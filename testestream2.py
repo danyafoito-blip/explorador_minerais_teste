@@ -30,13 +30,13 @@ tipos_deposito = [
 
 # --- 3. BARRA LATERAL (Sidebar) ---
 with st.sidebar:
-    # Podes colocar a tua imagem aqui na lateral para ficar como um logótipo
+    # Agora a imagem é carregada diretamente da pasta do GitHub
     try:
-        caminho_imagem = r"C:\Users\Pedro Afioto\Downloads\ChatGPT Image 2_03_2026, 13_53_00.png"
-        st.image(caminho_imagem)
-    except FileNotFoundError:
-        st.write("*(Espaço para o Logótipo)*")
-    
+        # Usa apenas o nome do ficheiro que subiste para o GitHub
+        nome_imagem = "ChatGPT Image 2_03_2026, 13_53_00.png" 
+        st.image(nome_imagem)
+    except Exception:
+        st.write("*(Logótipo não carregado)*")
     st.markdown("### ⚙️ Painel de Controlo")
     st.divider()
     
@@ -112,4 +112,5 @@ with tab_check:
     st.checkbox("Testar a dureza com canivete/vidro")
     st.checkbox("Observar o tipo de fratura/clivagem")
     st.checkbox("Testar reação com ácido clorídrico (HCl)")
+
 
