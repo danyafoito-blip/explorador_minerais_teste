@@ -102,7 +102,7 @@ with tab_mapa:
     st.markdown("### Principais Reservas e Produtores Globais")
     
     if recurso_selecionado == "Quartzo":
-        st.write("🌍 **Dica:** Clique e arraste o globo para o rodar. Os principais produtores de Quartzo estão destacados a vermelho.")
+        st.write("🌍 **Dica:** Clique e arraste o globo para o rodar. Os principais 5 produtores de Quartzo estão destacados a vermelho.")
         
         # Tabela com os códigos ISO-3 dos países
         dados_quartzo = pd.DataFrame({
@@ -118,7 +118,7 @@ with tab_mapa:
             color="Status", 
             hover_name="País", 
             color_discrete_map={"Produtor": "#FF4B4B"}, 
-            projection="orthographic"  # <--- A MÁGICA DO 3D ESTÁ AQUI
+            projection="orthographic"  
         )
         
         # Ajustes visuais para tornar o globo mais realista
@@ -131,7 +131,7 @@ with tab_mapa:
                 showland=True, 
                 landcolor="lightgrey",
                 showocean=True,         # Ativa os oceanos
-                oceancolor="#f0f8ff",   # Azul muito suave para a água ("Alice Blue")
+                oceancolor="#2f4fba",   # Azul muito suave para a água ("Alice Blue")
                 showframe=False         # Remove a moldura quadrada à volta do globo
             )
         )
@@ -151,4 +151,5 @@ with tab_ref:
     """)
     st.divider()
     st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
+
 
