@@ -21,17 +21,10 @@ materias_primas = [
     "Ortoclase"
 ]
 
-tipos_deposito = [
-    "Depósitos de Origem Magmática",
-    "Depósitos Hidrotermais",
-    "Depósitos Sedimentares",
-    "Depósitos Metamórficos"
-]
-
 # --- 3. BARRA LATERAL (Sidebar) ---
 with st.sidebar:
     try:
-        # Ajustado para funcionar no Cloud (apenas o nome do ficheiro)
+        # Imagem do topo
         nome_imagem = "ChatGPT Image 2_03_2026, 13_53_00.png"
         st.image(nome_imagem)
     except Exception:
@@ -40,18 +33,17 @@ with st.sidebar:
     st.markdown("### ⚙️ Painel de Controlo")
     st.divider()
     
+    # Agora apenas selecionamos a matéria-prima
     recurso_selecionado = st.selectbox("Selecione a Matéria-Prima:", materias_primas)
-    deposito_selecionado = st.selectbox("Selecione o Tipo de Depósito:", tipos_deposito)
     
     st.divider()
     st.info("💡 **Dica:** Utilize os separadores no ecrã principal para navegar pela informação.")
 
 # --- 4. ECRÃ PRINCIPAL ---
 st.markdown(f"## 🔎 Análise: {recurso_selecionado}")
-st.markdown(f"**Contexto Geológico:** {deposito_selecionado}")
-st.write("") 
+st.write("") # Pequeno espaço
 
-# --- ATUALIZAÇÃO: Adicionada a aba '📚 Referências' ---
+# --- SEPARADORES (Tabs) ---
 tab_caract, tab_confusoes, tab_quiz, tab_check, tab_ref = st.tabs([
     "📊 Características", 
     "⚠️ Confusões Comuns", 
@@ -104,7 +96,6 @@ with tab_check:
     st.checkbox("Observar o tipo de fratura/clivagem")
     st.checkbox("Testar reação com HCl")
 
-# --- CONTEÚDO DA NOVA ABA: Referências ---
 with tab_ref:
     st.markdown("### Fontes e Bibliografia")
     st.markdown("""
@@ -116,10 +107,9 @@ with tab_ref:
         * [Mindat.org](https://www.mindat.org) - Base de dados mineralógica.
         * [Webmineral](http://webmineral.com) - Mineralogy Database.
     * **Artigos Científicos:**
-        * Referências específicas sobre depósitos de *{recurso_selecionado}*.
+        * Referências específicas sobre exploração de *{recurso_selecionado}*.
     """)
     
     st.divider()
     st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
-
 
