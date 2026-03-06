@@ -92,3 +92,20 @@ def quiz_sms():
             st.info(f"Acertou {pontuacao} em 4. Reveja as opções incorretas e tente novamente!")
         else:
             st.warning("⚠️ Responda a todas as perguntas para ver o seu resultado final.")
+
+
+
+def mostrar_referencias_sms():
+    """Função que guarda e formata as referências bibliográficas dos SMS"""
+    st.markdown("### Fontes e Bibliografia - SMS")
+    
+    st.markdown("""
+    Abaixo encontram-se as principais referências científicas e académicas consultadas para a elaboração do perfil dos Sulfuretos Maciços do Fundo Oceânico:
+    
+    * **Hannington, M. D., de Ronde, C. E. J., & Petersen, S. (2005).** *Sea-floor tectonics and submarine hydrothermal systems.* Economic Geology 100th Anniversary Volume, 111-141.
+    * **Pirajno, F. (2009).** *Hydrothermal Processes and Mineral Systems.* Springer.
+    * **Robb, L. (2005).** *Introduction to Ore-Forming Processes.* Blackwell Publishing.
+    """)
+    
+    st.divider()
+    st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
