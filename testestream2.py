@@ -1,11 +1,11 @@
 
 import streamlit as st
 
-# --- 1. Configurações da Página (Tem de ser a primeira linha!) ---
+# --- 1. Configurações da Página ---
 st.set_page_config(
     page_title="Explorador de Recursos Energéticos", 
-    layout="wide", # Usa o ecrã todo
-    page_icon="💎" # Ícone no separador do navegador
+    layout="wide", 
+    page_icon="💎" 
 )
 
 # --- 2. Base de Dados ---
@@ -30,13 +30,13 @@ tipos_deposito = [
 
 # --- 3. BARRA LATERAL (Sidebar) ---
 with st.sidebar:
-    # Agora a imagem é carregada diretamente da pasta do GitHub
     try:
-        # Usa apenas o nome do ficheiro que subiste para o GitHub
-        nome_imagem = "ChatGPT Image 2_03_2026, 13_53_00.png" 
+        # Ajustado para funcionar no Cloud (apenas o nome do ficheiro)
+        nome_imagem = "ChatGPT Image 2_03_2026, 13_53_00.png"
         st.image(nome_imagem)
     except Exception:
-        st.write("*(Logótipo não carregado)*")
+        st.write("*(Espaço para o Logótipo)*")
+    
     st.markdown("### ⚙️ Painel de Controlo")
     st.divider()
     
@@ -44,73 +44,82 @@ with st.sidebar:
     deposito_selecionado = st.selectbox("Selecione o Tipo de Depósito:", tipos_deposito)
     
     st.divider()
-    st.info("💡 **Dica:** Utilize os separadores no ecrã principal para navegar pela informação do mineral selecionado.")
+    st.info("💡 **Dica:** Utilize os separadores no ecrã principal para navegar pela informação.")
 
 # --- 4. ECRÃ PRINCIPAL ---
 st.markdown(f"## 🔎 Análise: {recurso_selecionado}")
 st.markdown(f"**Contexto Geológico:** {deposito_selecionado}")
-st.write("") # Pequeno espaço
+st.write("") 
 
-# Criar os separadores (Tabs)
-tab_caract, tab_confusoes, tab_quiz, tab_check = st.tabs([
+# --- ATUALIZAÇÃO: Adicionada a aba '📚 Referências' ---
+tab_caract, tab_confusoes, tab_quiz, tab_check, tab_ref = st.tabs([
     "📊 Características", 
     "⚠️ Confusões Comuns", 
     "🧠 Quiz Interativo", 
-    "✅ Checklist de Campo"
+    "✅ Checklist de Campo",
+    "📚 Referências"
 ])
 
 # --- CONTEÚDO DOS SEPARADORES ---
 
-# Separador 1: Características
 with tab_caract:
     st.markdown("### Propriedades Principais")
-    # Usar colunas dentro do separador para organizar a informação
     col1, col2 = st.columns(2)
-    
     with col1:
         st.success("**Propriedades Físicas**")
         st.write("- Dureza (Escala de Mohs): *A definir*")
         st.write("- Brilho: *A definir*")
         st.write("- Clivagem / Fratura: *A definir*")
-        
     with col2:
         st.info("**Aplicações Industriais**")
         st.write("- Uso 1")
         st.write("- Uso 2")
         st.write("- Uso 3")
 
-# Separador 2: Confusões
 with tab_confusoes:
     st.markdown("### Minerais Semelhantes (Falsos Amigos)")
-    st.warning("É comum confundir este recurso com outras amostras no trabalho de campo. Veja as diferenças abaixo:")
-    
-    # O expander cria uma "gaveta" que o utilizador pode abrir e fechar
-    with st.expander("Mineral Parecido 1 vs Mineral Parecido 2"):
-        st.write("A principal diferença para distinguir estes dois a olho nu é o traço deixado na placa de porcelana e a reação a ácidos fracos.")
+    st.warning("Diferenças cruciais para identificação em campo:")
+    with st.expander("Ver detalhes de comparação"):
+        st.write("Conteúdo comparativo entre minerais semelhantes.")
 
-# Separador 3: Quiz
 with tab_quiz:
     st.markdown("### Teste os seus conhecimentos")
     pergunta = st.radio(
         f"Qual é a principal característica de identificação de {recurso_selecionado.split(' ')[0]}?",
         ["Opção A", "Opção B", "Opção C", "Opção D"],
-        index=None # Não seleciona nenhuma por defeito
+        index=None
     )
-    
     if st.button("Submeter Resposta"):
         if pergunta == "Opção B":
-            st.success("Correto! Muito bem.")
-        elif pergunta != None:
-            st.error("Incorreto. Tente novamente!")
+            st.success("Correto!")
+        elif pergunta is not None:
+            st.error("Incorreto.")
         else:
-            st.warning("Selecione uma opção primeiro.")
+            st.warning("Selecione uma opção.")
 
-# Separador 4: Checklist
 with tab_check:
     st.markdown("### Checklist de Identificação em Campo")
     st.checkbox("Verificar a cor e o traço")
     st.checkbox("Testar a dureza com canivete/vidro")
     st.checkbox("Observar o tipo de fratura/clivagem")
-    st.checkbox("Testar reação com ácido clorídrico (HCl)")
+    st.checkbox("Testar reação com HCl")
+
+# --- CONTEÚDO DA NOVA ABA: Referências ---
+with tab_ref:
+    st.markdown("### Fontes e Bibliografia")
+    st.markdown("""
+    Abaixo encontram-se as fontes consultadas para a elaboração deste guia:
+    
+    * **Livros:** * *Manual de Mineralogia*, Dana & Hurlbut.
+        * *Introduction to Ore-Forming Processes*, Laurence Robb.
+    * **Web:**
+        * [Mindat.org](https://www.mindat.org) - Base de dados mineralógica.
+        * [Webmineral](http://webmineral.com) - Mineralogy Database.
+    * **Artigos Científicos:**
+        * Referências específicas sobre depósitos de *{recurso_selecionado}*.
+    """)
+    
+    st.divider()
+    st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
 
 
