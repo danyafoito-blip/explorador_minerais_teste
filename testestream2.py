@@ -131,7 +131,7 @@ with tab_mapa:
                 showland=True, 
                 landcolor="lightgrey",
                 showocean=True,         # Ativa os oceanos
-                oceancolor="#2f4fba",   # Azul muito suave para a água ("Alice Blue")
+                oceancolor="#7990db",   # Azul muito suave para a água ("Alice Blue")
                 showframe=False         # Remove a moldura quadrada à volta do globo
             )
         )
@@ -151,5 +151,6 @@ with tab_ref:
     """)
     st.divider()
     st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
+
 
 
