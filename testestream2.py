@@ -1,5 +1,6 @@
 
 import streamlit as st
+import pandas as pd # --- NOVA IMPORTAÇÃO PARA OS DADOS DO MAPA ---
 
 # --- 1. Configurações da Página ---
 st.set_page_config(
@@ -24,7 +25,6 @@ materias_primas = [
 # --- 3. BARRA LATERAL (Sidebar) ---
 with st.sidebar:
     try:
-        # Imagem do topo
         nome_imagem = "ChatGPT Image 2_03_2026, 13_53_00.png"
         st.image(nome_imagem)
     except Exception:
@@ -33,7 +33,6 @@ with st.sidebar:
     st.markdown("### ⚙️ Painel de Controlo")
     st.divider()
     
-    # Agora apenas selecionamos a matéria-prima
     recurso_selecionado = st.selectbox("Selecione a Matéria-Prima:", materias_primas)
     
     st.divider()
@@ -41,14 +40,16 @@ with st.sidebar:
 
 # --- 4. ECRÃ PRINCIPAL ---
 st.markdown(f"## 🔎 Análise: {recurso_selecionado}")
-st.write("") # Pequeno espaço
+st.write("") 
 
 # --- SEPARADORES (Tabs) ---
-tab_caract, tab_confusoes, tab_quiz, tab_check, tab_ref = st.tabs([
+# ATUALIZAÇÃO: Adicionada a variável tab_mapa
+tab_caract, tab_confusoes, tab_quiz, tab_check, tab_mapa, tab_ref = st.tabs([
     "📊 Características", 
     "⚠️ Confusões Comuns", 
     "🧠 Quiz Interativo", 
     "✅ Checklist de Campo",
+    "🗺️ Mapa Global",      # NOVA ABA
     "📚 Referências"
 ])
 
@@ -96,20 +97,34 @@ with tab_check:
     st.checkbox("Observar o tipo de fratura/clivagem")
     st.checkbox("Testar reação com HCl")
 
+# --- CONTEÚDO DA NOVA ABA: Mapa Global ---
+with tab_mapa:
+    st.markdown("### Principais Reservas e Produtores Globais")
+    
+    if recurso_selecionado == "Quartzo":
+        st.write("Abaixo estão destacados alguns dos países com maiores extrações/reservas de Quartzo de alta pureza (ex: Brasil, EUA, China, Rússia e Madagáscar).")
+        
+        # Criar uma tabela (DataFrame) com as coordenadas GPS dos países
+        dados_quartzo = pd.DataFrame({
+            "País": ["Brasil", "EUA", "China", "Rússia", "Madagáscar"],
+            "lat": [-14.2350, 37.0902, 35.8617, 61.5240, -18.7669],
+            "lon": [-51.9253, -95.7129, 104.1954, 105.3188, 46.8691]
+        })
+        
+        # O Streamlit lê as colunas 'lat' e 'lon' e desenha o mapa automaticamente
+        st.map(dados_quartzo, zoom=1, use_container_width=True)
+        
+    else:
+        # Mensagem que aparece se o utilizador escolher outra pedra que ainda não tem mapa
+        st.info(f"📍 Os dados geográficos para **{recurso_selecionado}** ainda estão a ser compilados. Por favor, selecione **Quartzo** na barra lateral para ver um exemplo do mapa.")
+
 with tab_ref:
     st.markdown("### Fontes e Bibliografia")
     st.markdown("""
     Abaixo encontram-se as fontes consultadas para a elaboração deste guia:
-    
-    * **Livros:** * *Manual de Mineralogia*, Dana & Hurlbut.
-        * *Introduction to Ore-Forming Processes*, Laurence Robb.
     * **Web:**
         * [Mindat.org](https://www.mindat.org) - Base de dados mineralógica.
-        * [Webmineral](http://webmineral.com) - Mineralogy Database.
-    * **Artigos Científicos:**
-        * Referências específicas sobre exploração de *{recurso_selecionado}*.
     """)
-    
     st.divider()
     st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
 
