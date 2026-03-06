@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from SMS import quiz_sms
+from SMS import quiz_sms, mostrar_referencias_sms
 
 # --- 1. Configurações da Página ---
 st.set_page_config(
@@ -138,14 +138,18 @@ with tab_mapa:
         st.info(f"📍 Pedimos desculpa, como estamos ainda em fase de teste, os dados geográficos para **{recurso_selecionado}** ainda estão a ser compilados. Por favor, selecione **Quartzo** na barra lateral para ver um exemplo do globo.")
 
 with tab_ref:
-    st.markdown("### Fontes e Bibliografia")
-    st.markdown("""
-    Abaixo encontram-se as fontes consultadas para a elaboração deste guia:
-    * **Web:**
-        * [Mindat.org](https://www.mindat.org) - Base de dados mineralógica.
-    """)
-    st.divider()
-    st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
+    # Se o utilizador escolher os Sulfuretos, chamamos a nova função que tem os teus livros
+    if recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS)":
+        mostrar_referencias_sms()
+        
+    # Se escolher outra pedra qualquer, mostramos um aviso genérico
+    else:
+        st.markdown("### Fontes e Bibliografia")
+        st.info(f"📚 As referências específicas para **{recurso_selecionado}** ainda estão a ser compiladas. Selecione **Sulfuretos maciços do fundo oceânico (SMS)** na barra lateral para ver o formato completo.")
+        
+        st.divider()
+        st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
+
 
 
 
