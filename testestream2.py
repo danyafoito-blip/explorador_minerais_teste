@@ -1,6 +1,7 @@
 
 import streamlit as st
-import pandas as pd # --- NOVA IMPORTAÇÃO PARA OS DADOS DO MAPA ---
+import pandas as pd
+import plotly.express as px # --- NOVA BIBLIOTECA PARA MAPAS AVANÇADOS ---
 
 # --- 1. Configurações da Página ---
 st.set_page_config(
@@ -43,13 +44,12 @@ st.markdown(f"## 🔎 Análise: {recurso_selecionado}")
 st.write("") 
 
 # --- SEPARADORES (Tabs) ---
-# ATUALIZAÇÃO: Adicionada a variável tab_mapa
 tab_caract, tab_confusoes, tab_quiz, tab_check, tab_mapa, tab_ref = st.tabs([
     "📊 Características", 
     "⚠️ Confusões Comuns", 
     "🧠 Quiz Interativo", 
     "✅ Checklist de Campo",
-    "🗺️ Mapa Global",      # NOVA ABA
+    "🗺️ Mapa Global",
     "📚 Referências"
 ])
 
@@ -97,25 +97,41 @@ with tab_check:
     st.checkbox("Observar o tipo de fratura/clivagem")
     st.checkbox("Testar reação com HCl")
 
-# --- CONTEÚDO DA NOVA ABA: Mapa Global ---
+# --- NOVO MAPA COM PLOTLY ---
 with tab_mapa:
     st.markdown("### Principais Reservas e Produtores Globais")
     
     if recurso_selecionado == "Quartzo":
-        st.write("Abaixo estão destacados alguns dos países com maiores extrações/reservas de Quartzo de alta pureza (ex: Brasil, EUA, China, Rússia e Madagáscar).")
+        st.write("Países com maiores extrações/reservas de Quartzo de alta pureza destacados a vermelho.")
         
-        # Criar uma tabela (DataFrame) com as coordenadas GPS dos países
+        # Tabela com os códigos ISO-3 dos países para o Plotly os reconhecer
         dados_quartzo = pd.DataFrame({
-            "País": ["Brasil", "EUA", "China", "Rússia", "Madagáscar"],
-            "lat": [-14.2350, 37.0902, 35.8617, 61.5240, -18.7669],
-            "lon": [-51.9253, -95.7129, 104.1954, 105.3188, 46.8691]
+            "País": ["Brasil", "Estados Unidos", "China", "Rússia", "Madagáscar"],
+            "Código_ISO": ["BRA", "USA", "CHN", "RUS", "MDG"],
+            "Status": ["Produtor", "Produtor", "Produtor", "Produtor", "Produtor"]
         })
         
-        # O Streamlit lê as colunas 'lat' e 'lon' e desenha o mapa automaticamente
-        st.map(dados_quartzo, zoom=1, use_container_width=True)
+        # Criar o mapa coroplético
+        figura_mapa = px.choropleth(
+            dados_quartzo,
+            locations="Código_ISO",
+            color="Status", # Pinta baseado nesta coluna
+            hover_name="País", # Mostra o nome ao passar o rato
+            color_discrete_map={"Produtor": "#FF4B4B"}, # Define o vermelho vivo do Streamlit
+            projection="natural earth" # Mapa ligeiramente curvo (mais bonito que o plano)
+        )
+        
+        # Pequenos ajustes visuais (esconder a legenda e tirar margens desnecessárias)
+        figura_mapa.update_layout(
+            showlegend=False, 
+            margin={"r":0,"t":0,"l":0,"b":0},
+            geo=dict(showcoastlines=True, coastlinecolor="Black", showland=True, landcolor="lightgrey")
+        )
+        
+        # Dizer ao Streamlit para mostrar o gráfico interativo
+        st.plotly_chart(figura_mapa, use_container_width=True)
         
     else:
-        # Mensagem que aparece se o utilizador escolher outra pedra que ainda não tem mapa
         st.info(f"📍 Os dados geográficos para **{recurso_selecionado}** ainda estão a ser compilados. Por favor, selecione **Quartzo** na barra lateral para ver um exemplo do mapa.")
 
 with tab_ref:
@@ -127,4 +143,3 @@ with tab_ref:
     """)
     st.divider()
     st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
-
