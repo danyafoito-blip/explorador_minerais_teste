@@ -140,7 +140,7 @@ with tab_mapa:
         st.plotly_chart(figura_mapa, use_container_width=True)
         
     else:
-        st.info(f"📍 Os dados geográficos para **{recurso_selecionado}** ainda estão a ser compilados. Por favor, selecione **Quartzo** na barra lateral para ver um exemplo do globo.")
+        st.info(f"📍 Pedimos desculpa, como estamos ainda em fase de teste, os dados geográficos para **{recurso_selecionado}** ainda estão a ser compilados. Por favor, selecione **Quartzo** na barra lateral para ver um exemplo do globo.")
 
 with tab_ref:
     st.markdown("### Fontes e Bibliografia")
@@ -151,6 +151,7 @@ with tab_ref:
     """)
     st.divider()
     st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
+
 
 
 
