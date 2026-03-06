@@ -1,6 +1,6 @@
 import streamlit as st
 
-def mostrar_quiz_sms():
+def quiz_sms():
     """Função que guarda e corre o quiz dos Sulfuretos (SMS)"""
     
     st.write("Responda às seguintes questões sobre a formação e exploração de depósitos SMS:")
