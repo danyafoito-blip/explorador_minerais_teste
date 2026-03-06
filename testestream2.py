@@ -81,7 +81,7 @@ with tab_quiz:
     
     if recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS)":
         # Aqui chamamos a função que está guardada no ficheiro meu_quiz.py
-        mostrar_quiz_sms()
+        quiz_sms()
     else:
         st.info(f"🧠 O quiz específico para **{recurso_selecionado}** ainda está em desenvolvimento. Selecione **Sulfuretos maciços do fundo oceânico (SMS)** na barra lateral para testar um quiz completo.")
 
@@ -146,6 +146,7 @@ with tab_ref:
     """)
     st.divider()
     st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
+
 
 
 
