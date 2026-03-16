@@ -23,7 +23,7 @@ materias_primas = [
     "Metano (Hidratos e recursos não convencionais)",
     "Lítio (Rocha dura versus salmouras)",
     "Urânio e Tório (Combustíveis nucleares)",
-    "Sulfuretos maciços do fundo oceânico (SMS)",
+    "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto",
     "Quartzo",
     "Monazite",
     "Ortoclase"
