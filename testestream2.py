@@ -95,7 +95,7 @@ with st.sidebar:
     except Exception:
         st.write("*(Espaço para o Logótipo)*")
 
-    st.markdown("### ⚙️ Painel de Controlo")
+    st.markdown("<h3 style='text-align: center;'>⚙️ Painel de Controlo</h3>", unsafe_allow_html=True)
 
     st.divider()
 
