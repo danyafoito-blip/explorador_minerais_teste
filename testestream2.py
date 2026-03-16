@@ -90,7 +90,7 @@ depositos = {
 with st.sidebar:
 
     try:
-        nome_imagem = "ChatGPT Image Mar 16, 2026, 01_48_28 PM.png"
+        nome_imagem = "ChatGPT Image Mar 16, 2026, 01_54_16 PM.png"
         st.image(nome_imagem)
     except Exception:
         st.write("*(Espaço para o Logótipo)*")
