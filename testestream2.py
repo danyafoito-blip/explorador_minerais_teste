@@ -90,7 +90,7 @@ depositos = {
 with st.sidebar:
 
     try:
-        nome_imagem = "logo_e_min.jpeg"
+        nome_imagem = "WhatsApp Image 2026-03-16 at 13.44.40.jpeg"
         st.image(nome_imagem)
     except Exception:
         st.write("*(Espaço para o Logótipo)*")
