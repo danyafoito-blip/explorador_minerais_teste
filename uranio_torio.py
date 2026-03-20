@@ -9,65 +9,51 @@ from streamlit_folium import st_folium
 # 1. CARACTERÍSTICAS
 # ===============================
 
-def mostrar_caracteristicas_uranio(deposito):
+# ===============================
+# 1. CARACTERÍSTICAS
+# ===============================
+
+def mostrar_caracteristicas_uranio(deposito=""):
 
     st.markdown("### ☢️ Características do Urânio e Tório")
 
-    col1, col2 = st.columns(2)
-
-    with col1:
-
-        st.success("**Propriedades Físicas e Geoquímicas**")
-
-        st.write("- Elementos radioativos (U, Th)")
-        st.write("- Elevada densidade")
-        st.write("- Emissão de radiação ionizante")
-        st.write("- Mobilidade controlada por condições redox")
-        st.write("- Ocorrência em minerais como uraninita")
-
-    with col2:
-
-        st.info("**Importância Energética**")
-
-        st.write("- Combustível para energia nuclear")
-        st.write("- Produção de eletricidade de base")
-        st.write("- Baixas emissões de CO₂")
-        st.write("- Tório como alternativa emergente")
+    st.markdown("#### 🌍 5 Características Gerais do Recurso")
+    
+    with st.expander("🔍 Ver características gerais", expanded=True):
+        st.markdown("**1. Potencial Energético e Estratégico:** Tanto o urânio como o tório são elementos radioativos naturais fundamentais para a geração de energia nuclear. O tório é considerado um combustível promissor para o futuro devido à sua maior abundância, segurança intrínseca e menor produção de resíduos nucleares de vida longa.")
+        st.markdown("**2. Abundância Crostal:** O tório é cerca de três vezes mais abundante na crosta terrestre do que o urânio. A abundância média na crosta continental superior é de aproximadamente 10,5 ppm para o tório e 2,7 ppm para o urânio.")
+        st.markdown("**3. Comportamento Geoquímico e Solubilidade:** A formação de depósitos de urânio é controlada pela sua solubilidade: é altamente móvel em condições oxidantes (U6+) e precipita em condições redutoras (U4+). O tório, pelo contrário, é geoquimicamente inerte e muito pouco solúvel na maioria das águas naturais, não possuindo um estado oxidado móvel como o urânio.")
+        st.markdown("**4. Isótopos Naturais:** O urânio natural consiste principalmente em 238U (99,3%) e 235U (0,7%), o único isótopo físsil em reatores convencionais. O tório natural é composto quase inteiramente pelo isótopo 232Th, que pode ser transmutado em 233U físsil.")
+        st.markdown("**5. Tipos Genéticos de Depósitos:** Os recursos globais estão classificados em três grandes categorias de génese: ígneos (magmáticos), metamórficos e sedimentares (incluindo depósitos de prazeres e em arenitos).")
 
     st.divider()
 
-    if "unconformity" in deposito.lower():
+    if deposito:
+        st.markdown(f"#### 🔎 Características Específicas: {deposito}")
 
-        st.markdown("### 🪨 Depósitos tipo Unconformity")
+        if "unconformity" in deposito.lower():
+            st.markdown("- **Localização Estratigráfica:** Situam-se especificamente na interface (discordância) entre um soco metamórfico (geralmente Arcaico a Paleoproterozoico) e uma bacia sedimentar proterozoica rica em arenitos vermelhos (redbeds).")
+            st.markdown("- **Teores Excecionalmente Elevados:** Estes depósitos possuem os teores de urânio mais altos do mundo, com algumas zonas a atingirem mais de 20% de U, como se verifica nos depósitos de Cigar Lake e McArthur River no Canadá.")
+            st.markdown("- **Associação com Grafite:** A mineralização está frequentemente associada a condutores grafíticos e zonas de cisalhamento no soco, que funcionam como agentes redutores cruciais para a precipitação do urânio.")
+            st.markdown("- **Halos de Alteração Hidrotermal:** Caracterizam-se por halos de alteração extensos contendo minerais como ilite, clorite (sudoíte), caulinite e dravite, que servem como guias para a exploração.")
+            st.markdown("- **Mineralogia e Forma:** Ocorrem tipicamente como lentes sub-horizontais, filões ou preenchimentos de brecha, dominados por uraninita (pechblenda) massiva a disseminada.")
 
-        st.write("**Características principais:**")
-        st.write("- Altos teores de urânio")
-        st.write("- Associados a discordâncias geológicas")
-        st.write("- Interação entre fluidos oxidantes e redutores")
-        st.write("- Exemplos: Canadá, Austrália")
+        elif "arenitos" in deposito.lower():
+            st.markdown("- **Hospedeiro e Permeabilidade:** São depósitos epigenéticos hospedados em arenitos de grão médio a grosseiro, caracterizados por alta porosidade e permeabilidade, o que permite a circulação de fluidos mineralizantes.")
+            st.markdown("- **Mecanismo de Frente de Redox:** A mineralização concentra-se em \"frentes de oxirredução\", onde águas oxidantes que transportam urânio dissolvido encontram ambientes redutores, forçando a precipitação da uraninita ou coffinite.")
+            st.markdown("- **Variedade Morfológica:** Dividem-se em subtipos principais baseados na forma: roll-front (em forma de crescente), tabulares (horizontais e paralelos à estratificação) e de canal basal (paleocanais).")
+            st.markdown("- **Papel da Matéria Orgânica:** Dependem frequentemente da presença de agentes redutores intrínsecos como restos de plantas fossilizadas, matéria carbonosa ou pirite diagenética para fixar o urânio.")
+            st.markdown("- **Idade e Ambiente:** A maioria destes depósitos é do Silúrico ou mais recente, refletindo a evolução das plantas terrestres como principal redutor, embora existam exemplos proterozoicos ligados à migração de hidrocarbonetos.")
 
-    elif "arenitos" in deposito.lower():
-
-        st.markdown("### 🏜️ Depósitos em Arenitos")
-
-        st.write("**Características principais:**")
-        st.write("- Hospedados em bacias sedimentares")
-        st.write("- Controlo por fluxo de fluidos")
-        st.write("- Formação de roll-fronts")
-        st.write("- Extração por lixiviação in situ (ISR)")
-
-    elif "hidrotermais" in deposito.lower():
-
-        st.markdown("### 🌋 Depósitos Hidrotermais")
-
-        st.write("**Características principais:**")
-        st.write("- Associados a fluidos quentes")
-        st.write("- Relação com atividade magmática")
-        st.write("- Mineralização em veios e brechas")
-        st.write("- Variabilidade de teores")
+        elif "hidrotermais" in deposito.lower():
+            st.markdown("- **Natureza dos Fluidos:** Envolvem o movimento de fluidos quentes e frequentemente salinos (brinas diagenéticas ou fluidos magmáticos) com temperaturas entre 70°C e 250°C.")
+            st.markdown("- **Controlo Estrutural em Veios:** A mineralização apresenta-se geralmente sob a forma de filões (veios), zonas de fratura ou preenchimento de brechas, frequentemente associados a falhas regionais ou zonas de cisalhamento.")
+            st.markdown("- **Complexidade Mineralógica:** Frequentemente contêm associações complexas de urânio, tório e elementos de terras raras (REE), refletindo a mobilidade simultânea destes elementos a altas temperaturas.")
+            st.markdown("- **Associação com Rochas Alcalinas:** Estão muitas vezes ligados a complexos ígneos alcalinos e carbonatitos, onde os fluidos hidrotermais concentram metais extraídos das rochas circundantes.")
+            st.markdown("- **Presença de Mineralizadores:** Os fluidos mineralizantes são frequentemente ricos em componentes como CO2, flúor (F), cloro (Cl) e H2S, que auxiliam no transporte e posterior precipitação dos minerais de tório e urânio.")
 
     else:
-        st.info("Selecione um tipo de depósito válido.")
+        st.info("Selecione um tipo de depósito na barra lateral para ver as características específicas.")
 
 
 # ===============================
