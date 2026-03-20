@@ -74,7 +74,7 @@ def mostrar_caracteristicas_sms(deposito):
 # 2. CONFUSÕES COMUNS
 # ===============================
 
-def mostrar_confusoes_sms(deposito=None):
+def mostrar_confusoes_sms(deposito=""):
 
     st.markdown("### ⚠️ Confusões e Distinções Comuns")
 
@@ -92,38 +92,33 @@ def mostrar_confusoes_sms(deposito=None):
         st.markdown("**7. Zonamento Térmico:** Chaminés de alta temperatura são ricas em cobre (calcopirite), enquanto fluidos de temperatura mais baixa (<300°C) favorecem o enriquecimento em zinco e chumbo (esfalerite e galena).")
 
     st.divider()
-    
-    st.markdown("#### 🌋 Distinções Específicas por Depósito")
-    
-    tab_arcos, tab_dorsais, tab_retro = st.tabs([
-        "🌊 Arcos Vulcânicos", 
-        "🌋 Dorsais Médio-Oceânicas", 
-        "🌊 Bacias de Retro-arco"
-    ])
-    
-    with tab_arcos:
-        st.markdown("##### Arcos Vulcânicos Submarinos (5 pontos de identificação)")
-        st.markdown("- **Rocha Hospedeira Evoluída:** Associados a composições vulcânicas mais ácidas/evoluidas, como andesito, dacito e riolito.")
-        st.markdown("- **Enriquecimento em Voláteis:** Presença distinta de elementos magmatófilos (As, Sb, Bi, Te) derivados da desgaseificação de câmaras magmáticas profundas.")
-        st.markdown("- **Toxicidade Elevada:** Potencial de toxicidade superior devido à abundância de mercúrio (Hg) nativo e sulfuretos de mercúrio (ex: campo Calypso).")
-        st.markdown("- **Mineralogia Específica:** Ocorrência de sulfossais (série tennantite-tetraedrite) e galena, raramente vistos em cristas médio-oceânicas puras.")
-        st.markdown("- **Depósitos de Substituição:** Podem formar depósitos enterrados por substituição e infiltração no subsolo marinho (ex: Palinuro), em vez de chaminés clássicas expostas.")
 
-    with tab_dorsais:
-        st.markdown("##### Dorsais Médio-Oceânicas (5 pontos de identificação)")
-        st.markdown("- **Substrato Máfico/Ultramáfico:** Dominadas por basalto e gabro, ou peridotitos serpentinizados em zonas de falhas de destacamento.")
-        st.markdown("- **Assinatura Metálica Primária:** Ricas em Cu, Fe, Co, Se e Mo, com baixa concentração de elementos \"epitermais\" como As e Sb.")
-        st.markdown("- **Morfologia de Montículo:** Depósitos maduros como o TAG formam grandes montículos por acumulação e retrabalhamento de taludes de chaminés ao longo de milhares de anos.")
-        st.markdown("- **Exclusividade do Cobalto:** O Co está associado quase exclusivamente a locais de alta temperatura (~400°C) nestas dorsais.")
-        st.markdown("- **Sequência de Jasper:** Em depósitos extintos, a preservação do minério é garantida por uma carapaça de sílica impermeável que impede a oxidação pela água do mar.")
+    # Mostra apenas as 5 distinções específicas dependendo do depósito selecionado
+    if deposito:
+        st.markdown(f"#### 🔎 Distinções Específicas: {deposito}")
 
-    with tab_retro:
-        st.markdown("##### Bacias de Retro-arco (5 pontos de identificação)")
-        st.markdown("- **Elevado Teor Metálico:** Demonstram frequentemente os teores combinados de Cu + Zn + Pb mais elevados (média de 16,1 wt%) entre todos os ambientes tectónicos.")
-        st.markdown("- **Riqueza em Ouro:** Tendem a apresentar teores de ouro (Au) sistematicamente superiores aos sistemas de crista médio-oceânica.")
-        st.markdown("- **Dualidade Geológica:** Combinam características de dorsais (centros de expansão) com a influência de subducção, resultando em misturas de assinaturas geoquímicas máficas e félsicas.")
-        st.markdown("- **Densidade de Depósitos:** A frequência de ocorrência de depósitos ativos é comparável à das dorsais de espalhamento lento (aprox. cada 174 km).")
-        st.markdown("- **Zonamento Complexo:** Devido à natureza bimodal do vulcanismo, apresentam um zonamento mineralógico complexo entre assembleias de pirite-esfalerite e calcopirite-esfalerite.")
+        if "Arcos" in deposito:
+            st.markdown("- **Rocha Hospedeira Evoluída:** Associados a composições vulcânicas mais ácidas/evoluidas, como andesito, dacito e riolito.")
+            st.markdown("- **Enriquecimento em Voláteis:** Presença distinta de elementos magmatófilos (As, Sb, Bi, Te) derivados da desgaseificação de câmaras magmáticas profundas.")
+            st.markdown("- **Toxicidade Elevada:** Potencial de toxicidade superior devido à abundância de mercúrio (Hg) nativo e sulfuretos de mercúrio (ex: campo Calypso).")
+            st.markdown("- **Mineralogia Específica:** Ocorrência de sulfossais (série tennantite-tetraedrite) e galena, raramente vistos em cristas médio-oceânicas puras.")
+            st.markdown("- **Depósitos de Substituição:** Podem formar depósitos enterrados por substituição e infiltração no subsolo marinho (ex: Palinuro), em vez de chaminés clássicas expostas.")
+
+        elif "Dorsais" in deposito:
+            st.markdown("- **Substrato Máfico/Ultramáfico:** Dominadas por basalto e gabro, ou peridotitos serpentinizados em zonas de falhas de destacamento.")
+            st.markdown("- **Assinatura Metálica Primária:** Ricas em Cu, Fe, Co, Se e Mo, com baixa concentração de elementos \"epitermais\" como As e Sb.")
+            st.markdown("- **Morfologia de Montículo:** Depósitos maduros como o TAG formam grandes montículos por acumulação e retrabalhamento de taludes de chaminés ao longo de milhares de anos.")
+            st.markdown("- **Exclusividade do Cobalto:** O Co está associado quase exclusivamente a locais de alta temperatura (~400°C) nestas dorsais.")
+            st.markdown("- **Sequência de Jasper:** Em depósitos extintos, a preservação do minério é garantida por uma carapaça de sílica impermeável que impede a oxidação pela água do mar.")
+
+        elif "retro-arco" in deposito.lower():
+            st.markdown("- **Elevado Teor Metálico:** Demonstram frequentemente os teores combinados de Cu + Zn + Pb mais elevados (média de 16,1 wt%) entre todos os ambientes tectónicos.")
+            st.markdown("- **Riqueza em Ouro:** Tendem a apresentar teores de ouro (Au) sistematicamente superiores aos sistemas de crista médio-oceânica.")
+            st.markdown("- **Dualidade Geológica:** Combinam características de dorsais (centros de expansão) com a influência de subducção, resultando em misturas de assinaturas geoquímicas máficas e félsicas.")
+            st.markdown("- **Densidade de Depósitos:** A frequência de ocorrência de depósitos ativos é comparável à das dorsais de espalhamento lento (aprox. cada 174 km).")
+            st.markdown("- **Zonamento Complexo:** Devido à natureza bimodal do vulcanismo, apresentam um zonamento mineralógico complexo entre assembleias de pirite-esfalerite e calcopirite-esfalerite.")
+    else:
+        st.info("Selecione um tipo de depósito na barra lateral para ver as confusões específicas.")
 
 
 # ===============================
