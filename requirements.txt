@@ -3,4 +3,3 @@ pandas
 plotly
 folium
 streamlit_folium
-folium.plugins
