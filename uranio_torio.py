@@ -101,49 +101,151 @@ def mostrar_confusoes_uranio(deposito=""):
 # 3. QUIZ INTERATIVO
 # ===============================
 
-def quiz_uranio():
+def quiz_uranio(deposito=""):
 
     st.markdown("### 🧠 Quiz Interativo: Urânio e Tório")
+    st.write("Testa os teus conhecimentos sobre a geologia e exploração destes combustíveis nucleares! 👇")
 
-    st.write("Testa os teus conhecimentos 👇")
+    # --- PARTE 1: QUESTÕES GERAIS ---
+    st.markdown("#### 🌍 Questões Gerais")
+    
+    with st.expander("📝 Mostrar Questões Gerais", expanded=True):
+        # Q1 (Tua Q1)
+        q1 = st.radio(
+            "1️⃣ Em termos de abundância na crosta continental superior, qual é a relação aproximada entre o tório e o urânio?",
+            [
+                "A) O urânio é o dobro do tório.", 
+                "B) O tório é cerca de 3 a 4 vezes mais abundante que o urânio.", 
+                "C) Ambos possuem a mesma abundância (2,7 ppm).", 
+                "D) O tório é 100 vezes mais abundante."
+            ],
+            key="ura_geral_q1"
+        )
+        if st.button("Verificar Q1", key="btn_ug1"):
+            if q1.startswith("B)"):
+                st.success("Correto! ✅ O tório (aprox. 10,5 ppm) é cerca de 3 a 4 vezes mais abundante que o urânio (aprox. 2,7 ppm).")
+            else:
+                st.error("Incorreto. ❌ Lembra-te que o tório é significativamente mais comum.")
 
-    pergunta1 = st.radio(
-        "1️⃣ Onde são comuns depósitos tipo unconformity?",
-        [
-            "Oceanos profundos",
-            "Discordâncias geológicas",
-            "Atmosfera",
-            "Desertos arenosos"
-        ],
-        key="u_q1"
-    )
+        st.divider()
 
-    if st.button("Responder Pergunta 1"):
+        # Q2 (Tua Q2)
+        q2 = st.radio(
+            "2️⃣ O urânio é geoquimicamente móvel e solúvel em águas naturais quando se encontra em qual estado de oxidação?",
+            [
+                "A) Estado tetravalente (U4+).", 
+                "B) Estado hexavalente (U6+) sob condições oxidantes.", 
+                "C) Estado metálico.", 
+                "D) O urânio nunca é solúvel em água."
+            ],
+            key="ura_geral_q2"
+        )
+        if st.button("Verificar Q2", key="btn_ug2"):
+            if q2.startswith("B)"):
+                st.success("Correto! ✅ É a oxidação para U6+ que permite ao urânio dissolver-se e viajar nos fluidos.")
+            else:
+                st.error("Incorreto. ❌ Pensa nas condições necessárias para formar iões solúveis (uranilo).")
 
-        if pergunta1 == "Discordâncias geológicas":
-            st.success("Correto! ✅")
-        else:
-            st.error("Incorreto ❌")
+        st.divider()
 
-    st.divider()
+        # Q3 (Tua Q5)
+        q3 = st.radio(
+            "3️⃣ Qual é o mineral de fosfato que constitui a principal fonte de tório em depósitos sedimentares do tipo 'prazeres' (placers)?",
+            [
+                "A) Uraninita.", 
+                "B) Monazite.", 
+                "C) Quartzo.", 
+                "D) Pirite."
+            ],
+            key="ura_geral_q3"
+        )
+        if st.button("Verificar Q3", key="btn_ug3"):
+            if q3.startswith("B)"):
+                st.success("Correto! ✅ A monazite é um fosfato de terras raras e tório muito resistente, acumulando-se em areias de praia e rios.")
+            else:
+                st.error("Incorreto. ❌ Tenta novamente!")
 
-    pergunta2 = st.radio(
-        "2️⃣ Qual método é comum em depósitos em arenitos?",
-        [
-            "Exploração submarina",
-            "Fraturação hidráulica",
-            "Lixiviação in situ (ISR)",
-            "Fusão nuclear"
-        ],
-        key="u_q2"
-    )
+    st.write("") # Espaçamento
 
-    if st.button("Responder Pergunta 2"):
+    # --- PARTE 2: QUESTÕES ESPECÍFICAS ---
+    if deposito:
+        st.markdown(f"#### 🔎 Questões Específicas: {deposito}")
 
-        if pergunta2 == "Lixiviação in situ (ISR)":
-            st.success("Exato! ✅")
-        else:
-            st.error("Resposta incorreta ❌")
+        if "unconformity" in deposito.lower():
+            # Unconformity Q1 (Tua Q4)
+            q_unc1 = st.radio(
+                "Os depósitos de urânio do tipo 'Unconformity' (Discordância), como os da Bacia de Athabasca no Canadá, são mundialmente conhecidos por:",
+                [
+                    "A) Terem os teores mais elevados do mundo, por vezes excedendo 20% de U.", 
+                    "B) Ocorrerem apenas em rochas vulcânicas jovens.", 
+                    "C) Serem pobres em minério mas fáceis de extrair.", 
+                    "D) Não necessitarem de agentes redutores para a precipitação."
+                ],
+                key="ura_unc_q1"
+            )
+            if st.button("Verificar Resposta 1", key="btn_uu1"):
+                if q_unc1.startswith("A)"):
+                    st.success("Correto! ✅ São depósitos de classe mundial devido aos seus teores excecionalmente altos.")
+                else:
+                    st.error("Incorreto. ❌ Tenta novamente!")
+            
+            st.divider()
+
+            # Unconformity Q2 (Tua Q6)
+            q_unc2 = st.radio(
+                "Nos depósitos de discordância, a precipitação do urânio ocorre geralmente quando fluidos oxidantes encontram uma barreira redutora. No soco metamórfico, um alvo comum é:",
+                [
+                    "A) Ouro nativo.", 
+                    "B) Condutores grafíticos (metapelitos com grafite).", 
+                    "C) Camadas de sal-gema.", 
+                    "D) Granitos pobres em ferro."
+                ],
+                key="ura_unc_q2"
+            )
+            if st.button("Verificar Resposta 2", key="btn_uu2"):
+                if q_unc2.startswith("B)"):
+                    st.success("Correto! ✅ O grafite atua como um excelente agente redutor, forçando a precipitação do urânio.")
+                else:
+                    st.error("Incorreto. ❌ Pensa num material rico em carbono.")
+
+        elif "arenitos" in deposito.lower():
+            # Arenitos Q1 (Tua Q3)
+            q_are1 = st.radio(
+                "Qual é a morfologia característica de um depósito de urânio em arenito do tipo 'roll-front' quando observado em corte transversal?",
+                [
+                    "A) Uma esfera perfeita.", 
+                    "B) Uma forma de crescente ou meia-lua que corta a estratigrafia.", 
+                    "C) Um cilindro vertical estreito.", 
+                    "D) Uma camada tabular perfeitamente paralela ao leito."
+                ],
+                key="ura_are_q1"
+            )
+            if st.button("Verificar Resposta", key="btn_ua1"):
+                if q_are1.startswith("B)"):
+                    st.success("Correto! ✅ A frente de oxirredução avança pelo aquífero criando esta típica forma em crescente ('roll-front').")
+                else:
+                    st.error("Incorreto. ❌ Tenta novamente!")
+
+        elif "hidrotermais" in deposito.lower():
+            # Hidrotermais Q1 (Adaptada da tua Q6 que menciona hidrotermais)
+            q_hid1 = st.radio(
+                "Nos depósitos hidrotermais, a precipitação do urânio ocorre geralmente quando fluidos encontram uma barreira redutora. Qual destes pode ser um alvo estrutural/redutor?",
+                [
+                    "A) Ouro nativo.", 
+                    "B) Condutores grafíticos ou zonas de cisalhamento com fluidos redutores.", 
+                    "C) Camadas de sal-gema puros.", 
+                    "D) Granitos estéreis."
+                ],
+                key="ura_hid_q1"
+            )
+            if st.button("Verificar Resposta", key="btn_uh1"):
+                if q_hid1.startswith("B)"):
+                    st.success("Correto! ✅ A interação com grafite ou mistura com fluidos redutores (ex: com H2S) em falhas provoca a precipitação.")
+                else:
+                    st.error("Incorreto. ❌ Tenta novamente!")
+
+    else:
+        st.info("Selecione um tipo de depósito na barra lateral para ver as questões específicas deste ambiente.")
 
 
 # ===============================
