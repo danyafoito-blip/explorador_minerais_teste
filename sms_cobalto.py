@@ -106,49 +106,172 @@ def mostrar_confusoes_sms(deposito=""):
 # 3. QUIZ INTERATIVO
 # ===============================
 
-def quiz_sms():
+def quiz_sms(deposito=""):
 
-    st.markdown("### 🧠 Quiz Interativo: SMS e Cobalto")
+    st.markdown("### 🧠 Quiz Interativo: SMS e Recursos Marinhos")
+    st.write("Testa os teus conhecimentos sobre os recursos minerais do fundo do mar! 👇")
 
-    st.write("Testa os teus conhecimentos 👇")
+    # --- PARTE 1: QUESTÕES GERAIS ---
+    st.markdown("#### 🌍 Questões Gerais")
+    
+    with st.expander("📝 Mostrar Questões Gerais", expanded=True):
+        # Q1
+        q1 = st.radio(
+            "1️⃣ Quais são os principais metais base encontrados nos Sulfuretos Maciços do Fundo do Mar (SMS)?",
+            ["Ouro e Prata", "Cobre, Zinco, Chumbo e Ferro", "Cobalto e Níquel", "Alumínio e Magnésio"],
+            key="sms_geral_q1"
+        )
+        if st.button("Verificar Q1", key="btn_g1"):
+            if q1 == "Cobre, Zinco, Chumbo e Ferro":
+                st.success("Correto! ✅ Estes são os metais base dominantes, embora possam conter ouro e prata como subprodutos.")
+            else:
+                st.error("Incorreto. ❌ Tenta novamente!")
 
-    pergunta1 = st.radio(
-        "1️⃣ Onde se formam os SMS?",
-        [
-            "Desertos",
-            "Sistemas hidrotermais submarinos",
-            "Atmosfera",
-            "Glaciares"
-        ],
-        key="sms_q1"
-    )
+        st.divider()
 
-    if st.button("Responder Pergunta 1"):
+        # Q2
+        q2 = st.radio(
+            "2️⃣ Qual é a taxa de crescimento típica das crostas de ferro-manganês de origem hidrogenética?",
+            ["1-5 metros por ano", "1-5 centímetros por século", "1-5 milímetros por milhão de anos", "10-20 milímetros por década"],
+            key="sms_geral_q2"
+        )
+        if st.button("Verificar Q2", key="btn_g2"):
+            if q2 == "1-5 milímetros por milhão de anos":
+                st.success("Correto! ✅ É um processo extremamente lento comparado com depósitos hidrotermais.")
+            else:
+                st.error("Incorreto. ❌ Lembra-te que a precipitação hidrogenética é um processo muito lento.")
 
-        if pergunta1 == "Sistemas hidrotermais submarinos":
-            st.success("Correto! ✅")
-        else:
-            st.error("Incorreto ❌")
+        st.divider()
 
-    st.divider()
+        # Q3
+        q3 = st.radio(
+            "3️⃣ Em que intervalo de profundidade se encontram geralmente as crostas mais ricas em cobalto e de maior interesse económico?",
+            ["100 a 500 metros", "800 a 2500 metros", "4000 a 6000 metros", "Apenas abaixo dos 7000 metros"],
+            key="sms_geral_q3"
+        )
+        if st.button("Verificar Q3", key="btn_g3"):
+            if q3 == "800 a 2500 metros":
+                st.success("Correto! ✅ Encontram-se tipicamente nos flancos de montes submarinos (seamounts) a estas profundidades.")
+            else:
+                st.error("Incorreto. ❌ Tenta novamente!")
 
-    pergunta2 = st.radio(
-        "2️⃣ O cobalto é crítico para:",
-        [
-            "Produção de cimento",
-            "Baterias",
-            "Areia industrial",
-            "Vidro comum"
-        ],
-        key="sms_q2"
-    )
+        st.divider()
 
-    if st.button("Responder Pergunta 2"):
+        # Q4
+        q4 = st.radio(
+            "4️⃣ Qual é o mineral de manganês predominante nas crostas hidrogenéticas?",
+            ["Vernadite", "Todorokite", "Calcite", "Pirite"],
+            key="sms_geral_q4"
+        )
+        if st.button("Verificar Q4", key="btn_g4"):
+            if q4 == "Vernadite":
+                st.success("Correto! ✅ A vernadite (δ-MnO2) é o mineral de manganês mais comum nestas crostas.")
+            else:
+                st.error("Incorreto. ❌ Tenta novamente!")
 
-        if pergunta2 == "Baterias":
-            st.success("Exato! ✅")
-        else:
-            st.error("Resposta incorreta ❌")
+        st.divider()
+
+        # Q5
+        q5 = st.radio(
+            "5️⃣ Que morfologia de superfície é característica de muitas crostas de ferro-manganês?",
+            ["Cristais euédricos perfeitos", "Superfície lisa e vítrea", "Botrioidal (em forma de cacho de uvas)", "Estrutura fibrosa verticalizada"],
+            key="sms_geral_q5"
+        )
+        if st.button("Verificar Q5", key="btn_g5"):
+            if q5 == "Botrioidal (em forma de cacho de uvas)":
+                st.success("Correto! ✅ Esta textura globular/botrioidal é muito típica na superfície destas crostas.")
+            else:
+                st.error("Incorreto. ❌ Pensa em formas circulares ou em cacho.")
+
+    st.write("") # Espaçamento
+
+    # --- PARTE 2: QUESTÕES ESPECÍFICAS ---
+    if deposito:
+        st.markdown(f"#### 🔎 Questões Específicas: {deposito}")
+
+        if "Arcos" in deposito:
+            # Arcos Q1
+            q_arc1 = st.radio(
+                "Ao contrário das dorsais, que tipo de rochas hospedeiras são típicas em arcos vulcânicos?",
+                ["Basaltos e Peridotitos", "Rochas vulcânicas ácidas e evoluídas como dacitos e riolitos", "Calcários puros", "Arenitos"],
+                key="sms_arc_q1"
+            )
+            if st.button("Verificar Resposta 1 (Arcos)", key="btn_a1"):
+                if q_arc1 == "Rochas vulcânicas ácidas e evoluídas como dacitos e riolitos":
+                    st.success("Correto! ✅ O vulcanismo de arco é geralmente mais silícico (ácido).")
+                else:
+                    st.error("Incorreto. ❌ Tenta novamente!")
+            
+            st.divider()
+            
+            # Arcos Q2
+            q_arc2 = st.radio(
+                "Qual destes elementos tóxicos pode ocorrer como metal nativo em campos hidrotermais de arco (ex: Calypso)?",
+                ["Mercúrio (Hg)", "Ferro (Fe)", "Magnésio (Mg)", "Sódio (Na)"],
+                key="sms_arc_q2"
+            )
+            if st.button("Verificar Resposta 2 (Arcos)", key="btn_a2"):
+                if q_arc2 == "Mercúrio (Hg)":
+                    st.success("Correto! ✅ Ambientes de arco apresentam frequentemente maior toxicidade por elementos como o Hg.")
+                else:
+                    st.error("Incorreto. ❌ Tenta novamente!")
+
+        elif "Dorsais" in deposito:
+            # Dorsais Q1
+            q_dor1 = st.radio(
+                "Qual é o principal tipo de rocha que constitui o substrato nas Dorsais Médio-Oceânicas?",
+                ["Granito", "Basalto (MORB)", "Argila pelágica", "Calcário coralino"],
+                key="sms_dor_q1"
+            )
+            if st.button("Verificar Resposta 1 (Dorsais)", key="btn_d1"):
+                if q_dor1 == "Basalto (MORB)":
+                    st.success("Correto! ✅ Os Mid-Ocean Ridge Basalts (MORB) são a rocha dominante.")
+                else:
+                    st.error("Incorreto. ❌ Pensa no magma que se forma nos centros de expansão oceânica.")
+            
+            st.divider()
+
+            # Dorsais Q2
+            q_dor2 = st.radio(
+                "O que caracteriza a estrutura de depósitos extintos (eSMS) nas dorsais para os proteger da oxidação?",
+                ["Uma camada de matéria orgânica", "Uma capa de jasper (sílica rica em ferro)", "Uma barreira de anidrite ativa", "Não possuem qualquer proteção"],
+                key="sms_dor_q2"
+            )
+            if st.button("Verificar Resposta 2 (Dorsais)", key="btn_d2"):
+                if q_dor2 == "Uma capa de jasper (sílica rica em ferro)":
+                    st.success("Correto! ✅ Esta carapaça impermeável de sílica protege os sulfuretos da água do mar.")
+                else:
+                    st.error("Incorreto. ❌ Tenta novamente!")
+
+        elif "retro-arco" in deposito.lower():
+            # Retro-arco Q1
+            q_ret1 = st.radio(
+                "Como se comparam os teores combinados de Cu+Zn+Pb nas bacias de retro-arco em relação a outros ambientes tectónicos?",
+                ["São sistematicamente os mais baixos", "São frequentemente os mais elevados (média de 16,1 wt.%)", "São idênticos aos das bacias oceânicas profundas", "Não contêm metais base"],
+                key="sms_ret_q1"
+            )
+            if st.button("Verificar Resposta 1 (Retro-arco)", key="btn_r1"):
+                if q_ret1 == "São frequentemente os mais elevados (média de 16,1 wt.%)":
+                    st.success("Correto! ✅ As bacias de retro-arco apresentam uma elevada densidade e concentração metálica.")
+                else:
+                    st.error("Incorreto. ❌ Tenta novamente!")
+            
+            st.divider()
+
+            # Retro-arco Q2
+            q_ret2 = st.radio(
+                "Em relação ao ouro (Au), os depósitos em bacias de retro-arco tendem a ter teores:",
+                ["Superiores aos das cristas médio-oceânicas", "Inexistentes", "Muito inferiores aos das dorsais", "Apenas vestigiais sem interesse económico"],
+                key="sms_ret_q2"
+            )
+            if st.button("Verificar Resposta 2 (Retro-arco)", key="btn_r2"):
+                if q_ret2 == "Superiores aos das cristas médio-oceânicas":
+                    st.success("Correto! ✅ Há frequentemente um enriquecimento notável em metais preciosos nestes ambientes.")
+                else:
+                    st.error("Incorreto. ❌ Tenta novamente!")
+
+    else:
+        st.info("Selecione um tipo de depósito na barra lateral para ver as questões específicas deste ambiente.")
 
 
 # ===============================
