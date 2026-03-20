@@ -74,28 +74,56 @@ def mostrar_caracteristicas_sms(deposito):
 # 2. CONFUSÕES COMUNS
 # ===============================
 
-def mostrar_confusoes_sms():
+def mostrar_confusoes_sms(deposito=None):
 
-    st.markdown("### ⚠️ Confusões Comuns")
+    st.markdown("### ⚠️ Confusões e Distinções Comuns")
 
-    st.warning("Os depósitos SMS e crostas de cobalto são frequentemente confundidos.")
+    st.warning("A distinção entre os vários tipos de sulfuretos maciços e crostas exige atenção a detalhes geoquímicos, texturais e tectónicos.")
 
-    with st.expander("🔍 Ver detalhes"):
+    st.markdown("#### 🌍 7 Pontos Gerais de Distinção e Confusão")
+    
+    with st.expander("🔍 Ver detalhes gerais", expanded=True):
+        st.markdown("**1. Origem Genética (Rácio Mn/Fe):** A confusão entre crostas hidrogenéticas, diagenéticas e hidrotermais resolve-se pelo rácio Mn/Fe. Crostas hidrogenéticas têm rácios próximos de 1; depósitos hidrotermais mostram uma separação extrema (predomínio de Fe ou Mn); e diagenéticos são enriquecidos em Mn, Ni e Cu em relação ao Fe.")
+        st.markdown("**2. Estado de Atividade:** Sistemas ativos possuem fluidos a altas temperaturas (>350°C) e mineralogia de anidrite. Sistemas extintos (eSMS) perdem a anidrite por dissolução, sofrem colapso interno e são frequentemente protegidos por uma capa de jasper (sílica-ferro) de 3 a 6 metros.")
+        st.markdown("**3. Maturação Textural:** As texturas coloformes (zonadas e imaturas) retêm concentrações mais elevadas de elementos traço tóxicos (As, Pb, Ag, Sb) que são perdidos durante a recristalização para texturas maciças (maduras e euédricas).")
+        st.markdown("**4. Assinatura Geoquímica por Substrato:** Embora o rácio Co/Ni tenha sido usado para distinguir substratos máficos de ultramáficos, ele tem pouco poder discriminatório. O estanho (Sn) e um rácio Au/Ag cinco vezes superior são marcadores mais fiáveis de influência ultramáfica.")
+        st.markdown("**5. Mapeamento Acústico (ABI):** A intensidade de retrodispersão acústica pode confundir crostas puras com misturas de sedimentos. Áreas de crosta dominante (C) e mistas (M) exibem ABI elevado, enquanto áreas de sedimento (S) têm ABI baixo.")
+        st.markdown("**6. Taxas de Espalhamento (Spreading Rate):** Cristas de espalhamento lento ou ultralento favorecem rácios rocha/água mais elevados e percursos de fluidos mais profundos, influenciando o enriquecimento em metais preciosos (Au, Ag) face a cristas rápidas.")
+        st.markdown("**7. Zonamento Térmico:** Chaminés de alta temperatura são ricas em cobre (calcopirite), enquanto fluidos de temperatura mais baixa (<300°C) favorecem o enriquecimento em zinco e chumbo (esfalerite e galena).")
 
-        st.markdown("**1. SMS vs Nódulos Polimetálicos**")
-        st.write("- SMS: associados a hidrotermalismo")
-        st.write("- Nódulos: crescimento lento em planícies abissais")
+    st.divider()
+    
+    st.markdown("#### 🌋 Distinções Específicas por Depósito")
+    
+    tab_arcos, tab_dorsais, tab_retro = st.tabs([
+        "🌊 Arcos Vulcânicos", 
+        "🌋 Dorsais Médio-Oceânicas", 
+        "🌊 Bacias de Retro-arco"
+    ])
+    
+    with tab_arcos:
+        st.markdown("##### Arcos Vulcânicos Submarinos (5 pontos de identificação)")
+        st.markdown("- **Rocha Hospedeira Evoluída:** Associados a composições vulcânicas mais ácidas/evoluidas, como andesito, dacito e riolito.")
+        st.markdown("- **Enriquecimento em Voláteis:** Presença distinta de elementos magmatófilos (As, Sb, Bi, Te) derivados da desgaseificação de câmaras magmáticas profundas.")
+        st.markdown("- **Toxicidade Elevada:** Potencial de toxicidade superior devido à abundância de mercúrio (Hg) nativo e sulfuretos de mercúrio (ex: campo Calypso).")
+        st.markdown("- **Mineralogia Específica:** Ocorrência de sulfossais (série tennantite-tetraedrite) e galena, raramente vistos em cristas médio-oceânicas puras.")
+        st.markdown("- **Depósitos de Substituição:** Podem formar depósitos enterrados por substituição e infiltração no subsolo marinho (ex: Palinuro), em vez de chaminés clássicas expostas.")
 
-        st.markdown("**2. SMS vs Crostas de Cobalto**")
-        st.write("- SMS: sulfuretos maciços")
-        st.write("- Crostas: enriquecimento em superfícies rochosas")
+    with tab_dorsais:
+        st.markdown("##### Dorsais Médio-Oceânicas (5 pontos de identificação)")
+        st.markdown("- **Substrato Máfico/Ultramáfico:** Dominadas por basalto e gabro, ou peridotitos serpentinizados em zonas de falhas de destacamento.")
+        st.markdown("- **Assinatura Metálica Primária:** Ricas em Cu, Fe, Co, Se e Mo, com baixa concentração de elementos \"epitermais\" como As e Sb.")
+        st.markdown("- **Morfologia de Montículo:** Depósitos maduros como o TAG formam grandes montículos por acumulação e retrabalhamento de taludes de chaminés ao longo de milhares de anos.")
+        st.markdown("- **Exclusividade do Cobalto:** O Co está associado quase exclusivamente a locais de alta temperatura (~400°C) nestas dorsais.")
+        st.markdown("- **Sequência de Jasper:** Em depósitos extintos, a preservação do minério é garantida por uma carapaça de sílica impermeável que impede a oxidação pela água do mar.")
 
-        st.markdown("**3. Ativo vs Inativo**")
-        st.write("- Ativo: associado a fluidos quentes")
-        st.write("- Inativo: sistemas fossilizados")
-
-        st.markdown("**4. Mineração Simples?**")
-        st.write("- Ambientes profundos implicam desafios técnicos e ambientais")
+    with tab_retro:
+        st.markdown("##### Bacias de Retro-arco (5 pontos de identificação)")
+        st.markdown("- **Elevado Teor Metálico:** Demonstram frequentemente os teores combinados de Cu + Zn + Pb mais elevados (média de 16,1 wt%) entre todos os ambientes tectónicos.")
+        st.markdown("- **Riqueza em Ouro:** Tendem a apresentar teores de ouro (Au) sistematicamente superiores aos sistemas de crista médio-oceânica.")
+        st.markdown("- **Dualidade Geológica:** Combinam características de dorsais (centros de expansão) com a influência de subducção, resultando em misturas de assinaturas geoquímicas máficas e félsicas.")
+        st.markdown("- **Densidade de Depósitos:** A frequência de ocorrência de depósitos ativos é comparável à das dorsais de espalhamento lento (aprox. cada 174 km).")
+        st.markdown("- **Zonamento Complexo:** Devido à natureza bimodal do vulcanismo, apresentam um zonamento mineralógico complexo entre assembleias de pirite-esfalerite e calcopirite-esfalerite.")
 
 
 # ===============================
