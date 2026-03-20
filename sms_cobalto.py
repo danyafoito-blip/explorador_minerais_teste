@@ -9,65 +9,47 @@ from streamlit_folium import st_folium
 # 1. CARACTERÍSTICAS
 # ===============================
 
-def mostrar_caracteristicas_sms(deposito):
+def mostrar_caracteristicas_sms(deposito=""):
 
     st.markdown("### 🌊⚙️ Sulfuretos Maciços Submarinos (SMS) e Crostas de Cobalto")
 
-    col1, col2 = st.columns(2)
-
-    with col1:
-
-        st.success("**Propriedades Geológicas e Geoquímicas**")
-
-        st.write("- Depósitos hidrotermais submarinos")
-        st.write("- Ricos em Cu, Zn, Pb, Au, Ag")
-        st.write("- Associados a fluidos quentes")
-        st.write("- Precipitação rápida de sulfuretos")
-        st.write("- Elevada heterogeneidade")
-
-    with col2:
-
-        st.info("**Importância Económica**")
-
-        st.write("- Fonte de metais críticos")
-        st.write("- Cobalto essencial para baterias")
-        st.write("- Potencial elevado no fundo oceânico")
-        st.write("- Interesse crescente em mineração profunda")
+    st.markdown("#### 🌍 5 Características Gerais do Recurso")
+    
+    with st.expander("🔍 Ver características gerais", expanded=True):
+        st.markdown("**1. Geração Hidrotermal:** Estes depósitos formam-se através da circulação hidrotermal, onde a água do mar penetra na crosta, é aquecida por energia geotérmica, dissolve metais das rochas circundantes e os precipita como sulfuretos ao ser expelida.")
+        st.markdown("**2. Composição Metálica:** São ricos em metais base (Cobre, Zinco, Ferro e Chumbo) e contêm concentrações exploráveis de metais preciosos como Ouro e Prata.")
+        st.markdown("**3. Estrutura Tridimensional:** O recurso consiste em montículos de sulfuretos na superfície, chaminés (como os \"black smokers\") e uma zona de alimentação subsuperficial conhecida como stockwork.")
+        st.markdown("**4. Potencial Económico:** Estima-se que os depósitos ativos contenham centenas de milhões de toneladas de material, com teores de metal comparáveis ou superiores aos depósitos terrestres.")
+        st.markdown("**5. Ecossistemas Associados:** Suportam comunidades biológicas únicas baseadas na quimiossíntese em locais ativos, enquanto locais inativos servem de substrato duro para fauna séssil de águas profundas.")
 
     st.divider()
 
-    if "Dorsais" in deposito:
+    # Mostra apenas as 5 características específicas dependendo do depósito selecionado
+    if deposito:
+        st.markdown(f"#### 🔎 Características Específicas: {deposito}")
 
-        st.markdown("### 🌋 Dorsais Médio-Oceânicas")
+        if "Arcos" in deposito:
+            st.markdown("- **Rocha Hospedeira Evoluída:** Diferente das dorsais, estes depósitos estão associados a composições vulcânicas mais ácidas e evoluídas, como andesito, dacito e riolito.")
+            st.markdown("- **Aporte de Voláteis Magmáticos:** Apresentam enriquecimento em elementos magmatófilos (As, Sb, Bi, Te) derivados da desgaseificação de câmaras magmáticas.")
+            st.markdown("- **Elevado Teor de Mercúrio:** Podem conter concentrações muito altas de mercúrio (Hg), ocorrendo por vezes como mercúrio nativo (ex: campo Calypso).")
+            st.markdown("- **Depósitos de Substituição:** Frequentemente formam-se por substituição e infiltração no subsolo marinho, o que pode resultar em corpos de minério enterrados sem as chaminés clássicas expostas.")
+            st.markdown("- **Toxicidade Potencial:** Possuem o maior risco de toxicidade ambiental devido à associação de metais como As, Sb, Pb e Hg em minerais reativos como sulfossais e galena.")
 
-        st.write("**Características principais:**")
-        st.write("- Associadas a expansão do fundo oceânico")
-        st.write("- Sistemas hidrotermais ativos (black smokers)")
-        st.write("- Formação rápida de sulfuretos")
-        st.write("- Alta temperatura")
+        elif "Dorsais" in deposito:
+            st.markdown("- **Substrato Máfico/Ultramáfico:** São predominantemente alojados em basaltos e gabros, ou peridotitos serpentinizados em zonas de falhas de destacamento.")
+            st.markdown("- **Assinatura de Metais Primários:** Demonstram concentrações elevadas de Cu, Fe, Co, Se, Ni e Mo, refletindo a lixiviação direta da crosta oceânica máfica.")
+            st.markdown("- **Morfologia de Montículo:** Sistemas maduros (como o campo TAG) formam grandes montículos circulares por acumulação e retrabalhamento de taludes de chaminés ao longo de milénios.")
+            st.markdown("- **Capa de Jasper Protetora:** Em depósitos extintos, o corpo principal de sulfureto é frequentemente protegido da oxidação por uma camada de jasper (sílica rica em ferro) de 3 a 6 metros de espessura.")
+            st.markdown("- **Controlo da Taxa de Expansão:** A taxa de espalhamento da crista influencia a profundidade da célula hidrotermal e a rácio rocha/água, afetando diretamente os teores de Au, Ag e Ni.")
 
-    elif "Arcos" in deposito:
-
-        st.markdown("### 🌊 Arcos Vulcânicos Submarinos")
-
-        st.write("**Características principais:**")
-        st.write("- Associados a zonas de subducção")
-        st.write("- Magmatismo intenso")
-        st.write("- Maior diversidade metálica")
-        st.write("- Ambientes complexos")
-
-    elif "retro-arco" in deposito.lower():
-
-        st.markdown("### 🌊 Bacias de Retro-Arco")
-
-        st.write("**Características principais:**")
-        st.write("- Extensão tectónica atrás de arcos vulcânicos")
-        st.write("- Sistemas hidrotermais ativos")
-        st.write("- Depósitos economicamente relevantes")
-        st.write("- Variabilidade geológica")
-
+        elif "retro-arco" in deposito.lower():
+            st.markdown("- **Teores Metálicos Combinados Elevados:** Apresentam frequentemente os teores mais altos de Cu + Zn + Pb (média de 16,1 wt.%) entre todos os ambientes tectónicos.")
+            st.markdown("- **Enriquecimento em Ouro:** Tendem a possuir teores de ouro (Au) sistematicamente superiores aos encontrados nas cristas médio-oceânicas puras.")
+            st.markdown("- **Dualidade Geodinâmica:** Combinam características de centros de expansão (semelhantes às dorsais) com a influência geoquímica de zonas de subducção.")
+            st.markdown("- **Zonamento Mineralógico:** Possuem assembleias complexas de pirite-esfalerite e calcopirite-esfalerite, muitas vezes acompanhadas por barite.")
+            st.markdown("- **Densidade de Ocorrência:** A frequência de depósitos ativos nestas bacias é comparável à das dorsais de espalhamento lento, ocorrendo aproximadamente a cada 174 km.")
     else:
-        st.info("Selecione um tipo de depósito válido.")
+        st.info("Selecione um tipo de depósito na barra lateral para ver as características específicas.")
 
 
 # ===============================
@@ -93,7 +75,6 @@ def mostrar_confusoes_sms(deposito=""):
 
     st.divider()
 
-    # Mostra apenas as 5 distinções específicas dependendo do depósito selecionado
     if deposito:
         st.markdown(f"#### 🔎 Distinções Específicas: {deposito}")
 
