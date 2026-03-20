@@ -362,10 +362,10 @@ with tab_check:
         pass
         
     elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
-        checklist_uranio()
+        checklist_uranio(deposito_selecionado) 
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
-        checklist_sms(deposito_selecionado) # <--- Adicionar (deposito_selecionado) aqui!
+        checklist_sms(deposito_selecionado) 
         
     elif recurso_selecionado == "Quartzo":
         st.info("Conteúdo ainda não disponível.")
