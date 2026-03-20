@@ -252,19 +252,50 @@ def quiz_uranio(deposito=""):
 # 4. CHECKLIST DE CAMPO
 # ===============================
 
-def checklist_uranio():
+def checklist_uranio(deposito=""):
 
-    st.markdown("### ✅ Checklist de Campo")
+    st.markdown("### ✅ Checklist de Campo e Identificação (Urânio e Tório)")
+    st.write("Critérios práticos para identificação de amostras e depósitos no campo ou laboratório:")
 
-    st.write("Utilizado na prospeção de urânio e tório:")
+    # --- CHECKLIST GERAL ---
+    st.markdown("#### 🌍 Checklist Geral do Recurso")
+    
+    with st.expander("🔍 Ver checklist geral", expanded=True):
+        st.checkbox("**Radioatividade Detetável:** Presença de emissões gama que podem ser identificadas com contadores Geiger ou cintilómetros no campo ou museu.", key="chk_ura_geral_1")
+        st.checkbox("**Densidade Elevada:** Minerais primários de urânio, como a uraninite, são extremamente densos e pesados (densidade ~9-10 g/cm³), destacando-se de rochas comuns.", key="chk_ura_geral_2")
+        st.checkbox("**Cores Vibrantes de Minerais Secundários:** Presença de minerais de oxidação de cores intensas, como o amarelo néon (carnotite/autunite) ou verde maçã (torbernite), frequentemente associados a zonas de alteração superficial.", key="chk_ura_geral_3")
+        st.checkbox("**Abundância Relativa e Brilho:** O tório é 3 a 4 vezes mais abundante que o urânio e ocorre frequentemente em minerais com brilho resinoso ou ceroso, como a monazite (amarelo-mel a castanho) e a thorite (vermelho a preto).", key="chk_ura_geral_4")
+        st.checkbox("**Controlo Redox:** Evidência de mudanças de estado de oxidação, onde o urânio precipita em ambientes reduzidos (escuros/cinzentos) após ser transportado em soluções oxidadas.", key="chk_ura_geral_5")
 
-    st.checkbox("Identificar bacias sedimentares")
-    st.checkbox("Mapear discordâncias geológicas")
-    st.checkbox("Medir radioatividade (gamma)")
-    st.checkbox("Analisar condições redox")
-    st.checkbox("Identificar minerais uraníferos")
-    st.checkbox("Avaliar circulação de fluidos")
-    st.checkbox("Verificar segurança radiológica")
+    st.divider()
+
+    # --- CHECKLIST ESPECÍFICA ---
+    if deposito:
+        st.markdown(f"#### 🔎 Checklist Específica: {deposito}")
+
+        if "unconformity" in deposito.lower():
+            st.checkbox("**Interface Geológica Marcante:** Observação do contacto (discordância) entre um soco metamórfico altamente deformado (gneisses/xistos) e uma bacia de cobertura de arenitos proterozoicos horizontais.", key="chk_ura_unc_1")
+            st.checkbox("**Presença de Grafite:** Alvos de minério frequentemente associados a metapelitos grafíticos (condutores eletrónicos) no soco metamórfico.", key="chk_ura_unc_2")
+            st.checkbox("**Teores Excecionalmente Elevados:** Amostras de museu podem exibir minério maciço de uraninite (pechblenda botrioidal ou fuliginosa) com teores que excedem 20%, por vezes até 50% de U.", key="chk_ura_unc_3")
+            st.checkbox("**Alteração Argilosa e Hematítica:** Presença de halos de alteração extensos compostos por ilite, sudoíte (clorite de magnésio) e dravite (turmalina rica em boro) que rodeiam o minério.", key="chk_ura_unc_4")
+            st.checkbox("**Texturas de Substituição e Brecha:** Minério que preenche fraturas ou substitui a matriz do arenito logo acima ou abaixo da discordância.", key="chk_ura_unc_5")
+
+        elif "arenitos" in deposito.lower():
+            st.checkbox("**Morfologias Roll-Front ou Tabulares:** Corpos de minério em forma de crescente (roll-front) que cortam a estratigrafia ou camadas planas (tabular) paralelas à deposição.", key="chk_ura_are_1")
+            st.checkbox("**Zonamento de Cores Redox:** Transição visível entre arenitos oxidados (vermelhos/amarelos por hematite/limonite) e arenitos reduzidos (cinzentos por pirite e matéria orgânica).", key="chk_ura_are_2")
+            st.checkbox("**Redutores Orgânicos Visíveis:** Presença de restos de plantas carbonizadas, madeira fossilizada, troncos silicificados ou impregnações de betume/hidrocarbonetos que serviram para precipitar o urânio.", key="chk_ura_are_3")
+            st.checkbox("**Permeabilidade da Rocha Hospedeira:** Ocorrência em arenitos de grão médio a grosseiro, frequentemente com cimento de calcite ou sílica, evidenciando o antigo fluxo de águas subterrâneas.", key="chk_ura_are_4")
+            st.checkbox("**Associações de Minerais de Baixa Temperatura:** Disseminações finas de coffinite e uraninite na matriz arenosa, muitas vezes invisíveis a olho nu sem radiação.", key="chk_ura_are_5")
+
+        elif "hidrotermais" in deposito.lower():
+            st.checkbox("**Preenchimento de Fraturas (Veios):** Mineralização que ocorre em filões, zonas de cisalhamento ou brechas tectónicas, cruzando as estruturas da rocha encaixante.", key="chk_ura_hid_1")
+            st.checkbox("**Associação com Rochas Alcalinas:** Hospedados em complexos ígneos alcalinos ou carbonatitos (rochas ricas em carbonatos como dolomite e calcite de origem ígnea).", key="chk_ura_hid_2")
+            st.checkbox("**Complexidade Mineralógica REE-Th:** Presença simultânea de minerais de Terras Raras (como bastnaesite) e tório (como monazite e thorite), típica de sistemas de alta temperatura.", key="chk_ura_hid_3")
+            st.checkbox("**Minerais Indicadores (Mineralizadores):** Presença comum de fluorite (roxo/verde), barite e carbonatos que atuaram como agentes de transporte nos fluidos hidrotermais.", key="chk_ura_hid_4")
+            st.checkbox("**Halos de Alteração Potássica/Sódica:** Evidência de metasomatismo nas rochas encaixantes, com formação de novos feldspatos (albitização) ou micas.", key="chk_ura_hid_5")
+
+    else:
+        st.info("Selecione um tipo de depósito na barra lateral para ver a checklist específica.")
 
 
 # ===============================
