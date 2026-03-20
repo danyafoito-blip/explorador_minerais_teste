@@ -155,19 +155,48 @@ def quiz_sms():
 # 4. CHECKLIST DE CAMPO
 # ===============================
 
-def checklist_sms():
+def checklist_sms(deposito=""):
 
     st.markdown("### ✅ Checklist de Campo (Exploração Submarina)")
 
-    st.write("Utilizado na exploração de depósitos SMS:")
+    st.write("Critérios de identificação de amostras e depósitos SMS:")
 
-    st.checkbox("Identificar atividade hidrotermal")
-    st.checkbox("Mapear estruturas tectónicas")
-    st.checkbox("Analisar plumas hidrotermais")
-    st.checkbox("Amostragem de sulfuretos")
-    st.checkbox("Caracterização geoquímica")
-    st.checkbox("Avaliação ambiental")
-    st.checkbox("Utilização de ROVs/AUVs")
+    st.markdown("#### 🌍 Checklist Geral de Identificação")
+    
+    with st.expander("🔍 Ver checklist geral", expanded=True):
+        st.checkbox("**Morfologia Externa:** Verificar se a amostra apresenta estruturas tubulares (fragmentos de chaminés com condutos centrais), massas de sulfuretos maciços ou pavimentos de crostas botrioidais (em forma de cacho de uvas).", key="chk_geral_1")
+        st.checkbox("**Mineralogia Primária de Sulfuretos:** Identificar a presença de pirite, calcopirite (amarelo-latão), esfalerite (brilho resinoso) ou galena (brilho metálico cinza).", key="chk_geral_2")
+        st.checkbox("**Presença de Oxidação e Capas Protetoras:** Em depósitos extintos, procurar pela capa de jasper (sílica rica em ferro, cor laranja a vermelho-escuro) ou camadas de oxihidróxidos de ferro (FeOOH) que revestem o minério.", key="chk_geral_3")
+        st.checkbox("**Crostas de Fe-Mn:** Identificar a alternância de lâminas escuras (pretas a castanhas) diretamente sobre o substrato rochoso, apresentando uma textura fosca ou localmente brilhante se houver influência diagenética.", key="chk_geral_4")
+        st.checkbox("**Texturas de Maturação:** Diferenciar entre texturas coloformes (bandadas e zonadas, indicando cristalização imatura) e texturas maciças (recristalizadas e euédricas, indicando maturação térmica).", key="chk_geral_5")
+
+    st.divider()
+
+    if deposito:
+        st.markdown(f"#### 🔎 Checklist Específica: {deposito}")
+
+        if "Arcos" in deposito:
+            st.checkbox("**Substrato e Rocha Hospedeira:** Presença de fragmentos de rochas vulcânicas evoluídas e ácidas, como dacito ou riolito, em vez de basaltos simples.", key="chk_arc_1")
+            st.checkbox("**Mineralogia de Sulfossais:** Identificar visualmente sulfossais da série tennantite-tetraedrite e abundância de galena, que são mais comuns neste ambiente.", key="chk_arc_2")
+            st.checkbox("**Enriquecimento em Voláteis:** Procurar indicadores de mercúrio (Hg), por vezes ocorrendo como mercúrio nativo ou sulfuretos reativos (ex: campo Calypso).", key="chk_arc_3")
+            st.checkbox("**Gangue Abundante:** Presença significativa de minerais de gangue como barite (muitas vezes em texturas vuggy) e anidrite.", key="chk_arc_4")
+            st.checkbox("**Morfologia de Substituição:** Amostras que indicam infiltração e substituição de sedimentos ou rochas pré-existentes, resultando em minérios de aspeto 'sujo' ou brechificado com matriz sedimentar.", key="chk_arc_5")
+
+        elif "Dorsais" in deposito:
+            st.checkbox("**Host Rock Máfico/Ultramáfico:** Amostras associadas a basaltos (MORB), gabros ou peridotitos serpentinizados (frequentemente com clorite verde).", key="chk_dor_1")
+            st.checkbox("**Estrutura de Chaminé 'Black Smoker':** Fragmentos com condutos de fluidos intactos revestidos por calcopirite ou marcasite.", key="chk_dor_2")
+            st.checkbox("**Capa de Jasper Distintiva:** Presença de uma camada impermeável de sílica-ferro (3-6m no depósito original) com cores variando entre o mosqueado vermelho e cinza.", key="chk_dor_3")
+            st.checkbox("**Zonamento Térmico Simples:** Observar a separação clara entre zonas ricas em cobre (calcopirite) no núcleo e zinco (esfalerite) na periferia das chaminés.", key="chk_dor_4")
+            st.checkbox("**Pirite Maciça e Brechas:** Massas densas de pirite brechificada que formam a base dos montículos, muitas vezes com baixo teor visual de gangue.", key="chk_dor_5")
+
+        elif "retro-arco" in deposito.lower():
+            st.checkbox("**Elevada Densidade Metálica:** Amostras com os teores combinados mais elevados de Cu+Zn+Pb, apresentando-se extremamente pesadas e compactas.", key="chk_ret_1")
+            st.checkbox("**Mineralogia Bimodal:** Assembleias complexas e mistas de pirite-esfalerite e calcopirite-esfalerite na mesma amostra.", key="chk_ret_2")
+            st.checkbox("**Presença de Ouro e Prata:** Embora microscópicos, estes depósitos tendem a exibir teores de metais preciosos superiores aos de crista médio-oceânica.", key="chk_ret_3")
+            st.checkbox("**Chaminés Ramificadas:** Morfologia de chaminés mais finas e ramificadas (ex: 20 cm de diâmetro), indicando regimes de fluxo distintos (ex: 'Satanic Mills').", key="chk_ret_4")
+            st.checkbox("**Influência Magmática:** Presença de minerais e texturas associados a fluidos magmáticos exsolvidos, resultando numa geoquímica rica em metais 'epitermais' como As e Sb.", key="chk_ret_5")
+    else:
+        st.info("Selecione um tipo de depósito na barra lateral para ver a checklist específica.")
 
 
 # ===============================
