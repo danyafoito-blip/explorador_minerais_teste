@@ -1,21 +1,112 @@
 
+# ===============================
+# BIBLIOTECAS EXTERNAS
+# ===============================
+
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 import folium
 from streamlit_folium import st_folium
-from SMS import quiz_sms, mostrar_referencias_sms
+from folium.plugins import Fullscreen
 
+# ===============================
+# MÓDULOS DO PROJETO
+# ===============================
 
-# --- 1. Configurações da Página ---
+from hidrogenio import (
+    mostrar_caracteristicas_hidrogenio,
+    mostrar_confusoes_hidrogenio,
+    quiz_hidrogenio,
+    checklist_hidrogenio,
+    mapa_hidrogenio,
+    referencias_hidrogenio
+)
+
+from petroleo_gas import (
+    mostrar_caracteristicas_petroleo,
+    mostrar_confusoes_petroleo,
+    quiz_petroleo,
+    checklist_petroleo,
+    mapa_petroleo,
+    referencias_petroleo
+)
+
+from metano import (
+    mostrar_caracteristicas_metano,
+    mostrar_confusoes_metano,
+    quiz_metano,
+    checklist_metano,
+    mapa_metano,
+    referencias_metano
+)
+
+from litio import (
+    mostrar_caracteristicas_litio,
+    mostrar_confusoes_litio,
+    quiz_litio,
+    checklist_litio,
+    mapa_litio,
+    referencias_litio
+)
+
+from uranio_torio import (
+    mostrar_caracteristicas_uranio,
+    mostrar_confusoes_uranio,
+    quiz_uranio,
+    checklist_uranio,
+    mapa_uranio,
+    referencias_uranio
+)
+
+from sms_cobalto import (
+    mostrar_caracteristicas_sms,
+    mostrar_confusoes_sms,
+    quiz_sms,
+    checklist_sms,
+    mapa_sms,
+    referencias_sms
+)
+
+from quartzo import (
+    mostrar_caracteristicas_quartzo,
+    mostrar_confusoes_quartzo,
+    quiz_quartzo,
+    checklist_quartzo,
+    mapa_quartzo,
+    referencias_quartzo
+)
+
+from monazite import (
+    mostrar_caracteristicas_monazite,
+    mostrar_confusoes_monazite,
+    quiz_monazite,
+    checklist_monazite,
+    mapa_monazite,
+    referencias_monazite
+)
+
+from ortoclase import (
+    mostrar_caracteristicas_ortoclase,
+    mostrar_confusoes_ortoclase,
+    quiz_ortoclase,
+    checklist_ortoclase,
+    mapa_ortoclase,
+    referencias_ortoclase
+)
+
+# ===============================
+# 1. CONFIGURAÇÕES
+# ===============================
 
 st.set_page_config(
     page_title="Explorador de Recursos Energéticos",
     layout="wide",
-    page_icon="💎"
+    page_icon= "Logótipo.png"
 )
 
-# --- 2. Base de Dados ---
+# ===============================
+# 2. BASE DE DADOS
+# ===============================
 
 materias_primas = [
     "Hidrogénio (Geração natural e armazenamento)",
@@ -30,54 +121,45 @@ materias_primas = [
 ]
 
 depositos = {
-
     "Hidrogénio (Geração natural e armazenamento)": [
-        "Reservatórios geológicos naturais",
-        "Cavernas salinas",
-        "Reservatórios de gás esgotados"
+        "Reservatórios de Hidrogénio Natural (Geológico)",
+        "Reservatórios Geológicos para Armazenamento de Hidrogénio",
     ],
-
     "Petróleo e Gás (Sistemas convencionais)": [
-        "Bacias sedimentares",
-        "Armadilhas estruturais",
-        "Armadilhas estratigráficas"
-    ],
+        "Reservatório de petróleo",
+        "Reservatórios de gás",
+        "Reservatórios de petróleo e gás",
 
+    ],
     "Metano (Hidratos e recursos não convencionais)": [
-        "Hidratos de gás marinhos",
-        "Folhelhos ricos em matéria orgânica (Shale)",
-        "Carvões (Coalbed methane)"
+        "Reservatórios de Hidratos de Metano",
+        "Reservatórios Não Convencionais de Metano",
     ],
-
     "Lítio (Rocha dura versus salmouras)": [
         "Pegmatitos (rocha dura)",
         "Salmouras continentais",
         "Argilas ricas em lítio"
     ],
-
     "Urânio e Tório (Combustíveis nucleares)": [
         "Depósitos tipo unconformity",
         "Depósitos em arenitos",
         "Depósitos hidrotermais"
     ],
-
-    "Sulfuretos maciços do fundo oceânico (SMS)": [
+    "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto": [
         "Dorsais médio-oceânicas",
         "Arcos vulcânicos submarinos",
         "Bacias de retro-arco"
     ],
-
     "Quartzo": [
         "Veios hidrotermais",
         "Pegmatitos",
         "Depósitos aluviais"
     ],
-
     "Monazite": [
-        "Depósitos Primários ",
-        "Depósitos Secundários"
+        "Depósitos de Placer",
+        "Depósitos ígneos",
+        "Depósitos metamórficos"
     ],
-
     "Ortoclase": [
         "Pegmatitos graníticos",
         "Granitos",
@@ -85,18 +167,19 @@ depositos = {
     ]
 }
 
-# --- 3. Sidebar ---
+# ===============================
+# 3. SIDEBAR
+# ===============================
 
 with st.sidebar:
 
     try:
-        nome_imagem = "WhatsApp Image 2026-03-16 at 13.44.40.jpeg"
-        st.image(nome_imagem)
+        st.image("Logótipo.png")
     except Exception:
-        st.write("*(Espaço para o Logótipo)*")
+        st.write("*(Logótipo)*")
 
     st.markdown("<h3 style='text-align: center;'>⚙️ Painel de Controlo</h3>", unsafe_allow_html=True)
-
+    
     st.divider()
 
     recurso_selecionado = st.selectbox(
@@ -107,158 +190,294 @@ with st.sidebar:
     deposito_selecionado = st.selectbox(
         "Selecione o Tipo de Depósito:",
         depositos.get(recurso_selecionado, []),
-        key=f"deposito_{recurso_selecionado}"
+        key=f"dep_{recurso_selecionado}"
     )
 
     st.divider()
 
     st.info("💡 Utilize os separadores no ecrã principal para navegar.")
 
-# --- 4. Ecrã Principal ---
+# ===============================
+# 4. HEADER
+# ===============================
 
 st.markdown(f"## 🔎 Análise: {recurso_selecionado}")
 st.caption(f"Tipo de depósito selecionado: **{deposito_selecionado}**")
 
-st.write("")
 
-# --- Tabs ---
+# ===============================
+# 5. TABS
+# ===============================
 
-tab_caract, tab_confusoes, tab_quiz, tab_check, tab_mapa, tab_ref = st.tabs([
+tab_caract, tab_conf, tab_quiz, tab_check, tab_mapa, tab_ref = st.tabs([
     "📊 Características",
-    "⚠️ Confusões Comuns",
-    "🧠 Quiz Interativo",
-    "✅ Checklist de Campo",
-    "🗺️ Mapa Global",
+    "⚠️ Confusões",
+    "🧠 Quiz",
+    "✅ Checklist",
+    "🗺️ Mapa",
     "📚 Referências"
 ])
 
-# --- Características ---
+# ===============================
+# 6. CARACTERÍSTICAS
+# ===============================
 
 with tab_caract:
 
-    st.markdown("### Propriedades Principais")
+    if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
+        mostrar_caracteristicas_hidrogenio(deposito_selecionado)
+        
+    elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
+        mostrar_caracteristicas_petroleo(deposito_selecionado)
+    
+    elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+    
+    elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+    
+    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
+        mostrar_caracteristicas_uranio(deposito_selecionado)
+    
+    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+        mostrar_caracteristicas_sms(deposito_selecionado)
+    
+    elif recurso_selecionado == "Quartzo":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+    
+    elif recurso_selecionado == "Monazite":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+    
+    elif recurso_selecionado == "Ortoclase":
+        st.info("Conteúdo ainda não disponível.")
+        pass
 
-    col1, col2 = st.columns(2)
+    else:
+        st.info("Conteúdo ainda não disponível.")
 
-    with col1:
+# ===============================
+# 7. CONFUSÕES
+# ===============================
 
-        st.success("**Propriedades Físicas**")
+with tab_conf:
 
-        st.write("- Dureza (Escala de Mohs): *A definir*")
-        st.write("- Brilho: *A definir*")
-        st.write("- Clivagem / Fratura: *A definir*")
+    if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
+        mostrar_confusoes_hidrogenio()
+        
+    elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
+        mostrar_confusoes_petroleo()
+        
+    elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
+        mostrar_confusoes_uranio()
+        
+    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+        mostrar_confusoes_sms()
+        
+    elif recurso_selecionado == "Quartzo":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Monazite":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Ortoclase":
+        st.info("Conteúdo ainda não disponível.")
+        pass
 
-    with col2:
+    else:
+        st.info("Conteúdo ainda não disponível.")
 
-        st.info("**Aplicações Industriais**")
-
-        st.write("- Uso 1")
-        st.write("- Uso 2")
-        st.write("- Uso 3")
-
-# --- Confusões ---
-
-with tab_confusoes:
-
-    st.markdown("### Minerais Semelhantes")
-
-    st.warning("Diferenças cruciais para identificação.")
-
-    with st.expander("Ver detalhes"):
-
-        st.write("Conteúdo comparativo.")
-
-# --- Quiz ---
+# ===============================
+# 8. QUIZ
+# ===============================
 
 with tab_quiz:
 
-    if recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS)":
+    if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
+        quiz_hidrogenio()
 
+    elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
+        quiz_petroleo(deposito_selecionado)
+        
+    elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
+        quiz_uranio()
+        
+    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
         quiz_sms()
+        
+    elif recurso_selecionado == "Quartzo":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Monazite":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Ortoclase":
+        st.info("Conteúdo ainda não disponível.")
+        pass
 
     else:
+        st.info("Quiz em desenvolvimento.")
 
-        st.info(
-            f"O quiz para **{recurso_selecionado}** ainda está em desenvolvimento."
-        )
-
-# --- Checklist ---
+# ===============================
+# 9. CHECKLIST
+# ===============================
 
 with tab_check:
 
-    st.checkbox("Verificar a cor e o traço")
-    st.checkbox("Testar a dureza")
-    st.checkbox("Observar fratura/clivagem")
-    st.checkbox("Testar reação com HCl")
+    if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
+        checklist_hidrogenio()
+        
+    elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
+        checklist_petroleo()
+        
+    elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
+        checklist_uranio()
+        
+    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+        checklist_sms()
+        
+    elif recurso_selecionado == "Quartzo":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Monazite":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Ortoclase":
+        st.info("Conteúdo ainda não disponível.")
+        pass        
 
-# --- MAPA GLOBAL 2D COM CSV ---
+    else:
+        st.checkbox("Verificar propriedades gerais")
+        st.checkbox("Testar dureza")
+        st.checkbox("Observar fratura")
+
+# ===============================
+# 10. MAPA
+# ===============================
 
 with tab_mapa:
 
-    st.markdown("### 🌍 Mapa Global de Ocorrências")
-
-    uploaded_file = st.file_uploader(
-        "Carregar base de dados CSV com Latitude e Longitude",
-        type=["csv"]
-    )
-
-    if uploaded_file is not None:
-
-        df = pd.read_csv(uploaded_file)
-
-        st.success("Base de dados carregada com sucesso")
-
-        st.dataframe(df.head())
-
-        mapa = folium.Map(
-            location=[20,0],
-            zoom_start=2,
-            tiles="OpenStreetMap"
-        )
-
-        for _, row in df.iterrows():
-
-            if pd.notna(row["Latitude"]) and pd.notna(row["Longitude"]):
-
-                popup = f"""
-                <b>Field:</b> {row.get('Field Name','N/A')}<br>
-                <b>Country:</b> {row.get('Country/Region','N/A')}<br>
-                <b>Operator:</b> {row.get('Operator','N/A')}<br>
-                <b>Status:</b> {row.get('Status','N/A')}
-                """
-
-                folium.CircleMarker(
-                    location=[row["Latitude"], row["Longitude"]],
-                    radius=5,
-                    color="red",
-                    fill=True,
-                    fill_opacity=0.8,
-                    popup=popup
-                ).add_to(mapa)
-
-        st_folium(mapa, use_container_width=True, height=600)
+    if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
+        mapa_hidrogenio()
+        
+    elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
+        mapa_petroleo()
+              
+    elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
+        mapa_metano()
+        
+    elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
+        mapa_litio()
+        
+    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
+        mapa_uranio()
+        
+    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+        mapa_sms()
+        
+    elif recurso_selecionado == "Quartzo":
+        mapa_quartzo()
+        
+    elif recurso_selecionado == "Monazite":
+        mapa_monazite()
+        
+    elif recurso_selecionado == "Ortoclase":
+        mapa_ortoclase()      
 
     else:
 
-        st.info("Carregue um ficheiro CSV para visualizar os dados.")
+        st.info("Mapa genérico")
 
-# --- Referências ---
+        uploaded_file = st.file_uploader("CSV", type=["csv"])
+
+        if uploaded_file:
+            df = pd.read_csv(uploaded_file)
+
+            mapa = folium.Map(location=[20, 0], zoom_start=2)
+            Fullscreen().add_to(mapa)
+
+            for _, row in df.iterrows():
+                if pd.notna(row["Latitude"]) and pd.notna(row["Longitude"]):
+                    folium.CircleMarker(
+                        [row["Latitude"], row["Longitude"]],
+                        radius=5
+                    ).add_to(mapa)
+
+            st_folium(mapa, use_container_width=True)
+
+# ===============================
+# 11. REFERÊNCIAS
+# ===============================
 
 with tab_ref:
 
-    if recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS)":
-
-        mostrar_referencias_sms()
+    if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
+        referencias_hidrogenio()
+        
+    elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
+        referencias_petroleo()
+        
+    elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
+        referencias_uranio()
+        
+    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+        referencias_sms()
+        
+    elif recurso_selecionado == "Quartzo":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Monazite":
+        st.info("Conteúdo ainda não disponível.")
+        pass
+        
+    elif recurso_selecionado == "Ortoclase":
+        st.info("Conteúdo ainda não disponível.")
+        pass        
 
     else:
-
-        st.markdown("### Fontes e Bibliografia")
-
-        st.info(
-            f"As referências para **{recurso_selecionado}** ainda estão em compilação."
-        )
-
-        st.caption("Organizado por: Grupo Quartzo")
+        st.info("Referências em desenvolvimento.")
 
 
 
