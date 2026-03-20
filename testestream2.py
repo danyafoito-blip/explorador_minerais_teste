@@ -280,7 +280,7 @@ with tab_conf:
         pass
         
     elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
-        mostrar_confusoes_uranio()
+        mostrar_confusoes_uranio(deposito_selecionado) 
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
         mostrar_confusoes_sms()
