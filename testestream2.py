@@ -239,7 +239,7 @@ with tab_caract:
         pass
     
     elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
-        mostrar_caracteristicas_uranio(deposito_selecionado)
+        mostrar_caracteristicas_uranio(deposito_selecionado) # <--- Garantir que tem o (deposito_selecionado)
     
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
         mostrar_caracteristicas_sms(deposito_selecionado)
