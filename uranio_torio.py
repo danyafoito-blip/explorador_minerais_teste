@@ -53,7 +53,7 @@ def mostrar_caracteristicas_uranio(deposito=""):
             st.markdown("- **Presença de Mineralizadores:** Os fluidos mineralizantes são frequentemente ricos em componentes como CO2, flúor (F), cloro (Cl) e H2S, que auxiliam no transporte e posterior precipitação dos minerais de tório e urânio.")
 
     else:
-        st.info("Selecione um tipo de depósito na barra lateral para ver as características específicas.")
+        st.info("Selecione um tipo de depósito na barra lateral para visualizar as características específicas.")
 
 
 # ===============================
