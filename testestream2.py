@@ -324,7 +324,7 @@ with tab_quiz:
         quiz_uranio()
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
-        quiz_sms()
+        quiz_sms(deposito_selecionado) # <--- O argumento é essencial aqui!
         
     elif recurso_selecionado == "Quartzo":
         st.info("Conteúdo ainda não disponível.")
