@@ -321,7 +321,7 @@ with tab_quiz:
         pass
         
     elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
-        quiz_uranio()
+        quiz_uranio(deposito_selecionado) # <--- Tem de ter (deposito_selecionado)!
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
         quiz_sms(deposito_selecionado) # <--- O argumento é essencial aqui!
