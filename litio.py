@@ -83,28 +83,45 @@ def mostrar_caracteristicas_litio(deposito):
 # 2. CONFUSÕES COMUNS
 # ===============================
 
-def mostrar_confusoes_litio():
+# ===============================
+# 2. CONFUSÕES COMUNS E DISTINÇÕES
+# ===============================
 
-    st.markdown("### ⚠️ Confusões Comuns")
+def mostrar_confusoes_litio(deposito=""):
 
-    st.warning("O lítio é frequentemente mal interpretado em contexto geológico.")
+    st.markdown("### ⚠️ Pontos de Distinção e Confusão: Lítio")
 
-    with st.expander("🔍 Ver detalhes"):
+    st.markdown("#### 🌍 5 Pontos Gerais de Distinção")
 
-        st.markdown("**1. Lítio ≠ Terra Rara**")
-        st.write("- Lítio não pertence ao grupo das terras raras")
+    with st.expander("🔍 Ver pontos gerais", expanded=True):
+        st.markdown("**1. Estado Físico do Recurso:** A principal distinção reside entre o lítio em estado sólido, fixado em redes cristalinas de minerais (pegmatitos e argilas), e o lítio em estado líquido, dissolvido como ião em águas hipersalinas (salmouras).")
+        st.markdown("**2. Ambiente Tectónico e Climático:** Os pegmatitos formam-se em cinturões orogénicos (zonas de colisão de placas), enquanto as salmouras e muitas argilas dependem de bacias fechadas em climas áridos com atividade vulcânica recente.")
+        st.markdown("**3. Mineralogia e Química:** Cada depósito tem \"minerais indicadores\": a espodumena para rocha dura, a hectorite para argilas e o cloreto de lítio dissolvido para salmouras.")
+        st.markdown("**4. Método de Extração:** Pegmatitos exigem mineração convencional, moagem e ustulação a altas temperaturas; salmouras utilizam evaporação solar ou adsorção direta; argilas requerem lixiviação ácida.")
+        st.markdown("**5. Idade Geológica:** Os depósitos de rocha dura abrangem desde o Arqueico ao Mioceno, enquanto quase todos os depósitos de salmoura economicamente viáveis são do Quaternário.")
 
-        st.markdown("**2. Rocha Dura vs Salmouras**")
-        st.write("- Rocha dura: mineração tradicional")
-        st.write("- Salmouras: evaporação e processamento químico")
+    st.divider()
 
-        st.markdown("**3. Recurso vs Reserva**")
-        st.write("- Recurso: quantidade total estimada")
-        st.write("- Reserva: economicamente viável")
+    if deposito:
+        st.markdown(f"#### 🔎 Distinções Específicas: {deposito}")
 
-        st.markdown("**4. Extração Simples?**")
-        st.write("- Processamento pode ser complexo e intensivo")
+        if "pegmatito" in deposito.lower() or "rocha dura" in deposito.lower():
+            st.markdown("- **Composição Mineral:** O lítio está concentrado em silicatos como a espodumena, petalite e lepidolite, frequentemente ocorrendo em cristais de dimensões excecionais dentro de diques graníticos.")
+            st.markdown("- **Génese:** Resultam do fracionamento extremo de magmas graníticos peraluminosos (Tipo S) ou da fusão parcial da crosta, geralmente a menos de 10 km do plutão progenitor.")
+            st.markdown("- **Zonamento:** Apresentam um zonamento mineralógico característico, onde o lítio tende a acumular-se nas zonas intermédias ou distais em relação ao granito de origem.")
 
+        elif "salmoura" in deposito.lower():
+            st.markdown("- **Acumulação em Bacias Fechadas:** Encontram-se em bacias endorreicas onde a água flui para o interior, mas só sai por evaporação, concentrando sais ao longo de milhões de anos.")
+            st.markdown("- **Fonte Vulcânica:** O lítio provém da lixiviação de rochas vulcânicas circundantes (como ignimbritos) e de aportes de fluidos hidrotermais que alimentam a bacia.")
+            st.markdown("- **Desafio das Impurezas:** A viabilidade económica depende do rácio Magnésio/Lítio; rácios elevados dificultam a precipitação do lítio devido à similaridade química entre os dois iões.")
+
+        elif "argila" in deposito.lower():
+            st.markdown("- **Mineralogia Específica:** O lítio está hospedado em minerais de argila do grupo da esmectite, principalmente a hectorite (rica em magnésio e lítio) ou em ilites alteradas.")
+            st.markdown("- **Ambiente de Formação:** Formam-se tipicamente em lagos de caldeiras vulcânicas, onde cinzas e vidros vulcânicos sofrem alteração hidrotermal ou reagem com fluidos ricos em lítio.")
+            st.markdown("- **Facilidade de Mineração:** Por serem depósitos mais \"macios\", permitem a extração por céu aberto sem necessidade de explosivos, embora a separação química do lítio da estrutura da argila exija processamento ácido intensivo.")
+            
+    else:
+        st.info("Selecione um tipo de depósito na barra lateral para ver as distinções específicas.")
 
 # ===============================
 # 3. QUIZ INTERATIVO
