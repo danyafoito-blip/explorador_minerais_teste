@@ -49,13 +49,22 @@ from litio import (
     referencias_litio
 )
 
-from uranio_torio import (
+from uranio import (
     mostrar_caracteristicas_uranio,
     mostrar_confusoes_uranio,
     quiz_uranio,
     checklist_uranio,
     mapa_uranio,
     referencias_uranio
+)
+
+from torio import (
+    mostrar_caracteristicas_torio,
+    mostrar_confusoes_torio,
+    quiz_torio,
+    checklist_torio,
+    mapa_torio,
+    referencias_torio
 )
 
 from sms_cobalto import (
@@ -113,7 +122,8 @@ materias_primas = [
     "Petróleo e Gás (Sistemas convencionais)",
     "Metano (Hidratos e recursos não convencionais)",
     "Lítio (Rocha dura versus salmouras)",
-    "Urânio e Tório (Combustíveis nucleares)",
+    "Urânio (Combustíveis nucleares)",
+    "Tório (Combustíveis nucleares)",
     "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto",
     "Quartzo",
     "Monazite",
@@ -122,25 +132,30 @@ materias_primas = [
 
 depositos = {
     "Hidrogénio (Geração natural e armazenamento)": [
-        "Reservatórios de Hidrogénio Natural (Geológico)",
-        "Reservatórios Geológicos para Armazenamento de Hidrogénio",
+        "Serpentinização",
+        "Radiólise da água",
     ],
     "Petróleo e Gás (Sistemas convencionais)": [
-        "Reservatório de petróleo",
+        "Reservatório de óleo",
         "Reservatórios de gás",
-        "Reservatórios de petróleo e gás",
+        "Reservatórios de misto (óleo + gás)",
 
     ],
     "Metano (Hidratos e recursos não convencionais)": [
-        "Reservatórios de Hidratos de Metano",
-        "Reservatórios Não Convencionais de Metano",
+        "Biogénico",
+        "Termogénico",
     ],
     "Lítio (Rocha dura versus salmouras)": [
         "Pegmatitos (rocha dura)",
         "Salmouras continentais",
         "Argilas ricas em lítio"
     ],
-    "Urânio e Tório (Combustíveis nucleares)": [
+    "Urânio (Combustíveis nucleares)": [
+        "Depósitos tipo unconformity",
+        "Depósitos em arenitos",
+        "Depósitos hidrotermais"
+    ],
+    "Tório (Combustíveis nucleares)": [
         "Depósitos tipo unconformity",
         "Depósitos em arenitos",
         "Depósitos hidrotermais"
@@ -231,30 +246,28 @@ with tab_caract:
         mostrar_caracteristicas_petroleo(deposito_selecionado)
     
     elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        mostrar_caracteristicas_metano(deposito_selecionado)
     
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
-    
-    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
+        mostrar_caracteristicas_litio (deposito_selecionado)
+  
+    elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
         mostrar_caracteristicas_uranio(deposito_selecionado)
+        
+    elif recurso_selecionado == "Tório (Combustíveis nucleares)":
+        mostrar_caracteristicas_torio(deposito_selecionado)
     
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
         mostrar_caracteristicas_sms(deposito_selecionado)
     
     elif recurso_selecionado == "Quartzo":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        mostrar_caracteristicas_quartzo(deposito_selecionado)
     
     elif recurso_selecionado == "Monazite":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        mostrar_caracteristicas_monazite(deposito_selecionado)
     
     elif recurso_selecionado == "Ortoclase":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        mostrar_caracteristicas_ortoclase(deposito_selecionado)
 
     else:
         st.info("Conteúdo ainda não disponível.")
@@ -272,30 +285,28 @@ with tab_conf:
         mostrar_confusoes_petroleo()
         
     elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        mostrar_confusoes_metano()
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        mostrar_confusoes_litio()
         
-    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
-        mostrar_confusoes_uranio(deposito_selecionado) 
+    elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
+        mostrar_confusoes_uranio()
+        
+    elif recurso_selecionado == "Tório (Combustíveis nucleares)":
+        mostrar_confusoes_torio()
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
         mostrar_confusoes_sms()
         
     elif recurso_selecionado == "Quartzo":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        mostrar_confusoes_quartzo()
         
     elif recurso_selecionado == "Monazite":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        mostrar_confusoes_monazite()
         
     elif recurso_selecionado == "Ortoclase":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        mostrar_confusoes_ortoclase()
 
     else:
         st.info("Conteúdo ainda não disponível.")
@@ -307,36 +318,34 @@ with tab_conf:
 with tab_quiz:
 
     if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
-        quiz_hidrogenio()
+        quiz_hidrogenio(deposito_selecionado)
 
     elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
         quiz_petroleo(deposito_selecionado)
         
     elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        quiz_metano(deposito_selecionado)
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        quiz_litio(deposito_selecionado)
         
-    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
-        quiz_uranio(deposito_selecionado) # <--- Tem de ter (deposito_selecionado)!
+    elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
+        quiz_uranio(deposito_selecionado)
+        
+    elif recurso_selecionado == "Tório (Combustíveis nucleares)":
+        quiz_torio(deposito_selecionado)
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
-        quiz_sms(deposito_selecionado) # <--- O argumento é essencial aqui!
+        quiz_sms(deposito_selecionado)
         
     elif recurso_selecionado == "Quartzo":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        quiz_quartzo(deposito_selecionado)
         
     elif recurso_selecionado == "Monazite":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        quiz_monazite(deposito_selecionado)
         
     elif recurso_selecionado == "Ortoclase":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        quiz_ortoclase(deposito_selecionado)
 
     else:
         st.info("Quiz em desenvolvimento.")
@@ -354,30 +363,28 @@ with tab_check:
         checklist_petroleo()
         
     elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        checklist_metano()
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        checklist_litio()
         
-    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
-        checklist_uranio(deposito_selecionado) 
+    elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
+        checklist_uranio()
+        
+    elif recurso_selecionado == "Tório (Combustíveis nucleares)":
+        checklist_torio()
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
-        checklist_sms(deposito_selecionado) 
+        checklist_sms()
         
     elif recurso_selecionado == "Quartzo":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        checklist_quartzo()
         
     elif recurso_selecionado == "Monazite":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        checklist_monazite()
         
     elif recurso_selecionado == "Ortoclase":
-        st.info("Conteúdo ainda não disponível.")
-        pass        
+        checklist_ortoclase()       
 
     else:
         st.checkbox("Verificar propriedades gerais")
@@ -402,8 +409,11 @@ with tab_mapa:
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
         mapa_litio()
         
-    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
+    elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
         mapa_uranio()
+        
+    elif recurso_selecionado == "Tório (Combustíveis nucleares)":
+        mapa_torio()
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
         mapa_sms()
@@ -451,30 +461,28 @@ with tab_ref:
         referencias_petroleo()
         
     elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        referencias_metano()
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        referencias_litio()
         
-    elif recurso_selecionado == "Urânio e Tório (Combustíveis nucleares)":
+    elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
         referencias_uranio()
+        
+    elif recurso_selecionado == "Tório (Combustíveis nucleares)":
+        referencias_torio()
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
         referencias_sms()
         
     elif recurso_selecionado == "Quartzo":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        referencias_quartzo()
         
     elif recurso_selecionado == "Monazite":
-        st.info("Conteúdo ainda não disponível.")
-        pass
+        referencias_monazite()
         
     elif recurso_selecionado == "Ortoclase":
-        st.info("Conteúdo ainda não disponível.")
-        pass        
+        referencias_ortoclase()      
 
     else:
         st.info("Referências em desenvolvimento.")
