@@ -1,8 +1,9 @@
+# ===============================
+# BIBLIOTECAS EXTERNAS
+# ===============================
+
 import streamlit as st
-import pandas as pd
-import folium
-from folium.plugins import Fullscreen
-from streamlit_folium import st_folium
+import streamlit.components.v1 as components
 
 
 # ===============================
@@ -36,8 +37,7 @@ def mostrar_caracteristicas_petroleo(deposito):
 
     st.divider()
 
-    # Diferenciação por tipo de depósito
-    if "Reservatório de petróleo" in deposito:
+    if "Reservatório de óleo" in deposito:
 
         st.markdown("## Reservatório de Petróleo")
     
@@ -681,49 +681,41 @@ def mapa_petroleo():
 
     st.markdown("### 🌍 Mapa Global de Ocorrências de Petróleo e Gás")
 
-    uploaded_file = st.file_uploader(
-        "Carregar CSV com Latitude e Longitude",
-        type=["csv"],
-        key="petroleo_map"
-    )
+    with open("occurrences_oil_gas.html", "r", encoding="utf-8") as f:
+        html_content = f.read()
 
-    if uploaded_file is not None:
+    html_with_fullscreen = f"""
+    <button onclick="openFullscreen()" style="
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 9999;
+        padding: 8px 12px;
+        background-color: #1f77b4;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;">
+        ⛶ Fullscreen
+    </button>
 
-        df = pd.read_csv(uploaded_file)
+    <script>
+    function openFullscreen() {{
+        var elem = document.documentElement;
+        if (elem.requestFullscreen) {{
+            elem.requestFullscreen();
+        }} else if (elem.webkitRequestFullscreen) {{
+            elem.webkitRequestFullscreen();
+        }} else if (elem.msRequestFullscreen) {{
+            elem.msRequestFullscreen();
+        }}
+    }}
+    </script>
 
-        st.success("Base de dados carregada com sucesso")
-        st.dataframe(df.head())
+    {html_content}
+    """
 
-        mapa = folium.Map(
-            location=[20, 0],
-            zoom_start=2
-        )
-
-        Fullscreen().add_to(mapa)
-
-        for _, row in df.iterrows():
-
-            if pd.notna(row["Latitude"]) and pd.notna(row["Longitude"]):
-
-                popup = f"""
-                <b>Campo:</b> {row.get('Field Name','N/A')}<br>
-                <b>País:</b> {row.get('Country','N/A')}<br>
-                <b>Tipo:</b> {row.get('Type','N/A')}
-                """
-
-                folium.CircleMarker(
-                    [row["Latitude"], row["Longitude"]],
-                    radius=5,
-                    color="red",
-                    fill=True,
-                    fill_opacity=0.8,
-                    popup=popup
-                ).add_to(mapa)
-
-        st_folium(mapa, use_container_width=True, height=600)
-
-    else:
-        st.info("Carregue um ficheiro CSV para visualizar os dados.")
+    components.html(html_with_fullscreen, height=700, scrolling=True)
 
 
 # ===============================
@@ -734,8 +726,20 @@ def referencias_petroleo():
 
     st.markdown("### 📚 Referências e Bibliografia")
 
-    st.write("- Magoon, L. B., & Dow, W. G. (1994). The petroleum system: From source to trap. American Association of Petroleum Geologists.")
-    st.write("- Gluyas, J., & Swarbrick, R. (2004). Petroleum geoscience. Blackwell Publishing.")
-    st.write("- Gomes, J. S., & Alves, F. B. (2014). O universo da indústria petrolífera: Da pesquisa à refinação (3ª ed.). Fundação Calouste Gulbenkian.")
-
-    st.caption("Livros fundamentais para entender a origem e dinâmica dos sistemas petrolíferos.")
+    st.write(
+    "- Magoon, L. B., & Dow, W. G. (1994). The petroleum system: "
+    "From source to trap. American Association of Petroleum Geologists."
+    )
+    
+    st.write(
+    "- Gluyas, J., & Swarbrick, R. (2004). Petroleum geoscience. "
+    "Blackwell Publishing."
+    )
+    
+    st.write(
+    "- Gomes, J. S., & Alves, F. B. (2014). O universo da indústria petrolífera: "
+    "Da pesquisa à refinação (3ª ed.). Fundação Calouste Gulbenkian."
+    )
+    
+    st.caption("Referências utilizadas.")
+    

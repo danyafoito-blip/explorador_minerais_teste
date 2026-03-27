@@ -1,8 +1,9 @@
+# ===============================
+# BIBLIOTECAS EXTERNAS
+# ===============================
+
 import streamlit as st
-import pandas as pd
-import folium
-from folium.plugins import Fullscreen
-from streamlit_folium import st_folium
+import streamlit.components.v1 as components
 
 
 # ===============================
@@ -36,7 +37,7 @@ def mostrar_caracteristicas_metano(deposito):
 
     st.divider()
 
-    if "Hidratos" in deposito:
+    if "Biogénico" in deposito:
 
         st.markdown("### 🧊 Hidratos de Metano")
 
@@ -51,7 +52,7 @@ def mostrar_caracteristicas_metano(deposito):
         st.write("- Taludes oceânicos")
         st.write("- Regiões árticas")
 
-    elif "Não Convencionais" in deposito:
+    elif "Termogénico" in deposito:
 
         st.markdown("### ⚙️ Recursos Não Convencionais de Metano")
 
@@ -102,49 +103,161 @@ def mostrar_confusoes_metano():
 # 3. QUIZ INTERATIVO
 # ===============================
 
-def quiz_metano():
+def quiz_metano(deposito):
 
     st.markdown("### 🧠 Quiz Interativo: Metano")
-
     st.write("Testa os teus conhecimentos 👇")
 
-    pergunta1 = st.radio(
-        "1️⃣ Onde são encontrados hidratos de metano?",
-        [
-            "Desertos quentes",
-            "Taludes oceânicos",
-            "Rochas ígneas profundas",
-            "Atmosfera"
-        ],
-        key="m_q1"
-    )
+    # ---------------------- BIOGÉNICO ----------------------
+    if "Biogénico" in deposito:
 
-    if st.button("Responder Pergunta 1"):
+        st.markdown("#### Quiz: Metano Biogénico")
 
-        if pergunta1 == "Taludes oceânicos":
-            st.success("Correto! ✅")
-        else:
-            st.error("Incorreto ❌")
+        if "corrigido_bio" not in st.session_state:
+            st.session_state.corrigido_bio = False
 
-    st.divider()
-
-    pergunta2 = st.radio(
-        "2️⃣ Qual é o principal componente do gás natural?",
-        [
-            "CO₂",
-            "H₂",
+        corretas = [
+            "Atividade microbiana",
+            "Ambientes rasos e anaeróbios",
+            "Baixa temperatura",
             "CH₄",
-            "O₂"
-        ],
-        key="m_q2"
-    )
+            "Sedimentos marinhos e pântanos"
+        ]
 
-    if st.button("Responder Pergunta 2"):
+        q1 = st.radio("1️⃣ Origem do metano biogénico:",
+                      ["Atividade microbiana", "Alta temperatura", "Processos magmáticos"],
+                      key="bio_q1", index=None)
 
-        if pergunta2 == "CH₄":
-            st.success("Exato! ✅")
-        else:
-            st.error("Resposta incorreta ❌")
+        if st.session_state.corrigido_bio:
+            if q1 == corretas[0]:
+                st.success("Correto ✅")
+            elif q1 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[0]}**")
+
+        q2 = st.radio("2️⃣ Ambiente típico:",
+                      ["Ambientes rasos e anaeróbios", "Ambientes profundos e quentes", "Crosta oceânica"],
+                      key="bio_q2", index=None)
+
+        if st.session_state.corrigido_bio:
+            if q2 == corretas[1]:
+                st.success("Correto ✅")
+            elif q2 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[1]}**")
+
+        q3 = st.radio("3️⃣ Condições de formação:",
+                      ["Alta temperatura", "Baixa temperatura", "Sem água"],
+                      key="bio_q3", index=None)
+
+        if st.session_state.corrigido_bio:
+            if q3 == corretas[2]:
+                st.success("Correto ✅")
+            elif q3 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[2]}**")
+
+        q4 = st.radio("4️⃣ Principal gás produzido:",
+                      ["CO₂", "CH₄", "H₂"],
+                      key="bio_q4", index=None)
+
+        if st.session_state.corrigido_bio:
+            if q4 == corretas[3]:
+                st.success("Correto ✅")
+            elif q4 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[3]}**")
+
+        q5 = st.radio("5️⃣ Local comum de ocorrência:",
+                      ["Sedimentos marinhos e pântanos", "Granitos profundos", "Basaltos"],
+                      key="bio_q5", index=None)
+
+        if st.session_state.corrigido_bio:
+            if q5 == corretas[4]:
+                st.success("Correto ✅")
+            elif q5 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[4]}**")
+
+        if st.button("Corrigir Quiz Biogénico"):
+            st.session_state.corrigido_bio = True
+
+        if st.session_state.corrigido_bio:
+            respostas = [q1, q2, q3, q4, q5]
+            score = sum([r == c for r, c in zip(respostas, corretas)])
+            st.markdown(f"### 🎯 Pontuação: {score}/5")
+
+    # ---------------------- TERMOGÉNICO ----------------------
+    elif "Termogénico" in deposito:
+
+        st.markdown("#### Quiz: Metano Termogénico")
+
+        if "corrigido_termo" not in st.session_state:
+            st.session_state.corrigido_termo = False
+
+        corretas = [
+            "Maturação térmica da matéria orgânica",
+            "Alta temperatura e pressão",
+            "Profundidade elevada",
+            "CH₄",
+            "Catagénese"
+        ]
+
+        q1 = st.radio("1️⃣ Origem do metano termogénico:",
+                      ["Atividade microbiana", "Maturação térmica da matéria orgânica", "Processos superficiais"],
+                      key="termo_q1", index=None)
+
+        if st.session_state.corrigido_termo:
+            if q1 == corretas[0]:
+                st.success("Correto ✅")
+            elif q1 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[0]}**")
+
+        q2 = st.radio("2️⃣ Condições típicas:",
+                      ["Baixa temperatura", "Alta temperatura e pressão", "Ambiente superficial"],
+                      key="termo_q2", index=None)
+
+        if st.session_state.corrigido_termo:
+            if q2 == corretas[1]:
+                st.success("Correto ✅")
+            elif q2 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[1]}**")
+
+        q3 = st.radio("3️⃣ Ambiente de formação:",
+                      ["Superficial", "Profundidade elevada", "Atmosfera"],
+                      key="termo_q3", index=None)
+
+        if st.session_state.corrigido_termo:
+            if q3 == corretas[2]:
+                st.success("Correto ✅")
+            elif q3 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[2]}**")
+
+        q4 = st.radio("4️⃣ Principal gás produzido:",
+                      ["CO₂", "CH₄", "H₂"],
+                      key="termo_q4", index=None)
+
+        if st.session_state.corrigido_termo:
+            if q4 == corretas[3]:
+                st.success("Correto ✅")
+            elif q4 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[3]}**")
+
+        q5 = st.radio("5️⃣ Fase geológica associada:",
+                      ["Diagénese", "Catagénese", "Sedimentação"],
+                      key="termo_q5", index=None)
+
+        if st.session_state.corrigido_termo:
+            if q5 == corretas[4]:
+                st.success("Correto ✅")
+            elif q5 is not None:
+                st.error(f"Errado ❌ → Resposta correta: **{corretas[4]}**")
+
+        if st.button("Corrigir Quiz Termogénico"):
+            st.session_state.corrigido_termo = True
+
+        if st.session_state.corrigido_termo:
+            respostas = [q1, q2, q3, q4, q5]
+            score = sum([r == c for r, c in zip(respostas, corretas)])
+            st.markdown(f"### 🎯 Pontuação: {score}/5")
+
+    else:
+        st.info("Selecione um tipo de metano válido.")
 
 
 # ===============================
@@ -174,50 +287,41 @@ def mapa_metano():
 
     st.markdown("### 🌍 Mapa Global de Ocorrências de Metano")
 
-    uploaded_file = st.file_uploader(
-        "Carregar CSV com Latitude e Longitude",
-        type=["csv"],
-        key="metano_map"
-    )
+    with open("hydrates_methane_clathrates_occurrences.html", "r", encoding="utf-8") as f:
+        html_content = f.read()
 
-    if uploaded_file is not None:
+    html_with_fullscreen = f"""
+    <button onclick="openFullscreen()" style="
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 9999;
+        padding: 8px 12px;
+        background-color: #1f77b4;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;">
+        ⛶ Fullscreen
+    </button>
 
-        df = pd.read_csv(uploaded_file)
+    <script>
+    function openFullscreen() {{
+        var elem = document.documentElement;
+        if (elem.requestFullscreen) {{
+            elem.requestFullscreen();
+        }} else if (elem.webkitRequestFullscreen) {{
+            elem.webkitRequestFullscreen();
+        }} else if (elem.msRequestFullscreen) {{
+            elem.msRequestFullscreen();
+        }}
+    }}
+    </script>
 
-        st.success("Base de dados carregada com sucesso")
-        st.dataframe(df.head())
+    {html_content}
+    """
 
-        mapa = folium.Map(
-            location=[20, 0],
-            zoom_start=2
-        )
-
-        Fullscreen().add_to(mapa)
-
-        for _, row in df.iterrows():
-
-            if pd.notna(row["Latitude"]) and pd.notna(row["Longitude"]):
-
-                popup = f"""
-                <b>Local:</b> {row.get('Field Name','N/A')}<br>
-                <b>País:</b> {row.get('Country','N/A')}<br>
-                <b>Tipo:</b> {row.get('Type','N/A')}
-                """
-
-                folium.CircleMarker(
-                    [row["Latitude"], row["Longitude"]],
-                    radius=5,
-                    color="green",
-                    fill=True,
-                    fill_opacity=0.8,
-                    popup=popup
-                ).add_to(mapa)
-
-        st_folium(mapa, use_container_width=True, height=600)
-
-    else:
-        st.info("Carregue um ficheiro CSV para visualizar os dados.")
-
+    components.html(html_with_fullscreen, height=700, scrolling=True)
 
 # ===============================
 # 6. REFERÊNCIAS
