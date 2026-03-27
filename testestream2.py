@@ -248,7 +248,7 @@ with tab_caract:
         mostrar_caracteristicas_metano(deposito_selecionado)
     
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        mostrar_caracteristicas_litio(deposito_selecionado)
+        mostrar_caracteristicas_litio (deposito_selecionado)
   
     elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
         mostrar_caracteristicas_uranio(deposito_selecionado)
@@ -278,34 +278,34 @@ with tab_caract:
 with tab_conf:
 
     if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
-        mostrar_confusoes_hidrogenio(deposito_selecionado)
+        mostrar_confusoes_hidrogenio()
         
     elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
-        mostrar_confusoes_petroleo(deposito_selecionado)
+        mostrar_confusoes_petroleo()
         
     elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
-        mostrar_confusoes_metano(deposito_selecionado)
+        mostrar_confusoes_metano()
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        mostrar_confusoes_litio(deposito_selecionado) 
+        mostrar_confusoes_litio()
         
     elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
-        mostrar_confusoes_uranio(deposito_selecionado)
+        mostrar_confusoes_uranio()
         
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
-        mostrar_confusoes_torio(deposito_selecionado)
+        mostrar_confusoes_torio()
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
-        mostrar_confusoes_sms(deposito_selecionado)
+        mostrar_confusoes_sms()
         
     elif recurso_selecionado == "Quartzo":
-        mostrar_confusoes_quartzo(deposito_selecionado)
+        mostrar_confusoes_quartzo()
         
     elif recurso_selecionado == "Monazite":
-        mostrar_confusoes_monazite(deposito_selecionado)
+        mostrar_confusoes_monazite()
         
     elif recurso_selecionado == "Ortoclase":
-        mostrar_confusoes_ortoclase(deposito_selecionado)
+        mostrar_confusoes_ortoclase()
 
     else:
         st.info("Conteúdo ainda não disponível.")
@@ -356,34 +356,34 @@ with tab_quiz:
 with tab_check:
 
     if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
-        checklist_hidrogenio(deposito_selecionado)
+        checklist_hidrogenio()
         
     elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
-        checklist_petroleo(deposito_selecionado)
+        checklist_petroleo()
         
     elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
-        checklist_metano(deposito_selecionado)
+        checklist_metano()
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        checklist_litio(deposito_selecionado)
+        checklist_litio()
         
     elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
-        checklist_uranio(deposito_selecionado)
+        checklist_uranio()
         
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
-        checklist_torio(deposito_selecionado)
+        checklist_torio()
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
-        checklist_sms(deposito_selecionado)
+        checklist_sms()
         
     elif recurso_selecionado == "Quartzo":
-        checklist_quartzo(deposito_selecionado)
+        checklist_quartzo()
         
     elif recurso_selecionado == "Monazite":
-        checklist_monazite(deposito_selecionado)
+        checklist_monazite()
         
     elif recurso_selecionado == "Ortoclase":
-        checklist_ortoclase(deposito_selecionado)       
+        checklist_ortoclase()       
 
     else:
         st.checkbox("Verificar propriedades gerais")
@@ -397,34 +397,34 @@ with tab_check:
 with tab_mapa:
 
     if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
-        mapa_hidrogenio(deposito_selecionado)
+        mapa_hidrogenio()
         
     elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
-        mapa_petroleo(deposito_selecionado)
+        mapa_petroleo()
               
     elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
-        mapa_metano(deposito_selecionado)
+        mapa_metano()
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        mapa_litio(deposito_selecionado)
+        mapa_litio()
         
     elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
-        mapa_uranio(deposito_selecionado)
+        mapa_uranio()
         
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
-        mapa_torio(deposito_selecionado)
+        mapa_torio()
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
-        mapa_sms(deposito_selecionado)
+        mapa_sms()
         
     elif recurso_selecionado == "Quartzo":
-        mapa_quartzo(deposito_selecionado)
+        mapa_quartzo()
         
     elif recurso_selecionado == "Monazite":
-        mapa_monazite(deposito_selecionado)
+        mapa_monazite()
         
     elif recurso_selecionado == "Ortoclase":
-        mapa_ortoclase(deposito_selecionado)      
+        mapa_ortoclase()      
 
     else:
 
@@ -454,39 +454,37 @@ with tab_mapa:
 with tab_ref:
 
     if recurso_selecionado == "Hidrogénio (Geração natural e armazenamento)":
-        referencias_hidrogenio(deposito_selecionado)
+        referencias_hidrogenio()
         
     elif recurso_selecionado == "Petróleo e Gás (Sistemas convencionais)":
-        referencias_petroleo(deposito_selecionado)
+        referencias_petroleo()
         
     elif recurso_selecionado == "Metano (Hidratos e recursos não convencionais)":
-        referencias_metano(deposito_selecionado)
+        referencias_metano()
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        referencias_litio(deposito_selecionado)
+        referencias_litio()
         
     elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
-        referencias_uranio(deposito_selecionado)
+        referencias_uranio()
         
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
-        referencias_torio(deposito_selecionado)
+        referencias_torio()
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
-        referencias_sms(deposito_selecionado)
+        referencias_sms()
         
     elif recurso_selecionado == "Quartzo":
-        referencias_quartzo(deposito_selecionado)
+        referencias_quartzo()
         
     elif recurso_selecionado == "Monazite":
-        referencias_monazite(deposito_selecionado)
+        referencias_monazite()
         
     elif recurso_selecionado == "Ortoclase":
-        referencias_ortoclase(deposito_selecionado)      
+        referencias_ortoclase()      
 
     else:
         st.info("Referências em desenvolvimento.")
-
-
 
 
 
