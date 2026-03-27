@@ -288,7 +288,7 @@ with tab_conf:
         mostrar_confusoes_metano()
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        mostrar_confusoes_litio()
+        mostrar_confusoes_litio(deposito_selecionado) 
         
     elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
         mostrar_confusoes_uranio()
