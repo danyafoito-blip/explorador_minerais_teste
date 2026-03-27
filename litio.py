@@ -9,74 +9,51 @@ from streamlit_folium import st_folium
 # 1. CARACTERÍSTICAS
 # ===============================
 
-def mostrar_caracteristicas_litio(deposito):
+# ===============================
+# 1. CARACTERÍSTICAS
+# ===============================
+
+def mostrar_caracteristicas_litio(deposito=""):
 
     st.markdown("### 🔋 Características do Lítio")
 
-    col1, col2 = st.columns(2)
-
-    with col1:
-
-        st.success("**Propriedades Físicas e Geoquímicas**")
-
-        st.write("- Elemento químico: Li")
-        st.write("- Metal alcalino leve")
-        st.write("- Alta reatividade química")
-        st.write("- Baixa densidade")
-        st.write("- Elevada mobilidade em fluidos")
-
-    with col2:
-
-        st.info("**Importância Económica e Energética**")
-
-        st.write("- Essencial para baterias (íon-lítio)")
-        st.write("- Transição energética")
-        st.write("- Armazenamento de energia")
-        st.write("- Indústria eletrónica e automóvel")
+    st.markdown("#### 🌍 5 Características Gerais do Recurso")
+    
+    with st.expander("🔍 Ver características gerais", expanded=True):
+        st.markdown("**1. Importância Estratégica e Energética:** Fundamental para a transição energética global, sendo o componente principal das baterias de ião-lítio usadas em veículos elétricos e armazenamento de energia em larga escala.")
+        st.markdown("**2. Ocorrência Bimodal Dominante:** Apresenta-se na natureza de duas formas economicamente viáveis principais: no estado sólido fixado em minerais (pegmatitos e argilas) e dissolvido no estado líquido (salmouras).")
+        st.markdown("**3. Propriedades Químicas Únicas:** É o metal mais leve e o elemento sólido menos denso (0,534 g/cm³), possuindo um elevado potencial eletroquímico, tornando-o insubstituível para armazenamento de energia de alta densidade.")
+        st.markdown("**4. Distribuição Geográfica Concentrada:** A extração global é dominada pela Austrália (rocha dura) e pelo \"Triângulo do Lítio\" na América do Sul - Chile, Argentina e Bolívia (salmouras).")
+        st.markdown("**5. Alta Reatividade:** Nunca ocorre de forma livre na natureza; está sempre combinado com outros elementos. Consequentemente, a sua extração requer processos metalúrgicos, químicos ou de evaporação complexos.")
 
     st.divider()
 
-    if "Pegmatitos" in deposito:
+    if deposito:
+        st.markdown(f"#### 🔎 Características Específicas: {deposito}")
 
-        st.markdown("### 🪨 Lítio em Rocha Dura (Pegmatitos)")
+        if "pegmatito" in deposito.lower() or "rocha dura" in deposito.lower():
+            st.markdown("- **Mineralogia Principal:** O lítio está concentrado principalmente em silicatos como a espodumena (o mineral de minério mais importante), petalite, lepidolite e ambligonite.")
+            st.markdown("- **Génese e Localização:** Formam-se por diferenciação magmática extrema de granitos peraluminosos (Tipo S), ocorrendo geralmente a menos de 10 km do plutão progenitor.")
+            st.markdown("- **Estrutura Interna:** Apresentam frequentemente um zonamento mineralógico complexo (zonas de borda, parede, intermédia e núcleo) e cristais de dimensões excecionais.")
+            st.markdown("- **Idade Geológica:** Os depósitos abrangem um vasto intervalo de tempo, desde o Arqueico até ao Mioceno.")
+            st.markdown("- **Processamento:** Requerem métodos convencionais de mineração (céu aberto ou subterrânea), seguidos de moagem, flotação e ustulação (calcinação) a cerca de 1100°C antes da lixiviação ácida.")
 
-        st.write("**Minerais principais:**")
-        st.write("- Espodumena")
-        st.write("- Lepidolita")
-        st.write("- Petalita")
+        elif "salmoura" in deposito.lower():
+            st.markdown("- **Ambiente de Formação:** Acumulam-se em bacias endorreicas (fechadas) em climas áridos ou semiáridos, onde a taxa de evaporação excede a precipitação.")
+            st.markdown("- **Origem do Recurso:** O lítio provém da lixiviação de rochas vulcânicas circundantes (como ignimbritos e cinzas) e de aportes de fluidos hidrotermais.")
+            st.markdown("- **Método de Extração:** O processo clássico utiliza o bombeamento da salmoura para tanques de evaporação solar, onde o lítio é concentrado ao longo de 12 a 18 meses.")
+            st.markdown("- **Desafios Químicos:** A viabilidade económica é afetada pela presença de impurezas como magnésio (rácio Mg/Li), cálcio e sulfatos, que dificultam a purificação.")
+            st.markdown("- **Idade:** Praticamente todos os depósitos de salmoura de interesse económico atual são do período Quaternário.")
 
-        st.write("**Características:**")
-        st.write("- Origem magmática")
-        st.write("- Cristais de grande dimensão")
-        st.write("- Extração mineira convencional")
-        st.write("- Teores relativamente elevados")
-
-    elif "Salmouras" in deposito:
-
-        st.markdown("### 🌊 Lítio em Salmouras Continentais")
-
-        st.write("**Ambiente típico:**")
-        st.write("- Bacias endorreicas")
-        st.write("- Climas áridos (salars)")
-
-        st.write("**Características:**")
-        st.write("- Lítio dissolvido em salmouras")
-        st.write("- Extração por evaporação")
-        st.write("- Custos mais baixos")
-        st.write("- Forte dependência climática")
-
-    elif "Argilas" in deposito:
-
-        st.markdown("### 🧱 Lítio em Argilas")
-
-        st.write("**Características principais:**")
-        st.write("- Associado a minerais argilosos")
-        st.write("- Processamento mais complexo")
-        st.write("- Potencial crescente")
-        st.write("- Tecnologias ainda em desenvolvimento")
-
+        elif "argila" in deposito.lower():
+            st.markdown("- **Hospedeiro Mineral:** O lítio encontra-se fixado em minerais do grupo das esmectites, sendo a hectorite (rica em magnésio e lítio) a mais comum.")
+            st.markdown("- **Contexto Geológico:** Estão tipicamente associadas a depósitos de lagos em caldeiras vulcânicas alterados hidrotermalmente.")
+            st.markdown("- **Características Físicas:** São depósitos estratiformes e \"macios\", o que permite a mineração a céu aberto sem necessidade de explosivos.")
+            st.markdown("- **Potencial Económico:** Representam cerca de 8-9% dos recursos mundiais e estão a ganhar importância devido ao seu grande volume (ex: McDermitt Caldera nos EUA).")
+            st.markdown("- **Extração Química:** O lítio é recuperado através de processos de acidificação direta ou ustulação com calcário e gesso seguida de lixiviação.")
+            
     else:
-        st.info("Selecione um tipo de depósito válido.")
+        st.info("Selecione um tipo de depósito na barra lateral para ver as características específicas.")
 
 
 # ===============================
