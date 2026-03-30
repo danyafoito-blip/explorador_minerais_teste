@@ -74,26 +74,46 @@ def mostrar_caracteristicas_uranio(deposito):
 # 2. CONFUSÕES COMUNS
 # ===============================
 
-def mostrar_confusoes_uranio():
+# ===============================
+# 2. CONFUSÕES COMUNS E DISTINÇÕES
+# ===============================
 
-    st.markdown("### ⚠️ Confusões Comuns")
+def mostrar_confusoes_uranio(deposito=""):
 
-    st.warning("O urânio e o tório são frequentemente mal compreendidos.")
+    st.markdown("### ⚠️ Pontos de Distinção e Confusão: Urânio e Tório")
 
-    with st.expander("🔍 Ver detalhes"):
+    st.markdown("#### 🌍 5 Pontos Gerais de Distinção e Confusão")
 
-        st.markdown("**1. Urânio vs Tório**")
-        st.write("- Urânio: amplamente utilizado atualmente")
-        st.write("- Tório: potencial futuro, menos explorado")
+    with st.expander("🔍 Ver pontos gerais", expanded=True):
+        st.markdown("**1. Morfologia vs. Génese:** Depósitos situados no mesmo ambiente sedimentar (ex: paleocanais) e com formas semelhantes (ex: tabulares) podem ter mecanismos de formação completamente diferentes, o que pode induzir em erro durante a exploração.")
+        st.markdown("**2. Temperatura e Salinidade dos Fluidos:** A principal forma de distinguir sistemas meteóricos de sistemas hidrotermais/diagenéticos é através da temperatura (fluidos meteóricos <50°C vs. brinas quentes 70-250°C) e da salinidade (baixa em águas meteóricas vs. alta em brinas diagenéticas).")
+        st.markdown("**3. Origem do Redutor:** Existe confusão entre redutores intrínsecos (como matéria orgânica vegetal depositada com o sedimento) e extrínsecos (como hidrocarbonetos ou gases sulfídricos que migraram de outras zonas), sendo que ambos podem criar depósitos de aparência similar.")
+        st.markdown("**4. Evolução Atmosférica:** A distinção temporal é vital; depósitos hidrotermais de urânio só se tornaram possíveis após a oxigenação da atmosfera (~2,4 Ga), permitindo o transporte de U6+ solúvel, enquanto antes disso o urânio era transportado mecanicamente como detrito.")
+        st.markdown("**5. Metamorfismo:** Muitos depósitos classificados como \"metamórficos\" são, na verdade, depósitos em arenitos que sofreram metamorfismo posterior, mantendo muitas vezes a sua natureza redutora original.")
 
-        st.markdown("**2. Radioatividade ≠ Perigo imediato**")
-        st.write("- Depende da concentração e exposição")
+    st.divider()
 
-        st.markdown("**3. Depósitos ≠ Reatores nucleares**")
-        st.write("- Depósitos são naturais, reatores são artificiais")
+    if deposito:
+        st.markdown(f"#### 🔎 Distinções Específicas: {deposito}")
 
-        st.markdown("**4. Energia nuclear ≠ Energia renovável**")
-        st.write("- É de baixa emissão, mas não renovável")
+        if "unconformity" in deposito.lower():
+            st.markdown("**1. Localização Estratigráfica:** Ocorrem especificamente na interface entre um soco metamórfico (geralmente do Arcaico ao Paleoproterozoico) e uma cobertura sedimentar proterozoica rica em arenitos vermelhos.")
+            st.markdown("**2. Teores Excecionais:** Distinguem-se por possuírem os teores mais elevados do mundo (chegando a mais de 20% de U), muito superiores aos depósitos típicos em arenitos.")
+            st.markdown("**3. Controladores Estruturais:** Estão quase sempre associados a falhas reativadas e a condutores grafíticos no soco, que funcionam como agentes redutores ou caminhos para fluidos.")
+
+        elif "arenitos" in deposito.lower():
+            st.markdown("**1. Dependência Biológica:** Estão maioritariamente restritos a rochas do Silúrico ou mais recentes, devido à necessidade de matéria orgânica proveniente de plantas terrestres vasculares para atuar como redutor.")
+            st.markdown("**2. Morfologias Clássicas:** Dividem-se principalmente em tipos roll-front (em forma de crescente, cruzando a estratigrafia) e tabulares (paralelos à deposição), controlados pela permeabilidade do arenito.")
+            st.markdown("**3. Fronteiras de Redox:** A mineralização ocorre tipicamente na transição entre uma zona oxidada (frequentemente avermelhada/amarelada) e uma zona reduzida (cinzenta/preta) dentro do aquífero.")
+
+        elif "hidrotermais" in deposito.lower():
+            st.markdown("**1. Origem dos Fluidos:** Ao contrário dos depósitos sedimentares puros, estes envolvem fluidos de origem magmática ou do manto, ricos em mineralizadores como CO2 e H2S.")
+            st.markdown("**2. Associações Minerais Complexas:** Frequentemente contêm tório (Th) e elementos de terras raras (REE), que se enriquecem sincronamente em condições de alta temperatura, algo raro em depósitos sedimentares de baixa temperatura.")
+            st.markdown("**3. Controlo Estrutural em Veios:** Apresentam-se geralmente como veios, preenchimentos de fraturas ou zonas de brecha, muitas vezes associados a complexos alcalinos ou carbonatitos.")
+
+    else:
+        st.info("Selecione um tipo de depósito na barra lateral para ver as distinções específicas.")
+
 
 
 # ===============================
