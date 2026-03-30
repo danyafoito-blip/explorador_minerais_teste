@@ -74,7 +74,7 @@ def mostrar_caracteristicas_sms(deposito):
 # 2. CONFUSÕES COMUNS
 # ===============================
 
-def mostrar_confusoes_sms():
+def mostrar_confusoes_sms(deposito):
 
     st.markdown("### ⚠️ Confusões Comuns")
 
