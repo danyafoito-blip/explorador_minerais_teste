@@ -1,0 +1,1858 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ocorrências de Hidrogénio Natural (EGS)</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:#111826;
+      --panel2:#0f1520;
+      --text:#e6edf3;
+      --muted:#a8b3c2;
+      --line:#223047;
+      --good:#22c55e;
+      --mid:#f59e0b;
+      --low:#ef4444;
+      --unk:#9ca3af;
+      --chip:#0b1220;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:14px;
+    }
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #06080c, #0b0f14 40%, #0b0f14);
+      color: var(--text);
+    }
+    .app{
+      display:flex;
+      height: 100vh;
+      width: 100vw;
+      overflow:hidden;
+    }
+    .sidebar{
+      width: 420px;
+      min-width: 340px;
+      max-width: 520px;
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      border-right: 1px solid var(--line);
+      padding: 16px 14px;
+      overflow:auto;
+    }
+    .title{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      margin-bottom: 10px;
+    }
+    .title h1{
+      font-size: 16px;
+      margin:0 0 4px 0;
+      letter-spacing: .2px;
+      line-height: 1.2;
+    }
+    .title p{
+      margin:0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height:1.35;
+    }
+    .badge{
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 30%, #2b7fff, #1450b8);
+      box-shadow: var(--shadow);
+      flex: 0 0 auto;
+    }
+
+    .row{ display:flex; gap:10px; align-items:center; }
+    .spacer{ height: 10px; }
+    .input{
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: rgba(8,12,18,.65);
+      color: var(--text);
+      border-radius: 12px;
+      outline: none;
+    }
+    .input::placeholder{ color: #7d8aa0; }
+    .btn{
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: rgba(12,18,28,.85);
+      color: var(--text);
+      border-radius: 12px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{ filter: brightness(1.08); }
+    .btn:active{ transform: translateY(1px); }
+    .btn.small{ padding: 7px 10px; font-size: 12px; border-radius: 10px; }
+
+    .section{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(34,48,71,.65);
+    }
+    .section h2{
+      margin:0 0 8px 0;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #b8c4d7;
+    }
+    .chips{ display:flex; flex-wrap: wrap; gap: 8px; }
+    .chip{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding: 7px 10px;
+      background: rgba(6,10,16,.55);
+      border: 1px solid rgba(34,48,71,.85);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--text);
+    }
+    .chip input{ accent-color: #60a5fa; }
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display:inline-block;
+      border: 1px solid rgba(0,0,0,.35);
+    }
+    .dot.good{ background: var(--good); }
+    .dot.mid{ background: var(--mid); }
+    .dot.low{ background: var(--low); }
+    .dot.unk{ background: var(--unk); }
+
+    .list{
+      margin-top: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card{
+      border: 1px solid rgba(34,48,71,.9);
+      background: rgba(6,10,16,.55);
+      border-radius: var(--radius);
+      padding: 10px 10px;
+      box-shadow: 0 8px 18px rgba(0,0,0,.22);
+      cursor: pointer;
+    }
+    .card:hover{ filter: brightness(1.06); }
+    .card .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card .name{
+      font-size: 13px;
+      margin:0;
+      line-height:1.25;
+    }
+    .card .meta{
+      margin-top: 6px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(11,18,32,.65);
+      border: 1px solid rgba(34,48,71,.85);
+      color: #d6deea;
+      font-size: 11px;
+    }
+    .pill strong{ font-weight: 650; }
+    .pill.good{ border-color: rgba(34,197,94,.45); }
+    .pill.mid{ border-color: rgba(245,158,11,.45); }
+    .pill.low{ border-color: rgba(239,68,68,.45); }
+    .pill.unk{ border-color: rgba(156,163,175,.45); }
+    .smallnote{
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+      margin-top: 8px;
+    }
+
+    .mapwrap{
+      flex: 1 1 auto;
+      position: relative;
+      background: #0b0f14;
+    }
+    canvas#map{
+      width: 100%;
+      height: 100%;
+      display:block;
+    }
+    .hud{
+      position:absolute;
+      left: 12px;
+      top: 12px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      background: rgba(6,10,16,.55);
+      border: 1px solid rgba(34,48,71,.85);
+      border-radius: 14px;
+      padding: 8px 10px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+    .hud .z{
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .attribution{
+      position:absolute;
+      right: 10px;
+      bottom: 8px;
+      color: rgba(230,237,243,.78);
+      font-size: 11px;
+      background: rgba(6,10,16,.45);
+      border: 1px solid rgba(34,48,71,.65);
+      border-radius: 12px;
+      padding: 6px 9px;
+      backdrop-filter: blur(6px);
+    }
+    .popup{
+      position:absolute;
+      min-width: 280px;
+      max-width: 360px;
+      background: rgba(10,15,22,.92);
+      border: 1px solid rgba(34,48,71,.95);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 10px 10px;
+      transform: translate(-50%, -110%);
+      pointer-events: auto;
+      display:none;
+    }
+    .popup .pname{
+      margin:0 0 6px 0;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+    .popup .pline{
+      margin: 6px 0 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+    .popup .grid{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .popup .close{
+      position:absolute;
+      right: 8px;
+      top: 8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      border: 1px solid rgba(34,48,71,.85);
+      background: rgba(12,18,28,.85);
+      color: var(--text);
+      cursor:pointer;
+    }
+    .status{
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 14px;
+      border: 1px dashed rgba(34,48,71,.9);
+      background: rgba(6,10,16,.45);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  </style>
+</head>
+
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="title">
+      <div class="badge" aria-hidden="true"></div>
+      <div>
+        <h1>Mapa de ocorrências de H₂ natural (classificação EGS)</h1>
+        <p>Inclui ocorrências e exemplos citados nos textos fornecidos. As coordenadas são obtidas por geocodificação (Nominatim) quando necessário.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <input id="q" class="input" placeholder="Pesquisar por nome, país, EGS, notas..." />
+      <button id="reset" class="btn" title="Repor vista">Repor</button>
+    </div>
+
+    <div class="section">
+      <h2>Filtros</h2>
+
+      <div style="margin-bottom:8px;color:var(--muted);font-size:11px;line-height:1.3;">
+        <span class="mono">E</span> (expressão): A depósito, D dissolvido, S superfície, M mina, O operacional, X indefinido
+      </div>
+
+      <div class="chips" id="filterE"></div>
+
+      <div class="spacer"></div>
+
+      <div style="margin-bottom:8px;color:var(--muted);font-size:11px;line-height:1.3;">
+        Confiança/importância (cores)
+      </div>
+
+      <div class="chips" id="filterC"></div>
+
+      <div class="smallnote">
+        Dica: roda do rato para zoom, arrasta para mover. Clica num ponto para ver detalhes. Círculo tracejado = localização aproximada.
+      </div>
+
+      <div class="status" id="status">
+        Estado: a iniciar geocodificação e carregamento do mapa.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Ocorrências (clicar para focar)</h2>
+      <div class="list" id="list"></div>
+      <div class="smallnote">
+        Atribuição: © OpenStreetMap contributors. A geocodificação usa Nominatim (limite 1 pedido por segundo).
+      </div>
+    </div>
+  </aside>
+
+  <main class="mapwrap">
+    <canvas id="map"></canvas>
+
+    <div class="hud">
+      <button id="zoomOut" class="btn small" title="Zoom -">−</button>
+      <button id="zoomIn" class="btn small" title="Zoom +">+</button>
+      <div class="z" id="zread">Zoom: 2</div>
+    </div>
+
+    <div class="popup" id="popup" role="dialog" aria-modal="false">
+      <button class="close" id="pclose" title="Fechar">✕</button>
+      <h3 class="pname" id="pname"></h3>
+      <div class="grid" id="pgrid"></div>
+      <p class="pline" id="ptext"></p>
+      <p class="pline" id="pcoords"></p>
+    </div>
+
+    <div class="attribution">© OpenStreetMap contributors</div>
+  </main>
+</div>
+
+<script>
+/*
+  Mapa auto-contido (um só ficheiro):
+  - Tiles: https://tile.openstreetmap.org/{z}/{x}/{y}.png
+  - Geocodificação: https://nominatim.openstreetmap.org/search?format=json&q=...
+  Nota: para usos pesados ou institucionais, considera alojar tiles e/ou Nominatim próprios.
+*/
+
+const DATA = [
+  {
+    id:"bourakebougou",
+    nome:"Bourakébougou (Mali)",
+    query:"Bourakébougou, Mali",
+    lat:12.65,
+    lon:-8.05,
+    approx:true,
+    approx_km:150,
+    E:"A",
+    G:"F",
+    S:"I",
+    gDetalhe:"Acumulação em reservatórios empilhados; H₂ de alta pureza; selagem por sills doleríticos",
+    confianca:3,
+    fonte:"Compilação",
+    notas:"Campo com produção reportada; sistema cratónico; compartimentação estratigráfica."
+  },
+  {
+    id:"bougou_1",
+    nome:"Bougou-1 (Mali)",
+    query:"Bourakébougou, Mali",
+    lat:12.68,
+    lon:-8.02,
+    approx:true,
+    approx_km:50,
+    E:"A",
+    G:"F",
+    S:"I",
+    gDetalhe:"Poço do campo de Bourakébougou (reservatórios empilhados; selo por sills)",
+    confianca:3,
+    fonte:"Compilação",
+    notas:"Localização aproximada dentro do campo."
+  },
+  {
+    id:"gazbongou_1",
+    nome:"Gazbongou-1 (Mali)",
+    query:"Bourakébougou, Mali",
+    lat:12.62,
+    lon:-8.08,
+    approx:true,
+    approx_km:50,
+    E:"A",
+    G:"F",
+    S:"I",
+    gDetalhe:"Poço do campo de Bourakébougou (reservatórios empilhados; selo por sills)",
+    confianca:3,
+    fonte:"Compilação",
+    notas:"Localização aproximada dentro do campo."
+  },
+  {
+    id:"fols1a",
+    nome:"FOLS1A (Lorena, França)",
+    query:"Folschviller, Moselle, France",
+    lat:49.079,
+    lon:6.686,
+    approx:false,
+    E:"D",
+    G:"O",
+    S:"X",
+    gDetalhe:"H₂ dissolvido em aquífero carbonífero; hipótese carbonífera e/ou redox em minerais ferrosos",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Caprock para acumulação de gás livre não demonstrada nos excertos."
+  },
+  {
+    id:"pth2",
+    nome:"PTH-2 (Pontpierre, Lorena, França)",
+    query:"Pontpierre, Moselle, France",
+    lat:49.095,
+    lon:6.335,
+    approx:false,
+    E:"D",
+    G:"X",
+    S:"X",
+    gDetalhe:"Poço alvo para caracterização de H₂ em profundidade (dados públicos limitados)",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Arquitectura fonte-reservatório-selo não discriminada."
+  },
+  {
+    id:"nemaha",
+    nome:"Nemaha uplift (Kansas, EUA)",
+    query:"Nemaha Ridge, Kansas, USA",
+    lat:39,
+    lon:-96.5,
+    approx:true,
+    approx_km:300,
+    E:"A",
+    G:"F",
+    S:"X",
+    gDetalhe:"Gás livre transitório e H₂ dissolvido/bolhas em sistema cratónico controlado por falhas",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Selo geológico não discriminado; referência a selagem operacional por plug."
+  },
+  {
+    id:"scott1",
+    nome:"Scott#1 (Kansas, EUA)",
+    query:"Kansas, USA",
+    lat:38.6,
+    lon:-98.6,
+    approx:true,
+    approx_km:260,
+    E:"A",
+    G:"F",
+    S:"X",
+    gDetalhe:"Poço com H₂ reportado; parâmetros de armadilha e selo não descritos",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada (registo histórico)."
+  },
+  {
+    id:"heins1",
+    nome:"Heins#1 (Kansas, EUA)",
+    query:"Kansas, USA",
+    lat:38.3,
+    lon:-98.2,
+    approx:true,
+    approx_km:260,
+    E:"A",
+    G:"F",
+    S:"X",
+    gDetalhe:"Poço com H₂ reportado; parâmetros de armadilha e selo não descritos",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada (registo histórico)."
+  },
+  {
+    id:"blythe1320",
+    nome:"Blythe 13-20 (Kansas, EUA)",
+    query:"Kansas, USA",
+    lat:38.55,
+    lon:-98.1,
+    approx:true,
+    approx_km:260,
+    E:"A",
+    G:"F",
+    S:"X",
+    gDetalhe:"Poço com H₂ reportado; parâmetros de armadilha e selo não descritos",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada (registo histórico)."
+  },
+  {
+    id:"hoarty_ne3",
+    nome:"Hoarty NE3 (Nebraska, EUA)",
+    query:"Nebraska, USA",
+    lat:41.5,
+    lon:-99.7,
+    approx:true,
+    approx_km:420,
+    E:"A",
+    G:"F",
+    S:"X",
+    gDetalhe:"Poço com H₂ reportado; parâmetros geológicos não discriminados",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada."
+  },
+  {
+    id:"project_geneva",
+    nome:"Project Geneva (Nebraska, EUA)",
+    query:"Nebraska, USA",
+    lat:41.2,
+    lon:-99.2,
+    approx:true,
+    approx_km:420,
+    E:"A",
+    G:"F",
+    S:"X",
+    gDetalhe:"Ocorrência reportada; parâmetros geológicos não discriminados",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada."
+  },
+  {
+    id:"sao_francisco_basin",
+    nome:"Bacia do São Francisco (Brasil)",
+    query:"São Francisco Basin, Brazil",
+    lat:-16.5,
+    lon:-45,
+    approx:true,
+    approx_km:450,
+    E:"S",
+    G:"R",
+    S:"N",
+    gDetalhe:"Microseepage pulsátil e depressões subcirculares; assinatura crustal com hipótese de radiólise",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Sistema aberto; não há prova de selo efectivo para reter H₂ como gás livre."
+  },
+  {
+    id:"ptra5",
+    nome:"PTRA-5 (Minas Gerais, Brasil)",
+    query:"Sete Lagoas, Minas Gerais, Brazil",
+    lat:-19.3,
+    lon:-44.1,
+    approx:true,
+    approx_km:120,
+    E:"S",
+    G:"R",
+    S:"N",
+    gDetalhe:"Poço associado a cratão/bacia com hipótese radiolítica; ocorrência reportada",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Localização aproximada."
+  },
+  {
+    id:"ptra1",
+    nome:"PTRA-1 (Minas Gerais, Brasil)",
+    query:"Sete Lagoas, Minas Gerais, Brazil",
+    lat:-19.55,
+    lon:-44.05,
+    approx:true,
+    approx_km:120,
+    E:"S",
+    G:"R",
+    S:"N",
+    gDetalhe:"Poço associado a cratão/bacia com hipótese radiolítica; ocorrência reportada",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Localização aproximada."
+  },
+  {
+    id:"psb009",
+    nome:"PSB-009 (Minas Gerais, Brasil)",
+    query:"Sete Lagoas, Minas Gerais, Brazil",
+    lat:-19.45,
+    lon:-44.4,
+    approx:true,
+    approx_km:120,
+    E:"S",
+    G:"R",
+    S:"N",
+    gDetalhe:"Ocorrência reportada em poço; associada à região do São Francisco",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada."
+  },
+  {
+    id:"oman_magniyat",
+    nome:"Magniyat (Omã)",
+    query:"Oman",
+    lat:23.1,
+    lon:57.9,
+    approx:true,
+    approx_km:80,
+    E:"S",
+    G:"F",
+    S:"N",
+    gDetalhe:"Fonte hiperalcalina em ofiolito; serpentinização (redox Fe-driven)",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Sistema aberto controlado por fracturas."
+  },
+  {
+    id:"oman_hawasina",
+    nome:"Hawasina (Omã)",
+    query:"Oman",
+    lat:22.9,
+    lon:57.6,
+    approx:true,
+    approx_km:90,
+    E:"S",
+    G:"F",
+    S:"N",
+    gDetalhe:"Fonte hiperalcalina associada a unidade Hawasina; serpentinização (redox Fe-driven)",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Sistema aberto controlado por fracturas."
+  },
+  {
+    id:"oman_bahla",
+    nome:"Bahla (Omã)",
+    query:"Bahla, Oman",
+    lat:22.96,
+    lon:57.3,
+    approx:true,
+    approx_km:50,
+    E:"S",
+    G:"F",
+    S:"N",
+    gDetalhe:"Fonte hiperalcalina em contexto ultramáfico; serpentinização",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Sistema aberto; localização aproximada do ponto de emissão."
+  },
+  {
+    id:"samail_ophiolite",
+    nome:"Ofiolito de Samail (Omã)",
+    query:"Semail Ophiolite, Oman",
+    lat:23.2,
+    lon:58.2,
+    approx:true,
+    approx_km:180,
+    E:"S",
+    G:"F",
+    S:"N",
+    gDetalhe:"Maciço ultramáfico com serpentinização e circulação hidrotermal",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Representação ao nível do maciço ofiolítico."
+  },
+  {
+    id:"kaoris",
+    nome:"Source des Kaoris (Nova Caledónia)",
+    query:"Nouméa, New Caledonia",
+    lat:-22.25,
+    lon:166.45,
+    approx:true,
+    approx_km:60,
+    E:"S",
+    G:"F",
+    S:"N",
+    gDetalhe:"Fonte em peridotitos/ofiolito; serpentinização (redox Fe-driven)",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Sistema aberto; localização aproximada."
+  },
+  {
+    id:"carenage",
+    nome:"Baie du Carénage (Nova Caledónia)",
+    query:"Nouméa, New Caledonia",
+    lat:-22.28,
+    lon:166.44,
+    approx:true,
+    approx_km:25,
+    E:"S",
+    G:"F",
+    S:"N",
+    gDetalhe:"Fonte em contexto peridotítico; serpentinização",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Sistema aberto; localização aproximada."
+  },
+  {
+    id:"mangatarem",
+    nome:"Mangatarem (Filipinas)",
+    query:"Mangatarem, Pangasinan, Philippines",
+    lat:15.79,
+    lon:120.29,
+    approx:false,
+    E:"S",
+    G:"F",
+    S:"N",
+    gDetalhe:"Fonte em contexto ofiolítico; serpentinização (redox Fe-driven)",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Sistema aberto."
+  },
+  {
+    id:"zambales",
+    nome:"Ofiolito de Zambales (Filipinas)",
+    query:"Zambales, Philippines",
+    lat:15.33,
+    lon:120.12,
+    approx:true,
+    approx_km:120,
+    E:"S",
+    G:"F",
+    S:"N",
+    gDetalhe:"Maciço ultramáfico; serpentinização",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Representação ao nível do maciço ofiolítico."
+  },
+  {
+    id:"chimaera",
+    nome:"Chimaera, Yanartaş (Turquia)",
+    query:"Yanartas, Cirali, Turkey",
+    lat:36.42,
+    lon:30.48,
+    approx:false,
+    E:"S",
+    G:"F",
+    S:"N",
+    gDetalhe:"Seep por fracturas em ultramáficas serpentinizadas; sistema aberto",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Emissão superficial por fracturas."
+  },
+  {
+    id:"bulqize",
+    nome:"Mina de Bulqizë (Albânia)",
+    query:"Bulqizë, Albania",
+    lat:41.49,
+    lon:20.22,
+    approx:false,
+    E:"M",
+    G:"F",
+    S:"N",
+    gDetalhe:"Degaseificação em mina num maciço ofiolítico; serpentinização/redox em ultramáficas",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Emissão em galerias; sistema aberto."
+  },
+  {
+    id:"lovozero",
+    nome:"Lovozero (Rússia)",
+    query:"Lovozero, Murmansk Oblast, Russia",
+    lat:67.9,
+    lon:34.75,
+    approx:false,
+    E:"M",
+    G:"X",
+    S:"N",
+    gDetalhe:"Degaseificação em mina em complexo alcalino; mecanismo não discriminado",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Sistema aberto em ambiente mineiro."
+  },
+  {
+    id:"witwatersrand",
+    nome:"Witwatersrand (África do Sul)",
+    query:"Witwatersrand, South Africa",
+    lat:-26.2,
+    lon:27.7,
+    approx:true,
+    approx_km:80,
+    E:"M",
+    G:"F",
+    S:"N",
+    gDetalhe:"Emissões em minas profundas; contexto BIF/greenstone, vias por fracturas",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Localização aproximada da província mineira."
+  },
+  {
+    id:"asal_rift",
+    nome:"Rifte do Asal (Djibouti)",
+    query:"Asal Rift, Djibouti",
+    lat:11.55,
+    lon:42.45,
+    approx:true,
+    approx_km:60,
+    E:"S",
+    G:"T",
+    S:"N",
+    gDetalhe:"Descarga geotérmica em rifte; contribuição profunda; sistema aberto",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Emissões superficiais em misturas gasosas."
+  },
+  {
+    id:"wa_seep",
+    nome:"Austrália Ocidental (seep)",
+    query:"Western Australia, Australia",
+    lat:-25,
+    lon:121,
+    approx:true,
+    approx_km:900,
+    E:"S",
+    G:"X",
+    S:"N",
+    gDetalhe:"Seep superficial; sistema aberto",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Representação regional."
+  },
+  {
+    id:"otway",
+    nome:"Bacia de Otway (Austrália)",
+    query:"Otway Basin, Australia",
+    lat:-38.7,
+    lon:142.8,
+    approx:true,
+    approx_km:250,
+    E:"A",
+    G:"R",
+    S:"S",
+    gDetalhe:"Rifte mesozóico em semi-graben; H₂ inorgânico do soco (radiólise + serpentinização) com contributo termogénico secundário; migração por falhas extensionais",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Reservatórios: arenitos porosos (Pretty Hill Sandstone, Windermere Sandstone). Selos: shales/argilitos marinhos e lacustres; sal localmente."
+  },
+  {
+    id:"robe1",
+    nome:"Robe 1 (Bacia de Otway, Austrália)",
+    query:"Robe, South Australia, Australia",
+    lat:-37.17,
+    lon:139.76,
+    approx:true,
+    approx_km:35,
+    E:"A",
+    G:"R",
+    S:"S",
+    gDetalhe:"Poço histórico; sistema de rifte com migração por falhas; reservatórios areníticos; selagem por shales",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada do poço histórico."
+  },
+  {
+    id:"otway_dissolved",
+    nome:"Bacia de Otway (H₂ dissolvido em aquíferos profundos)",
+    query:"Otway Basin, Australia",
+    lat:-38.9,
+    lon:143,
+    approx:true,
+    approx_km:250,
+    E:"D",
+    G:"R",
+    S:"X",
+    gDetalhe:"H₂ dissolvido em aquíferos profundos; fonte inorgânica do soco (radiólise + serpentinização)",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Recurso em fase aquosa; acumulação de gás livre não demonstrada para este sub-tipo."
+  },
+  {
+    id:"cooper",
+    nome:"Bacia de Cooper (Austrália)",
+    query:"Cooper Basin, Australia",
+    lat:-27,
+    lon:141,
+    approx:true,
+    approx_km:500,
+    E:"A",
+    G:"O",
+    S:"S",
+    gDetalhe:"Bacia intracratónica profunda; H₂ orgânico termogénico tardio em carvões e xistos sobrematurados (T > 250 °C) em fossas profundas; sobrepressão e basin-centered gas",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Reservatórios: tight sandstones e intervalos fracturados (Formação Patchawarra). Selos: Roseneath e Murteree (shales intraformacionais espessos)."
+  },
+  {
+    id:"ralgnal1",
+    nome:"Ralgnal 1 (Bacia de Cooper, Austrália)",
+    query:"Cooper Basin, Australia",
+    lat:-26.7,
+    lon:141.4,
+    approx:true,
+    approx_km:500,
+    E:"A",
+    G:"O",
+    S:"S",
+    gDetalhe:"Poço em bacia profunda; coerente com génese orgânica tardia e retenção em selos intraformacionais",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada do poço na bacia."
+  },
+  {
+    id:"yorke",
+    nome:"Península de Yorke (Austrália do Sul)",
+    query:"Yorke Peninsula, South Australia, Australia",
+    lat:-34.8,
+    lon:137.5,
+    approx:true,
+    approx_km:120,
+    E:"A",
+    G:"R",
+    S:"S",
+    gDetalhe:"Radiólise da água subterrânea em granitos radiogénicos (Suíte Hiltaba, U/Th); migração por falhas profundas; acumulação rasa em carbonatos fracturados",
+    confianca:3,
+    fonte:"Compilação",
+    notas:"Reservatórios: Formações Parara e Kulpara (calcários fracturados) + topo do soco fraturado. Selos: micritos, xistos e níveis evaporíticos intraformacionais; hélio associado."
+  },
+  {
+    id:"yorke_fairy_rings",
+    nome:"Península de Yorke (microseepage, anéis de fada)",
+    query:"Yorke Peninsula, South Australia, Australia",
+    lat:-34.9,
+    lon:137.3,
+    approx:true,
+    approx_km:120,
+    E:"S",
+    G:"R",
+    S:"N",
+    gDetalhe:"Emanações difusas e depressões subcirculares indicam fuga activa a partir de sistema radiogénico crustal",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Sistema aberto ao nível superficial."
+  },
+  {
+    id:"ramsay1",
+    nome:"Ramsay Oil Bore 1 (Península de Yorke, Austrália)",
+    query:"Yorke Peninsula, South Australia, Australia",
+    lat:-34.65,
+    lon:137.7,
+    approx:true,
+    approx_km:60,
+    E:"A",
+    G:"R",
+    S:"S",
+    gDetalhe:"Poço histórico (1931) com H₂ muito elevado; fonte radiolítica; reservatórios carbonatados fracturados",
+    confianca:3,
+    fonte:"Compilação",
+    notas:"H₂ reportado > 76% (até ~89% após correcção do ar); hélio associado."
+  },
+  {
+    id:"ramsay2",
+    nome:"Ramsay-2 (Península de Yorke, Austrália)",
+    query:"Yorke Peninsula, South Australia, Australia",
+    lat:-34.75,
+    lon:137.65,
+    approx:true,
+    approx_km:60,
+    E:"A",
+    G:"R",
+    S:"S",
+    gDetalhe:"Poço de seguimento em sistema radiogénico; reservatórios carbonatados fracturados; selagem intraformacional",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Localização aproximada."
+  },
+  {
+    id:"ramsay3",
+    nome:"Ramsay-3 (Península de Yorke, Austrália)",
+    query:"Yorke Peninsula, South Australia, Australia",
+    lat:-34.72,
+    lon:137.45,
+    approx:true,
+    approx_km:60,
+    E:"A",
+    G:"R",
+    S:"S",
+    gDetalhe:"Poço de seguimento; migração por falhas; retenção por micritos/xistos/evaporitos intraformacionais",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Localização aproximada."
+  },
+  {
+    id:"monzon1",
+    nome:"Monzón-1 (Anticlinal de Barbastro, Espanha)",
+    query:"Monzón, Huesca, Spain",
+    lat:41.91,
+    lon:0.19,
+    approx:true,
+    approx_km:25,
+    E:"A",
+    G:"F",
+    S:"E",
+    gDetalhe:"Armadilha estrutural em anticlinal com pacote evaporítico selante espesso",
+    confianca:2,
+    fonte:"Compilação",
+    notas:"Medições modernas referidas como inexistentes/insuficientes."
+  },
+  {
+    id:"mtkitty1",
+    nome:"Mt. Kitty-1 (Bacia Amadeus, Austrália)",
+    query:"Amadeus Basin, Northern Territory, Australia",
+    lat:-24.2,
+    lon:132,
+    approx:true,
+    approx_km:350,
+    E:"A",
+    G:"X",
+    S:"E",
+    gDetalhe:"Poço em bacia com selagem evaporítica regional; génese e armadilha não discriminadas",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Selos evaporíticos regionais podem ser barreiras eficazes."
+  },
+  {
+    id:"bohai",
+    nome:"Bacia de Bohai (China)",
+    query:"Bohai Bay, China",
+    lat:38.9,
+    lon:119,
+    approx:true,
+    approx_km:350,
+    E:"X",
+    G:"X",
+    S:"X",
+    gDetalhe:"Bacia sedimentar costeira; ocorrência reportada em poços (detalhe não discriminado)",
+    confianca:0,
+    fonte:"Compilação",
+    notas:"Representação ao nível de bacia."
+  },
+  {
+    id:"boxing",
+    nome:"Boxing (Bacia de Bohai, China)",
+    query:"Boxing County, Shandong, China",
+    lat:37.5,
+    lon:118,
+    approx:true,
+    approx_km:80,
+    E:"O",
+    G:"X",
+    S:"X",
+    gDetalhe:"Sub-bacia/depocentro; ocorrência reportada (detalhe não discriminado)",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada."
+  },
+  {
+    id:"qaidam",
+    nome:"Bacia de Qaidam (China)",
+    query:"Qaidam Basin, Qinghai, China",
+    lat:37.5,
+    lon:94.5,
+    approx:true,
+    approx_km:600,
+    E:"X",
+    G:"X",
+    S:"X",
+    gDetalhe:"Bacia intracontinental; ocorrência reportada (detalhe não discriminado)",
+    confianca:0,
+    fonte:"Compilação",
+    notas:"Representação ao nível de bacia."
+  },
+  {
+    id:"sanhu_w2",
+    nome:"Sanhu (Bacia de Qaidam, China)",
+    query:"Qaidam Basin, Qinghai, China",
+    lat:36.8,
+    lon:95.3,
+    approx:true,
+    approx_km:250,
+    E:"O",
+    G:"X",
+    S:"X",
+    gDetalhe:"Depocentro/anomalia; ocorrência em poço referida (detalhe não discriminado)",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Localização aproximada."
+  },
+  {
+    id:"jimo",
+    nome:"Jimo (Shandong, China)",
+    query:"Jimo, Qingdao, Shandong, China",
+    lat:36.38,
+    lon:120.45,
+    approx:false,
+    E:"S",
+    G:"T",
+    S:"N",
+    gDetalhe:"Descarga geotérmica; contribuição profunda; sistema aberto",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Emissões em mistura gasosa."
+  },
+  {
+    id:"tengchong",
+    nome:"Tengchong (Yunnan, China)",
+    query:"Tengchong, Yunnan, China",
+    lat:25.02,
+    lon:98.49,
+    approx:false,
+    E:"S",
+    G:"T",
+    S:"N",
+    gDetalhe:"Geotermia em zona tectónica activa; sistema aberto",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Emissões em mistura gasosa."
+  },
+  {
+    id:"yamal",
+    nome:"Península de Yamal (Rússia)",
+    query:"Yamal Peninsula, Russia",
+    lat:69,
+    lon:70,
+    approx:true,
+    approx_km:450,
+    E:"X",
+    G:"X",
+    S:"C",
+    gDetalhe:"Selo criogénico (permafrost) com potencial de confinamento raso",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Exemplo de barreira criogénica."
+  },
+  {
+    id:"taoudenni",
+    nome:"Bacia de Taoudenni (Mali/sahel)",
+    query:"Taoudenni Basin, Mali",
+    lat:21,
+    lon:-6,
+    approx:true,
+    approx_km:600,
+    E:"X",
+    G:"F",
+    S:"I",
+    gDetalhe:"Bacia cratónica com intrusões tipo sill como elementos de selagem",
+    confianca:1,
+    fonte:"Compilação",
+    notas:"Representação ao nível de bacia."
+  }
+];
+
+// ---------- Utilitários de cores, etiquetas e filtros ----------
+function confLabel(c){
+  if(c===3) return "Alta";
+  if(c===2) return "Média";
+  if(c===1) return "Baixa";
+  return "Indef.";
+}
+function confClass(c){
+  if(c===3) return "good";
+  if(c===2) return "mid";
+  if(c===1) return "low";
+  return "unk";
+}
+function confColor(c){
+  if(c===3) return "#22c55e";
+  if(c===2) return "#f59e0b";
+  if(c===1) return "#ef4444";
+  return "#9ca3af";
+}
+function eLabel(E){
+  const map = {
+    A:"A (depósito)",
+    D:"D (dissolvido)",
+    S:"S (superfície)",
+    M:"M (mina)",
+    O:"O (operacional)",
+    X:"X (indef.)"
+  };
+  return map[E] || E;
+}
+function gLabel(G){
+  const map = {
+    F:"F (Fe-redox)",
+    R:"R (radiólise)",
+    T:"T (mantélico/geotérmico)",
+    O:"O (orgânico)",
+    X:"X (indef.)"
+  };
+  return map[G] || G;
+}
+function sLabel(S){
+  const map = {
+    E:"E (evaporitos)",
+    I:"I (sills ígneos)",
+    S:"S (shales/mudstones)",
+    C:"C (permafrost)",
+    N:"N (sist. aberto)",
+    X:"X (indef.)"
+  };
+  return map[S] || S;
+}
+
+// ---------- Mapa em canvas com tiles OSM ----------
+const canvas = document.getElementById("map");
+const ctx = canvas.getContext("2d");
+
+const popup = document.getElementById("popup");
+const pname = document.getElementById("pname");
+const pgrid = document.getElementById("pgrid");
+const ptext = document.getElementById("ptext");
+const pcoords = document.getElementById("pcoords");
+document.getElementById("pclose").addEventListener("click", () => hidePopup());
+
+const statusEl = document.getElementById("status");
+
+let W=0, H=0, DPR=1;
+
+let view = {
+  lat: 18,
+  lon: 0,
+  z: 2
+};
+
+const ZMIN = 2, ZMAX = 15;
+const TILE = 256;
+const tileCache = new Map();
+
+let dragging = false;
+let dragStart = null;
+
+function clampLat(lat){
+  const max = 85.05112878;
+  return Math.max(-max, Math.min(max, lat));
+}
+function lonWrap(lon){
+  // manter em [-180,180)
+  let x = ((lon + 180) % 360 + 360) % 360 - 180;
+  return x;
+}
+function latLonToWorldPx(lat, lon, z){
+  lat = clampLat(lat);
+  lon = lonWrap(lon);
+  const n = Math.pow(2, z);
+  const x = (lon + 180) / 360 * n * TILE;
+  const rad = lat * Math.PI / 180;
+  const y = (1 - Math.log(Math.tan(rad) + 1/Math.cos(rad)) / Math.PI) / 2 * n * TILE;
+  return {x, y};
+}
+function worldPxToLatLon(x, y, z){
+  const n = Math.pow(2, z);
+  const lon = x / (n*TILE) * 360 - 180;
+  const a = Math.PI - 2 * Math.PI * y / (n*TILE);
+  const lat = (180/Math.PI) * Math.atan(0.5*(Math.exp(a) - Math.exp(-a)));
+  return {lat: clampLat(lat), lon: lonWrap(lon)};
+}
+
+function resize(){
+  DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  W = canvas.clientWidth;
+  H = canvas.clientHeight;
+  canvas.width = Math.floor(W * DPR);
+  canvas.height = Math.floor(H * DPR);
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  requestDraw();
+}
+
+window.addEventListener("resize", resize);
+
+let needsDraw = true;
+function requestDraw(){ needsDraw = true; }
+
+function tileURL(z, x, y){
+  return `https://tile.openstreetmap.org/${z}/${x}/${y}.png`;
+}
+
+function getTile(z, x, y){
+  const key = `${z}/${x}/${y}`;
+  if(tileCache.has(key)) return tileCache.get(key);
+
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.loaded = false;
+  img.onerror = () => { img.loaded = false; requestDraw(); };
+  img.onload = () => { img.loaded = true; requestDraw(); };
+  img.src = tileURL(z, x, y);
+
+  tileCache.set(key, img);
+  return img;
+}
+
+function drawTiles(){
+  const z = view.z;
+  const n = Math.pow(2, z);
+
+  const center = latLonToWorldPx(view.lat, view.lon, z);
+  const topLeft = { x: center.x - W/2, y: center.y - H/2 };
+
+  const x0 = Math.floor(topLeft.x / TILE);
+  const y0 = Math.floor(topLeft.y / TILE);
+  const x1 = Math.floor((topLeft.x + W) / TILE);
+  const y1 = Math.floor((topLeft.y + H) / TILE);
+
+  for(let ty=y0; ty<=y1; ty++){
+    if(ty < 0 || ty >= n) continue;
+    for(let tx=x0; tx<=x1; tx++){
+      // wrap global em x
+      let wx = ((tx % n) + n) % n;
+      const img = getTile(z, wx, ty);
+      const dx = Math.round(tx * TILE - topLeft.x);
+      const dy = Math.round(ty * TILE - topLeft.y);
+
+      // fundo
+      ctx.fillStyle = "#0b0f14";
+      ctx.fillRect(dx, dy, TILE, TILE);
+
+      if(img.loaded){
+        ctx.drawImage(img, dx, dy, TILE, TILE);
+      }else{
+        // placeholder discreto
+        ctx.fillStyle = "rgba(255,255,255,0.03)";
+        ctx.fillRect(dx+1, dy+1, TILE-2, TILE-2);
+      }
+    }
+  }
+
+  // grelha fina (opcional) para leitura
+  ctx.strokeStyle = "rgba(255,255,255,0.07)";
+  ctx.lineWidth = 1;
+  for(let i=0; i<=6; i++){
+    const y = Math.round(i * H/6);
+    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+  }
+  for(let i=0; i<=10; i++){
+    const x = Math.round(i * W/10);
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+  }
+}
+
+function screenXY(lat, lon){
+  const z = view.z;
+  const center = latLonToWorldPx(view.lat, view.lon, z);
+  const p = latLonToWorldPx(lat, lon, z);
+  return {
+    x: (p.x - center.x) + W/2,
+    y: (p.y - center.y) + H/2
+  };
+}
+
+
+function metersPerPixel(lat, z){
+  const R = 6378137;
+  const latRad = lat * Math.PI / 180;
+  return Math.cos(latRad) * 2 * Math.PI * R / (TILE * Math.pow(2, z));
+}
+function kmToPx(km, lat, z){
+  return (km * 1000) / metersPerPixel(lat, z);
+}
+
+
+function drawMarkers(){
+  const visible = getVisibleItems();
+
+  for(const it of visible){
+    if(typeof it.lat !== "number" || typeof it.lon !== "number") continue;
+    const xy = screenXY(it.lat, it.lon);
+    // fora do ecrã
+    if(xy.x < -600 || xy.x > W+600 || xy.y < -600 || xy.y > H+600) continue;
+
+    // localização aproximada: desenhar área de incerteza (raio)
+    if(it.approx){
+      const km = (typeof it.approx_km === "number") ? it.approx_km : 150;
+      let r = kmToPx(km, it.lat, view.z);
+      r = Math.max(14, Math.min(520, r));
+
+      ctx.save();
+      ctx.globalAlpha = 0.10;
+      ctx.beginPath();
+      ctx.arc(xy.x, xy.y, r, 0, Math.PI*2);
+      ctx.fillStyle = confColor(it.confianca);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.save();
+      ctx.globalAlpha = 0.45;
+      ctx.setLineDash([7, 7]);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = confColor(it.confianca);
+      ctx.beginPath();
+      ctx.arc(xy.x, xy.y, r, 0, Math.PI*2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+    }
+
+    const rOuter = it.approx ? 10 : 9;
+    const rInner = it.approx ? 6.5 : 6;
+
+    ctx.beginPath();
+    ctx.arc(xy.x, xy.y, rOuter, 0, Math.PI*2);
+    ctx.fillStyle = "rgba(0,0,0,0.45)";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(xy.x, xy.y, rInner, 0, Math.PI*2);
+    ctx.fillStyle = confColor(it.confianca);
+    ctx.fill();
+
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = "rgba(0,0,0,0.55)";
+    ctx.stroke();
+
+    // marcação de centro para localização aproximada
+    if(it.approx){
+      ctx.save();
+      ctx.globalAlpha = 0.85;
+      ctx.strokeStyle = "rgba(255,255,255,0.9)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(xy.x - 6, xy.y);
+      ctx.lineTo(xy.x + 6, xy.y);
+      ctx.moveTo(xy.x, xy.y - 6);
+      ctx.lineTo(xy.x, xy.y + 6);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // etiqueta curta (opcional) para alta confiança
+    if(it.confianca === 3){
+      ctx.font = "12px system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.fillStyle = "rgba(230,237,243,0.92)";
+      ctx.textBaseline = "top";
+      const tag = it.E + it.G + it.S;
+      ctx.fillText(tag, xy.x + 10, xy.y - 10);
+    }
+  }
+}
+
+
+
+function draw(){
+  needsDraw = false;
+  ctx.clearRect(0,0,W,H);
+  drawTiles();
+  drawMarkers();
+  document.getElementById("zread").textContent = "Zoom: " + view.z;
+}
+
+function tick(){
+  if(needsDraw) draw();
+  requestAnimationFrame(tick);
+}
+
+// ---------- Interacção (arrastar, zoom, clique) ----------
+canvas.addEventListener("mousedown", (ev) => {
+  dragging = true;
+  hidePopup();
+  const rect = canvas.getBoundingClientRect();
+  const mx = ev.clientX - rect.left;
+  const my = ev.clientY - rect.top;
+  const centerPx = latLonToWorldPx(view.lat, view.lon, view.z);
+  dragStart = {mx, my, cx:centerPx.x, cy:centerPx.y};
+});
+window.addEventListener("mouseup", () => { dragging=false; dragStart=null; });
+window.addEventListener("mousemove", (ev) => {
+  if(!dragging || !dragStart) return;
+  const rect = canvas.getBoundingClientRect();
+  const mx = ev.clientX - rect.left;
+  const my = ev.clientY - rect.top;
+  const dx = mx - dragStart.mx;
+  const dy = my - dragStart.my;
+  const nx = dragStart.cx - dx;
+  const ny = dragStart.cy - dy;
+  const ll = worldPxToLatLon(nx, ny, view.z);
+  view.lat = ll.lat;
+  view.lon = ll.lon;
+  requestDraw();
+});
+
+canvas.addEventListener("wheel", (ev) => {
+  ev.preventDefault();
+  hidePopup();
+  const rect = canvas.getBoundingClientRect();
+  const mx = ev.clientX - rect.left;
+  const my = ev.clientY - rect.top;
+
+  const before = screenToLatLon(mx, my);
+  const dir = Math.sign(ev.deltaY);
+  let nz = view.z + (dir > 0 ? -1 : +1);
+  nz = Math.max(ZMIN, Math.min(ZMAX, nz));
+  if(nz === view.z) return;
+
+  view.z = nz;
+
+  // manter o ponto sob o cursor (zoom centrado no rato)
+  const after = screenToLatLon(mx, my);
+  const dLat = before.lat - after.lat;
+  const dLon = before.lon - after.lon;
+  view.lat = clampLat(view.lat + dLat);
+  view.lon = lonWrap(view.lon + dLon);
+
+  requestDraw();
+}, {passive:false});
+
+function screenToLatLon(x, y){
+  const z = view.z;
+  const center = latLonToWorldPx(view.lat, view.lon, z);
+  const wx = center.x + (x - W/2);
+  const wy = center.y + (y - H/2);
+  return worldPxToLatLon(wx, wy, z);
+}
+
+canvas.addEventListener("click", (ev) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = ev.clientX - rect.left;
+  const my = ev.clientY - rect.top;
+
+  const pick = pickMarker(mx, my);
+  if(pick){
+    showPopup(pick, mx, my);
+  }else{
+    hidePopup();
+  }
+});
+
+function pickMarker(mx, my){
+  const visible = getVisibleItems();
+  let best = null;
+  let bestD2 = Infinity;
+  for(const it of visible){
+    if(typeof it.lat !== "number" || typeof it.lon !== "number") continue;
+    const xy = screenXY(it.lat, it.lon);
+    const dx = mx - xy.x;
+    const dy = my - xy.y;
+    const d2 = dx*dx + dy*dy;
+    if(d2 < bestD2){
+      bestD2 = d2;
+      best = it;
+    }
+  }
+  // raio de selecção
+  if(best && bestD2 <= 13*13) return best;
+  return null;
+}
+
+document.getElementById("zoomIn").addEventListener("click", () => {
+  view.z = Math.min(ZMAX, view.z + 1);
+  hidePopup();
+  requestDraw();
+});
+document.getElementById("zoomOut").addEventListener("click", () => {
+  view.z = Math.max(ZMIN, view.z - 1);
+  hidePopup();
+  requestDraw();
+});
+document.getElementById("reset").addEventListener("click", () => {
+  hidePopup();
+  view = {lat: 18, lon: 0, z: 2};
+  requestDraw();
+});
+
+// ---------- Popup ----------
+function pillHTML(text, cls){
+  return `<span class="pill ${cls}">${text}</span>`;
+}
+
+function showPopup(it, mx, my){
+  pname.textContent = it.nome;
+  const egs = `${it.E}-${it.G}-${it.S}`;
+  const cls = confClass(it.confianca);
+
+  const locTxt = it.approx
+    ? ((typeof it.approx_km === "number") ? `Aproximada ±${Math.round(it.approx_km)} km` : "Aproximada")
+    : "Precisa";
+
+  pgrid.innerHTML = [
+    pillHTML(`<strong>EGS</strong> ${egs}`, cls),
+    pillHTML(`<strong>E</strong> ${eLabel(it.E)}`, "unk"),
+    pillHTML(`<strong>G</strong> ${gLabel(it.G)}`, "unk"),
+    pillHTML(`<strong>S</strong> ${sLabel(it.S)}`, "unk"),
+    pillHTML(`<strong>Loc.</strong> ${locTxt}`, "unk"),
+    pillHTML(`<strong>Conf.</strong> ${confLabel(it.confianca)}`, cls)].join("");
+
+  const linhas = [];
+  if(it.gDetalhe) linhas.push("Geração: " + it.gDetalhe);
+  if(it.notas) linhas.push("Notas: " + it.notas);
+  ptext.textContent = linhas.join("  ");
+
+  if(typeof it.lat === "number" && typeof it.lon === "number"){
+    if(it.approx){
+      const km = (typeof it.approx_km === "number") ? `±${Math.round(it.approx_km)} km` : "";
+      pcoords.textContent = `Localização aproximada ${km}: ${it.lat.toFixed(5)}, ${it.lon.toFixed(5)}`;
+    }else{
+      pcoords.textContent = `Coordenadas: ${it.lat.toFixed(5)}, ${it.lon.toFixed(5)}`;
+    }
+  }else{
+    pcoords.textContent = "Localização: indisponível (geocodificação falhou).";
+  }
+
+  popup.style.left = `${mx}px`;
+  popup.style.top = `${my}px`;
+  popup.style.display = "block";
+}
+
+function hidePopup(){
+  popup.style.display = "none";
+}
+
+// ---------- Filtros e lista ----------
+const filterState = {
+  E: new Set(["A","D","S","M","O","X"]),
+  C: new Set([3,2,1,0]),
+  q: ""
+};
+
+function makeFilterUI(){
+  const eWrap = document.getElementById("filterE");
+  const cWrap = document.getElementById("filterC");
+
+  const Es = ["A","D","S","M","O","X"];
+  eWrap.innerHTML = Es.map(E => `
+    <label class="chip">
+      <input type="checkbox" data-kind="E" data-value="${E}" checked />
+      <span class="mono">${E}</span>
+      <span>${eLabel(E)}</span>
+    </label>
+  `).join("");
+
+  const Cs = [
+    {v:3, txt:"Alta"},
+    {v:2, txt:"Média"},
+    {v:1, txt:"Baixa"},
+    {v:0, txt:"Indef."}
+  ];
+  cWrap.innerHTML = Cs.map(c => `
+    <label class="chip">
+      <input type="checkbox" data-kind="C" data-value="${c.v}" checked />
+      <span class="dot ${confClass(c.v)}"></span>
+      <span>${c.txt}</span>
+    </label>
+  `).join("");
+
+  document.querySelectorAll("input[type=checkbox][data-kind]").forEach(cb => {
+    cb.addEventListener("change", () => {
+      const kind = cb.dataset.kind;
+      const val = cb.dataset.value;
+      if(kind === "E"){
+        if(cb.checked) filterState.E.add(val);
+        else filterState.E.delete(val);
+      }else{
+        const iv = parseInt(val,10);
+        if(cb.checked) filterState.C.add(iv);
+        else filterState.C.delete(iv);
+      }
+      hidePopup();
+      renderList();
+      requestDraw();
+      updateStatus();
+    });
+  });
+}
+
+function matchesQuery(it, q){
+  if(!q) return true;
+  const s = (it.nome + " " + (it.notas||"") + " " + (it.fonte||"") + " " + `${it.E}-${it.G}-${it.S}`).toLowerCase();
+  return s.includes(q.toLowerCase());
+}
+
+function getVisibleItems(){
+  return DATA.filter(it => {
+    if(!filterState.E.has(it.E)) return false;
+    if(!filterState.C.has(it.confianca)) return false;
+    if(!matchesQuery(it, filterState.q)) return false;
+    return true;
+  });
+}
+
+function renderList(){
+  const wrap = document.getElementById("list");
+  const items = getVisibleItems();
+
+  wrap.innerHTML = items.map(it => {
+    const cls = confClass(it.confianca);
+    const egs = `${it.E}-${it.G}-${it.S}`;
+    let coord = "sem coords";
+    if(typeof it.lat === "number"){
+      coord = `${it.lat.toFixed(3)}, ${it.lon.toFixed(3)}`;
+      if(it.approx){
+        const km = (typeof it.approx_km === "number") ? ` ±${Math.round(it.approx_km)} km` : " aprox.";
+        coord = "~" + coord + km;
+      }
+    }
+    return `
+      <div class="card" data-id="${it.id}">
+        <div class="top">
+          <p class="name">${it.nome}</p>
+          <span class="pill ${cls}"><span class="dot ${cls}"></span><strong>${confLabel(it.confianca)}</strong></span>
+        </div>
+        <div class="meta">
+          <span class="pill ${cls}"><strong>EGS</strong> <span class="mono">${egs}</span></span>
+          <span class="pill"><strong>Coords</strong> <span class="mono">${coord}</span></span>
+          <span class="pill"><strong>Loc</strong> ${it.approx ? ((typeof it.approx_km === "number") ? ("Aprox. ±" + Math.round(it.approx_km) + " km") : "Aprox.") : "Prec."}</span></div>
+      </div>
+    `;
+  }).join("");
+
+  wrap.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", () => {
+      const id = card.dataset.id;
+      const it = DATA.find(x => x.id === id);
+      if(!it) return;
+
+      if(typeof it.lat === "number" && typeof it.lon === "number"){
+        focus(it.lat, it.lon, Math.max(view.z, 6));
+        // mostrar popup no centro aproximado
+        const xy = screenXY(it.lat, it.lon);
+        showPopup(it, xy.x, xy.y);
+      }else{
+        // se ainda não tem coords, tenta geocodificar já
+        geocodeOne(it).then(() => {
+          if(typeof it.lat === "number" && typeof it.lon === "number"){
+            focus(it.lat, it.lon, Math.max(view.z, 6));
+            const xy = screenXY(it.lat, it.lon);
+            showPopup(it, xy.x, xy.y);
+          }else{
+            updateStatus("Não foi possível obter coordenadas para: " + it.nome);
+          }
+        });
+      }
+    });
+  });
+}
+
+function focus(lat, lon, z){
+  view.lat = clampLat(lat);
+  view.lon = lonWrap(lon);
+  view.z = Math.max(ZMIN, Math.min(ZMAX, z));
+  requestDraw();
+}
+
+document.getElementById("q").addEventListener("input", (ev) => {
+  filterState.q = ev.target.value || "";
+  hidePopup();
+  renderList();
+  requestDraw();
+  updateStatus();
+});
+
+// ---------- Geocodificação (fila com 1 pedido/seg) ----------
+let geocoding = false;
+
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+async function geocodeOne(it){
+  if(typeof it.lat === "number" && typeof it.lon === "number") return true;
+
+  const q = it.query || it.nome;
+  const url = "https://nominatim.openstreetmap.org/search"
+    + "?format=json"
+    + "&limit=1"
+    + "&addressdetails=0"
+    + "&accept-language=pt"
+    + "&q=" + encodeURIComponent(q);
+
+  try{
+    const res = await fetch(url, {
+      headers: {
+        // Nota: em ficheiro local, o browser define Referer/User-Agent;
+        // para projectos reais, inclui identificação apropriada conforme política.
+        "Accept": "application/json"
+      }
+    });
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    const js = await res.json();
+    if(js && js.length){
+      let lat = parseFloat(js[0].lat);
+      let lon = parseFloat(js[0].lon);
+
+      // offset opcional para separar pontos sobrepostos
+      if(it.offset){
+        lat += (it.offset.dLat || 0);
+        lon += (it.offset.dLon || 0);
+      }
+
+
+      // inferir raio de incerteza a partir da bounding box do geocodificador (quando aplicável)
+      if(it.approx && (typeof it.approx_km !== "number") && js[0].boundingbox){
+        const bb = js[0].boundingbox.map(v => parseFloat(v)); // [s, n, w, e]
+        const lat1 = bb[0], lat2 = bb[1], lon1 = bb[2], lon2 = bb[3];
+        const midLat = (lat1 + lat2) / 2;
+        const dLatKm = Math.abs(lat2 - lat1) * 111.0;
+        const dLonKm = Math.abs(lon2 - lon1) * 111.0 * Math.cos(midLat * Math.PI/180);
+        let rKm = 0.5 * Math.sqrt(dLatKm*dLatKm + dLonKm*dLonKm);
+        rKm = Math.max(20, Math.min(800, rKm));
+        it.approx_km = rKm;
+      }
+
+      it.lat = lat;
+      it.lon = lon;
+      return true;
+    }
+  }catch(e){
+    // falha silenciosa: será mostrada no status
+  }
+  return false;
+}
+
+async function geocodeAll(){
+  if(geocoding) return;
+  const missing = DATA.filter(it => (typeof it.lat !== "number") || (typeof it.lon !== "number")).length;
+  if(missing === 0){
+    updateStatus("Todas as ocorrências têm coordenadas (precisas ou aproximadas). Geocodificação não necessária.");
+    return;
+  }
+  geocoding = true;
+  updateStatus("Geocodificação: a iniciar fila (1 pedido/seg)." );
+
+  let ok=0, fail=0;
+  for(let i=0; i<DATA.length; i++){
+    const it = DATA[i];
+    if(typeof it.lat === "number" && typeof it.lon === "number") continue;
+
+    updateStatus(`Geocodificação: ${i+1}/${DATA.length}  (${it.nome})`);
+    const good = await geocodeOne(it);
+    if(good) ok++; else fail++;
+
+    renderList();
+    requestDraw();
+
+    // limite de 1 pedido por segundo (conservador)
+    await sleep(1100);
+  }
+
+  updateStatus(`Geocodificação concluída. Sucesso: ${ok} | Falhas: ${fail}.`);
+  geocoding = false;
+}
+
+function updateStatus(msg){
+  const items = getVisibleItems();
+  const total = DATA.length;
+  const vis = items.length;
+
+  const noCoords = items.filter(it => typeof it.lat !== "number").length;
+  const base = `Visíveis: ${vis}/${total}. Sem coords (visíveis): ${noCoords}.`;
+
+  statusEl.textContent = msg ? (base + "  " + msg) : base;
+}
+
+// ---------- Arranque ----------
+function init(){
+  makeFilterUI();
+  resize();
+  renderList();
+  updateStatus();
+  requestDraw();
+  tick();
+  geocodeAll();
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
