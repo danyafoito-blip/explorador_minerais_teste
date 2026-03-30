@@ -464,7 +464,7 @@ def quiz_petroleo(deposito):
 
     if "Reservatório de petróleo" in deposito:
 
-        st.markdown("#### Quiz: Reservatório de Petróleo")
+        st.markdown("#### Quiz: Reservatório de óleo")
 
         if "corrigido_pet" not in st.session_state:
             st.session_state.corrigido_pet = False
@@ -588,7 +588,7 @@ def quiz_petroleo(deposito):
             score = sum([r == c for r, c in zip(respostas, corretas)])
             st.markdown(f"### 🎯 Pontuação: {score}/5")
 
-    elif "Reservatórios de petróleo e gás" in deposito:
+    elif "Reservatórios misto (óleo + gás)" in deposito:
 
         st.markdown("#### Quiz: Petróleo e Gás")
 
