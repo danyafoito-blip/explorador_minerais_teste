@@ -193,7 +193,7 @@ def quiz_sms():
 
 
 
-def mostrar_referencias_sms():
+def referencias_sms():
     """Função que guarda e formata as referências bibliográficas dos SMS"""
     st.markdown("### Fontes e Bibliografia - SMS")
     
