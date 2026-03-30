@@ -335,7 +335,7 @@ with tab_quiz:
         quiz_torio(deposito_selecionado)
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
-        quiz_sms(deposito_selecionado)
+        quiz_sms()
         
     elif recurso_selecionado == "Quartzo":
         quiz_quartzo(deposito_selecionado)
