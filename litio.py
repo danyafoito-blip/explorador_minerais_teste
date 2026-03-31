@@ -538,7 +538,6 @@ def quiz_litio(deposito=None):
             else:
                 st.error(f"❌ **Questão incorreta.** Respondeste: *{respostas_utilizador[i]}* | A resposta certa era: **{q['resposta_correta']}**")
 
-import streamlit as st
 
 def checklist_litio(deposito=None):
     # Verificação de segurança
