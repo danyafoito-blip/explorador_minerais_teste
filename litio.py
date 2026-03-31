@@ -241,26 +241,7 @@ def mostrar_confusoes_litio(deposito=""):
 
     st.divider()
 
-    if deposito:
-        st.markdown(f"#### 🔎 Distinções Específicas: {deposito}")
 
-        if "pegmatito" in deposito.lower() or "rocha dura" in deposito.lower():
-            st.markdown("- **Composição Mineral:** O lítio está concentrado em silicatos como a espodumena, petalite e lepidolite, frequentemente ocorrendo em cristais de dimensões excecionais dentro de diques graníticos.")
-            st.markdown("- **Génese:** Resultam do fracionamento extremo de magmas graníticos peraluminosos (Tipo S) ou da fusão parcial da crosta, geralmente a menos de 10 km do plutão progenitor.")
-            st.markdown("- **Zonamento:** Apresentam um zonamento mineralógico característico, onde o lítio tende a acumular-se nas zonas intermédias ou distais em relação ao granito de origem.")
-
-        elif "salmoura" in deposito.lower():
-            st.markdown("- **Acumulação em Bacias Fechadas:** Encontram-se em bacias endorreicas onde a água flui para o interior, mas só sai por evaporação, concentrando sais ao longo de milhões de anos.")
-            st.markdown("- **Fonte Vulcânica:** O lítio provém da lixiviação de rochas vulcânicas circundantes (como ignimbritos) e de aportes de fluidos hidrotermais que alimentam a bacia.")
-            st.markdown("- **Desafio das Impurezas:** A viabilidade económica depende do rácio Magnésio/Lítio; rácios elevados dificultam a precipitação do lítio devido à similaridade química entre os dois iões.")
-
-        elif "argila" in deposito.lower():
-            st.markdown("- **Mineralogia Específica:** O lítio está hospedado em minerais de argila do grupo da esmectite, principalmente a hectorite (rica em magnésio e lítio) ou em ilites alteradas.")
-            st.markdown("- **Ambiente de Formação:** Formam-se tipicamente em lagos de caldeiras vulcânicas, onde cinzas e vidros vulcânicos sofrem alteração hidrotermal ou reagem com fluidos ricos em lítio.")
-            st.markdown("- **Facilidade de Mineração:** Por serem depósitos mais \"macios\", permitem a extração por céu aberto sem necessidade de explosivos, embora a separação química do lítio da estrutura da argila exija processamento ácido intensivo.")
-            
-    else:
-        st.info("Selecione um tipo de depósito na barra lateral para ver as distinções específicas.")
 
 # ===============================
 # 3. QUIZ INTERATIVO
