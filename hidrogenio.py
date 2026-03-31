@@ -33,7 +33,7 @@ def mostrar_caracteristicas_hidrogenio(deposito):
     
     with col1:
     
-        st.success("**Propriedades Físicas**")
+        st.success("**Propriedades físicas**")
     
         st.write("- Gás incolor, inodoro e insípido")
         st.write("- Densidade extremamente baixa (gás mais leve)")
@@ -43,7 +43,7 @@ def mostrar_caracteristicas_hidrogenio(deposito):
     
     with col2:
     
-        st.info("**Propriedades Químicas**")
+        st.info("**Propriedades químicas**")
     
         st.write("- Molécula H₂ com ligação covalente forte")
         st.write("- Baixa reatividade em condições normais")
@@ -72,7 +72,7 @@ def mostrar_caracteristicas_hidrogenio(deposito):
         
         st.divider()
 
-        st.markdown("### Mecanismos geoquímicos e reações")
+        st.markdown("### Mecanismos de geração de hidrogénio geológico")
     
         st.markdown(
         """
@@ -136,11 +136,11 @@ def mostrar_caracteristicas_hidrogenio(deposito):
     
         st.divider()
     
-        st.markdown("### Rocha-mãe")
+        st.markdown("### Rocha geradora")
     
         st.markdown(
         """
-        **Rocha-mãe**: formação rochosa onde o hidrogénio é **gerado in situ**
+        **Rocha geradora**: formação rochosa onde o hidrogénio é **gerado in situ**
         por reações geoquímicas.
         """
         )
@@ -244,7 +244,7 @@ def mostrar_caracteristicas_hidrogenio(deposito):
         st.write("""
         - Evaporitos (sal)  
         - Intrusões de dolerito (sills)  
-        - Folhelhos (shales)  
+        - Argilito (shales)  
         - Rochas ígneas e metamórficas não fraturadas  
         - Argilas e metassedimentos  
         """)
@@ -257,7 +257,7 @@ def mostrar_caracteristicas_hidrogenio(deposito):
         
         st.markdown(
         """
-        **Armadilha**: configuração de rochas reservatório e selantes que permite a 
+        **Armadilhas**: configurações de rochas reservatório e selantes que permitem a 
         **acumulação e retenção do hidrogénio (H₂)**, impedindo a sua fuga para a superfície.
         """
         )
@@ -302,7 +302,7 @@ def mostrar_caracteristicas_hidrogenio(deposito):
     
         st.divider()
 
-        st.markdown("### Mecanismos geoquímicos e reações")
+        st.markdown("### Mecanismos de geração de hidrogénio geológico")
         
         st.markdown(
         """
@@ -374,11 +374,11 @@ def mostrar_caracteristicas_hidrogenio(deposito):
     
         st.divider()
 
-        st.markdown("### Rocha-mãe")
+        st.markdown("### Rocha geradora")
         
         st.markdown(
         """
-        **Rocha-mãe**: formação rochosa onde o hidrogénio é **gerado in situ**
+        **Rocha geradora**: formação rochosa onde o hidrogénio é **gerado in situ**
         por reações geoquímicas.
         """
         )     
@@ -484,7 +484,7 @@ def mostrar_caracteristicas_hidrogenio(deposito):
         st.write("""
         - Evaporitos (sal)  
         - Intrusões de dolerito (sills)  
-        - Folhelhos (shales)  
+        - Argilito (shales)  
         - Rochas ígneas e metamórficas não fraturadas  
         - Argilas e metassedimentos  
         """)
@@ -497,7 +497,7 @@ def mostrar_caracteristicas_hidrogenio(deposito):
         
         st.markdown(
         """
-        **Armadilha**: configuração de rochas reservatório e selantes que permite a 
+        **Armadilhas**: configurações de rochas reservatório e selantes que permitem a 
         **acumulação e retenção do hidrogénio (H₂)**, impedindo a sua fuga para a superfície.
         """
         )
@@ -535,9 +535,9 @@ def mostrar_caracteristicas_hidrogenio(deposito):
 
 def mostrar_confusoes_hidrogenio():
 
-    st.markdown("### Confusões Comuns")
+    st.markdown("### Confusões comuns")
 
-    st.markdown("**1. Serpentinização vs Radiólise da Água**")
+    st.markdown("**1. Serpentinização vs Radiólise da água**")
 
     st.write("""
 - **Serpentinização**:
@@ -553,81 +553,81 @@ def mostrar_confusoes_hidrogenio():
   - Pode ocorrer em maior profundidade e ampla gama de temperaturas
     """)
 
-    st.info("💡 Ocorrem em contextos geológicos distintos e não devem ser confundidos.")
+    st.info("💡 Ocorrem em contextos geológicos distintos.")
 
     st.divider()
 
-    st.markdown("**2. Fonte do Hidrogénio**")
+    st.markdown("**2. Fonte do hidrogénio**")
 
     st.write("""
 - **Serpentinização** → reações **redox água–minerais**
-- **Radiólise** → **radiação ionizante** quebra a molécula de água
+- **Radiólise da água** → **radiação ionizante** quebra a molécula de água
     """)
 
     st.info("💡 Nem todo o H₂ tem origem em reações geoquímicas clássicas.")
 
     st.divider()
 
-    st.markdown("**3. Taxa de Produção vs Tempo**")
+    st.markdown("**3. Taxa de produção vs Tempo**")
 
     st.write("""
 - **Serpentinização** → produção mais elevada, dependente de circulação de fluidos
-- **Radiólise** → produção baixa, mas contínua durante milhões a biliões de anos
+- **Radiólise da água** → produção baixa, mas contínua durante milhões a biliões de anos
     """)
 
     st.info("💡 Processos lentos podem gerar volumes significativos ao longo do tempo.")
 
     st.divider()
 
-    st.markdown("**4. Rocha-mãe**")
+    st.markdown("**4. Rocha geradora**")
 
     st.write("""
 - **Serpentinização** → rochas ultramáficas (ricas em olivina)
-- **Radiólise** → rochas graníticas/cristalinas radiogénicas
+- **Radiólise da água** → rochas graníticas/cristalinas radiogénicas
     """)
 
     st.info("💡 A composição mineralógica é determinante para a geração de H₂.")
 
     st.divider()
 
-    st.markdown("**5. Papel dos Fluidos**")
+    st.markdown("**5. Papel dos fluidos**")
 
     st.write("""
 - **Serpentinização** → requer circulação ativa de água
-- **Radiólise** → pode ocorrer com água aprisionada em poros/fraturas
+- **Radiólise da água** → pode ocorrer com água aprisionada em poros/fraturas
     """)
 
     st.info("💡 Nem todos os sistemas requerem fluxo hidrotermal ativo.")
 
     st.divider()
 
-    st.markdown("**6. Contexto Geológico**")
+    st.markdown("**6. Contexto geológico**")
 
     st.write("""
 - **Serpentinização** → dorsais oceânicas, ofiolitos, zonas de subducção
-- **Radiólise** → cratões antigos e embasamento profundo
+- **Radiólise da água** → cratões antigos e embasamento profundo
     """)
 
     st.info("💡 O ambiente geológico é chave para identificar o processo.")
 
     st.divider()
 
-    st.markdown("**7. Associação com Outros Gases**")
+    st.markdown("**7. Associação com outros gases**")
 
     st.write("""
 - **Serpentinização** → frequentemente associada a metano (CH₄)
-- **Radiólise** → pode gerar espécies oxidantes (ex: H₂O₂)
+- **Radiólise da água** → pode gerar espécies oxidantes (ex: H₂O₂)
     """)
 
     st.info("💡 O contexto geoquímico ajuda a distinguir a origem do H₂.")
 
     st.divider()
 
-    st.markdown("**8. Potencial Económico**")
+    st.markdown("**8. Potencial económico**")
 
     st.write("""
 - **Serpentinização** → maior potencial de acumulação explorável
-- **Radiólise** → contributo mais difuso, mas relevante em sistemas antigos
+- **Radiólise da água** → contributo mais difuso, mas relevante em sistemas antigos
     """)
 
     st.info("💡 Ambos os processos podem ser relevantes dependendo do contexto.")
@@ -638,15 +638,10 @@ def mostrar_confusoes_hidrogenio():
 
 def quiz_hidrogenio(deposito):
 
-    st.markdown("### Quiz Interativo: Hidrogénio Geológico")
-    st.write("Testa os teus conhecimentos 👇")
+    st.markdown("### Quiz interativo")
+    st.caption("Testa os teus conhecimentos")
 
-    # ===============================
-    # SERPENTINIZAÇÃO
-    # ===============================
     if "Serpentinização" in deposito:
-
-        st.markdown("#### Quiz: Serpentinização")
 
         if "corrigido_serp" not in st.session_state:
             st.session_state.corrigido_serp = False
@@ -695,7 +690,7 @@ def quiz_hidrogenio(deposito):
 
         st.divider()
 
-        q4 = st.radio("4️⃣ Tipo de rocha-mãe:",
+        q4 = st.radio("4️⃣ Tipo de rocha geradora:",
                       ["Granito", "Rochas ultramáficas", "Arenito", "Basalto"],
                       key="serp_q4", index=None)
 
@@ -717,7 +712,7 @@ def quiz_hidrogenio(deposito):
             elif q5 is not None:
                 st.error(f"Errado ❌ → Resposta correta: **{corretas[4]}**")
 
-        if st.button("Corrigir Quiz Serpentinização"):
+        if st.button("Concluir"):
             st.session_state.corrigido_serp = True
 
         if st.session_state.corrigido_serp:
@@ -725,12 +720,7 @@ def quiz_hidrogenio(deposito):
             score = sum([r == c for r, c in zip(respostas, corretas)])
             st.markdown(f"### 🎯 Pontuação: {score}/5")
 
-    # ===============================
-    # RADIÓLISE
-    # ===============================
     elif "Radiólise da água" in deposito:
-
-        st.markdown("#### Quiz: Radiólise da Água")
 
         if "corrigido_rad" not in st.session_state:
             st.session_state.corrigido_rad = False
@@ -779,7 +769,7 @@ def quiz_hidrogenio(deposito):
 
         st.divider()
 
-        q4 = st.radio("4️⃣ Tipo de rocha-mãe:",
+        q4 = st.radio("4️⃣ Tipo de rocha geradora:",
                       ["Peridotitos", "Rochas graníticas/cristalinas", "Arenitos", "Basaltos"],
                       key="rad_q4", index=None)
 
@@ -801,7 +791,7 @@ def quiz_hidrogenio(deposito):
             elif q5 is not None:
                 st.error(f"Errado ❌ → Resposta correta: **{corretas[4]}**")
 
-        if st.button("Corrigir Quiz Radiólise"):
+        if st.button("Concluir"):
             st.session_state.corrigido_rad = True
 
         if st.session_state.corrigido_rad:
@@ -809,9 +799,6 @@ def quiz_hidrogenio(deposito):
             score = sum([r == c for r, c in zip(respostas, corretas)])
             st.markdown(f"### 🎯 Pontuação: {score}/5")
 
-    # ===============================
-    # DEFAULT
-    # ===============================
     else:
         st.info("Selecione um tipo de depósito válido.")
 
@@ -821,13 +808,11 @@ def quiz_hidrogenio(deposito):
 
 def checklist_hidrogenio():
 
-    st.markdown("### Checklist de Campo")
+    st.markdown("### Checklist de campo")
 
     st.write("Avaliação integrada de um sistema de hidrogénio geológico:")
 
-    st.divider()
-
-    st.markdown("**1. Geração de Hidrogénio**")
+    st.markdown("**1. Geração de hidrogénio**")
 
     st.checkbox("Identificar evidências de serpentinização (rochas ultramáficas, serpentina)")
     st.checkbox("Identificar rochas radiogénicas (granitos ricos em U, Th, K)")
@@ -837,7 +822,7 @@ def checklist_hidrogenio():
 
     st.divider()
 
-    st.markdown("**2. Rocha-Mãe**")
+    st.markdown("**2. Rocha geradora**")
 
     st.checkbox("Confirmar presença de rochas ultramáficas (peridotitos)")
     st.checkbox("Identificar rochas graníticas/cristalinas radiogénicas")
@@ -851,11 +836,11 @@ def checklist_hidrogenio():
     st.checkbox("Avaliar conectividade de fraturas (permeabilidade)")
     st.checkbox("Identificar evidências de migração ativa (seepage de H₂)")
     st.checkbox("Medir emissões gasosas (H₂, CH₄)")
-    st.checkbox("Avaliar mecanismos dominantes (advecção vs difusão)")
+    st.checkbox("Avaliar mecanismos dominantes (advecção e difusão)")
 
     st.divider()
 
-    st.markdown("**4. Rocha Reservatório**")
+    st.markdown("**4. Rocha reservatório**")
 
     st.checkbox("Identificar formações porosas e permeáveis (arenitos, carbonatos)")
     st.checkbox("Avaliar porosidade e permeabilidade")
@@ -864,7 +849,7 @@ def checklist_hidrogenio():
 
     st.divider()
 
-    st.markdown("**5. Rocha Selante**")
+    st.markdown("**5. Rocha selante**")
 
     st.checkbox("Identificar rochas de baixa permeabilidade (argilas, evaporitos, shales)")
     st.checkbox("Verificar continuidade lateral do selante")
@@ -882,12 +867,13 @@ def checklist_hidrogenio():
 
     st.divider()
 
-    st.markdown("**7. Indicadores Complementares**")
+    st.markdown("**7. Indicadores complementares**")
 
     st.checkbox("Presença de gases associados (CH₄, He)")
     st.checkbox("Anomalias geoquímicas no solo")
     st.checkbox("Avaliação da atividade microbiana (consumo de H₂)")
-    st.checkbox("Indícios de sistemas ativos vs relictos")
+    st.checkbox("Indício de sistema ativo")
+    st.checkbox("Indício de sistema relicto")
 
     st.success("💡 Um sistema viável requer: geração + migração + reservatório + selante + armadilha.")
 
@@ -897,7 +883,7 @@ def checklist_hidrogenio():
 
 def mapa_hidrogenio():
 
-    st.markdown("### 🌍 Mapa Global de Ocorrências de Hidrogénio")
+    st.markdown("### 🌍 Mapa global de ocorrências de hidrogénio")
 
     with open("occurrences_hydrogen.html", "r", encoding="utf-8") as f:
         html_content = f.read()
@@ -941,7 +927,7 @@ def mapa_hidrogenio():
 
 def referencias_hidrogenio():
 
-    st.markdown("### 📚 Referências e Bibliografia")
+    st.markdown("### 📚 Referências bibliográficas")
 
     st.write(
     "- Etiope, G., Ellis, G. S., Ardakani, O. H., Boreham, C. J., Klitzke, P., "
