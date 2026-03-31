@@ -12,43 +12,54 @@ import streamlit.components.v1 as components
 
 def mostrar_caracteristicas_petroleo(deposito):
 
-    st.markdown("### Características do Petróleo e Gás")
+    st.markdown("### Petróleo e gás")
+    
+    st.markdown(
+        """
+        O **petróleo e o gás natural** são misturas complexas de **hidrocarbonetos** 
+        e compostos orgânicos associados, gerados a partir da matéria orgânica 
+        ao longo de processos geológicos e acumulados em sistemas petrolíferos.  
+        """
+    )
+      
+    st.divider()
 
     col1, col2 = st.columns(2)
 
     with col1:
-
-        st.success("**Propriedades Físicas e Geoquímicas**")
-
-        st.write("- Mistura complexa de hidrocarbonetos")
-        st.write("- Densidade variável (API gravity)")
-        st.write("- Viscosidade variável")
-        st.write("- Presença de gás associado (CH₄ dominante)")
-        st.write("- Composição controlada por maturação térmica")
-
+    
+        st.success("**Propriedades físicas**")
+    
+        st.write("- Estado líquido (óleo), podendo ocorrer como gás ou sólido (betume)")
+        st.write("- Densidade geralmente menor que a da água")
+        st.write("- Grau API define óleo leve ou pesado")
+        st.write("- Viscosidade variável controla o fluxo")
+        st.write("- Dependência de pressão e temperatura (P–T)")
+    
     with col2:
-
-        st.info("**Importância Energética**")
-
-        st.write("- Principal fonte global de energia")
-        st.write("- Produção de combustíveis (gasolina, diesel)")
-        st.write("- Matéria-prima petroquímica")
-        st.write("- Base da economia energética global")
+    
+        st.info("**Propriedades químicas**")
+    
+        st.write("- Mistura complexa de compostos orgânicos")
+        st.write("- Predominância de carbono e hidrogénio")
+        st.write("- Presença de enxofre, oxigénio e azoto")
+        st.write("- Diferentes tipos de hidrocarbonetos com estruturas variadas")
+        st.write("- Componentes pesados influenciam as propriedades do óleo")
 
     st.divider()
 
     if "Reservatório de óleo" in deposito:
 
-        st.markdown("## Reservatório de Petróleo")
+        st.markdown("### Reservatório de óleo")
     
         st.success(
-            "Um reservatório de petróleo é um reservatório em que a mistura de hidrocarbonetos "
+            "Um reservatório de óleo é um reservatório em que a mistura de hidrocarbonetos "
             "se encontra predominantemente no estado líquido, nas condições de pressão e temperatura do reservatório."
         )
     
         st.divider()
     
-        st.markdown("## Rocha-mãe")
+        st.markdown("### Rocha-mãe")
     
         with st.container():
             st.info(
@@ -65,18 +76,18 @@ def mostrar_caracteristicas_petroleo(deposito):
     
             with col2:
                 st.markdown("**Tipos comuns:**")
-                st.write("- Shales lacustres")
+                st.write("- Argilitos lacustres (lacustrine shale)")
                 st.write("- Margas calcárias")
     
-        st.markdown("### Tipo de Querogénio")
+        st.markdown("#### Tipo de querogénio")
     
         st.success(
-            "Tipo I (Liptinito): origem algal (ambientes lacustres/lagunares), principal responsável pela geração de petróleo."
+            "Tipo I (liptinito): origem algal (ambientes lacustres/lagunares), principal responsável pela geração de óleo."
         )
     
         st.divider()
     
-        st.markdown("## Geração (Maturação Térmica)")
+        st.markdown("### Maturação térmica")
     
         st.warning(
             "A maturação térmica ocorre com o soterramento (overburden), aumentando pressão e temperatura."
@@ -85,7 +96,7 @@ def mostrar_caracteristicas_petroleo(deposito):
         col1, col2 = st.columns(2)
     
         with col1:
-            st.metric("Temperatura (janela de petróleo)", "100 – 150 ºC")
+            st.metric("Temperatura (janela de óleo)", "100 – 150 ºC")
     
         with col2:
             st.metric("Refletância da vitrinite", "0.6 – 1.3 %")
@@ -94,7 +105,7 @@ def mostrar_caracteristicas_petroleo(deposito):
     
         st.divider()
     
-        st.markdown("## Migração")
+        st.markdown("### Migração")
     
         st.info(
             "Processo de deslocação dos hidrocarbonetos desde a rocha-mãe até ao reservatório ou à superfície."
@@ -107,7 +118,7 @@ def mostrar_caracteristicas_petroleo(deposito):
     
         st.divider()
     
-        st.markdown("## Rocha Reservatório")
+        st.markdown("### Rocha reservatório")
     
         st.success(
             "Formação geológica com porosidade e permeabilidade suficientes para armazenar e permitir o fluxo de hidrocarbonetos."
@@ -127,19 +138,19 @@ def mostrar_caracteristicas_petroleo(deposito):
     
         st.divider()
     
-        st.markdown("## Rocha Selante")
+        st.markdown("### Rocha selante")
     
         st.error(
             "Camada impermeável que impede a migração dos hidrocarbonetos, garantindo a sua acumulação."
         )
     
         st.write("**Principais tipos:**")
-        st.write("- Folhelhos (shales)")
+        st.write("- Argilitos (shales)")
         st.write("- Evaporitos (sal e anidrita)")
     
         st.divider()
     
-        st.markdown("## Armadilhas Geológicas")
+        st.markdown("### Armadilhas")
     
         st.info(
             "Configurações que permitem a acumulação significativa de hidrocarbonetos."
@@ -164,9 +175,9 @@ def mostrar_caracteristicas_petroleo(deposito):
             st.write("- Desconformidades")
             st.write("- Diagenéticas")
 
-    elif "Reservatórios de gás" in deposito:
+    elif "Reservatório de gás" in deposito:
 
-        st.markdown("### Reservatórios de gás")
+        st.markdown("### Reservatório de gás")
     
         st.success(
             "Um reservatório de gás é um reservatório em que a mistura de hidrocarbonetos "
@@ -175,7 +186,7 @@ def mostrar_caracteristicas_petroleo(deposito):
     
         st.divider()
     
-        st.markdown("## Rocha-mãe")
+        st.markdown("### Rocha-mãe")
     
         with st.container():
             st.info(
@@ -193,18 +204,18 @@ def mostrar_caracteristicas_petroleo(deposito):
             with col2:
                 st.markdown("**Tipos comuns:**")
                 st.write("- Carvões (lignito, hulha)")
-                st.write("- Folhelhos carbonosos")
+                st.write("- Argilitos carbonosos (carbonaceous shale)")
                 st.write("- Siltitos ricos em matéria vegetal")
     
-        st.markdown("### Tipo de Querogénio")
+        st.markdown("#### Tipo de querogénio")
     
         st.success(
-            "Tipo III (Vitrinito): derivado de detritos de plantas terrestres superiores e lenhosas, principal responsável pela geração de gás."
+            "Tipo III (vitrinito): derivado de detritos de plantas terrestres superiores e lenhosas, principal responsável pela geração de gás."
         )
     
         st.divider()
     
-        st.markdown("## Geração (Maturação Térmica)")
+        st.markdown("### Maturação térmica")
     
         st.warning(
             "A maturação térmica ocorre com o soterramento (overburden), aumentando pressão e temperatura."
@@ -222,7 +233,7 @@ def mostrar_caracteristicas_petroleo(deposito):
     
         st.divider()
     
-        st.markdown("## Migração")
+        st.markdown("### Migração")
     
         st.info(
             "Processo de deslocação dos hidrocarbonetos desde a rocha-mãe até ao reservatório ou à superfície."
@@ -235,7 +246,7 @@ def mostrar_caracteristicas_petroleo(deposito):
     
         st.divider()
     
-        st.markdown("## Rocha Reservatório")
+        st.markdown("### Rocha reservatório")
     
         st.success(
             "Formação geológica com porosidade e permeabilidade suficientes para armazenar e permitir o fluxo de hidrocarbonetos."
@@ -255,19 +266,19 @@ def mostrar_caracteristicas_petroleo(deposito):
     
         st.divider()
     
-        st.markdown("## Rocha Selante")
+        st.markdown("### Rocha selante")
     
         st.error(
             "Camada impermeável que impede a migração dos hidrocarbonetos, garantindo a sua acumulação."
         )
     
         st.write("**Principais tipos:**")
-        st.write("- Folhelhos (shales)")
+        st.write("- Argilitos (shales)")
         st.write("- Evaporitos (sal e anidrita)")
     
         st.divider()
     
-        st.markdown("## Armadilhas Geológicas")
+        st.markdown("### Armadilhas")
     
         st.info(
             "Configurações que permitem a acumulação significativa de hidrocarbonetos."
@@ -292,18 +303,18 @@ def mostrar_caracteristicas_petroleo(deposito):
             st.write("- Desconformidades")
             st.write("- Diagenéticas")
 
-    elif "Reservatórios de petróleo e gás" in deposito:
+    elif "Reservatório misto (óleo + gás)" in deposito:
 
-        st.markdown("### Reservatórios de petróleo e gás")
+        st.markdown("### Reservatório misto")
     
         st.success(
-            "Um reservatório de petróleo e gás contém hidrocarbonetos nas fases líquida e gasosa, "
+            "Um reservatório misto contém hidrocarbonetos nas fases líquida e gasosa, "
             "em quantidades significativas, nas condições de pressão e temperatura do reservatório."
         )
         
         st.divider()
     
-        st.markdown("## Rocha-mãe")
+        st.markdown("### Rocha-mãe")
     
         with st.container():
             st.info(
@@ -320,32 +331,32 @@ def mostrar_caracteristicas_petroleo(deposito):
     
             with col2:
                 st.markdown("**Tipos comuns:**")
-                st.write("- Folhelhos marinhos (black shales)")
+                st.write("- Argilitos negros (black shales)")
                 st.write("- Calcários betuminosos")
                 st.write("- Margas")
     
-        st.markdown("### Tipo de Querogénio")
+        st.markdown("#### Tipo de querogénio")
     
         st.success(
-            "Tipo II (Exinito): derivado de plâncton marinho e bactérias, associado à geração de petróleo e gás."
+            "Tipo II (exinito): derivado de plâncton marinho e bactérias, associado à geração de petróleo e gás."
         )
     
         st.divider()
     
-        st.markdown("## Geração (Maturação Térmica)")
+        st.markdown("### Maturação térmica")
     
         st.warning(
             "A maturação térmica ocorre com o soterramento (overburden), aumentando pressão e temperatura."
         )
         
         st.info(
-            "A geração de petróleo e gás ocorre frequentemente quando a rocha-mãe atravessa diferentes estágios de maturação, de forma simultânea ou sucessiva."
+            "A geração de óleo e gás ocorre frequentemente quando a rocha-mãe atravessa diferentes estágios de maturação, de forma simultânea ou sucessiva."
         )
     
         col1, col2 = st.columns(2)
         
         with col1:
-            st.metric("Temperatura (janela petróleo + gás)", "100 – 300 ºC")
+            st.metric("Temperatura (janela óleo + gás)", "100 – 300 ºC")
         
         with col2:
             st.metric("Refletância da vitrinite", "0.6 – 4.0 %")
@@ -354,7 +365,7 @@ def mostrar_caracteristicas_petroleo(deposito):
 
         st.divider()
     
-        st.markdown("## Migração")
+        st.markdown("### Migração")
     
         st.info(
             "Processo de deslocação dos hidrocarbonetos desde a rocha-mãe até ao reservatório ou à superfície."
@@ -367,7 +378,7 @@ def mostrar_caracteristicas_petroleo(deposito):
     
         st.divider()
     
-        st.markdown("## Rocha Reservatório")
+        st.markdown("### Rocha reservatório")
     
         st.success(
             "Formação geológica com porosidade e permeabilidade suficientes para armazenar e permitir o fluxo de hidrocarbonetos."
@@ -387,19 +398,19 @@ def mostrar_caracteristicas_petroleo(deposito):
     
         st.divider()
     
-        st.markdown("## Rocha Selante")
+        st.markdown("### Rocha selante")
     
         st.error(
             "Camada impermeável que impede a migração dos hidrocarbonetos, garantindo a sua acumulação."
         )
     
         st.write("**Principais tipos:**")
-        st.write("- Folhelhos (shales)")
+        st.write("- Argilitos (shales)")
         st.write("- Evaporitos (sal e anidrita)")
     
         st.divider()
     
-        st.markdown("## Armadilhas Geológicas")
+        st.markdown("### Armadilhas")
     
         st.info(
             "Configurações que permitem a acumulação significativa de hidrocarbonetos."
@@ -434,24 +445,139 @@ def mostrar_caracteristicas_petroleo(deposito):
 
 def mostrar_confusoes_petroleo():
 
-    st.markdown("### ⚠️ Confusões Comuns")
+    st.markdown("### Confusões comuns")
 
-    st.warning("Conceitos errados são frequentes na geologia do petróleo.")
+    st.markdown("**1. Reservatório de óleo vs Reservatório de gás vs Reservatório misto**")
 
-    with st.expander("🔍 Ver detalhes"):
+    st.write("""
+- **Reservatório de óleo**:
+  - Hidrocarbonetos predominantemente no **estado líquido**
+  - Associado a querogénio Tipo I ou II
+  - Forma-se em temperaturas moderadas (janela de óleo)
 
-        st.markdown("**1. Petróleo vs Gás Natural**")
-        st.write("- Petróleo: líquido")
-        st.write("- Gás: fase gasosa (principalmente metano)")
+- **Reservatório de gás**:
+  - Hidrocarbonetos no **estado gasoso**
+  - Associado a querogénio Tipo III ou maturação avançada
+  - Forma-se a temperaturas mais elevadas
 
-        st.markdown("**2. Rocha reservatório vs Rocha-mãe**")
-        st.write("- Rocha-mãe: onde se forma o hidrocarboneto")
-        st.write("- Rocha reservatório: onde ele se acumula")
+- **Reservatório misto**:
+  - Presença simultânea de fases líquida e gasosa
+  - Resulta de diferentes estágios de maturação térmica
+    """)
 
-        st.markdown("**3. Porosidade vs Permeabilidade**")
-        st.write("- Porosidade: espaço disponível")
-        st.write("- Permeabilidade: capacidade de fluxo")
+    st.info("💡 O estado dos hidrocarbonetos depende das condições de pressão, temperatura e maturação.")
 
+    st.divider()
+
+    st.markdown("**2. Rocha-mãe vs Rocha reservatório**")
+
+    st.write("""
+- **Rocha-mãe**:
+  - Local onde os hidrocarbonetos são **gerados**
+  - Rica em matéria orgânica (querogénio)
+
+- **Rocha reservatório**:
+  - Local onde os hidrocarbonetos são **armazenados**
+  - Possui porosidade e permeabilidade
+    """)
+
+    st.info("💡 Gerar e armazenar são processos distintos no sistema petrolífero.")
+
+    st.divider()
+
+    st.markdown("**3. Porosidade vs Permeabilidade**")
+
+    st.write("""
+- **Porosidade**:
+  - Quantidade de espaço vazio na rocha
+  - Controla a capacidade de armazenamento
+
+- **Permeabilidade**:
+  - Capacidade de os fluidos circularem
+  - Controla a produção
+    """)
+
+    st.info("💡 Uma rocha pode ter porosidade alta e baixa permeabilidade.")
+
+    st.divider()
+
+    st.markdown("**4. Tipo de querogénio**")
+
+    st.write("""
+- **Tipo I**:
+  - Origem algal (ambiente lacustre)
+  - Gera principalmente **óleo**
+
+- **Tipo II**:
+  - Origem marinha (plâncton)
+  - Gera **óleo e gás**
+
+- **Tipo III**:
+  - Origem terrestre (plantas)
+  - Gera principalmente **gás**
+    """)
+
+    st.info("💡 O tipo de matéria orgânica controla o tipo de hidrocarboneto gerado.")
+
+    st.divider()
+
+    st.markdown("**5. Maturação térmica vs Geração**")
+
+    st.write("""
+- **Maturação térmica**:
+  - Processo de aumento de temperatura e pressão com o soterramento
+
+- **Geração de hidrocarbonetos**:
+  - Resultado da transformação do querogénio em óleo e/ou gás
+    """)
+
+    st.info("💡 A maturação controla quando e quanto hidrocarboneto é gerado.")
+
+    st.divider()
+
+    st.markdown("**6. Migração vs Acumulação**")
+
+    st.write("""
+- **Migração**:
+  - Movimento dos hidrocarbonetos desde a rocha-mãe
+
+- **Acumulação**:
+  - Concentração dos hidrocarbonetos numa armadilha
+    """)
+
+    st.info("💡 Sem armadilha eficaz, os hidrocarbonetos perdem-se para a superfície.")
+
+    st.divider()
+
+    st.markdown("**7. Rocha selante vs Reservatório**")
+
+    st.write("""
+- **Rocha selante**:
+  - Impermeável
+  - Impede a fuga dos hidrocarbonetos
+
+- **Rocha reservatório**:
+  - Permeável
+  - Permite armazenar e produzir fluidos
+    """)
+
+    st.info("💡 O contraste entre permeabilidade é essencial para o sistema funcionar.")
+
+    st.divider()
+
+    st.markdown("**8. Janela de óleo vs Janela de gás**")
+
+    st.write("""
+- **Janela de óleo**:
+  - ~100 – 150 ºC
+  - Geração predominante de óleo
+
+- **Janela de gás**:
+  - ~150 – 300 ºC
+  - Geração predominante de gás
+    """)
+
+    st.info("💡 Temperaturas mais elevadas favorecem a formação de gás.")
 
 # ===============================
 # 3. QUIZ INTERATIVO
@@ -459,12 +585,10 @@ def mostrar_confusoes_petroleo():
 
 def quiz_petroleo(deposito):
 
-    st.markdown("### 🧠 Quiz Interativo: Petróleo e Gás")
-    st.write("Testa os teus conhecimentos 👇")
+    st.markdown("### Quiz interativo")
+    st.caption("Testa os teus conhecimentos")
 
-    if "Reservatório de petróleo" in deposito:
-
-        st.markdown("#### Quiz: Reservatório de óleo")
+    if "Reservatório de óleo" in deposito:
 
         if "corrigido_pet" not in st.session_state:
             st.session_state.corrigido_pet = False
@@ -516,7 +640,7 @@ def quiz_petroleo(deposito):
             elif q5 is not None:
                 st.error(f"Errado ❌ → Resposta correta: **{corretas[4]}**")
 
-        if st.button("Corrigir Quiz Petróleo"):
+        if st.button("Concluir"):
             st.session_state.corrigido_pet = True
 
         if st.session_state.corrigido_pet:
@@ -524,9 +648,7 @@ def quiz_petroleo(deposito):
             score = sum([r == c for r, c in zip(respostas, corretas)])
             st.markdown(f"### 🎯 Pontuação: {score}/5")
 
-    elif "Reservatórios de gás" in deposito:
-
-        st.markdown("#### Quiz: Reservatório de Gás")
+    elif "Reservatório de gás" in deposito:
 
         if "corrigido_gas" not in st.session_state:
             st.session_state.corrigido_gas = False
@@ -563,7 +685,7 @@ def quiz_petroleo(deposito):
                 st.error(f"Errado ❌ → Resposta correta: **{corretas[2]}**")
 
         q4 = st.radio("4️⃣ Tipo de rocha-mãe mais associado ao gás:",
-                      ["Shales lacustres", "Carvões e folhelhos carbonosos", "Calcários marinhos"], key="gas_q4", index=None)
+                      ["Argilitos lacustres", "Carvões e folhelhos carbonosos", "Calcários marinhos"], key="gas_q4", index=None)
 
         if st.session_state.corrigido_gas:
             if q4 == corretas[3]:
@@ -580,7 +702,7 @@ def quiz_petroleo(deposito):
             elif q5 is not None:
                 st.error(f"Errado ❌ → Resposta correta: **{corretas[4]}**")
 
-        if st.button("Corrigir Quiz Gás"):
+        if st.button("Concluir"):
             st.session_state.corrigido_gas = True
 
         if st.session_state.corrigido_gas:
@@ -588,15 +710,13 @@ def quiz_petroleo(deposito):
             score = sum([r == c for r, c in zip(respostas, corretas)])
             st.markdown(f"### 🎯 Pontuação: {score}/5")
 
-    elif "Reservatórios misto (óleo + gás)" in deposito:
-
-        st.markdown("#### Quiz: Petróleo e Gás")
+    elif "Reservatório misto (óleo + gás)" in deposito:
 
         if "corrigido_mix" not in st.session_state:
             st.session_state.corrigido_mix = False
 
         corretas = ["Líquida e gasosa", "Tipo II", "100–300 ºC",
-                    "Folhelhos marinhos", "Em múltiplos estágios"]
+                    "Argilitos negros", "Em múltiplos estágios"]
 
         q1 = st.radio("1️⃣ Fases presentes:",
                       ["Apenas líquida", "Apenas gasosa", "Líquida e gasosa"], key="mix_q1", index=None)
@@ -626,7 +746,7 @@ def quiz_petroleo(deposito):
                 st.error(f"Errado ❌ → Resposta correta: **{corretas[2]}**")
 
         q4 = st.radio("4️⃣ Tipo de rocha-mãe comum:",
-                      ["Granito", "Folhelhos marinhos", "Basalto"], key="mix_q4", index=None)
+                      ["Granito", "Argilitos negros", "Basalto"], key="mix_q4", index=None)
 
         if st.session_state.corrigido_mix:
             if q4 == corretas[3]:
@@ -643,7 +763,7 @@ def quiz_petroleo(deposito):
             elif q5 is not None:
                 st.error(f"Errado ❌ → Resposta correta: **{corretas[4]}**")
 
-        if st.button("Corrigir Quiz Petróleo + Gás"):
+        if st.button("Concluir"):
             st.session_state.corrigido_mix = True
 
         if st.session_state.corrigido_mix:
@@ -654,24 +774,84 @@ def quiz_petroleo(deposito):
     else:
         st.info("Selecione um tipo de depósito válido.")
 
-
 # ===============================
 # 4. CHECKLIST DE CAMPO
 # ===============================
 
 def checklist_petroleo():
 
-    st.markdown("### ✅ Checklist de Campo")
+    st.markdown("### Checklist de campo")
 
-    st.write("Utilizado na prospeção de petróleo e gás:")
+    st.write("Avaliação integrada de um sistema petrolífero:")
 
-    st.checkbox("Identificar rochas geradoras")
-    st.checkbox("Avaliar maturação térmica")
-    st.checkbox("Mapear estruturas (anticlinais, falhas)")
-    st.checkbox("Avaliar porosidade e permeabilidade")
-    st.checkbox("Identificar rocha selante")
-    st.checkbox("Verificar presença de hidrocarbonetos")
+    st.markdown("**1. Rocha-mãe**")
 
+    st.checkbox("Identificar rochas ricas em matéria orgânica (shales, margas, carvões)")
+    st.checkbox("Avaliar Carbono Orgânico Total (COT > 2%)")
+    st.checkbox("Determinar tipo de querogénio (Tipo I, II ou III)")
+    st.checkbox("Inferir ambiente deposicional (lacustre, marinho ou continental)")
+    st.checkbox("Avaliar potencial gerador de óleo e/ou gás")
+
+    st.divider()
+
+    st.markdown("**2. Maturação térmica**")
+
+    st.checkbox("Avaliar temperatura (100–300 ºC)")
+    st.checkbox("Medir refletância da vitrinite (0.6–4.0%)")
+    st.checkbox("Identificar fase: diagénese, catagénese ou metagénese")
+    st.checkbox("Confirmar geração de óleo, gás ou ambos")
+    st.checkbox("Avaliar evolução térmica do sistema")
+
+    st.divider()
+
+    st.markdown("**3. Migração**")
+
+    st.checkbox("Mapear falhas, fraturas e vias de migração")
+    st.checkbox("Distinguir migração primária e secundária")
+    st.checkbox("Avaliar permeabilidade das formações")
+    st.checkbox("Identificar evidências de migração (óleo ou gás)")
+    st.checkbox("Reconhecer possíveis perdas (migração terciária)")
+
+    st.divider()
+
+    st.markdown("**4. Rocha reservatório**")
+
+    st.checkbox("Identificar rochas porosas (arenitos, calcários, dolomitos)")
+    st.checkbox("Avaliar porosidade")
+    st.checkbox("Avaliar permeabilidade")
+    st.checkbox("Confirmar presença de hidrocarbonetos (óleo e/ou gás)")
+    st.checkbox("Analisar distribuição de fases (gás no topo, óleo abaixo)")
+
+    st.divider()
+
+    st.markdown("**5. Rocha selante**")
+
+    st.checkbox("Identificar rochas impermeáveis (shales, evaporitos)")
+    st.checkbox("Verificar continuidade lateral do selante")
+    st.checkbox("Avaliar integridade (ausência de fraturas abertas)")
+    st.checkbox("Confirmar capacidade de retenção de hidrocarbonetos")
+    st.checkbox("Avaliar risco de fuga (especialmente gás)")
+
+    st.divider()
+
+    st.markdown("**6. Armadilha**")
+
+    st.checkbox("Identificar armadilhas estruturais (anticlinais, falhas, domos de sal)")
+    st.checkbox("Identificar armadilhas estratigráficas (pinch-outs, discordâncias)")
+    st.checkbox("Confirmar geometria favorável à acumulação")
+    st.checkbox("Verificar relação reservatório–selante")
+    st.checkbox("Avaliar segregação de fases (óleo e gás)")
+
+    st.divider()
+
+    st.markdown("**7. Indicadores complementares**")
+
+    st.checkbox("Presença de exsudações (óleo ou gás)")
+    st.checkbox("Anomalias geoquímicas no solo")
+    st.checkbox("Dados sísmicos favoráveis")
+    st.checkbox("Presença de gases associados (CH₄, etc.)")
+
+    st.success("💡 Um sistema viável requer: geração + migração + reservatório + selante + armadilha.")
 
 # ===============================
 # 5. MAPA GLOBAL
@@ -679,7 +859,7 @@ def checklist_petroleo():
 
 def mapa_petroleo():
 
-    st.markdown("### 🌍 Mapa Global de Ocorrências de Petróleo e Gás")
+    st.markdown("### 🌍 Mapa global de ocorrências de petróleo e gás")
 
     with open("occurrences_oil_gas.html", "r", encoding="utf-8") as f:
         html_content = f.read()
@@ -717,14 +897,13 @@ def mapa_petroleo():
 
     components.html(html_with_fullscreen, height=700, scrolling=True)
 
-
 # ===============================
 # 6. REFERÊNCIAS
 # ===============================
 
 def referencias_petroleo():
 
-    st.markdown("### 📚 Referências e Bibliografia")
+    st.markdown("### 📚 Referências bibliográficas")
 
     st.write(
     "- Magoon, L. B., & Dow, W. G. (1994). The petroleum system: "
