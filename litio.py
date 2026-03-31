@@ -17,16 +17,16 @@ def mostrar_caracteristicas_litio(deposito):
 
     with col1:
         st.success("**Propriedades Físicas e Químicas**")
-        st.write("- É o metal mais leve da Tabela Periódica")
-        st.write("- Elevado potencial eletroquímico e calor específico")
-        st.write("- Altamente reativo e inflamável (não ocorre livre na natureza)")
+        st.write("- Metal mais leve da Tabela Periódica")
+        st.write("- Elevado potencial eletroquímico")
+        st.write("- Altamente reativo e inflamável")
         st.write("- Excelente condutividade elétrica")
 
     with col2:
         st.info("**Importância Energética**")
-        st.write("- Elemento central na transição energética global")
+        st.write("- Elemento central na transição energética")
         st.write("- Crucial para o fabrico de baterias de iões de lítio")
-        st.write("- Utilizado em ligas metálicas leves (setor aeroespacial)")
+        st.write("- Utilizado em ligas metálicas leves)")
         st.write("- Aplicações importantes na indústria vidreira e cerâmica")
 
     st.divider()
@@ -266,9 +266,8 @@ def mostrar_confusoes_litio(deposito=""):
 # 3. QUIZ INTERATIVO
 # ===============================
 
-def quiz_litio():
-
-    st.markdown("### 🧠 Quiz Interativo: Lítio")
+def quiz_litio(deposito):  # <-- O parâmetro 'deposito' tem de estar aqui
+    st.markdown(f"### 🧠 Quiz Interativo: Lítio - {deposito}")
 
     st.write("Testa os teus conhecimentos 👇")
 
