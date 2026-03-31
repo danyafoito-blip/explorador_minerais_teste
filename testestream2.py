@@ -150,9 +150,12 @@ depositos = {
         "Argilas ricas em lítio"
     ],
     "Urânio (Combustíveis nucleares)": [
-        "Depósitos tipo unconformity",
-        "Depósitos em arenitos",
-        "Depósitos hidrotermais"
+        "Arenitos",
+        "Discordâncias",
+        "Intrusivos e Magmáticos",
+        "Hidrotermal e Metassomática",
+        "Superficiais e Sedimentares",
+        "Brechas"
     ],
     "Tório (Combustíveis nucleares)": [
         "Depósitos tipo unconformity",
