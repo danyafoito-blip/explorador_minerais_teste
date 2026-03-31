@@ -243,53 +243,300 @@ def mostrar_confusoes_litio(deposito=""):
 
 
 
-# ===============================
-# 3. QUIZ INTERATIVO
-# ===============================
+import streamlit as st
 
-def quiz_litio(deposito):  # <-- O parâmetro 'deposito' tem de estar aqui
-    st.markdown(f"### 🧠 Quiz Interativo: Lítio - {deposito}")
+def quiz_litio(deposito=None):
+    # Verificação de segurança para evitar TypeError se o argumento for None ou vazio
+    if not deposito:
+        st.warning("Por favor, seleciona um tipo de depósito para carregar o quiz.")
+        return
 
-    st.write("Testa os teus conhecimentos 👇")
+    # Se for uma lista (caso uses st.multiselect no futuro), junta tudo numa string
+    if isinstance(deposito, list):
+        deposito = ", ".join(deposito)
 
-    pergunta1 = st.radio(
-        "1️⃣ Qual mineral é uma fonte importante de lítio em pegmatitos?",
-        [
-            "Quartzo",
-            "Espodumena",
-            "Calcite",
-            "Pirite"
-        ],
-        key="l_q1"
-    )
+    st.markdown(f"### 🧠 Quiz Interativo: Lítio ({deposito})")
+    st.info("Testa os teus conhecimentos sobre as características geológicas e a exploração do Lítio!")
 
-    if st.button("Responder Pergunta 1"):
+    # ==========================================
+    # BASE DE DADOS DE PERGUNTAS
+    # ==========================================
+    
+    questoes_gerais = [
+        {
+            "pergunta": "1. Qual é a abundância relativa do lítio na crosta terrestre?",
+            "opcoes": [
+                "A) É o elemento mais abundante.",
+                "B) É o 25.º elemento mais abundante, com cerca de 25 ppm.",
+                "C) É o 50.º elemento mais abundante.",
+                "D) Existe apenas em vestígios indetetáveis."
+            ],
+            "resposta_correta": "B) É o 25.º elemento mais abundante, com cerca de 25 ppm."
+        },
+        {
+            "pergunta": "2. Por que razão o lítio é armazenado em óleo mineral ou vácuo?",
+            "opcoes": [
+                "A) Para evitar que derreta a baixas temperaturas.",
+                "B) Porque é altamente reativo e inflama-se em contacto com o ar ou água.",
+                "C) Para manter a sua cor prateada original.",
+                "D) Porque é um material radioativo perigoso."
+            ],
+            "resposta_correta": "B) Porque é altamente reativo e inflama-se em contacto com o ar ou água."
+        },
+        {
+            "pergunta": "3. Qual destas indústrias consome a maior percentagem de lítio globalmente (cerca de 80%)?",
+            "opcoes": [
+                "A) Cerâmica e Vidro.",
+                "B) Lubrificantes industriais.",
+                "C) Baterias.",
+                "D) Indústria Nuclear."
+            ],
+            "resposta_correta": "C) Baterias."
+        },
+        {
+            "pergunta": "4. Em que estado físico o lítio é extraído das salmouras continentais?",
+            "opcoes": [
+                "A) Sólido (cristais de metal puro).",
+                "B) Gasoso (vapores vulcânicos).",
+                "C) Líquido (dissolvido em águas hipersalinas).",
+                "D) Plasma."
+            ],
+            "resposta_correta": "C) Líquido (dissolvido em águas hipersalinas)."
+        },
+        {
+            "pergunta": "5. Qual é o peso atómico do lítio, o metal mais leve da tabela periódica?",
+            "opcoes": [
+                "A) 1,008 g/mol.",
+                "B) 6,941 g/mol.",
+                "C) 12,011 g/mol.",
+                "D) 22,989 g/mol."
+            ],
+            "resposta_correta": "B) 6,941 g/mol."
+        }
+    ]
 
-        if pergunta1 == "Espodumena":
-            st.success("Correto! ✅")
+    questoes_pegmatitos = [
+        {
+            "pergunta": "6. Qual é o mineral de minério de lítio mais importante encontrado em pegmatitos?",
+            "opcoes": [
+                "A) Quartzo.",
+                "B) Espodumena.",
+                "C) Halite.",
+                "D) Pirite."
+            ],
+            "resposta_correta": "B) Espodumena."
+        },
+        {
+            "pergunta": "7. A que distância máxima de um plutão granítico progenitor se encontram geralmente os pegmatitos LCT?",
+            "opcoes": [
+                "A) A mais de 100 km.",
+                "B) Geralmente a menos de 10 km.",
+                "C) Exclusivamente dentro do núcleo do granito.",
+                "D) Não têm relação com granitos."
+            ],
+            "resposta_correta": "B) Geralmente a menos de 10 km."
+        },
+        {
+            "pergunta": "8. No processamento de espodumena, a que temperatura deve ocorrer a ustulação (calcinação) para tornar o mineral solúvel?",
+            "opcoes": [
+                "A) 100 °C.",
+                "B) 500 °C.",
+                "C) Cerca de 1050 °C a 1100 °C.",
+                "D) 3000 °C."
+            ],
+            "resposta_correta": "C) Cerca de 1050 °C a 1100 °C."
+        },
+        {
+            "pergunta": "9. Qual é a característica estrutural comum em pegmatitos de lítio?",
+            "opcoes": [
+                "A) Homogeneidade total sem variações.",
+                "B) Zonamento mineralógico (zonas de borda, parede, intermédia e núcleo).",
+                "C) Estrutura gasosa borbulhante.",
+                "D) Formação exclusiva em profundidades oceânicas."
+            ],
+            "resposta_correta": "B) Zonamento mineralógico (zonas de borda, parede, intermédia e núcleo)."
+        },
+        {
+            "pergunta": "10. Os pegmatitos LCT (Lítio-Césio-Tântalo) estão associados a que contexto tectónico?",
+            "opcoes": [
+                "A) Cinturões orogénicos (colisão de placas).",
+                "B) Fossas abissais estáveis.",
+                "C) Planícies abissais sem atividade.",
+                "D) Dorsais meso-oceânicas apenas."
+            ],
+            "resposta_correta": "A) Cinturões orogénicos (colisão de placas)."
+        }
+    ]
+
+    questoes_salmouras = [
+        {
+            "pergunta": "6. Onde se localizam as maiores bacias de salmoura de lítio do mundo?",
+            "opcoes": [
+                "A) No 'Triângulo do Lítio' (Argentina, Bolívia e Chile).",
+                "B) No centro da Europa.",
+                "C) Na floresta amazónica.",
+                "D) No fundo do Oceano Atlântico."
+            ],
+            "resposta_correta": "A) No 'Triângulo do Lítio' (Argentina, Bolívia e Chile)."
+        },
+        {
+            "pergunta": "7. Qual é o método tradicional e mais económico para concentrar o lítio das salmouras?",
+            "opcoes": [
+                "A) Mineração subterrânea com explosivos.",
+                "B) Evaporação solar em tanques extensos.",
+                "C) Filtragem magnética direta.",
+                "D) Destilação por fervura industrial."
+            ],
+            "resposta_correta": "B) Evaporação solar em tanques extensos."
+        },
+        {
+            "pergunta": "8. Qual o principal entrave químico na extração de lítio de salmouras?",
+            "opcoes": [
+                "A) A falta de sal comum (NaCl).",
+                "B) A presença de impurezas como Magnésio (Mg), devido à sua semelhança química.",
+                "C) A água ser demasiado doce.",
+                "D) O lítio evaporar-se com o sol."
+            ],
+            "resposta_correta": "B) A presença de impurezas como Magnésio (Mg), devido à sua semelhança química."
+        },
+        {
+            "pergunta": "9. Qual é a idade geológica da maioria dos depósitos de salmoura economicamente viáveis?",
+            "opcoes": [
+                "A) Arqueico (4 mil milhões de anos).",
+                "B) Jurássico.",
+                "C) Quaternário (de 2,6 milhões de anos até ao presente).",
+                "D) Cretáceo."
+            ],
+            "resposta_correta": "C) Quaternário (de 2,6 milhões de anos até ao presente)."
+        },
+        {
+            "pergunta": "10. Qual é a concentração típica de lítio em salmouras ricas?",
+            "opcoes": [
+                "A) 1 a 5 ppm.",
+                "B) 200 a 1400 ppm.",
+                "C) 50% de lítio puro.",
+                "D) 100.000 mg/L."
+            ],
+            "resposta_correta": "B) 200 a 1400 ppm."
+        }
+    ]
+
+    questoes_argilas = [
+        {
+            "pergunta": "6. Em que mineral do grupo das esmectites se encontra tipicamente o lítio nestes depósitos?",
+            "opcoes": [
+                "A) Caulinite.",
+                "B) Hectorite.",
+                "C) Talco.",
+                "D) Quartzo."
+            ],
+            "resposta_correta": "B) Hectorite."
+        },
+        {
+            "pergunta": "7. Qual é o ambiente de formação destes depósitos sedimentares de argila?",
+            "opcoes": [
+                "A) Desertos de areia seca.",
+                "B) Lagos em caldeiras vulcânicas alterados hidrotermalmente.",
+                "C) Recifes de coral.",
+                "D) Picos de montanhas nevadas."
+            ],
+            "resposta_correta": "B) Lagos em caldeiras vulcânicas alterados hidrotermalmente."
+        },
+        {
+            "pergunta": "8. Onde se localiza a maior reserva mundial de argila com lítio?",
+            "opcoes": [
+                "A) Salar de Uyuni.",
+                "B) Caldeira de McDermitt (EUA).",
+                "C) Minas Gerais (Brasil).",
+                "D) Vale do Tejo (Portugal)."
+            ],
+            "resposta_correta": "B) Caldeira de McDermitt (EUA)."
+        },
+        {
+            "pergunta": "9. Qual é a vantagem económica da mineração de argilas de lítio?",
+            "opcoes": [
+                "A) São depósitos muito duros que protegem o lítio.",
+                "B) São 'macios', permitindo extração a céu aberto sem necessidade de explosivos.",
+                "C) O lítio separa-se apenas com água fria.",
+                "D) Estão localizados em grandes profundidades oceânicas."
+            ],
+            "resposta_correta": "B) São 'macios', permitindo extração a céu aberto sem necessidade de explosivos."
+        },
+        {
+            "pergunta": "10. Qual o processo químico necessário para libertar o lítio da estrutura da argila?",
+            "opcoes": [
+                "A) Lavagem simples com sabão.",
+                "B) Lixiviação ácida ou ustulação com calcário.",
+                "C) Exposição prolongada ao vento.",
+                "D) Congelamento extremo."
+            ],
+            "resposta_correta": "B) Lixiviação ácida ou ustulação com calcário."
+        }
+    ]
+
+    # ==========================================
+    # LÓGICA DE SELEÇÃO DE PERGUNTAS
+    # ==========================================
+    
+    # As questões gerais entram sempre
+    questoes_atuais = questoes_gerais.copy()
+
+    # Adiciona as questões específicas dependendo da seleção do utilizador
+    if "Pegmatitos" in deposito:
+        questoes_atuais.extend(questoes_pegmatitos)
+    elif "Salmouras" in deposito:
+        questoes_atuais.extend(questoes_salmouras)
+    elif "Argilas" in deposito:
+        questoes_atuais.extend(questoes_argilas)
+
+    # ==========================================
+    # INTERFACE DO QUIZ (FORMULÁRIO)
+    # ==========================================
+    
+    with st.form(key="quiz_litio_form"):
+        respostas_utilizador = []
+        
+        for i, q in enumerate(questoes_atuais):
+            st.markdown(f"**{q['pergunta']}**")
+            resposta = st.radio(
+                "Selecione a opção:", 
+                q["opcoes"], 
+                key=f"questao_litio_{i}", 
+                label_visibility="collapsed"
+            )
+            respostas_utilizador.append(resposta)
+            st.write("---")
+
+        submit = st.form_submit_button("Submeter Respostas")
+
+    # ==========================================
+    # AVALIAÇÃO E RESULTADOS
+    # ==========================================
+    
+    if submit:
+        score = 0
+        for i, q in enumerate(questoes_atuais):
+            if respostas_utilizador[i] == q["resposta_correta"]:
+                score += 1
+
+        st.markdown(f"### 🎯 O teu resultado: **{score} / {len(questoes_atuais)}**")
+        
+        if score == len(questoes_atuais):
+            st.balloons()
+            st.success("Brilhante! Acertaste em tudo. És um verdadeiro especialista em Lítio!")
+        elif score >= len(questoes_atuais) / 2:
+            st.info("Bom trabalho! Mas ainda podes afinar alguns conceitos.")
         else:
-            st.error("Incorreto ❌")
+            st.warning("Bom esforço! Vale a pena reveres as características na secção acima e tentar de novo.")
 
-    st.divider()
+        st.divider()
+        st.markdown("### Correção:")
 
-    pergunta2 = st.radio(
-        "2️⃣ Onde são típicas as salmouras ricas em lítio?",
-        [
-            "Regiões polares",
-            "Bacias áridas (salars)",
-            "Zonas vulcânicas profundas",
-            "Oceanos abertos"
-        ],
-        key="l_q2"
-    )
-
-    if st.button("Responder Pergunta 2"):
-
-        if pergunta2 == "Bacias áridas (salars)":
-            st.success("Exato! ✅")
-        else:
-            st.error("Resposta incorreta ❌")
-
+        for i, q in enumerate(questoes_atuais):
+            if respostas_utilizador[i] == q["resposta_correta"]:
+                st.success(f"✔️ **Questão correta!** {q['resposta_correta']}")
+            else:
+                st.error(f"❌ **Questão incorreta.** Respondeste: *{respostas_utilizador[i]}* | A resposta certa era: **{q['resposta_correta']}**")
 
 # ===============================
 # 4. CHECKLIST DE CAMPO
