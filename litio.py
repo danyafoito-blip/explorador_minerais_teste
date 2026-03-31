@@ -9,72 +9,210 @@ from streamlit_folium import st_folium
 # 1. CARACTERÍSTICAS
 # ===============================
 
-
 def mostrar_caracteristicas_litio(deposito):
 
-    st.markdown("### 🔋 Características do Lítio")
+    st.markdown("### Características do Lítio")
 
     col1, col2 = st.columns(2)
 
     with col1:
-
-        st.success("**Propriedades Físicas e Geoquímicas**")
-
-        st.write("- Elemento químico: Li")
-        st.write("- Metal alcalino leve")
-        st.write("- Alta reatividade química")
-        st.write("- Baixa densidade")
-        st.write("- Elevada mobilidade em fluidos")
+        st.success("**Propriedades Físicas e Químicas**")
+        st.write("- É o metal mais leve da Tabela Periódica")
+        st.write("- Elevado potencial eletroquímico e calor específico")
+        st.write("- Altamente reativo e inflamável (não ocorre livre na natureza)")
+        st.write("- Excelente condutividade elétrica")
 
     with col2:
-
-        st.info("**Importância Económica e Energética**")
-
-        st.write("- Essencial para baterias (íon-lítio)")
-        st.write("- Transição energética")
-        st.write("- Armazenamento de energia")
-        st.write("- Indústria eletrónica e automóvel")
+        st.info("**Importância Energética**")
+        st.write("- Elemento central na transição energética global")
+        st.write("- Crucial para o fabrico de baterias de iões de lítio")
+        st.write("- Utilizado em ligas metálicas leves (setor aeroespacial)")
+        st.write("- Aplicações importantes na indústria vidreira e cerâmica")
 
     st.divider()
 
-    if "Pegmatitos" in deposito:
+    if "Pegmatitos (rocha dura)" in deposito:
 
-        st.markdown("### 🪨 Lítio em Rocha Dura (Pegmatitos)")
+        st.markdown("## Pegmatitos (Rocha Dura)")
+    
+        st.success(
+            "Depósitos de rocha dura formados através da cristalização fracionada de magmas graníticos, "
+            "onde o lítio se concentra nas fases finais (fluidos residuais)."
+        )
+    
+        st.divider()
+    
+        st.markdown("## Mineralogia Principal")
+    
+        with st.container():
+            st.info(
+                "O lítio nestes depósitos encontra-se inserido na estrutura cristalina de minerais específicos."
+            )
+    
+            col1, col2 = st.columns(2)
+    
+            with col1:
+                st.markdown("**Mineral Principal:**")
+                st.write("- **Espodumena:** O mineral de lítio mais comum e explorado em rocha dura.")
+    
+            with col2:
+                st.markdown("**Outros Minerais Comuns:**")
+                st.write("- Petalite")
+                st.write("- Lepidolite")
+    
+        st.divider()
+    
+        st.markdown("## Génese e Formação")
+    
+        st.warning(
+            "O lítio, sendo um elemento incompatível, não se integra facilmente nos minerais que cristalizam primeiro "
+            "num magma, acumulando-se no líquido magmático residual."
+        )
+        
+        st.write("- Ocorrem geralmente na forma de filões (veios) intrusivos em rochas encaixantes mais antigas.")
+        st.write("- Associados a granitos do tipo LCT (Lítio, Césio e Tântalo).")
+    
+        st.divider()
+    
+        st.markdown("## Exploração e Processamento")
+    
+        st.error(
+            "Requer mineração tradicional (céu aberto ou subterrânea), seguida de processamento intensivo."
+        )
+    
+        col1, col2 = st.columns(2)
+    
+        with col1:
+            st.markdown("**Vantagens:**")
+            st.write("- Processamento mais rápido que as salmouras")
+            st.write("- Teores de lítio geralmente mais elevados")
+    
+        with col2:
+            st.markdown("**Desafios:**")
+            st.write("- Custos operacionais (OPEX) mais elevados")
+            st.write("- Processos de britagem, moagem e flotação intensivos em energia")
 
-        st.write("**Minerais principais:**")
-        st.write("- Espodumena")
-        st.write("- Lepidolita")
-        st.write("- Petalita")
+    elif "Salmouras continentais" in deposito:
 
-        st.write("**Características:**")
-        st.write("- Origem magmática")
-        st.write("- Cristais de grande dimensão")
-        st.write("- Extração mineira convencional")
-        st.write("- Teores relativamente elevados")
+        st.markdown("## Salmouras Continentais")
+    
+        st.success(
+            "Depósitos líquidos onde o recurso se encontra dissolvido em águas subterrâneas hipersalinas (salmouras), "
+            "geralmente localizados por baixo da crosta de sal em bacias endorreicas (salares)."
+        )
+    
+        st.divider()
+    
+        st.markdown("## Génese e Formação")
+    
+        with st.container():
+            st.info(
+                "Resultam da lixiviação contínua de rochas vulcânicas ricas em lítio ao longo de milhões de anos."
+            )
+    
+            col1, col2 = st.columns(2)
+    
+            with col1:
+                st.markdown("**Requisitos Geológicos:**")
+                st.write("- Bacias endorreicas (sem saída para o mar)")
+                st.write("- Atividade vulcânica prévia/recente")
+    
+            with col2:
+                st.markdown("**Requisitos Climáticos:**")
+                st.write("- Clima extremamente árido")
+                st.write("- Taxa de evaporação muito superior à precipitação")
+    
+        st.divider()
+    
+        st.markdown("## Características do Reservatório")
+    
+        st.warning(
+            "Tal como nos hidrocarbonetos, as salmouras requerem uma rocha reservatório com porosidade e permeabilidade "
+            "suficientes para permitir o bombeamento."
+        )
+        
+        st.write("- O aquífero pode ser composto por halite fraturada, areias, cascalhos ou argilas.")
+        st.write("- A dinâmica de fluidos é essencial para não diluir a salmoura com águas doces superficiais.")
+    
+        st.divider()
+    
+        st.markdown("## Exploração e Processamento")
+    
+        st.error(
+            "Extração feita através de bombagem da salmoura para a superfície, seguida de evaporação solar."
+        )
+    
+        col1, col2 = st.columns(2)
+    
+        with col1:
+            st.markdown("**Vantagens:**")
+            st.write("- Menor custo de produção (OPEX)")
+            st.write("- Menor intensidade carbónica na extração inicial")
+    
+        with col2:
+            st.markdown("**Desafios:**")
+            st.write("- Tempo de processamento longo (12 a 24 meses em tanques)")
+            st.write("- Desafios ambientais (consumo e gestão hídrica)")
 
-    elif "Salmouras" in deposito:
+    elif "Argilas ricas em lítio" in deposito:
 
-        st.markdown("### 🌊 Lítio em Salmouras Continentais")
+        st.markdown("## Argilas Ricas em Lítio")
+    
+        st.success(
+            "Recurso não convencional e emergente onde o lítio se encontra fixado na estrutura lamelar de minerais de argila, "
+            "frequentemente depositados em bacias sedimentares de antigos lagos vulcânicos."
+        )
+        
+        st.divider()
+    
+        st.markdown("## Mineralogia Principal")
+    
+        with st.container():
+            st.info(
+                "Diferente dos pegmatitos, o lítio está ligado a minerais de grão muito fino."
+            )
+    
+            col1, col2 = st.columns(2)
+    
+            with col1:
+                st.markdown("**Argilas Comuns:**")
+                st.write("- Hectorite")
+                st.write("- Esmectite")
+    
+            with col2:
+                st.markdown("**Outros associados:**")
+                st.write("- Jadarite (mineral de borossilicato encontrado na Sérvia)")
+    
+        st.divider()
+    
+        st.markdown("## Génese e Formação")
+    
+        st.warning(
+            "Associadas à alteração hidrotermal ou meteórica de cinzas vulcânicas ricas em lítio."
+        )
+        
+        st.write("- O lítio é mobilizado e posteriormente fixado nas estruturas das argilas durante a diagénese.")
+        st.write("- Frequentemente encontradas em antigas caldeiras vulcânicas.")
 
-        st.write("**Ambiente típico:**")
-        st.write("- Bacias endorreicas")
-        st.write("- Climas áridos (salars)")
-
-        st.write("**Características:**")
-        st.write("- Lítio dissolvido em salmouras")
-        st.write("- Extração por evaporação")
-        st.write("- Custos mais baixos")
-        st.write("- Forte dependência climática")
-
-    elif "Argilas" in deposito:
-
-        st.markdown("### 🧱 Lítio em Argilas")
-
-        st.write("**Características principais:**")
-        st.write("- Associado a minerais argilosos")
-        st.write("- Processamento mais complexo")
-        st.write("- Potencial crescente")
-        st.write("- Tecnologias ainda em desenvolvimento")
+        st.divider()
+    
+        st.markdown("## Exploração e Processamento")
+    
+        st.error(
+            "A extração envolve mineração a céu aberto, mas a metalurgia é mais complexa e ainda está em fase de escalonamento."
+        )
+    
+        col1, col2 = st.columns(2)
+    
+        with col1:
+            st.markdown("**Características do Depósito:**")
+            st.write("- Grandes volumes de minério disponíveis")
+            st.write("- Teores intermédios (menores que pegmatitos, maiores que salmouras)")
+    
+        with col2:
+            st.markdown("**Desafios:**")
+            st.write("- Requer lixiviação ácida intensiva para libertar o lítio da argila")
+            st.write("- Gestão de resíduos (tailings) e elevado consumo de reagentes")
 
     else:
         st.info("Selecione um tipo de depósito válido.")
