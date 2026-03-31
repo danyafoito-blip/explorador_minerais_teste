@@ -365,7 +365,7 @@ with tab_check:
         checklist_metano()
         
     elif recurso_selecionado == "Lítio (Rocha dura versus salmouras)":
-        checklist_litio()
+        checklist_litio(deposito_selecionado)
         
     elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
         checklist_uranio()
