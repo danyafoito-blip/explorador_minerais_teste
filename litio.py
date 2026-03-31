@@ -538,24 +538,63 @@ def quiz_litio(deposito=None):
             else:
                 st.error(f"❌ **Questão incorreta.** Respondeste: *{respostas_utilizador[i]}* | A resposta certa era: **{q['resposta_correta']}**")
 
-# ===============================
-# 4. CHECKLIST DE CAMPO
-# ===============================
+import streamlit as st
 
-def checklist_litio():
+def checklist_litio(deposito=None):
+    # Verificação de segurança
+    if not deposito:
+        st.warning("Por favor, seleciona um tipo de depósito para carregar a checklist.")
+        return
 
-    st.markdown("### ✅ Checklist de Campo")
+    if isinstance(deposito, list):
+        deposito = ", ".join(deposito)
 
-    st.write("Utilizado na prospeção de lítio:")
+    st.markdown("### ✅ Checklist de Observação: Lítio")
+    st.info("Utiliza esta checklist para identificares as principais características do lítio e dos seus depósitos, quer em amostras de mão, quer no contexto geológico.")
 
-    st.checkbox("Identificar pegmatitos graníticos")
-    st.checkbox("Mapear bacias sedimentares evaporíticas")
-    st.checkbox("Analisar mineralogia (espodumena, lepidolita)")
-    st.checkbox("Amostragem geoquímica")
-    st.checkbox("Avaliar condições climáticas (evaporação)")
-    st.checkbox("Caracterizar salmouras")
-    st.checkbox("Avaliar viabilidade económica")
+    # ===============================
+    # CHECKLIST GERAL (Sempre visível)
+    # ===============================
+    st.markdown("#### 🔍 Checklist Geral do Recurso")
+    
+    st.checkbox("**Leveza Extrema:** Identifique se a descrição menciona ser o metal mais leve da tabela periódica (densidade de 0,534 g/cm³).", key="chk_geral_1")
+    st.checkbox("**Modo de Conservação:** Em exposições de metal puro, verifique se está submerso em óleo mineral, querosene ou vácuo, devido à sua alta reatividade com o ar.", key="chk_geral_2")
+    st.checkbox("**Cor e Brilho:** O metal puro deve apresentar um brilho prateado (embora oxide rapidamente para cinza se exposto).", key="chk_geral_3")
+    st.checkbox("**Abundância Curiosa:** Procure notas que indiquem que, apesar da fama, é apenas o 25.º elemento mais abundante na crosta (~25-35 ppm).", key="chk_geral_4")
+    st.checkbox("**Foco Tecnológico:** Procure associações com a 'Transição Energética' ou amostras de baterias de iões de lítio ao lado do minério.", key="chk_geral_5")
 
+    st.divider()
+
+    # ===============================
+    # CHECKLISTS ESPECÍFICAS
+    # ===============================
+    
+    if "Pegmatitos" in deposito:
+        st.markdown("#### 🪨 Pegmatitos (Rocha Dura - LCT)")
+        
+        st.checkbox("**Cristais Gigantes:** Verifique se a amostra apresenta uma textura muito grosseira, típica de pegmatitos, com cristais que podem atingir dimensões métricas.", key="chk_peg_1")
+        st.checkbox("**Espodumena:** Procure cristais prismáticos de cor branco-creme, esverdeada ou rosada; é o principal mineral de minério.", key="chk_peg_2")
+        st.checkbox("**Micas Coloridas:** Identifique a lepidolite, uma mica de cor violeta ou lilás característica destes depósitos.", key="chk_peg_3")
+        st.checkbox("**Zonamento Mineralógico:** Em diagramas, observe se o depósito está organizado em zonas (borda, parede, intermédia e núcleo).", key="chk_peg_4")
+        st.checkbox("**Associação Granítica:** Confirme se o depósito está associado a granitos peraluminosos (ricos em alumínio).", key="chk_peg_5")
+
+    elif "Salmouras" in deposito:
+        st.markdown("#### 💧 Salmouras Continentais (Salares)")
+        
+        st.checkbox("**Minerais Evaporíticos:** Procure amostras de halite (sal comum), gesso ou silvite, que formam as crostas superficiais dos salares.", key="chk_sal_1")
+        st.checkbox("**Contexto Geográfico:** Verifique se o mapa indica bacias em climas áridos ou bacias endorreicas (fechadas), como o 'Triângulo do Lítio'.", key="chk_sal_2")
+        st.checkbox("**Amostra Líquida:** Se houver frascos, a salmoura rica em lítio é geralmente um líquido transparente ou amarelado com altíssima salinidade.", key="chk_sal_3")
+        st.checkbox("**Subprodutos:** Identifique a presença de potássio (potassa), magnésio ou boro, frequentemente extraídos em conjunto.", key="chk_sal_4")
+        st.checkbox("**Cenário Tectónico:** Observe se o depósito está associado a atividade geotérmica ou vulcânica recente (Cenozoica).", key="chk_sal_5")
+
+    elif "Argilas" in deposito:
+        st.markdown("#### 🏜️ Argilas Ricas em Lítio (Sedimentares)")
+        
+        st.checkbox("**Hectorite:** Identifique este mineral do grupo das esmectites; é uma argila rica em magnésio e lítio.", key="chk_arg_1")
+        st.checkbox("**Origem Vulcânica:** Verifique se a rocha hospedeira é um tufo vulcânico ou cinza alterada.", key="chk_arg_2")
+        st.checkbox("**Ambiente de Lagoa:** O contexto geológico deve mencionar lagos em caldeiras vulcânicas.", key="chk_arg_3")
+        st.checkbox("**Aspeto Estratificado:** As amostras costumam ser estratiformes (em camadas) e visualmente semelhantes a barros comuns.", key="chk_arg_4")
+        st.checkbox("**Consistência:** Notas sobre a extração referem frequentemente que são depósitos 'macios', que não exigem explosivos para a mineração.", key="chk_arg_5")
 
 # ===============================
 # 5. MAPA GLOBAL
