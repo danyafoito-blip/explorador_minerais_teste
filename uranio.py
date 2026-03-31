@@ -11,7 +11,7 @@ from streamlit_folium import st_folium
 
 def mostrar_caracteristicas_uranio(deposito):
 
-    st.markdown("### ☢️ Características do Urânio e Tório")
+    st.markdown("### ☢️ Características do Urânio")
 
     col1, col2 = st.columns(2)
 
@@ -21,19 +21,20 @@ def mostrar_caracteristicas_uranio(deposito):
 
         st.write("- Elementos radioativos (U, Th)")
         st.write("- Elevada densidade")
-        st.write("- Emissão de radiação ionizante")
-        st.write("- Mobilidade controlada por condições redox")
-        st.write("- Ocorrência em minerais como uraninita")
+        st.write("- Radioatividade e Decaimento Natural")
+        st.write("- Comportamento de Elemento Incompatível")
+        st.write("- Sensibilidade Redox e Solubilidade Variável")
 
     with col2:
 
         st.info("**Importância Energética**")
 
         st.write("- Combustível para energia nuclear")
-        st.write("- Produção de eletricidade de base")
+        st.write("- Geração de Eletricidade em Larga Escala")
         st.write("- Baixas emissões de CO₂")
-        st.write("- Tório como alternativa emergente")
-
+        st.write("- Estabilidade de Custos e Competitividade")
+        st.write("- Sustentabilidade de Longo Prazo")
+    
     st.divider()
 
     if "unconformity" in deposito.lower():
