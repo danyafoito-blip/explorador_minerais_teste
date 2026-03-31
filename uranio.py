@@ -15,6 +15,14 @@ def mostrar_caracteristicas_uranio(deposito):
 
     col1, col2 = st.columns(2)
 
+    # Verificação de segurança
+    if not deposito:
+        st.warning("Por favor, seleciona um tipo de depósito para visualizar as características.")
+        return
+
+    if isinstance(deposito, list):
+        deposito = ", ".join(deposito)
+    
     with col1:
 
         st.success("**Propriedades Físicas e Geoquímicas**")
@@ -37,38 +45,172 @@ def mostrar_caracteristicas_uranio(deposito):
     
     st.divider()
 
-    if "unconformity" in deposito.lower():
+# 1. Arenitos
+    if "Arenitos" in deposito:
+        st.markdown("## Depósitos em Arenitos (Sandstone-hosted)")
+        
+        st.success(
+            "Representam uma grande parte da produção mundial (ex: Cazaquistão, EUA). Ocorrem em rochas sedimentares clásticas de grão médio a grosseiro."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.warning(
+            "Formam-se pela dinâmica de fluidos: águas subterrâneas oxidantes ricas em urânio atravessam aquíferos permeáveis."
+        )
+        st.write("- A precipitação ocorre quando o fluido encontra uma **barreira redutora** (matéria orgânica, pirite, gás sulfídrico).")
+        st.write("- Morfologia clássica em forma de meia-lua ou crescente, conhecida como **'Roll-front'**.")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Vantagens:**")
+            st.write("- Maioritariamente extraídos por **ISR** (In-Situ Recovery).")
+            st.write("- Baixo custo de capital (CAPEX) e impacto visual superficial mínimo.")
+        with col2:
+            st.markdown("**Desafios:**")
+            st.write("- Exige hidrogeologia altamente controlada para evitar contaminação de aquíferos.")
+            st.write("- Teores tipicamente baixos a moderados.")
 
-        st.markdown("### 🪨 Depósitos tipo Unconformity")
+    # 2. Discordâncias
+    elif "Discordâncias" in deposito or "Unconformity" in deposito:
+        st.markdown("## Depósitos Relacionados com Discordâncias (Unconformity-related)")
+        
+        st.success(
+            "Famosos pelos depósitos da Bacia de Athabasca (Canadá) e Alligator Rivers (Austrália). São os depósitos com os **teores mais elevados do mundo**."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.info(
+            "Ocorrem no contacto espacial entre bacias sedimentares proterozoicas e o soco metamórfico/ígneo mais antigo (a discordância)."
+        )
+        st.write("- Resultam da mistura de salmouras oxidantes da bacia com fluidos redutores provenientes do soco.")
+        st.write("- Estão frequentemente associados a zonas de falha com litologias ricas em grafite (que atuam como condutores e redutores).")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        st.error(
+            "Devido aos teores extremos (que podem ultrapassar os 20% de Urânio), exigem métodos de mineração altamente especializados."
+        )
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Características:**")
+            st.write("- Menor volume de minério necessário para grande produção.")
+        with col2:
+            st.markdown("**Desafios:**")
+            st.write("- Risco de radiação extremo (exige ventilação massiva e equipamento telecomandado).")
+            st.write("- Necessidade de congelar artificialmente as rochas envolventes para evitar inundações nas minas.")
 
-        st.write("**Características principais:**")
-        st.write("- Altos teores de urânio")
-        st.write("- Associados a discordâncias geológicas")
-        st.write("- Interação entre fluidos oxidantes e redutores")
-        st.write("- Exemplos: Canadá, Austrália")
+    # 3. Intrusivos e Magmáticos
+    elif "Intrusivos e Magmáticos" in deposito:
+        st.markdown("## Depósitos Intrusivos e Magmáticos")
+        
+        st.success(
+            "Depósitos associados à cristalização direta de magmas ou fluidos tardi-magmáticos. Exemplos incluem os alaskitos de Rössing (Namíbia)."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.warning(
+            "Sendo o urânio um elemento altamente incompatível, não se integra nos minerais comuns durante a cristalização magmática inicial."
+        )
+        st.write("- Concentra-se nas fases finais da diferenciação magmática (magmas residuais).")
+        st.write("- Ocorre em rochas como granitos muito evoluídos, pegmatitos, sienitos ou carbonatitos.")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Características:**")
+            st.write("- Operações de grande escala, geralmente a céu aberto.")
+            st.write("- Minério muito homogéneo em grandes volumes.")
+        with col2:
+            st.markdown("**Desafios:**")
+            st.write("- Teores muito baixos (frequentemente < 0.05% U).")
+            st.write("- Requer o processamento de enormes quantidades de rocha.")
 
-    elif "arenitos" in deposito.lower():
+    # 4. Hidrotermal e Metassomática
+    elif "Hidrotermal e Metassomática" in deposito:
+        st.markdown("## Depósitos de Origem Hidrotermal e Metassomática")
+        
+        st.success(
+            "Incluem sistemas clássicos de filões (veios) de quartzo-carbonato-uraninita e depósitos complexos como os skarns."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.info(
+            "Formados pela circulação de fluidos quentes (hidrotermais) ao longo de fraturas, falhas ou zonas de cisalhamento na rocha hospedeira."
+        )
+        st.write("- A alteração metassomática altera quimicamente a rocha encaixante (ex: depósitos de alteração albitítica).")
+        st.write("- Podem estar intimamente ligados a fluidos derivados de magmas ou águas de formação aquecidas profundamente.")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        st.write("- Historicamente muito importantes (ex: minas europeias no Maciço Ibérico e da Boémia).")
+        st.write("- Mineração predominantemente subterrânea.")
+        st.write("- Podem ser depósitos polimetálicos, onde o urânio é recuperado com outros metais (ex: Ag, Co, Ni).")
 
-        st.markdown("### 🏜️ Depósitos em Arenitos")
+    # 5. Superficiais e Sedimentares Específicos
+    elif "Superficiais e Sedimentares" in deposito:
+        st.markdown("## Depósitos Superficiais e Sedimentares Específicos")
+        
+        st.success(
+            "Depósitos formados perto da superfície terrestre em ambientes sedimentares recentes. Inclui depósitos em calcretos, fosforitos e xistos negros."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Depósitos em Calcreto:**")
+            st.write("- Típicos de climas áridos (ex: Austrália Ocidental, Namíbia).")
+            st.write("- Águas ricas em urânio e vanádio evaporam em paleocanais, precipitando carnotite.")
+        with col2:
+            st.markdown("**Fosforitos e Xistos Negros:**")
+            st.write("- Ambientes marinhos redutores (anóxicos).")
+            st.write("- O urânio adsorve na matéria orgânica ou substitui o cálcio na apatite.")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        st.warning(
+            "A viabilidade económica destes depósitos é muito sensível ao preço de mercado do urânio."
+        )
+        st.write("- Calcretos: Extração fácil, a céu aberto, mas com teores marginais.")
+        st.write("- Fosforitos: O urânio é geralmente extraído como **subproduto** da indústria de fertilizantes fosfatados.")
 
-        st.write("**Características principais:**")
-        st.write("- Hospedados em bacias sedimentares")
-        st.write("- Controlo por fluxo de fluidos")
-        st.write("- Formação de roll-fronts")
-        st.write("- Extração por lixiviação in situ (ISR)")
-
-    elif "hidrotermais" in deposito.lower():
-
-        st.markdown("### 🌋 Depósitos Hidrotermais")
-
-        st.write("**Características principais:**")
-        st.write("- Associados a fluidos quentes")
-        st.write("- Relação com atividade magmática")
-        st.write("- Mineralização em veios e brechas")
-        st.write("- Variabilidade de teores")
+    # 6. Brechas
+    elif "Brechas" in deposito or "Breccia" in deposito:
+        st.markdown("## Depósitos em Brechas (Breccia-pipe)")
+        
+        st.success(
+            "Estruturas geológicas cilíndricas ou em forma de tubo preenchidas com fragmentos de rocha colapsada (brecha), famosas no planalto do Colorado (EUA)."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.info(
+            "Resultam de colapsos cársicos: a dissolução de calcários profundos cria cavernas, e as rochas sedimentares sobrejacentes desabam para o seu interior."
+        )
+        st.write("- Estes 'tubos' verticais tornam-se condutas altamente permeáveis para a circulação de fluidos minerais.")
+        st.write("- O urânio precipita ao encontrar barreiras redutoras nestes tubos.")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("**Vantagens:**")
+            st.write("- Apresentam frequentemente **teores muito elevados**.")
+            st.write("- Ocupam uma área de superfície (pegada) extremamente pequena.")
+        with col2:
+            st.markdown("**Desafios:**")
+            st.write("- Difíceis de encontrar na prospeção ('agulha num palheiro').")
+            st.write("- Volumes totais de minério por cada tubo são relativamente pequenos.")
 
     else:
-        st.info("Selecione um tipo de depósito válido.")
+        st.info("Selecione um tipo de depósito válido para visualizar a informação.")
 
 
 # ===============================
