@@ -262,9 +262,10 @@ def mostrar_confusoes_uranio(deposito=""):
 # 3. Quiz
 # ===============================
 
+def quiz_uranio():
+    st.header("Quiz: Urânio")
+    st.markdown("Teste os seus conhecimentos sobre as características gerais e os depósitos específicos de urânio.")
 
-st.header("Quiz: Urânio")
-st.markdown("Teste os seus conhecimentos sobre as características gerais e os depósitos específicos de urânio.")
 
 # Dicionários com as perguntas, opções e respostas corretas
 quiz_geral = [
