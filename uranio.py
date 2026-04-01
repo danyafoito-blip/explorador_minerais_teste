@@ -427,165 +427,94 @@ def quiz_uranio():
 # 4. CHECKLIST
 # ===============================
 
+
+# ===============================
+# 4. CHECKLIST
+# ===============================
+
 def checklist_uranio():
     st.header("📋 Checklist de Exploração: Urânio")
     st.markdown("Utilize esta checklist interativa para assinalar as características geológicas e mineralógicas encontradas durante a exploração ou estudo de depósitos de urânio.")
 
-
-
-# Dicionários com as perguntas, opções e respostas corretas
-quiz_geral = [
-    {
-        "pergunta": "1. Qual é a principal característica geoquímica que controla a formação da maioria dos depósitos de urânio?",
-        "opcoes": [
-            "A) A sua afinidade extrema com o oxigénio em qualquer estado.",
-            "B) A alta solubilidade no estado hexavalente (U6+) e a baixa solubilidade no estado tetravalente (U4+).",
-            "C) A sua capacidade de se fundir com o ferro no núcleo da Terra.",
-            "D) O facto de ser um elemento quimicamente inerte."
+    # Estrutura de dados da checklist (Tópicos com o texto explicativo incluído)
+    dados_checklist = {
+        "1. Checklist Geral do Recurso": [
+            "**Radioatividade:** Identificação de emissões gama através de detetores como contadores Geiger.",
+            "**Densidade Elevada:** O mineral primário uraninite é extremamente pesado, apresentando densidades entre 9,0 e 9,7 g/cm³.",
+            "**Contraste de Cor do Minério:** Presença de uraninite/pechblenda de cor negra em contraste com minerais secundários de oxidação de cores vibrantes como o amarelo néon (carnotite) ou verde (torbernite).",
+            "**Sensibilidade Redox:** Evidência de precipitação do urânio (U4+) em ambientes reduzidos (geralmente de tons cinzentos a pretos) após o transporte em soluções oxidadas (U6+).",
+            "**Associações Elementares Comuns:** Presença de elementos como molibdénio (Mo), vanádio (V), selénio (Se) e arsénio (As)."
         ],
-        "correta": "B) A alta solubilidade no estado hexavalente (U6+) e a baixa solubilidade no estado tetravalente (U4+)."
-    },
-    {
-        "pergunta": "2. Qual é a abundância média de urânio na crosta continental superior?",
-        "opcoes": ["A) 10,5 ppm.", "B) 2,7 ppm.", "C) 100 ppm.", "D) 0,7 ppm."],
-        "correta": "B) 2,7 ppm."
-    },
-    {
-        "pergunta": "3. Qual o isótopo de urânio que é físsil e utilizado diretamente em reatores de fissão convencionais?",
-        "opcoes": [
-            "A) 238U.",
-            "B) 235U (que representa cerca de 0,7% do urânio natural).",
-            "C) 232Th.",
-            "D) 233U."
+        "2. Depósitos em Arenitos (Sandstone-hosted)": [
+            "**Permeabilidade da Rocha:** Hospedado em arenitos de grão médio a grosseiro, caracterizados por elevada porosidade e permeabilidade.",
+            "**Morfologias Específicas:** Corpos de minério em forma de crescente (roll-front) que cortam a estratigrafia ou lentes tabulares paralelas à deposição.",
+            "**Zonamento de Cores Redox:** Transição visível entre zonas oxidadas (vermelhas/acastanhadas por hematite/limonite) e zonas reduzidas (cinzentas/pretas).",
+            "**Agentes Redutores Visíveis:** Presença de detritos de plantas fósseis, madeira carbonizada ou pirite diagenética na matriz do arenito.",
+            "**Minerais Disseminados:** O urânio ocorre frequentemente como disseminações finas de coffinite ou uraninite que revestem os grãos de areia."
         ],
-        "correta": "B) 235U (que representa cerca de 0,7% do urânio natural)."
-    },
-    {
-        "pergunta": "4. A relação de produção de energia entre quantidades iguais de urânio natural e carvão é de aproximadamente:",
-        "opcoes": ["A) 10 para 1.", "B) 100 para 1.", "C) 10.000 para 1.", "D) 1.000.000 para 1."],
-        "correta": "C) 10.000 para 1."
-    },
-    {
-        "pergunta": "5. Por que razão o urânio é considerado uma fonte de energia limpa no contexto das metas 'dual carbon'?",
-        "opcoes": [
-            "A) Porque é renovável como a energia solar.",
-            "B) Porque é neutro em termos de efeito de estufa, não emitindo CO2 durante a geração.",
-            "C) Porque não produz qualquer tipo de resíduo.",
-            "D) Porque é encontrado em todas as rochas da superfície."
+        "3. Depósitos Relacionados com Discordâncias (Unconformity-related)": [
+            "**Interface Estratigráfica:** Localização junto ao contacto entre um soco metamórfico (Arqueano a Paleoproterozoico) e uma bacia de cobertura de arenitos proterozoicos.",
+            "**Associação com Grafite:** Minério frequentemente associado a metapelitos grafíticos ou zonas de cisalhamento ricas em grafite no soco.",
+            "**Teores Excecionais:** Amostras de museu que exibem minério maciço (pechblenda botrioidal) com teores muito elevados, podendo exceder 20% de U.",
+            "**Halos de Alteração Argilosa:** Presença de halos extensos de ilite, clorite (sudoíte) e caulinite a envolver a mineralização.",
+            "**Controlo Estrutural e Brechas:** Mineralização associada a falhas reativadas, zonas de dissolução de quartzo ou brechas tectónicas próximas da discordância."
         ],
-        "correta": "B) Porque é neutro em termos de efeito de estufa, não emitindo CO2 durante a geração."
+        "4. Depósitos Intrusivos e Magmáticos": [
+            "**Rochas Hospedeiras Felsicas:** Ocorrência em pegmatitos, leuco-granitos ou complexos de rochas ígneas alcalinas.",
+            "**Caráter Incompatível:** Concentração de urânio em magmas residuais de estágios tardios de diferenciação.",
+            "**Sincronismo U-Th:** Mineralização conjunta de urânio e tório, resultante da sua mobilidade simultânea em fusões silicatadas de alta temperatura.",
+            "**Textura de Disseminação:** Uraninite ou uranothorite distribuída de forma disseminada na matriz ígnea.",
+            "**Variabilidade Mineralógica:** Presença de minerais acessórios como zircão e monazite enriquecido em urânio."
+        ],
+        "5. Depósitos de Origem Hidrotermal e Metassomática": [
+            "**Texturas de Veio e Fratura:** Mineralização que ocorre em filões (veios), preenchimentos de fraturas ou zonas de brecha que atravessam as rochas encaixantes.",
+            "**Indicadores de Temperatura:** Evidência de formação a partir de brinas quentes (70-250°C) e salinas.",
+            "**Metassomatismo Associado:** Evidências de alteração química intensa, como a albitização (formação de albite) ou neoformação de feldspato potássico.",
+            "**Complexidade Mineralógica:** Associação com sulfuretos e, em sistemas de alta temperatura, com Elementos de Terras Raras (REE), Ni, Co e Cu.",
+            "**Alteração de Parede:** Presença de forte caulinização ou cloritização nas rochas que rodeiam os veios mineralizados."
+        ],
+        "6. Depósitos Superficiais e Sedimentares Específicos": [
+            "**Acumulações Detríticas (Prazeres):** Concentrações mecânicas de minerais pesados e resistentes como a monazite em areias de rios ou praias.",
+            "**Calcretes (Evapotranspiração):** Corpos tabulares em sedimentos de vales áridos, cimentados por carbonatos e contendo minerais como a carnotite.",
+            "**Sedimentos Lacustres Anóxicos:** Mineralização em siltitos ou lodos de fundo de lago, muito ricos em matéria orgânica.",
+            "**Estruturas de Colapso (Breccia Pipes):** Tubos verticais cilíndricos preenchidos por brechas mineralizadas com pechblenda e sulfuretos.",
+            "**Paleoprazeres:** Conglomerados muito antigos (pré-2.4 Ga) onde a uraninite se acumulou mecanicamente antes da oxigenação da atmosfera."
+        ]
     }
-]
 
-quiz_depositos = [
-    {
-        "pergunta": "1. Depósitos em Arenitos: Qual é a forma característica de um depósito tipo 'roll-front' em corte transversal?",
-        "opcoes": [
-            "A) Um cilindro vertical perfeito.",
-            "B) Uma forma de crescente ou meia-lua que corta a estratigrafia.",
-            "C) Uma esfera isolada no centro do aquífero.",
-            "D) Uma camada perfeitamente plana e horizontal."
-        ],
-        "correta": "B) Uma forma de crescente ou meia-lua que corta a estratigrafia."
-    },
-    {
-        "pergunta": "2. Depósitos tipo Unconformity: Onde se localizam tipicamente os depósitos de urânio com os teores mais elevados do mundo?",
-        "opcoes": [
-            "A) No centro de vulcões ativos.",
-            "B) Na interface entre um soco metamórfico e uma cobertura de arenitos proterozoicos.",
-            "C) Em desertos arenosos modernos.",
-            "D) No fundo dos oceanos."
-        ],
-        "correta": "B) Na interface entre um soco metamórfico e uma cobertura de arenitos proterozoicos."
-    },
-    {
-        "pergunta": "3. Depósitos Intrusivos e Magmáticos: Como se comporta o urânio durante a cristalização de um magma?",
-        "opcoes": [
-            "A) Entra precocemente nos minerais de silicato comuns.",
-            "B) É um elemento incompatível que se concentra nos magmas residuais tardios (ex: granitos e pegmatitos).",
-            "C) Desaparece por evaporação térmica.",
-            "D) Transforma-se imediatamente em chumbo."
-        ],
-        "correta": "B) É um elemento incompatível que se concentra nos magmas residuais tardios (ex: granitos e pegmatitos)."
-    },
-    {
-        "pergunta": "4. Depósitos de Origem Hidrotermal e Metassomática: Qual é o intervalo de temperatura típico dos fluidos (brinas) que formam estes depósitos?",
-        "opcoes": ["A) Entre 0°C e 20°C.", "B) Entre 70°C e 250°C.", "C) Acima de 1000°C.", "D) Exclusivamente a 500°C."],
-        "correta": "B) Entre 70°C e 250°C."
-    },
-    {
-        "pergunta": "5. Depósitos Superficiais e Sedimentares Específicos: O que causa a precipitação de urânio (como a carnotite) em depósitos de calcrete em ambientes áridos?",
-        "opcoes": [
-            "A) O arrefecimento súbito das águas termais.",
-            "B) A evapotranspiração, que aumenta a concentração de urânio nas águas próximas da superfície.",
-            "C) O impacto de meteoritos.",
-            "D) A atividade vulcânica submarina."
-        ],
-        "correta": "B) A evapotranspiração, que aumenta a concentração de urânio nas águas próximas da superfície."
-    }
-]
+    # Lógica de contagem e apresentação
+    total_items = sum(len(itens) for itens in dados_checklist.values())
+    items_marcados = 0
 
-# Criação do formulário para o Quiz
-with st.form("quiz_uranio"):
-    respostas_utilizador_geral = []
-    respostas_utilizador_depositos = []
-    
-    st.subheader("Parte 1: Urânio em Geral (Dificuldade Fácil-Média)")
-    for i, q in enumerate(quiz_geral):
-        resp = st.radio(q["pergunta"], q["opcoes"], key=f"ug_{i}", index=None)
-        respostas_utilizador_geral.append(resp)
-        st.write("---")
-        
-    st.subheader("Parte 2: Tipos de Depósitos Específicos")
-    for i, q in enumerate(quiz_depositos):
-        resp = st.radio(q["pergunta"], q["opcoes"], key=f"ud_{i}", index=None)
-        respostas_utilizador_depositos.append(resp)
-        st.write("---")
+    # Criar as secções dinamicamente (usando expanders para manter a interface organizada)
+    for seccao, itens in dados_checklist.items():
+        with st.expander(seccao, expanded=False):
+            for i, item in enumerate(itens):
+                # A chave tem de ser única. Usamos uma string única baseada na secção e no índice.
+                if st.checkbox(item, key=f"chk_u_full_{seccao[:1]}_{i}"):
+                    items_marcados += 1
 
-    # Botão de submissão
-    submetido = st.form_submit_button("Verificar Respostas")
-
-# Lógica de validação fora do formulário
-if submetido:
-    pontuacao_geral = 0
-    pontuacao_depositos = 0
-    
     st.divider()
-    st.subheader("Resultados:")
+
+    # Barra de Progresso
+    st.write(f"### Progresso da Avaliação: {items_marcados} de {total_items}")
+    progresso = items_marcados / total_items
+    st.progress(progresso)
+
+    if items_marcados == total_items:
+        st.success("🎉 Excelente! Todos os indicadores geológicos e mineralógicos foram identificados.")
+    elif items_marcados > 0:
+        st.info("Continue a analisar a sua amostra ou área de estudo para identificar mais evidências.")
+
+    st.divider()
     
-    # Validação da Parte 1
-    st.write("**Parte 1: Urânio em Geral**")
-    for i, q in enumerate(quiz_geral):
-        if respostas_utilizador_geral[i] == q["correta"]:
-            pontuacao_geral += 1
-        elif respostas_utilizador_geral[i] is None:
-            st.warning(f"Pergunta {i+1} não respondida.")
-        else:
-            st.error(f"Pergunta {i+1}: Incorreta. A resposta certa era: {q['correta']}")
-            
-    st.success(f"Pontuação Geral: {pontuacao_geral} / {len(quiz_geral)}")
-    
-    # Validação da Parte 2
-    st.write("**Parte 2: Tipos de Depósitos Específicos**")
-    for i, q in enumerate(quiz_depositos):
-        if respostas_utilizador_depositos[i] == q["correta"]:
-            pontuacao_depositos += 1
-        elif respostas_utilizador_depositos[i] is None:
-            st.warning(f"Pergunta {i+1} não respondida.")
-        else:
-            st.error(f"Pergunta {i+1}: Incorreta. A resposta certa era: {q['correta']}")
-            
-    st.success(f"Pontuação Depósitos: {pontuacao_depositos} / {len(quiz_depositos)}")
-    
-    # Mensagem final consoante o resultado total
-    pontuacao_total = pontuacao_geral + pontuacao_depositos
-    if pontuacao_total == 10:
-        st.balloons()
-        st.success("Perfeito! Acertaste em tudo!")
-    elif pontuacao_total >= 7:
-        st.info("Muito bom resultado!")
-    else:
-        st.info("Podes sempre tentar novamente para melhorar a pontuação.")
+    # Caixa de Curiosidades / Questões para reflexão
+    st.markdown("### 💡 Questões para Reflexão e Pesquisa")
+    st.info("""
+    * Como funcionam os reatores nucleares naturais de Gabão (Oklo)?
+    * Qual é a viabilidade tecnológica e económica de extrair urânio diretamente da água do mar?
+    * Como é que as metodologias de exploração de urânio mudaram desde a década de 1970 até hoje?
+    """)
 
 # ===============================
 # 5. MAPA GLOBAL
