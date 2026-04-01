@@ -371,7 +371,7 @@ with tab_check:
         checklist_litio(deposito_selecionado)
         
     elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
-        checklist_uranio()
+        checklist_uranio(tipo_especifico)
         
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
         checklist_torio()
