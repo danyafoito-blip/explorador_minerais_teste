@@ -363,7 +363,7 @@ def quiz_uranio():
         respostas_utilizador_geral = []
         respostas_utilizador_depositos = []
         
-        st.subheader("Parte 1: Urânio em Geral (Dificuldade Fácil-Média)")
+        st.subheader("Parte 1: Urânio em Geral")
         for i, q in enumerate(quiz_geral):
             resp = st.radio(q["pergunta"], q["opcoes"], key=f"ug_{i}", index=None)
             respostas_utilizador_geral.append(resp)
