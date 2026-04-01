@@ -266,160 +266,159 @@ def quiz_uranio():
     st.header("Quiz: Urânio")
     st.markdown("Teste os seus conhecimentos sobre as características gerais e os depósitos específicos de urânio.")
 
+    # Dicionários com as perguntas, opções e respostas corretas
+    quiz_geral = [
+        {
+            "pergunta": "1. Qual é a principal característica geoquímica que controla a formação da maioria dos depósitos de urânio?",
+            "opcoes": [
+                "A) A sua afinidade extrema com o oxigénio em qualquer estado.",
+                "B) A alta solubilidade no estado hexavalente (U6+) e a baixa solubilidade no estado tetravalente (U4+).",
+                "C) A sua capacidade de se fundir com o ferro no núcleo da Terra.",
+                "D) O facto de ser um elemento quimicamente inerte."
+            ],
+            "correta": "B) A alta solubilidade no estado hexavalente (U6+) e a baixa solubilidade no estado tetravalente (U4+)."
+        },
+        {
+            "pergunta": "2. Qual é a abundância média de urânio na crosta continental superior?",
+            "opcoes": ["A) 10,5 ppm.", "B) 2,7 ppm.", "C) 100 ppm.", "D) 0,7 ppm."],
+            "correta": "B) 2,7 ppm."
+        },
+        {
+            "pergunta": "3. Qual o isótopo de urânio que é físsil e utilizado diretamente em reatores de fissão convencionais?",
+            "opcoes": [
+                "A) 238U.",
+                "B) 235U (que representa cerca de 0,7% do urânio natural).",
+                "C) 232Th.",
+                "D) 233U."
+            ],
+            "correta": "B) 235U (que representa cerca de 0,7% do urânio natural)."
+        },
+        {
+            "pergunta": "4. A relação de produção de energia entre quantidades iguais de urânio natural e carvão é de aproximadamente:",
+            "opcoes": ["A) 10 para 1.", "B) 100 para 1.", "C) 10.000 para 1.", "D) 1.000.000 para 1."],
+            "correta": "C) 10.000 para 1."
+        },
+        {
+            "pergunta": "5. Por que razão o urânio é considerado uma fonte de energia limpa no contexto das metas 'dual carbon'?",
+            "opcoes": [
+                "A) Porque é renovável como a energia solar.",
+                "B) Porque é neutro em termos de efeito de estufa, não emitindo CO2 durante a geração.",
+                "C) Porque não produz qualquer tipo de resíduo.",
+                "D) Porque é encontrado em todas as rochas da superfície."
+            ],
+            "correta": "B) Porque é neutro em termos de efeito de estufa, não emitindo CO2 durante a geração."
+        }
+    ]
 
-# Dicionários com as perguntas, opções e respostas corretas
-quiz_geral = [
-    {
-        "pergunta": "1. Qual é a principal característica geoquímica que controla a formação da maioria dos depósitos de urânio?",
-        "opcoes": [
-            "A) A sua afinidade extrema com o oxigénio em qualquer estado.",
-            "B) A alta solubilidade no estado hexavalente (U6+) e a baixa solubilidade no estado tetravalente (U4+).",
-            "C) A sua capacidade de se fundir com o ferro no núcleo da Terra.",
-            "D) O facto de ser um elemento quimicamente inerte."
-        ],
-        "correta": "B) A alta solubilidade no estado hexavalente (U6+) e a baixa solubilidade no estado tetravalente (U4+)."
-    },
-    {
-        "pergunta": "2. Qual é a abundância média de urânio na crosta continental superior?",
-        "opcoes": ["A) 10,5 ppm.", "B) 2,7 ppm.", "C) 100 ppm.", "D) 0,7 ppm."],
-        "correta": "B) 2,7 ppm."
-    },
-    {
-        "pergunta": "3. Qual o isótopo de urânio que é físsil e utilizado diretamente em reatores de fissão convencionais?",
-        "opcoes": [
-            "A) 238U.",
-            "B) 235U (que representa cerca de 0,7% do urânio natural).",
-            "C) 232Th.",
-            "D) 233U."
-        ],
-        "correta": "B) 235U (que representa cerca de 0,7% do urânio natural)."
-    },
-    {
-        "pergunta": "4. A relação de produção de energia entre quantidades iguais de urânio natural e carvão é de aproximadamente:",
-        "opcoes": ["A) 10 para 1.", "B) 100 para 1.", "C) 10.000 para 1.", "D) 1.000.000 para 1."],
-        "correta": "C) 10.000 para 1."
-    },
-    {
-        "pergunta": "5. Por que razão o urânio é considerado uma fonte de energia limpa no contexto das metas 'dual carbon'?",
-        "opcoes": [
-            "A) Porque é renovável como a energia solar.",
-            "B) Porque é neutro em termos de efeito de estufa, não emitindo CO2 durante a geração.",
-            "C) Porque não produz qualquer tipo de resíduo.",
-            "D) Porque é encontrado em todas as rochas da superfície."
-        ],
-        "correta": "B) Porque é neutro em termos de efeito de estufa, não emitindo CO2 durante a geração."
-    }
-]
+    quiz_depositos = [
+        {
+            "pergunta": "1. Depósitos em Arenitos: Qual é a forma característica de um depósito tipo 'roll-front' em corte transversal?",
+            "opcoes": [
+                "A) Um cilindro vertical perfeito.",
+                "B) Uma forma de crescente ou meia-lua que corta a estratigrafia.",
+                "C) Uma esfera isolada no centro do aquífero.",
+                "D) Uma camada perfeitamente plana e horizontal."
+            ],
+            "correta": "B) Uma forma de crescente ou meia-lua que corta a estratigrafia."
+        },
+        {
+            "pergunta": "2. Depósitos tipo Unconformity: Onde se localizam tipicamente os depósitos de urânio com os teores mais elevados do mundo?",
+            "opcoes": [
+                "A) No centro de vulcões ativos.",
+                "B) Na interface entre um soco metamórfico e uma cobertura de arenitos proterozoicos.",
+                "C) Em desertos arenosos modernos.",
+                "D) No fundo dos oceanos."
+            ],
+            "correta": "B) Na interface entre um soco metamórfico e uma cobertura de arenitos proterozoicos."
+        },
+        {
+            "pergunta": "3. Depósitos Intrusivos e Magmáticos: Como se comporta o urânio durante a cristalização de um magma?",
+            "opcoes": [
+                "A) Entra precocemente nos minerais de silicato comuns.",
+                "B) É um elemento incompatível que se concentra nos magmas residuais tardios (ex: granitos e pegmatitos).",
+                "C) Desaparece por evaporação térmica.",
+                "D) Transforma-se imediatamente em chumbo."
+            ],
+            "correta": "B) É um elemento incompatível que se concentra nos magmas residuais tardios (ex: granitos e pegmatitos)."
+        },
+        {
+            "pergunta": "4. Depósitos de Origem Hidrotermal e Metassomática: Qual é o intervalo de temperatura típico dos fluidos (brinas) que formam estes depósitos?",
+            "opcoes": ["A) Entre 0°C e 20°C.", "B) Entre 70°C e 250°C.", "C) Acima de 1000°C.", "D) Exclusivamente a 500°C."],
+            "correta": "B) Entre 70°C e 250°C."
+        },
+        {
+            "pergunta": "5. Depósitos Superficiais e Sedimentares Específicos: O que causa a precipitação de urânio (como a carnotite) em depósitos de calcrete em ambientes áridos?",
+            "opcoes": [
+                "A) O arrefecimento súbito das águas termais.",
+                "B) A evapotranspiração, que aumenta a concentração de urânio nas águas próximas da superfície.",
+                "C) O impacto de meteoritos.",
+                "D) A atividade vulcânica submarina."
+            ],
+            "correta": "B) A evapotranspiração, que aumenta a concentração de urânio nas águas próximas da superfície."
+        }
+    ]
 
-quiz_depositos = [
-    {
-        "pergunta": "1. Depósitos em Arenitos: Qual é a forma característica de um depósito tipo 'roll-front' em corte transversal?",
-        "opcoes": [
-            "A) Um cilindro vertical perfeito.",
-            "B) Uma forma de crescente ou meia-lua que corta a estratigrafia.",
-            "C) Uma esfera isolada no centro do aquífero.",
-            "D) Uma camada perfeitamente plana e horizontal."
-        ],
-        "correta": "B) Uma forma de crescente ou meia-lua que corta a estratigrafia."
-    },
-    {
-        "pergunta": "2. Depósitos tipo Unconformity: Onde se localizam tipicamente os depósitos de urânio com os teores mais elevados do mundo?",
-        "opcoes": [
-            "A) No centro de vulcões ativos.",
-            "B) Na interface entre um soco metamórfico e uma cobertura de arenitos proterozoicos.",
-            "C) Em desertos arenosos modernos.",
-            "D) No fundo dos oceanos."
-        ],
-        "correta": "B) Na interface entre um soco metamórfico e uma cobertura de arenitos proterozoicos."
-    },
-    {
-        "pergunta": "3. Depósitos Intrusivos e Magmáticos: Como se comporta o urânio durante a cristalização de um magma?",
-        "opcoes": [
-            "A) Entra precocemente nos minerais de silicato comuns.",
-            "B) É um elemento incompatível que se concentra nos magmas residuais tardios (ex: granitos e pegmatitos).",
-            "C) Desaparece por evaporação térmica.",
-            "D) Transforma-se imediatamente em chumbo."
-        ],
-        "correta": "B) É um elemento incompatível que se concentra nos magmas residuais tardios (ex: granitos e pegmatitos)."
-    },
-    {
-        "pergunta": "4. Depósitos de Origem Hidrotermal e Metassomática: Qual é o intervalo de temperatura típico dos fluidos (brinas) que formam estes depósitos?",
-        "opcoes": ["A) Entre 0°C e 20°C.", "B) Entre 70°C e 250°C.", "C) Acima de 1000°C.", "D) Exclusivamente a 500°C."],
-        "correta": "B) Entre 70°C e 250°C."
-    },
-    {
-        "pergunta": "5. Depósitos Superficiais e Sedimentares Específicos: O que causa a precipitação de urânio (como a carnotite) em depósitos de calcrete em ambientes áridos?",
-        "opcoes": [
-            "A) O arrefecimento súbito das águas termais.",
-            "B) A evapotranspiração, que aumenta a concentração de urânio nas águas próximas da superfície.",
-            "C) O impacto de meteoritos.",
-            "D) A atividade vulcânica submarina."
-        ],
-        "correta": "B) A evapotranspiração, que aumenta a concentração de urânio nas águas próximas da superfície."
-    }
-]
-
-# Criação do formulário para o Quiz
-with st.form("quiz_uranio"):
-    respostas_utilizador_geral = []
-    respostas_utilizador_depositos = []
-    
-    st.subheader("Parte 1: Urânio em Geral (Dificuldade Fácil-Média)")
-    for i, q in enumerate(quiz_geral):
-        resp = st.radio(q["pergunta"], q["opcoes"], key=f"ug_{i}", index=None)
-        respostas_utilizador_geral.append(resp)
-        st.write("---")
+    # Criação do formulário para o Quiz
+    with st.form("quiz_uranio_form"):
+        respostas_utilizador_geral = []
+        respostas_utilizador_depositos = []
         
-    st.subheader("Parte 2: Tipos de Depósitos Específicos")
-    for i, q in enumerate(quiz_depositos):
-        resp = st.radio(q["pergunta"], q["opcoes"], key=f"ud_{i}", index=None)
-        respostas_utilizador_depositos.append(resp)
-        st.write("---")
-
-    # Botão de submissão
-    submetido = st.form_submit_button("Verificar Respostas")
-
-# Lógica de validação fora do formulário
-if submetido:
-    pontuacao_geral = 0
-    pontuacao_depositos = 0
-    
-    st.divider()
-    st.subheader("Resultados:")
-    
-    # Validação da Parte 1
-    st.write("**Parte 1: Urânio em Geral**")
-    for i, q in enumerate(quiz_geral):
-        if respostas_utilizador_geral[i] == q["correta"]:
-            pontuacao_geral += 1
-        elif respostas_utilizador_geral[i] is None:
-            st.warning(f"Pergunta {i+1} não respondida.")
-        else:
-            st.error(f"Pergunta {i+1}: Incorreta. A resposta certa era: {q['correta']}")
+        st.subheader("Parte 1: Urânio em Geral (Dificuldade Fácil-Média)")
+        for i, q in enumerate(quiz_geral):
+            resp = st.radio(q["pergunta"], q["opcoes"], key=f"ug_{i}", index=None)
+            respostas_utilizador_geral.append(resp)
+            st.write("---")
             
-    st.success(f"Pontuação Geral: {pontuacao_geral} / {len(quiz_geral)}")
-    
-    # Validação da Parte 2
-    st.write("**Parte 2: Tipos de Depósitos Específicos**")
-    for i, q in enumerate(quiz_depositos):
-        if respostas_utilizador_depositos[i] == q["correta"]:
-            pontuacao_depositos += 1
-        elif respostas_utilizador_depositos[i] is None:
-            st.warning(f"Pergunta {i+1} não respondida.")
+        st.subheader("Parte 2: Tipos de Depósitos Específicos")
+        for i, q in enumerate(quiz_depositos):
+            resp = st.radio(q["pergunta"], q["opcoes"], key=f"ud_{i}", index=None)
+            respostas_utilizador_depositos.append(resp)
+            st.write("---")
+
+        # Botão de submissão
+        submetido = st.form_submit_button("Verificar Respostas")
+
+    # Lógica de validação fora do formulário
+    if submetido:
+        pontuacao_geral = 0
+        pontuacao_depositos = 0
+        
+        st.divider()
+        st.subheader("Resultados:")
+        
+        # Validação da Parte 1
+        st.write("**Parte 1: Urânio em Geral**")
+        for i, q in enumerate(quiz_geral):
+            if respostas_utilizador_geral[i] == q["correta"]:
+                pontuacao_geral += 1
+            elif respostas_utilizador_geral[i] is None:
+                st.warning(f"Pergunta {i+1} não respondida.")
+            else:
+                st.error(f"Pergunta {i+1}: Incorreta. A resposta certa era: {q['correta']}")
+                
+        st.success(f"Pontuação Geral: {pontuacao_geral} / {len(quiz_geral)}")
+        
+        # Validação da Parte 2
+        st.write("**Parte 2: Tipos de Depósitos Específicos**")
+        for i, q in enumerate(quiz_depositos):
+            if respostas_utilizador_depositos[i] == q["correta"]:
+                pontuacao_depositos += 1
+            elif respostas_utilizador_depositos[i] is None:
+                st.warning(f"Pergunta {i+1} não respondida.")
+            else:
+                st.error(f"Pergunta {i+1}: Incorreta. A resposta certa era: {q['correta']}")
+                
+        st.success(f"Pontuação Depósitos: {pontuacao_depositos} / {len(quiz_depositos)}")
+        
+        # Mensagem final consoante o resultado total
+        pontuacao_total = pontuacao_geral + pontuacao_depositos
+        if pontuacao_total == 10:
+            st.balloons()
+            st.success("Perfeito! Acertaste em tudo!")
+        elif pontuacao_total >= 7:
+            st.info("Muito bom resultado!")
         else:
-            st.error(f"Pergunta {i+1}: Incorreta. A resposta certa era: {q['correta']}")
-            
-    st.success(f"Pontuação Depósitos: {pontuacao_depositos} / {len(quiz_depositos)}")
-    
-    # Mensagem final consoante o resultado total
-    pontuacao_total = pontuacao_geral + pontuacao_depositos
-    if pontuacao_total == 10:
-        st.balloons()
-        st.success("Perfeito! Acertaste em tudo!")
-    elif pontuacao_total >= 7:
-        st.info("Muito bom resultado!")
-    else:
-        st.info("Podes sempre tentar novamente para melhorar a pontuação.")
+            st.info("Podes sempre tentar novamente para melhorar a pontuação.")
 
 
 # ===============================
