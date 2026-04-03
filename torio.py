@@ -45,16 +45,122 @@ def mostrar_caracteristicas_torio(deposito):
     
     st.divider()
 
-    # =========================================================
-    # ESPAÇO PARA AS CARACTERÍSTICAS ESPECÍFICAS DOS DEPÓSITOS
-    # =========================================================
-    
-    # Exemplo:
-    # if "Placers" in deposito:
-    #     st.markdown("## Depósitos de Placers (Areias Minerais)")
-    #     st.success("Detalhes sobre a acumulação mecânica da monazite...")
-    #     st.divider()
+import streamlit as st
 
+# ===============================
+# 1. CARACTERÍSTICAS
+# ===============================
+
+def mostrar_caracteristicas_torio(deposito):
+
+    st.markdown("### ☢️ Características do Tório")
+
+    col1, col2 = st.columns(2)
+
+    # Verificação de segurança
+    if not deposito:
+        st.warning("Por favor, seleciona um tipo de depósito para visualizar as características.")
+        return
+
+    # Converter para string e minúsculas para facilitar a filtragem nos "ifs"
+    if isinstance(deposito, list):
+        deposito_str = " ".join(deposito).lower()
+    else:
+        deposito_str = deposito.lower()
+    
+    # --- PARTE 1: CARACTERÍSTICAS GERAIS (Apenas Títulos) ---
+    with col1:
+        st.success("**Propriedades Físicas e Geoquímicas**")
+        st.write("- Propriedades Físicas Elevadas")
+        st.write("- Radioatividade e Dominância Isotópica")
+        st.write("- Natureza Litófila")
+        st.write("- Comportamento de Elemento Incompatível")
+        st.write("- Inércia Geoquímica à Superfície")
+
+    with col2:
+        st.info("**Importância Económica e Energética**")
+        st.write("- Combustível Nuclear do Futuro")
+        st.write("- Abundância e Segurança de Suprimento")
+        st.write("- Vantagens Económicas no Processamento")
+        st.write("- Reatores mais Seguros e Limpos")
+        st.write("- Aplicações Tecnológicas Diversas")
+    
+    st.divider()
+
+    # --- PARTE 2: CARACTERÍSTICAS ESPECÍFICAS DOS DEPÓSITOS ---
+    
+    if "carbonatito" in deposito_str or "alcalino" in deposito_str:
+        st.markdown("### 🪨 Carbonatitos e Complexos Alcalinos")
+        st.success(
+            "**Génese e Formação:** O tório é um elemento incompatível que se enriquece nos estágios tardios da "
+            "diferenciação magmática. Nestes sistemas, fluidos carbonatíticos alcalinos ricos em voláteis (como F, Cl e CO₂) "
+            "possuem uma elevada capacidade de transportar e concentrar o tório e elementos de terras raras (REE). "
+            "A mineralização ocorre frequentemente na zona de contacto entre o carbonatito e o soco (ex: Bayan Obo, China) ou controlada por falhas regionais."
+        )
+        st.info(
+            "**Exploração e Processamento:** O tório nestes depósitos é quase sempre explorado como um subproduto "
+            "da extração de REE ou nióbio. O processamento envolve a recuperação de minerais como a bastnaesite e a monazite. "
+            "Nestes depósitos, a monazite costuma ter teores de ThO₂ relativamente baixos (geralmente <2%), o que é uma "
+            "vantagem para a extração química das terras raras, reduzindo a contaminação radioativa."
+        )
+        st.divider()
+
+    if "placer" in deposito_str or "paleoplacer" in deposito_str or "sedimentar" in deposito_str:
+        st.markdown("### 🏖️ Placeres e Paleoplaceres (Depósitos Sedimentares de Superfície)")
+        st.success(
+            "**Génese e Formação:** Devido à inércia geoquímica do Th⁴⁺ e à estabilidade da rede cristalina dos seus minerais "
+            "(especialmente a monazite), o tório resiste à meteorização química. Através da meteorização mecânica, "
+            "estes minerais densos e resistentes acumulam-se em aluviões, rios e zonas costeiras, formando depósitos de 'areias negras' ou prazeres."
+        )
+        st.info(
+            "**Exploração e Processamento:** Estes constituem a principal fonte mundial de tório. A exploração foca-se "
+            "em áreas de margem continental e bacias estáveis. O processamento utiliza a elevada densidade da monazite (>5 g/cm³) "
+            "para a separação gravítica, seguida de métodos magnéticos e eletrostáticos para purificar o concentrado antes da lixiviação química."
+        )
+        st.divider()
+
+    if "metamórfico" in deposito_str or "metamorfico" in deposito_str:
+        st.markdown("### 🏔️ Terrenos e Sistemas Metamórficos")
+        st.success(
+            "**Génese e Formação:** O tório apresenta mobilidade durante o metamorfismo, tal como o potássio e o urânio. "
+            "Os depósitos podem ser sedimentar-metamórficos ou de contacto-metassomático (skarns), onde o tório se concentra "
+            "em migmatitos, gnaisses e xistos. A mineralização distribui-se frequentemente ao longo de planos de foliação, fraturas ou de forma disseminada."
+        )
+        st.info(
+            "**Exploração e Processamento:** Estes recursos são menos desenvolvidos comercialmente do que os prazeres. "
+            "Um exemplo notável de processamento histórico ocorreu em Steenkampskraal (África do Sul), onde se extraíram "
+            "concentrados de monazite com teores entre 3,3% e 7,6% de Th."
+        )
+        st.divider()
+
+    if "granito" in deposito_str or "pegmatito" in deposito_str:
+        st.markdown("### 🌋 Granitos Evoluídos e Pegmatitos")
+        st.success(
+            "**Génese e Formação:** O tório concentra-se em magmas residuais tardios (leucogranitos e pegmatitos) "
+            "devido ao seu grande raio iónico e carga elevada, que o impedem de entrar na estrutura dos minerais comuns de silicato. "
+            "Nestes sistemas de alta temperatura, o tório e o urânio são frequentemente enriquecidos em simultâneo (sincronismo geoquímico)."
+        )
+        st.info(
+            "**Exploração e Processamento:** Embora contenham grandes reservas, a maioria destes depósitos não tem "
+            "importância comercial imediata, funcionando como reservas estratégicas para o futuro. O tório ocorre disseminado "
+            "em minerais como a uraninite, thorite e monazite."
+        )
+        st.divider()
+
+    if "alteração" in deposito_str or "alteracao" in deposito_str or "residual" in deposito_str or "weathering" in deposito_str:
+        st.markdown("### 🏜️ Perfis de Alteração Residual (Weathering Crusts)")
+        st.success(
+            "**Génese e Formação:** Resultam da meteorização química intensa de rochas primárias (como carbonatitos) em climas tropicais. "
+            "Enquanto elementos móveis como Ca e Mg são removidos, o tório e as terras raras permanecem concentrados no resíduo laterítico. "
+            "Formam-se agregados porosos de monazite secundária e outros fosfatos."
+        )
+        st.info(
+            "**Exploração e Processamento:** O depósito de Mt. Weld (Austrália) é o exemplo mais proeminente, sendo um "
+            "dos depósitos de REE de maior teor no mundo. O processamento envolve a exploração a céu aberto, flotação para concentrar os minerais "
+            "e, posteriormente, processos complexos de calcinação, conversão cáustica, lixiviação ácida e extração por solventes "
+            "(geralmente utilizando extratantes organofosforados como o CYANEX 923)."
+        )
+        st.divider()
 
 # ===============================
 # 2. CONFUSÕES COMUNS
