@@ -158,9 +158,11 @@ depositos = {
         "Brechas"
     ],
     "Tório (Combustíveis nucleares)": [
-        "Depósitos tipo unconformity",
-        "Depósitos em arenitos",
-        "Depósitos hidrotermais"
+        "Carbonatitos e Complexos Alcalinos",
+        "Placeres e Paleoplaceres (Depósitos Sedimentares de Superfície)",
+        "Terrenos e Sistemas Metamórficos",
+        "Granitos Evoluídos e Pegmatitos",
+        "Perfis de Alteração Residual (Weathering Crusts)""
     ],
     "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto": [
         "Dorsais médio-oceânicas",
