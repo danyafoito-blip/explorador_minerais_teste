@@ -598,6 +598,27 @@ def quiz_uranio(deposito):
             st.info("Podes sempre tentar novamente para melhorar a pontuação.")
 
 # ===============================
+# 4. CHECKLIST DE CAMPO
+# ===============================
+
+def checklist_uranio():
+
+    st.markdown("### ✅ Checklist de Campo")
+
+    st.write("Utilizado na prospeção de urânio e tório:")
+
+    st.checkbox("Identificar bacias sedimentares")
+    st.checkbox("Mapear discordâncias geológicas")
+    st.checkbox("Medir radioatividade (gamma)")
+    st.checkbox("Analisar condições redox")
+    st.checkbox("Identificar minerais uraníferos")
+    st.checkbox("Avaliar circulação de fluidos")
+    st.checkbox("Verificar segurança radiológica")
+
+
+
+
+# ===============================
 # 5. MAPA GLOBAL
 # ===============================
 
