@@ -332,7 +332,7 @@ with tab_quiz:
         quiz_litio(deposito_selecionado)
         
     elif recurso_selecionado == "Urânio (Combustíveis nucleares)":
-        quiz_uranio()
+        quiz_uranio(deposito_selecionado)
         
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
         quiz_torio(deposito_selecionado)
