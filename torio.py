@@ -400,23 +400,84 @@ def quiz_torio(deposito):
         else:
             st.info("Podes sempre tentar novamente para melhorar a pontuação.")
 # ===============================
-# 4. CHECKLIST DE CAMPO
+# 4. CHECKLIST
 # ===============================
 
-def checklist_torio():
+def checklist_torio(deposito):
+    st.header("✅ Checklist de Exploração: Tório")
+    st.markdown("Utilize esta checklist para confirmar as principais características geológicas, mineralógicas e de campo durante a avaliação do recurso.")
 
-    st.markdown("### ✅ Checklist de Campo")
+    # Converter a seleção para string para garantir o funcionamento dos ifs
+    if not deposito:
+        deposito_str = ""
+    elif isinstance(deposito, list):
+        deposito_str = " ".join(deposito).lower()
+    else:
+        deposito_str = str(deposito).lower()
 
-    st.write("Utilizado na prospeção de urânio e tório:")
+    # --- PARTE 1: GERAL ---
+    st.subheader("Parte 1: Características Gerais do Tório")
+    st.checkbox("**Radioatividade Natural:** O tório é um elemento radioativo natural de vida longa, cujas emissões gama podem ser detetadas com instrumentos portáteis, como cintilómetros ou contadores Geiger.")
+    st.checkbox("**Afinidade com Oxigénio (Litófilo):** O tório ocorre quase exclusivamente na forma de óxidos ou sais oxigenados (fosfatos, silicatos, carbonatos), nunca formando sulfuretos ou selenetos.")
+    st.checkbox("**Propriedades Físicas do Metal:** Se observado como metal puro (raro em estado natural), apresenta uma cor branco-prateada que se torna cinzenta sob exposição atmosférica, sendo relativamente macio e muito denso (11,72 g/cm³).")
+    st.checkbox("**Incompatibilidade Magmática:** Procure evidências de enriquecimento em rochas ácidas, pegmatíticas e alcalinas, uma vez que o tório permanece nos fundidos residuais durante a evolução magmática.")
+    st.checkbox("**Inércia em Superfície:** Devido à sua natureza quimicamente inerte, o tório é transportado mecanicamente dentro da rede cristalina de minerais resistentes à meteorização, como a monazite.")
 
-    st.checkbox("Identificar bacias sedimentares")
-    st.checkbox("Mapear discordâncias geológicas")
-    st.checkbox("Medir radioatividade (gamma)")
-    st.checkbox("Analisar condições redox")
-    st.checkbox("Identificar minerais uraníferos")
-    st.checkbox("Avaliar circulação de fluidos")
-    st.checkbox("Verificar segurança radiológica")
+    st.divider()
 
+    # --- PARTE 2: ESPECÍFICA ---
+    st.subheader("Parte 2: Critérios Específicos do Depósito")
+    
+    # Variável para controlar se mostramos a mensagem de "selecione um depósito"
+    mostrou_especifico = False
+
+    if "carbonatitos" in deposito_str or "alcalinos" in deposito_str:
+        mostrou_especifico = True
+        st.markdown("### Carbonatitos e Complexos Alcalinos")
+        st.checkbox("**Matriz Carbonatada:** Mineralização hospedada em rochas ígneas ricas em minerais de carbonato (>50%), como calcite, dolomite e ankerite.")
+        st.checkbox("**Associação com REE e Nb:** Presença frequente de minerais de Elementos de Terras Raras (bastnaesite, monazite) e nióbio (pirocloro), sendo o tório muitas vezes um subproduto destes depósitos.")
+        st.checkbox("**Minerais Indicadores:** Presença de monazite, thorite, thorianite, allanite e bastnaesite dentro da massa rochosa.")
+        st.checkbox("**Texturas Disseminadas ou em Veios:** O minério pode ocorrer como cristais disseminados (ex: monazite em dolomite) ou preenchendo net de filões e fraturas.")
+        st.checkbox("**Metassomatismo:** Evidência de intensa alteração hidrotérmica nas rochas encaixantes, frequentemente apresentando substituição sódica e de flúor.")
+
+    if "placeres" in deposito_str or "paleoplaceres" in deposito_str or "sedimentares" in deposito_str:
+        mostrou_especifico = True
+        st.markdown("### Placeres e Paleoplaceres (Depósitos Sedimentares de Superfície)")
+        st.checkbox("**Areias Pesadas (Black Sands):** Concentrações mecânicas de minerais densos em ambientes de praia, rios ou dunas, frequentemente apresentando camadas escuras devido à presença de ilmenite e magnetite.")
+        st.checkbox("**Presença de Monazite Detrítica:** A monazite é o principal mineral portador de tório nestes depósitos, ocorrendo como grãos amarelos a castanho-amarelados misturados com quartzo.")
+        st.checkbox("**Resistência Química:** Os minerais de tório nestes depósitos devem exibir formas angulares a sub-angulares, indicando transporte a partir de fontes próximas e resistência à meteorização química.")
+        st.checkbox("**Minerais Associados de Valor Industrial:** Coexistência com minerais como zircão, rutilo, ilmenite, cassiterite, granada e estaurolite.")
+        st.checkbox("**Conglomerados Antigos (Paleoplaceres):** No caso de depósitos pré-câmbricos, o tório e o urânio ocorrem em conglomerados de seixos de quartzo ricos em pirite, onde a uraninite clástica pode conter vários pontos percentuais de tório.")
+
+    if "metamórficos" in deposito_str or "metamorficos" in deposito_str:
+        mostrou_especifico = True
+        st.markdown("### Terrenos e Sistemas Metamórficos")
+        st.checkbox("**Hospedeiros Metamórficos:** Ocorrência em gnaisses, xistos, migmatitos e quartzitos de alto grau, onde o tório se concentrou durante processos de metasomatismo ou recristalização.")
+        st.checkbox("**Controlo em Planos de Foliação:** Minerais de tório frequentemente distribuídos ao longo de planos de xistosidade, fraturas ou juntas.")
+        st.checkbox("**Texturas de Skarn:** Mineralização associada a minerais como diópsido, calcite, wollastonite e espinela, resultante da interação de fluidos graníticos com mármores.")
+        st.checkbox("**Auréolas Radiogénicas:** Observação de halos de radiação em torno de minerais de tório (como thorianite) quando incluídos em minerais vizinhos.")
+        st.checkbox("**Associações Complexas:** Presença de elementos como Mo, Bi, Zr, Sn e W associados ao tório em zonas de contacto metasomático.")
+
+    if "granitos" in deposito_str or "pegmatitos" in deposito_str:
+        mostrou_especifico = True
+        st.markdown("### Granitos Evoluídos e Pegmatitos")
+        st.checkbox("**Rochas Felsicas e Leucocráticas:** Enriquecimento em granitos peralcalinos, leuco-granitos e pegmatitos altamente fracionados.")
+        st.checkbox("**Sincronismo U-Th:** Em sistemas de alta temperatura, o tório ocorre frequentemente associado ao urânio na uraninite (pechblenda), com teores de tório que podem atingir vários pontos percentuais.")
+        st.checkbox("**Minerais Acessórios Radioativos:** Identificação de uranothorite, brannerite, allanite e xenotime dentro da matriz granítica ou pegmatítica.")
+        st.checkbox("**Concentração em Magmas Residuais:** Mineralização frequentemente localizada em zonas tardias de cristalização, como vugues ou zonas de substituição dentro de corpos ígneos.")
+        st.checkbox("**Variedade de Cores:** Minerais como a monazite nestes granitos podem apresentar cores variadas, de incolor a esverdeado ou acastanhado em secções finas.")
+
+    if "alteração residual" in deposito_str or "alteracao" in deposito_str or "weathering" in deposito_str:
+        mostrou_especifico = True
+        st.markdown("### Perfis de Alteração Residual (Weathering Crusts)")
+        st.checkbox("**Resíduos Lateríticos:** Concentrações de tório em solos e crostas de meteorização intensas, formadas pela remoção química de Ca e Mg da rocha original (frequentemente carbonatitos).")
+        st.checkbox("**Minerais Secundários Porosos:** Presença de agregados porosos de monazite secundária e minerais do grupo da crandallite e goyazite.")
+        st.checkbox("**Associação com Óxidos de Ferro:** O tório e as terras raras ficam retidos em massas de goethite e limonite que compõem a crosta de meteorização.")
+        st.checkbox("**Adsorção em Argilas:** Uma parte significativa do tório pode estar adsorvida em minerais de argila (como caulinite ou ilite) formados durante a alteração das rochas primárias.")
+        st.checkbox("**Texturas Biomórficas/Coloformes:** Em alguns depósitos supergénicos, o minério pode apresentar estruturas globulares coloformes ou tubos microscópicos indicativos de processos de baixa temperatura.")
+
+    if not mostrou_especifico:
+        st.info("💡 Seleciona um tipo de depósito específico no menu principal para visualizar os critérios de campo detalhados desta secção.")
 
 # ===============================
 # 5. MAPA GLOBAL
