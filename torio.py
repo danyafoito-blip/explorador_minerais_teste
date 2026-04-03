@@ -33,7 +33,7 @@ def mostrar_caracteristicas_torio(deposito):
         st.success("**Propriedades Físicas e Geoquímicas**")
         st.write("- Propriedades Físicas Elevadas")
         st.write("- Radioatividade e Dominância Isotópica")
-        st.write("- Natureza Litófila")
+        st.write("- Baixa Solubilidade")
         st.write("- Comportamento de Elemento Incompatível")
         st.write("- Inércia Geoquímica à Superfície")
 
