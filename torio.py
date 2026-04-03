@@ -207,54 +207,198 @@ def mostrar_confusoes_torio():
 
 
 # ===============================
-# 3. QUIZ INTERATIVO
+# 3. QUIZ
 # ===============================
 
-def quiz_torio():
+def quiz_torio(deposito):
+    st.header("📝 Quiz: Tório")
+    st.markdown("Teste os seus conhecimentos sobre as características gerais e os depósitos específicos de tório.")
 
-    st.markdown("### 🧠 Quiz Interativo: Urânio e Tório")
+    # Converter a seleção para string (tal como nas características)
+    if not deposito:
+        deposito_str = ""
+    elif isinstance(deposito, list):
+        deposito_str = " ".join(deposito).lower()
+    else:
+        deposito_str = str(deposito).lower()
 
-    st.write("Testa os teus conhecimentos 👇")
+    # Dicionário com as perguntas GERAIS (Aparecem sempre)
+    quiz_geral = [
+        {
+            "pergunta": "1. Qual é a abundância média do tório na crosta continental superior em comparação com o urânio?",
+            "opcoes": [
+                "A) O urânio é mais abundante que o tório.",
+                "B) Ambos possuem a mesma abundância (2,7 ppm).",
+                "C) O tório é cerca de 3 a 4 vezes mais abundante (10,5 ppm) que o urânio (2,7 ppm).",
+                "D) O tório é 100 vezes mais abundante que o urânio."
+            ],
+            "correta": "C) O tório é cerca de 3 a 4 vezes mais abundante (10,5 ppm) que o urânio (2,7 ppm)."
+        },
+        {
+            "pergunta": "2. Qual é o isótopo natural que constitui quase 100% do tório encontrado na natureza?",
+            "opcoes": [
+                "A) 235Th.",
+                "B) 232Th.",
+                "C) 233U.",
+                "D) 230Th."
+            ],
+            "correta": "B) 232Th."
+        },
+        {
+            "pergunta": "3. Como se comporta o tório durante o processo de cristalização de um magma (fase magmática)?",
+            "opcoes": [
+                "A) Entra facilmente nos minerais de silicato comuns.",
+                "B) Desaparece devido à alta temperatura.",
+                "C) Comporta-se como um elemento incompatível, concentrando-se nos fundidos residuais das fases tardias.",
+                "D) Precipita imediatamente no início da fusão."
+            ],
+            "correta": "C) Comporta-se como um elemento incompatível, concentrando-se nos fundidos residuais das fases tardias."
+        },
+        {
+            "pergunta": "4. No ciclo do combustível nuclear, o tório (232Th) é considerado um material 'fértil' porque, após absorver um neutrão, ele transmuta-se em:",
+            "opcoes": [
+                "A) 233U (um isótopo físsil).",
+                "B) 238U.",
+                "C) Plutónio-239.",
+                "D) Chumbo estável."
+            ],
+            "correta": "A) 233U (um isótopo físsil)."
+        },
+        {
+            "pergunta": "5. Qual é a principal característica geoquímica do tório em processos de superfície (meteorização)?",
+            "opcoes": [
+                "A) É altamente solúvel em água da chuva.",
+                "B) É geoquimicamente inerte, permanecendo em minerais estáveis e formando depósitos de prazeres.",
+                "C) Oxida-se rapidamente e evapora.",
+                "D) Transforma-se em urânio solúvel."
+            ],
+            "correta": "B) É geoquimicamente inerte, permanecendo em minerais estáveis e formando depósitos de prazeres."
+        }
+    ]
 
-    pergunta1 = st.radio(
-        "1️⃣ Onde são comuns depósitos tipo unconformity?",
-        [
-            "Oceanos profundos",
-            "Discordâncias geológicas",
-            "Atmosfera",
-            "Desertos arenosos"
-        ],
-        key="u_q1"
-    )
+    # Filtrar as perguntas dos DEPÓSITOS consoante a seleção do utilizador
+    quiz_depositos_filtrado = []
 
-    if st.button("Responder Pergunta 1"):
+    if "carbonatitos" in deposito_str or "alcalinos" in deposito_str:
+        quiz_depositos_filtrado.append({
+            "pergunta": "Carbonatitos e Complexos Alcalinos: O tório encontrado em carbonatitos, como no depósito de Bayan Obo (China), é geralmente extraído como:",
+            "opcoes": [
+                "A) O produto principal da mina.",
+                "B) Subproduto da extração de Elementos de Terras Raras (REE) e nióbio.",
+                "C) Um resíduo sem qualquer valor estratégico.",
+                "D) Combustível líquido direto."
+            ],
+            "correta": "B) Subproduto da extração de Elementos de Terras Raras (REE) e nióbio."
+        })
+        
+    if "placeres" in deposito_str or "paleoplaceres" in deposito_str or "sedimentares" in deposito_str:
+        quiz_depositos_filtrado.append({
+            "pergunta": "Placeres e Paleoplaceres: Qual é o mineral de fosfato mais comum que serve como a principal fonte de tório nestes depósitos de areias pesadas?",
+            "opcoes": [
+                "A) Uraninite.",
+                "B) Bastnaesite.",
+                "C) Monazite.",
+                "D) Quartzo."
+            ],
+            "correta": "C) Monazite."
+        })
 
-        if pergunta1 == "Discordâncias geológicas":
-            st.success("Correto! ✅")
+    if "metamórficos" in deposito_str or "metamorficos" in deposito_str:
+        quiz_depositos_filtrado.append({
+            "pergunta": "Terrenos e Sistemas Metamórficos: O depósito de Tranomaro, em Madagáscar, é um exemplo de qual subtipo de depósito metamórfico/hidrotermal?",
+            "opcoes": [
+                "A) Depósito de roll-front.",
+                "B) Skarn (formado pela interação de fluidos com rochas carbonatadas).",
+                "C) Conglomerado de seixos de quartzo.",
+                "D) Depósito de calcrete."
+            ],
+            "correta": "B) Skarn (formado pela interação de fluidos com rochas carbonatadas)."
+        })
+
+    if "granitos" in deposito_str or "pegmatitos" in deposito_str:
+        quiz_depositos_filtrado.append({
+            "pergunta": "Granitos Evoluídos e Pegmatitos: Por que razão o tório e o urânio são frequentemente enriquecidos em simultâneo nestes sistemas?",
+            "opcoes": [
+                "A) Porque ambos são solúveis em água fria.",
+                "B) Devido ao seu comum grande raio iónico e carga elevada, que os impede de entrar em minerais comuns.",
+                "C) Porque são os primeiros minerais a cristalizar no magma.",
+                "D) Porque são atraídos pelo ferro no centro da intrusão."
+            ],
+            "correta": "B) Devido ao seu comum grande raio iónico e carga elevada, que os impede de entrar em minerais comuns."
+        })
+
+    if "alteração residual" in deposito_str or "alteracao" in deposito_str or "weathering" in deposito_str:
+        quiz_depositos_filtrado.append({
+            "pergunta": "Perfis de Alteração Residual: Como se forma a concentração de tório em depósitos como o de Mt. Weld (Austrália)?",
+            "opcoes": [
+                "A) Através de erupções vulcânicas subaquáticas.",
+                "B) Por meteorização química intensa, onde minerais solúveis são removidos e o tório permanece concentrado no resíduo laterítico.",
+                "C) Por precipitação em águas geladas.",
+                "D) Por impacto de meteoritos ricos em metais pesados."
+            ],
+            "correta": "B) Por meteorização química intensa, onde minerais solúveis são removidos e o tório permanece concentrado no resíduo laterítico."
+        })
+
+    # Criação do formulário para o Quiz
+    with st.form("quiz_torio_form"):
+        respostas_utilizador_geral = []
+        respostas_utilizador_depositos = []
+        
+        st.subheader("Parte 1: Tório em Geral")
+        for i, q in enumerate(quiz_geral):
+            resp = st.radio(q["pergunta"], q["opcoes"], key=f"tg_{i}", index=None)
+            respostas_utilizador_geral.append(resp)
+            st.write("---")
+            
+        # Só mostra a Parte 2 se houver perguntas específicas para o depósito escolhido
+        if quiz_depositos_filtrado:
+            st.subheader("Parte 2: Questões Específicas do Depósito")
+            for i, q in enumerate(quiz_depositos_filtrado):
+                resp = st.radio(q["pergunta"], q["opcoes"], key=f"td_{i}", index=None)
+                respostas_utilizador_depositos.append(resp)
+                st.write("---")
         else:
-            st.error("Incorreto ❌")
+            st.info("💡 Seleciona um tipo de depósito específico no menu para desbloquear perguntas extra nesta secção!")
 
-    st.divider()
+        # Botão de submissão
+        submetido = st.form_submit_button("Verificar Respostas")
 
-    pergunta2 = st.radio(
-        "2️⃣ Qual método é comum em depósitos em arenitos?",
-        [
-            "Exploração submarina",
-            "Fraturação hidráulica",
-            "Lixiviação in situ (ISR)",
-            "Fusão nuclear"
-        ],
-        key="u_q2"
-    )
-
-    if st.button("Responder Pergunta 2"):
-
-        if pergunta2 == "Lixiviação in situ (ISR)":
-            st.success("Exato! ✅")
+    # Lógica de validação (executada quando o botão é clicado)
+    if submetido:
+        pontuacao = 0
+        total_perguntas = len(quiz_geral) + len(quiz_depositos_filtrado)
+        
+        st.divider()
+        st.subheader("Resultados:")
+        
+        st.write("**Parte 1: Tório em Geral**")
+        for i, q in enumerate(quiz_geral):
+            if respostas_utilizador_geral[i] == q["correta"]:
+                pontuacao += 1
+            elif respostas_utilizador_geral[i] is None:
+                st.warning(f"Pergunta Geral {i+1} não respondida.")
+            else:
+                st.error(f"Pergunta Geral {i+1}: Incorreta. A resposta certa era: {q['correta']}")
+                
+        if quiz_depositos_filtrado:
+            st.write("**Parte 2: Depósitos Específicos**")
+            for i, q in enumerate(quiz_depositos_filtrado):
+                if respostas_utilizador_depositos[i] == q["correta"]:
+                    pontuacao += 1
+                elif respostas_utilizador_depositos[i] is None:
+                    st.warning(f"Pergunta Específica {i+1} não respondida.")
+                else:
+                    st.error(f"Pergunta Específica {i+1}: Incorreta. A resposta certa era: {q['correta']}")
+            
+        st.success(f"Pontuação Final: {pontuacao} / {total_perguntas}")
+        
+        if pontuacao == total_perguntas and total_perguntas > 0:
+            st.balloons()
+            st.success("Perfeito! Acertaste em tudo!")
+        elif pontuacao >= (total_perguntas * 0.7):
+            st.info("Muito bom resultado!")
         else:
-            st.error("Resposta incorreta ❌")
-
-
+            st.info("Podes sempre tentar novamente para melhorar a pontuação.")
 # ===============================
 # 4. CHECKLIST DE CAMPO
 # ===============================
