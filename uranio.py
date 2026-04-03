@@ -221,41 +221,45 @@ def mostrar_caracteristicas_uranio(deposito):
 # 2. CONFUSÕES COMUNS E DISTINÇÕES
 # ===============================
 
-def mostrar_confusoes_uranio(deposito=""):
+# ===============================
+# 2. CONFUSÕES E MITOS
+# ===============================
 
-    st.markdown("### ⚠️ Pontos de Distinção e Confusão: Urânio e Tório")
+def mostrar_confusoes_uranio():
+    st.header("❌ Mitos e Confusões Comuns: Urânio")
+    st.markdown("O urânio é um dos elementos mais estigmatizados devido à sua associação com armas nucleares e acidentes. Vamos desmistificar algumas das ideias mais comuns.")
 
-    st.markdown("#### 🌍 5 Pontos Gerais de Distinção e Confusão")
+    col1, col2 = st.columns(2)
 
-    with st.expander("🔍 Ver pontos gerais", expanded=True):
-        st.markdown("**1. Morfologia vs. Génese:** Depósitos situados no mesmo ambiente sedimentar (ex: paleocanais) e com formas semelhantes (ex: tabulares) podem ter mecanismos de formação completamente diferentes, o que pode induzir em erro durante a exploração.")
-        st.markdown("**2. Temperatura e Salinidade dos Fluidos:** A principal forma de distinguir sistemas meteóricos de sistemas hidrotermais/diagenéticos é através da temperatura (fluidos meteóricos <50°C vs. brinas quentes 70-250°C) e da salinidade (baixa em águas meteóricas vs. alta em brinas diagenéticas).")
-        st.markdown("**3. Origem do Redutor:** Existe confusão entre redutores intrínsecos (como matéria orgânica vegetal depositada com o sedimento) e extrínsecos (como hidrocarbonetos ou gases sulfídricos que migraram de outras zonas), sendo que ambos podem criar depósitos de aparência similar.")
-        st.markdown("**4. Evolução Atmosférica:** A distinção temporal é vital; depósitos hidrotermais de urânio só se tornaram possíveis após a oxigenação da atmosfera (~2,4 Ga), permitindo o transporte de U6+ solúvel, enquanto antes disso o urânio era transportado mecanicamente como detrito.")
-        st.markdown("**5. Metamorfismo:** Muitos depósitos classificados como \"metamórficos\" são, na verdade, depósitos em arenitos que sofreram metamorfismo posterior, mantendo muitas vezes a sua natureza redutora original.")
+    with col1:
+        st.error("**Mito 1: O urânio natural brilha a verde no escuro**")
+        st.success(
+            "**Realidade:** O minério de urânio natural não brilha no escuro. "
+            "A ideia da radiação verde fluorescente vem da cultura pop (como os Simpsons) e dos mostradores de relógios antigos (que usavam rádio e fósforo, não urânio). "
+            "Alguns minerais secundários de urânio podem emitir fluorescência sob luz ultravioleta (UV), mas nunca emitem luz própria no escuro."
+        )
 
-    st.divider()
+        st.error("**Mito 2: O urânio natural é perigoso só de estar perto**")
+        st.success(
+            "**Realidade:** O urânio natural é composto maioritariamente por U-238 (99,27%), que tem uma meia-vida de 4,5 mil milhões de anos. "
+            "Isto significa que decai muito lentamente. A sua principal emissão são partículas alfa, que não penetram a pele humana ou mesmo uma folha de papel. "
+            "O verdadeiro perigo está na inalação ou ingestão do pó do minério, que é tóxico como um metal pesado (semelhante ao chumbo)."
+        )
 
-    if deposito:
-        st.markdown(f"#### 🔎 Distinções Específicas: {deposito}")
+    with col2:
+        st.error("**Mito 3: O minério de urânio pode explodir espontaneamente**")
+        st.success(
+            "**Realidade:** É fisicamente impossível que um depósito de urânio natural ou o minério bruto sofra uma explosão nuclear. "
+            "Para que ocorra uma reação em cadeia descontrolada ou explosiva, o isótopo físsil (U-235) precisa de ser artificialmente enriquecido de 0,7% para mais de 90%. "
+            "Em reatores comerciais para eletricidade, enriquece-se apenas até cerca de 3 a 5%, o que também impossibilita uma explosão nuclear."
+        )
 
-        if "unconformity" in deposito.lower():
-            st.markdown("**1. Localização Estratigráfica:** Ocorrem especificamente na interface entre um soco metamórfico (geralmente do Arcaico ao Paleoproterozoico) e uma cobertura sedimentar proterozoica rica em arenitos vermelhos.")
-            st.markdown("**2. Teores Excecionais:** Distinguem-se por possuírem os teores mais elevados do mundo (chegando a mais de 20% de U), muito superiores aos depósitos típicos em arenitos.")
-            st.markdown("**3. Controladores Estruturais:** Estão quase sempre associados a falhas reativadas e a condutores grafíticos no soco, que funcionam como agentes redutores ou caminhos para fluidos.")
-
-        elif "arenitos" in deposito.lower():
-            st.markdown("**1. Dependência Biológica:** Estão maioritariamente restritos a rochas do Silúrico ou mais recentes, devido à necessidade de matéria orgânica proveniente de plantas terrestres vasculares para atuar como redutor.")
-            st.markdown("**2. Morfologias Clássicas:** Dividem-se principalmente em tipos roll-front (em forma de crescente, cruzando a estratigrafia) e tabulares (paralelos à deposição), controlados pela permeabilidade do arenito.")
-            st.markdown("**3. Fronteiras de Redox:** A mineralização ocorre tipicamente na transição entre uma zona oxidada (frequentemente avermelhada/amarelada) e uma zona reduzida (cinzenta/preta) dentro do aquífero.")
-
-        elif "hidrotermais" in deposito.lower():
-            st.markdown("**1. Origem dos Fluidos:** Ao contrário dos depósitos sedimentares puros, estes envolvem fluidos de origem magmática ou do manto, ricos em mineralizadores como CO2 e H2S.")
-            st.markdown("**2. Associações Minerais Complexas:** Frequentemente contêm tório (Th) e elementos de terras raras (REE), que se enriquecem sincronamente em condições de alta temperatura, algo raro em depósitos sedimentares de baixa temperatura.")
-            st.markdown("**3. Controlo Estrutural em Veios:** Apresentam-se geralmente como veios, preenchimentos de fraturas ou zonas de brecha, muitas vezes associados a complexos alcalinos ou carbonatitos.")
-
-    else:
-        st.info("Selecione um tipo de depósito na barra lateral para ver as distinções específicas.")
+        st.error("**Mito 4: Uma vez extraído, o terreno fica radioativo para sempre**")
+        st.success(
+            "**Realidade:** As minas de urânio modernas seguem rigorosos protocolos de remediação. "
+            "Quando a mina fecha, os estéreis são contidos, selados e a área é coberta e revegetada. "
+            "Com as práticas atuais, a radioatividade à superfície na área remediada regressa a níveis seguros, equivalentes à radiação de fundo natural."
+        )
 
 
 # ===============================
