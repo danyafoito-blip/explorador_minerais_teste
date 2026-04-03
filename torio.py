@@ -5,6 +5,8 @@ from folium.plugins import Fullscreen
 from streamlit_folium import st_folium
 
 
+import streamlit as st
+
 # ===============================
 # 1. CARACTERÍSTICAS
 # ===============================
@@ -20,23 +22,23 @@ def mostrar_caracteristicas_torio(deposito):
         st.warning("Por favor, seleciona um tipo de depósito para visualizar as características.")
         return
 
+    # Correção: Converter a variável para string minúscula (resolve o NameError!)
     if isinstance(deposito, list):
-        deposito = ", ".join(deposito)
+        deposito_str = " ".join(deposito).lower()
+    else:
+        deposito_str = str(deposito).lower()
     
+    # --- PARTE 1: CARACTERÍSTICAS GERAIS ---
     with col1:
-
         st.success("**Propriedades Físicas e Geoquímicas**")
-
         st.write("- Propriedades Físicas Elevadas")
         st.write("- Radioatividade e Dominância Isotópica")
-        st.write("- Baixa Solubilidade")
+        st.write("- Natureza Litófila")
         st.write("- Comportamento de Elemento Incompatível")
         st.write("- Inércia Geoquímica à Superfície")
 
     with col2:
-
         st.info("**Importância Económica e Energética**")
-
         st.write("- Combustível Nuclear do Futuro")
         st.write("- Abundância e Segurança de Suprimento")
         st.write("- Vantagens Económicas no Processamento")
@@ -45,8 +47,7 @@ def mostrar_caracteristicas_torio(deposito):
     
     st.divider()
 
-
-# --- PARTE 2: CARACTERÍSTICAS ESPECÍFICAS DOS DEPÓSITOS ---
+    # --- PARTE 2: CARACTERÍSTICAS ESPECÍFICAS DOS DEPÓSITOS ---
     
     # 1. Carbonatitos e Complexos Alcalinos
     if "carbonatitos" in deposito_str or "alcalinos" in deposito_str:
