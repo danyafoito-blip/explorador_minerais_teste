@@ -15,59 +15,48 @@ def mostrar_caracteristicas_torio(deposito):
 
     col1, col2 = st.columns(2)
 
+    # Verificação de segurança
+    if not deposito:
+        st.warning("Por favor, seleciona um tipo de depósito para visualizar as características.")
+        return
+
+    if isinstance(deposito, list):
+        deposito = ", ".join(deposito)
+    
     with col1:
 
         st.success("**Propriedades Físicas e Geoquímicas**")
 
-        st.write("- Elementos radioativos (U, Th)")
-        st.write("- Elevada densidade")
-        st.write("- Emissão de radiação ionizante")
-        st.write("- Mobilidade controlada por condições redox")
-        st.write("- Ocorrência em minerais como uraninita")
+        st.write("- **Propriedades Físicas Elevadas:** Metal prateado com densidade de 11,72 g/cm³, alto ponto de fusão (1750 °C) e ebulição (4790 °C).")
+        st.write("- **Radioatividade e Dominância:** O isótopo 232Th representa quase 100% da abundância natural e possui uma meia-vida de 1,39 x 10¹⁰ anos.")
+        st.write("- **Natureza Litófila:** Forte afinidade pelo oxigénio, formando preferencialmente minerais de óxido em vez de sulfuretos.")
+        st.write("- **Elemento Incompatível:** Concentra-se em magmas residuais tardios (como granitos alcalinos e pegmatitos) durante os processos magmáticos.")
+        st.write("- **Inércia Geoquímica:** No estado Th4+ é inerte à superfície e tem baixa solubilidade, sendo transportado mecanicamente (ex: monazite).")
 
     with col2:
 
-        st.info("**Importância Energética**")
+        st.info("**Importância Económica e Energética**")
 
-        st.write("- Combustível para energia nuclear")
-        st.write("- Produção de eletricidade de base")
-        st.write("- Baixas emissões de CO₂")
-        st.write("- Tório como alternativa emergente")
-
+        st.write("- **Combustível Nuclear do Futuro:** O 232Th pode ser transmutado em 233U (material físsil de alta eficiência).")
+        st.write("- **Abundância e Segurança:** É cerca de 3 a 4 vezes mais abundante na crosta continental do que o urânio.")
+        st.write("- **Vantagens de Processamento:** Como é quase inteiramente 232Th, não exige processos dispendiosos de enriquecimento isotópico.")
+        st.write("- **Reatores Seguros e Limpos:** Oferece maior segurança (ex: Reatores de Sal Fundido), menos resíduos de vida longa e resistência à proliferação de armas.")
+        st.write("- **Aplicações Tecnológicas Diversas:** Utilizado em ligas aeroespaciais de alta temperatura, catalisadores, cerâmicas e elétrodos de soldadura.")
+    
     st.divider()
 
-    if "unconformity" in deposito.lower():
-
-        st.markdown("### 🪨 Depósitos tipo Unconformity")
-
-        st.write("**Características principais:**")
-        st.write("- Altos teores de urânio")
-        st.write("- Associados a discordâncias geológicas")
-        st.write("- Interação entre fluidos oxidantes e redutores")
-        st.write("- Exemplos: Canadá, Austrália")
-
-    elif "arenitos" in deposito.lower():
-
-        st.markdown("### 🏜️ Depósitos em Arenitos")
-
-        st.write("**Características principais:**")
-        st.write("- Hospedados em bacias sedimentares")
-        st.write("- Controlo por fluxo de fluidos")
-        st.write("- Formação de roll-fronts")
-        st.write("- Extração por lixiviação in situ (ISR)")
-
-    elif "hidrotermais" in deposito.lower():
-
-        st.markdown("### 🌋 Depósitos Hidrotermais")
-
-        st.write("**Características principais:**")
-        st.write("- Associados a fluidos quentes")
-        st.write("- Relação com atividade magmática")
-        st.write("- Mineralização em veios e brechas")
-        st.write("- Variabilidade de teores")
-
-    else:
-        st.info("Selecione um tipo de depósito válido.")
+    # =========================================================
+    # ESPAÇO PARA AS CARACTERÍSTICAS ESPECÍFICAS DOS DEPÓSITOS
+    # =========================================================
+    
+    # Tal como no Urânio, aqui podes colocar a lógica dos "if" para mostrar 
+    # informação detalhada consoante o depósito que o utilizador selecionou.
+    
+    # Exemplo (podes apagar ou modificar consoante os teus depósitos no menu):
+    # if "Placers" in deposito or "Areias" in deposito:
+    #     st.markdown("## Depósitos de Placers (Areias Minerais)")
+    #     st.success("Detalhes sobre a acumulação mecânica da monazite...")
+    #     st.divider()
 
 
 # ===============================
