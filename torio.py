@@ -158,29 +158,52 @@ def mostrar_caracteristicas_torio(deposito):
         st.divider()
 
 # ===============================
-# 2. CONFUSÕES COMUNS
+# 2. CONFUSÕES E MITOS
 # ===============================
 
 def mostrar_confusoes_torio():
 
-    st.markdown("### ⚠️ Confusões Comuns")
+    st.markdown("### ❌ Confusões e Mitos Frequentes")
 
-    st.warning("O urânio e o tório são frequentemente mal compreendidos.")
+    # Mito 1
+    st.error("**Mito: O tório não é radioativo.**")
+    st.success(
+        "**Realidade:** O tório é um elemento radioativo natural de vida longa. Embora a sua radioatividade seja "
+        "por vezes considerada 'ligeira', as preocupações com as emissões gama e os produtos de decaimento "
+        "(como o 232U) são obstáculos significativos à sua utilização comercial e requerem manuseamento especializado."
+    )
+    
+    st.divider()
 
-    with st.expander("🔍 Ver detalhes"):
+    # Mito 2
+    st.error("**Mito: O tório é físsil e pode ser usado diretamente como combustível.**")
+    st.success(
+        "**Realidade:** O tório (232Th) não é físsil, o que significa que não pode sustentar uma reação em cadeia por si só. "
+        "Ele é um material fértil: precisa de absorver neutrões (geralmente de uma fonte externa de urânio ou plutónio) "
+        "para se transmutar em 233U, que é o verdadeiro material físsil que gera energia."
+    )
+    
+    st.divider()
 
-        st.markdown("**1. Urânio vs Tório**")
-        st.write("- Urânio: amplamente utilizado atualmente")
-        st.write("- Tório: potencial futuro, menos explorado")
+    # Mito 3
+    st.error("**Mito: A tecnologia nuclear de tório já está implementada à escala global.**")
+    st.success(
+        "**Realidade:** Atualmente, não existem reatores nucleares à escala industrial que utilizem tório em operação comercial "
+        "no mundo. Embora tenham existido protótipos experimentais desde meados do século XX e a Índia continue a operar "
+        "reatores experimentais e a desenvolver o seu programa, a tecnologia ainda é considerada emergente e de fase de pesquisa "
+        "em muitos países."
+    )
+    
+    st.divider()
 
-        st.markdown("**2. Radioatividade ≠ Perigo imediato**")
-        st.write("- Depende da concentração e exposição")
-
-        st.markdown("**3. Depósitos ≠ Reatores nucleares**")
-        st.write("- Depósitos são naturais, reatores são artificiais")
-
-        st.markdown("**4. Energia nuclear ≠ Energia renovável**")
-        st.write("- É de baixa emissão, mas não renovável")
+    # Mito 4
+    st.error("**Mito: O tório não tem outras aplicações além da energia nuclear.**")
+    st.success(
+        "**Realidade:** Apesar de o seu potencial nuclear ser o mais discutido, o tório tem sido utilizado há muito tempo "
+        "em diversas indústrias de ponta. Ele é empregado no fabrico de ligas aeroespaciais de alta temperatura, "
+        "catalisadores químicos, elétrodos de soldadura e cerâmicas resistentes ao calor. Historicamente, também foi "
+        "fundamental na produção de mantas para lanternas incandescentes."
+    )
 
 
 # ===============================
