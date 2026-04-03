@@ -162,7 +162,7 @@ depositos = {
         "Placeres e Paleoplaceres (Depósitos Sedimentares de Superfície)",
         "Terrenos e Sistemas Metamórficos",
         "Granitos Evoluídos e Pegmatitos",
-        "Perfis de Alteração Residual (Weathering Crusts)""
+        "Perfis de Alteração Residual (Weathering Crusts)"
     ],
     "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto": [
         "Dorsais médio-oceânicas",
