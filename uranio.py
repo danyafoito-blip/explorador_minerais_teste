@@ -695,27 +695,7 @@ def checklist_uranio(deposito):
                     items_marcados += 1
 
     st.divider()
-
-    # Barra de Progresso
-    st.write(f"### Progresso da Avaliação: {items_marcados} de {total_items}")
-    progresso = items_marcados / total_items if total_items > 0 else 0
-    st.progress(progresso)
-
-    if items_marcados == total_items and total_items > 0:
-        st.success("🎉 Excelente! Todos os indicadores geológicos e mineralógicos foram identificados.")
-    elif items_marcados > 0:
-        st.info("Continue a analisar a sua amostra ou área de estudo para identificar mais evidências.")
-
-    st.divider()
-    
-    # Caixa de Curiosidades / Questões para reflexão
-    st.markdown("### 💡 Questões para Reflexão e Pesquisa")
-    st.info("""
-    * Como funcionam os reatores nucleares naturais de Gabão (Oklo)?
-    * Qual é a viabilidade tecnológica e económica de extrair urânio diretamente da água do mar?
-    * Como é que as metodologias de exploração de urânio mudaram desde a década de 1970 até hoje?
-    """)
-
+ 
 
 
 
