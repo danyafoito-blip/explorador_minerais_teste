@@ -598,22 +598,123 @@ def quiz_uranio(deposito):
             st.info("Podes sempre tentar novamente para melhorar a pontuação.")
 
 # ===============================
-# 4. CHECKLIST DE CAMPO
+# 4. CHECKLIST
 # ===============================
 
-def checklist_uranio():
+def checklist_uranio(deposito):
+    st.header("📋 Checklist de Exploração: Urânio")
+    st.markdown("Utilize esta checklist interativa para assinalar as características geológicas e mineralógicas encontradas durante a exploração ou estudo de depósitos de urânio.")
 
-    st.markdown("### ✅ Checklist de Campo")
+    # Converter a seleção para string para facilitar a filtragem
+    if not deposito:
+        deposito_str = ""
+    elif isinstance(deposito, list):
+        deposito_str = " ".join(deposito).lower()
+    else:
+        deposito_str = deposito.lower()
 
-    st.write("Utilizado na prospeção de urânio e tório:")
+    # Dicionário completo com toda a informação
+    dados_checklist = {
+        "1. Checklist Geral do Recurso": [
+            "**Radioatividade:** Identificação de emissões gama através de detetores como contadores Geiger.",
+            "**Densidade Elevada:** O mineral primário uraninite é extremamente pesado, apresentando densidades entre 9,0 e 9,7 g/cm³.",
+            "**Contraste de Cor do Minério:** Presença de uraninite/pechblenda de cor negra em contraste com minerais secundários de oxidação de cores vibrantes como o amarelo néon (carnotite) ou verde (torbernite).",
+            "**Sensibilidade Redox:** Evidência de precipitação do urânio (U4+) em ambientes reduzidos (geralmente de tons cinzentos a pretos) após o transporte em soluções oxidadas (U6+).",
+            "**Associações Elementares Comuns:** Presença de elementos como molibdénio (Mo), vanádio (V), selénio (Se) e arsénio (As)."
+        ],
+        "2. Depósitos em Arenitos (Sandstone-hosted)": [
+            "**Permeabilidade da Rocha:** Hospedado em arenitos de grão médio a grosseiro, caracterizados por elevada porosidade e permeabilidade.",
+            "**Morfologias Específicas:** Corpos de minério em forma de crescente (roll-front) que cortam a estratigrafia ou lentes tabulares paralelas à deposição.",
+            "**Zonamento de Cores Redox:** Transição visível entre zonas oxidadas (vermelhas/acastanhadas por hematite/limonite) e zonas reduzidas (cinzentas/pretas).",
+            "**Agentes Redutores Visíveis:** Presença de detritos de plantas fósseis, madeira carbonizada ou pirite diagenética na matriz do arenito.",
+            "**Minerais Disseminados:** O urânio ocorre frequentemente como disseminações finas de coffinite ou uraninite que revestem os grãos de areia."
+        ],
+        "3. Depósitos Relacionados com Discordâncias (Unconformity-related)": [
+            "**Interface Estratigráfica:** Localização junto ao contacto entre um soco metamórfico (Arqueano a Paleoproterozoico) e uma bacia de cobertura de arenitos proterozoicos.",
+            "**Associação com Grafite:** Minério frequentemente associado a metapelitos grafíticos ou zonas de cisalhamento ricas em grafite no soco.",
+            "**Teores Excecionais:** Amostras de museu que exibem minério maciço (pechblenda botrioidal) com teores muito elevados, podendo exceder 20% de U.",
+            "**Halos de Alteração Argilosa:** Presença de halos extensos de ilite, clorite (sudoíte) e caulinite a envolver a mineralização.",
+            "**Controlo Estrutural e Brechas:** Mineralização associada a falhas reativadas, zonas de dissolução de quartzo ou brechas tectónicas próximas da discordância."
+        ],
+        "4. Depósitos Intrusivos e Magmáticos": [
+            "**Rochas Hospedeiras Felsicas:** Ocorrência em pegmatitos, leuco-granitos ou complexos de rochas ígneas alcalinas.",
+            "**Caráter Incompatível:** Concentração de urânio em magmas residuais de estágios tardios de diferenciação.",
+            "**Sincronismo U-Th:** Mineralização conjunta de urânio e tório, resultante da sua mobilidade simultânea em fusões silicatadas de alta temperatura.",
+            "**Textura de Disseminação:** Uraninite ou uranothorite distribuída de forma disseminada na matriz ígnea.",
+            "**Variabilidade Mineralógica:** Presença de minerais acessórios como zircão e monazite enriquecidos em urânio."
+        ],
+        "5. Depósitos de Origem Hidrotermal e Metassomática": [
+            "**Texturas de Veio e Fratura:** Mineralização que ocorre em filões (veios), preenchimentos de fraturas ou zonas de brecha que atravessam as rochas encaixantes.",
+            "**Indicadores de Temperatura:** Evidência de formação a partir de brinas quentes (70-250°C) e salinas.",
+            "**Metassomatismo Associado:** Evidências de alteração química intensa, como a albitização (formação de albite) ou neoformação de feldspato potássico.",
+            "**Complexidade Mineralógica:** Associação com sulfuretos e, em sistemas de alta temperatura, com Elementos de Terras Raras (REE), Ni, Co e Cu.",
+            "**Alteração de Parede:** Presença de forte caulinização ou cloritização nas rochas que rodeiam os veios mineralizados."
+        ],
+        "6. Depósitos Superficiais e Sedimentares Específicos": [
+            "**Acumulações Detríticas (Prazeres):** Concentrações mecânicas de minerais pesados e resistentes como a monazite em areias de rios ou praias.",
+            "**Calcretes (Evapotranspiração):** Corpos tabulares em sedimentos de vales áridos, cimentados por carbonatos e contendo minerais como a carnotite.",
+            "**Sedimentos Lacustres Anóxicos:** Mineralização em siltitos ou lodos de fundo de lago, muito ricos em matéria orgânica.",
+            "**Estruturas de Colapso (Breccia Pipes):** Tubos verticais cilíndricos preenchidos por brechas mineralizadas com pechblenda e sulfuretos.",
+            "**Paleoprazeres:** Conglomerados muito antigos (pré-2.4 Ga) onde a uraninite se acumulou mecanicamente antes da oxigenação da atmosfera."
+        ]
+    }
 
-    st.checkbox("Identificar bacias sedimentares")
-    st.checkbox("Mapear discordâncias geológicas")
-    st.checkbox("Medir radioatividade (gamma)")
-    st.checkbox("Analisar condições redox")
-    st.checkbox("Identificar minerais uraníferos")
-    st.checkbox("Avaliar circulação de fluidos")
-    st.checkbox("Verificar segurança radiológica")
+    # Criar um novo dicionário apenas com as secções que queremos mostrar
+    dados_filtrados = {}
+    
+    # A checklist geral entra sempre
+    dados_filtrados["1. Checklist Geral do Recurso"] = dados_checklist["1. Checklist Geral do Recurso"]
+    
+    # Filtrar o resto consoante a seleção
+    if "arenito" in deposito_str:
+        dados_filtrados["2. Depósitos em Arenitos (Sandstone-hosted)"] = dados_checklist["2. Depósitos em Arenitos (Sandstone-hosted)"]
+    if "unconformity" in deposito_str or "discordância" in deposito_str:
+        dados_filtrados["3. Depósitos Relacionados com Discordâncias (Unconformity-related)"] = dados_checklist["3. Depósitos Relacionados com Discordâncias (Unconformity-related)"]
+    if "intrusivo" in deposito_str or "magmático" in deposito_str:
+        dados_filtrados["4. Depósitos Intrusivos e Magmáticos"] = dados_checklist["4. Depósitos Intrusivos e Magmáticos"]
+    if "hidrotermai" in deposito_str or "hidrotermal" in deposito_str or "metassomática" in deposito_str:
+        dados_filtrados["5. Depósitos de Origem Hidrotermal e Metassomática"] = dados_checklist["5. Depósitos de Origem Hidrotermal e Metassomática"]
+    if "superficia" in deposito_str or "sedimentar" in deposito_str:
+        dados_filtrados["6. Depósitos Superficiais e Sedimentares Específicos"] = dados_checklist["6. Depósitos Superficiais e Sedimentares Específicos"]
+
+    # Mensagem caso não haja nenhum depósito específico selecionado ainda
+    if len(dados_filtrados) == 1 and not deposito_str:
+        st.info("💡 Seleciona um tipo de depósito específico no menu para desbloquear as opções de checklist avançadas.")
+
+    # Lógica de contagem baseada apenas nos dados filtrados
+    total_items = sum(len(itens) for itens in dados_filtrados.values())
+    items_marcados = 0
+
+    # Apresentar as secções no ecrã
+    for seccao, itens in dados_filtrados.items():
+        # Vamos manter o expander aberto por defeito para as secções específicas
+        with st.expander(seccao, expanded=True):
+            for i, item in enumerate(itens):
+                # A chave tem de ser baseada na string da secção para evitar erros ao mudar de depósito
+                if st.checkbox(item, key=f"chk_u_{seccao[:2].strip()}_{i}"):
+                    items_marcados += 1
+
+    st.divider()
+
+    # Barra de Progresso
+    st.write(f"### Progresso da Avaliação: {items_marcados} de {total_items}")
+    progresso = items_marcados / total_items if total_items > 0 else 0
+    st.progress(progresso)
+
+    if items_marcados == total_items and total_items > 0:
+        st.success("🎉 Excelente! Todos os indicadores geológicos e mineralógicos foram identificados.")
+    elif items_marcados > 0:
+        st.info("Continue a analisar a sua amostra ou área de estudo para identificar mais evidências.")
+
+    st.divider()
+    
+    # Caixa de Curiosidades / Questões para reflexão
+    st.markdown("### 💡 Questões para Reflexão e Pesquisa")
+    st.info("""
+    * Como funcionam os reatores nucleares naturais de Gabão (Oklo)?
+    * Qual é a viabilidade tecnológica e económica de extrair urânio diretamente da água do mar?
+    * Como é que as metodologias de exploração de urânio mudaram desde a década de 1970 até hoje?
+    """)
 
 
 
