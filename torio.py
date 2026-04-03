@@ -27,21 +27,21 @@ def mostrar_caracteristicas_torio(deposito):
 
         st.success("**Propriedades Físicas e Geoquímicas**")
 
-        st.write("- **Propriedades Físicas Elevadas:** Metal prateado com densidade de 11,72 g/cm³, alto ponto de fusão (1750 °C) e ebulição (4790 °C).")
-        st.write("- **Radioatividade e Dominância:** O isótopo 232Th representa quase 100% da abundância natural e possui uma meia-vida de 1,39 x 10¹⁰ anos.")
-        st.write("- **Natureza Litófila:** Forte afinidade pelo oxigénio, formando preferencialmente minerais de óxido em vez de sulfuretos.")
-        st.write("- **Elemento Incompatível:** Concentra-se em magmas residuais tardios (como granitos alcalinos e pegmatitos) durante os processos magmáticos.")
-        st.write("- **Inércia Geoquímica:** No estado Th4+ é inerte à superfície e tem baixa solubilidade, sendo transportado mecanicamente (ex: monazite).")
+        st.write("- Propriedades Físicas Elevadas")
+        st.write("- Radioatividade e Dominância Isotópica")
+        st.write("- Natureza Litófila")
+        st.write("- Comportamento de Elemento Incompatível")
+        st.write("- Inércia Geoquímica à Superfície")
 
     with col2:
 
         st.info("**Importância Económica e Energética**")
 
-        st.write("- **Combustível Nuclear do Futuro:** O 232Th pode ser transmutado em 233U (material físsil de alta eficiência).")
-        st.write("- **Abundância e Segurança:** É cerca de 3 a 4 vezes mais abundante na crosta continental do que o urânio.")
-        st.write("- **Vantagens de Processamento:** Como é quase inteiramente 232Th, não exige processos dispendiosos de enriquecimento isotópico.")
-        st.write("- **Reatores Seguros e Limpos:** Oferece maior segurança (ex: Reatores de Sal Fundido), menos resíduos de vida longa e resistência à proliferação de armas.")
-        st.write("- **Aplicações Tecnológicas Diversas:** Utilizado em ligas aeroespaciais de alta temperatura, catalisadores, cerâmicas e elétrodos de soldadura.")
+        st.write("- Combustível Nuclear do Futuro")
+        st.write("- Abundância e Segurança de Suprimento")
+        st.write("- Vantagens Económicas no Processamento")
+        st.write("- Reatores mais Seguros e Limpos")
+        st.write("- Aplicações Tecnológicas Diversas")
     
     st.divider()
 
@@ -49,11 +49,8 @@ def mostrar_caracteristicas_torio(deposito):
     # ESPAÇO PARA AS CARACTERÍSTICAS ESPECÍFICAS DOS DEPÓSITOS
     # =========================================================
     
-    # Tal como no Urânio, aqui podes colocar a lógica dos "if" para mostrar 
-    # informação detalhada consoante o depósito que o utilizador selecionou.
-    
-    # Exemplo (podes apagar ou modificar consoante os teus depósitos no menu):
-    # if "Placers" in deposito or "Areias" in deposito:
+    # Exemplo:
+    # if "Placers" in deposito:
     #     st.markdown("## Depósitos de Placers (Areias Minerais)")
     #     st.success("Detalhes sobre a acumulação mecânica da monazite...")
     #     st.divider()
