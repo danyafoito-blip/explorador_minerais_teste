@@ -50,7 +50,7 @@ from litio import (
 
 from uranio import (
     mostrar_caracteristicas_uranio,
-    mostrar_confusoes_uranio,
+    #mostrar_confusoes_uranio,
     quiz_uranio,
     checklist_uranio,
     mapa_uranio,
