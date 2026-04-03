@@ -376,7 +376,7 @@ with tab_check:
         checklist_uranio(deposito_selecionado)
         
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
-        checklist_torio()
+        checklist_torio(deposito_selecionado)
         
     elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
         checklist_sms()
