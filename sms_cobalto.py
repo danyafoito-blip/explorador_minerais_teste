@@ -374,7 +374,7 @@ def quiz_sms(*args):
             "correta": "B) Os fosforitos servem frequentemente de substrato geológico para as crostas."
         },
         {
-            "pergunta": "9. Lamas REY (Sedimentos Metalíferos): Qual é a origem das partículas ricas em metais que compõem estas lamas?",
+            "pergunta": "9. Lamas REY: Qual é a origem das partículas ricas em metais que compõem estas lamas?",
             "opcoes": [
                 "A) Areias sopradas pelo vento do deserto.",
                 "B) Deposição de partículas das plumas de fontes hidrotermais.",
@@ -384,7 +384,7 @@ def quiz_sms(*args):
             "correta": "B) Deposição de partículas das plumas de fontes hidrotermais."
         },
         {
-            "pergunta": "10. Lamas REY (Sedimentos Metalíferos): Estas lamas são consideradas um recurso estratégico principalmente devido ao seu teor em:",
+            "pergunta": "10. Lamas REY: Estas lamas são consideradas um recurso estratégico principalmente devido ao seu teor em:",
             "opcoes": [
                 "A) Sal de cozinha.",
                 "B) Diamantes industriais.",
