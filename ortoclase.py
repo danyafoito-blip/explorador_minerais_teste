@@ -384,17 +384,35 @@ def quiz_ortoclase(deposito):
 
 def checklist_ortoclase():
 
-    st.markdown("### ✅ Checklist de Campo")
+    st.markdown("### ✅ Checklist de Campo: Ortoclase")
 
-    st.write("Utilizado na identificação de ortoclase:")
+    st.write("Utiliza esta lista para guiar a tua observação e identificação no terreno ou laboratório:")
 
-    st.checkbox("Observar clivagem em 2 direções")
-    st.checkbox("Testar dureza (~6 Mohs)")
-    st.checkbox("Identificar cor típica (rosa/branco)")
-    st.checkbox("Associar a granitos/pegmatitos")
-    st.checkbox("Distinguir de quartzo")
-    st.checkbox("Verificar alteração para argilas")
-    st.checkbox("Recolher amostras")
+    st.markdown("**1. Observação Macroscópica (Cor e Brilho)**")
+    st.checkbox("Cor: Verificar se é branco, creme, cinza, rosa ou avermelhado (devido a inclusões de Fe³⁺).")
+    st.checkbox("Variedade Amarela: Presença de tons amarelo-âmbar em contextos específicos (ex: qualidade gemológica de Itrongay).")
+    st.checkbox("Transparência/Turbidez: Notar se é baço ou leitoso (turvo devido a microporos, o que ajuda a distinguir do quartzo límpido).")
+    st.checkbox("Brilho: Identificar brilho vítreo nas faces frescas de clivagem.")
+
+    st.divider()
+
+    st.markdown("**2. Propriedades Mecânicas de Diagnóstico**")
+    st.checkbox("Clivagem Perfeita a 90º: Confirmar dois planos que se cruzam em ângulos retos ('ortho' = reto, 'clase' = quebra).")
+    st.checkbox("Dureza: Testar se risca vidro e aço, mas é riscado por quartzo (dureza de 6 a 6,5 na escala de Mohs).")
+
+    st.divider()
+
+    st.markdown("**3. Hábito Cristalino e Geminação**")
+    st.checkbox("Geminação de Carlsbad: Observar se os cristais parecem 'divididos ao meio', refletindo luz em ângulos diferentes (ajuda na distinção da microclina).")
+    st.checkbox("Hábito de Adulária: Em veios hidrotermais, procurar cristais com hábito rômbico ou prismático simples ({110}), frequentemente límpidos.")
+    st.checkbox("Intercrescimento Gráfico: Em pegmatitos, procurar por textura de 'granito gráfico' (inclusões de quartzo semelhantes a escrita cuneiforme).")
+
+    st.divider()
+
+    st.markdown("**4. Contexto Geológico (Ambiente de Ocorrência)**")
+    st.checkbox("Rochas Ígneas Félsicas: Verificar associação com granitos, sienitos ou riólitos.")
+    st.checkbox("Pegmatitos Graníticos: Procurar cristais gigantes/blocos de feldspato em zonas intermédias do corpo pegmatítico.")
+    st.checkbox("Grau Metamórfico: Ocorrência em gnaisses ou granulitos (fácies de alta temperatura, resultando da decomposição de micas).")
 
 
 # ===============================
