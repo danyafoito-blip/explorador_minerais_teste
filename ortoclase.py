@@ -15,62 +15,138 @@ def mostrar_caracteristicas_ortoclase(deposito):
 
     col1, col2 = st.columns(2)
 
+    # Verificação de segurança
+    if not deposito:
+        st.warning("Por favor, seleciona um tipo de depósito para visualizar as características.")
+        return
+
+    if isinstance(deposito, list):
+        deposito = ", ".join(deposito)
+    
     with col1:
 
-        st.success("**Propriedades Físicas e Mineralógicas**")
+        st.success("**Propriedades Físicas e Geoquímicas**")
 
-        st.write("- Fórmula química: KAlSi₃O₈")
-        st.write("- Grupo: Feldspatos")
-        st.write("- Dureza: ~6 (Mohs)")
-        st.write("- Clivagem perfeita em 2 direções")
-        st.write("- Cor: rosa, branca ou bege")
+        st.write("- **Composição Química:** Silicato de alumínio e potássio (KAlSi₃O₈), podendo conter pequenas quantidades de sódio.")
+        st.write("- **Estrutura Cristalina:** Pertence aos tectossilicatos, com tetraedros formando uma rede complexa.")
+        st.write("- **Hábito e Simetria:** Monoclínica, exibindo frequentemente microtextura tipo 'tweed'.")
+        st.write("- **Clivagem e Dureza:** Duas direções de clivagem perfeitas a 90º; dureza de 6 a 6,5 (Mohs).")
+        st.write("- **Comportamento Térmico:** Baixo ponto de fusão, atuando como agente fundente essencial.")
 
     with col2:
 
-        st.info("**Importância Económica e Industrial**")
+        st.info("**Importância Energética**")
 
-        st.write("- Produção de cerâmica")
-        st.write("- Indústria do vidro")
-        st.write("- Material de construção")
-        st.write("- Uso em esmaltes")
-        st.write("- Fonte de potássio")
-
+        st.write("- **Minerais Radioativos:** Em pegmatitos, pode hospedar uraninite e thorianite (combustível nuclear).")
+        st.write("- **Lítio e Baterias:** Ocorre associada a pegmatitos LCT (fontes primárias de lítio).")
+        st.write("- **Isolamento Térmico/Elétrico:** Fabrico de porcelanas e isoladores para redes de energia.")
+        st.write("- **Geocronologia (K/Ar):** Datação potássio-árgon para mapear histórias térmicas de bacias.")
+        st.write("- **Eficiência Industrial:** Reduz a temperatura de fusão de vidro/cerâmica, poupando energia.")
+    
     st.divider()
 
-    if "Pegmatitos" in deposito:
+    # 1. Pegmatitos Graníticos
+    if "Pegmatitos" in deposito or "Pegmatito" in deposito:
+        st.markdown("## 1. Pegmatitos Graníticos")
+        
+        st.success(
+            "Corpos ígneos caracterizados por cristais de dimensões anómalas, fontes vitais de feldspatos de elevada pureza."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.warning(
+            "Formam-se na fase final da cristalização de magmas graníticos."
+        )
+        st.write("- A concentração de voláteis nestes estágios permite o crescimento de cristais gigantes de ortoclase.")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        st.write("- **Método:** Extração em pedreiras (frequentemente a céu aberto).")
+        st.write("- **Processamento:** Inclui britagem e separação magnética para remover minerais de ferro, como a biotite.")
 
-        st.markdown("### 🪨 Pegmatitos Graníticos")
+    # 2. Granitoides Félsicos
+    elif "Granitoides" in deposito or "Granitos" in deposito or "Félsicos" in deposito:
+        st.markdown("## 2. Granitoides Félsicos")
+        
+        st.success(
+            "Rochas ígneas plutónicas onde os feldspatos potássicos dominam a composição mineralógica."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.info(
+            "Resultam da solidificação de intrusões magmáticas leucocráticas."
+        )
+        st.write("- Muitas vezes sofrem processos de feldspatização secundária (metassomatismo), que enriquece a rocha encaixante em potássio.")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        st.write("- **Método:** Exploração mecanizada em larga escala.")
+        st.write("- **Processamento:** A matéria-prima é submetida a moagem fina e classificação granulométrica específica para uso cerâmico.")
 
-        st.write("**Características principais:**")
-        st.write("- Origem magmática")
-        st.write("- Cristais de grande dimensão")
-        st.write("- Associado a quartzo e mica")
-        st.write("- Alta pureza mineral")
+    # 3. Depósitos Metamórficos
+    elif "Metamórficos" in deposito or "Metamorfismo" in deposito:
+        st.markdown("## 3. Depósitos Metamórficos")
+        
+        st.success(
+            "Associações rochosas formadas a grandes profundidades sob regimes de pressão e temperatura elevados, como os ortognaisses."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.warning(
+            "A ortoclase forma-se muitas vezes pela decomposição de micas (como a biotite e a muscovite)."
+        )
+        st.write("- Ocorrem de forma pronunciada em condições de alta temperatura (fácies granulito).")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        st.write("- **Método:** Mineração direta de rochas consolidadas (ex: ortognaisses).")
+        st.write("- **Processamento:** Envolve separação magnética a seco de alta intensidade para garantir a máxima pureza química do feldspato.")
 
-    elif "Granitos" in deposito:
+    # 4. Acumulações Sedimentares
+    elif "Sedimentares" in deposito or "Areias" in deposito or "residuais" in deposito.lower() or "Acumulações" in deposito:
+        st.markdown("## 4. Acumulações Sedimentares")
+        
+        st.success(
+            "Concentrações detríticas conhecidas comercialmente como 'areias feldspáticas', muito procuradas pela indústria vidreira."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.info(
+            "Resultam da erosão agressiva de granitos seguida de transporte fluvial."
+        )
+        st.write("- Os grãos de ortoclase acumulam-se em paleocanais, depósitos de praia ou terraços como areias ricas em feldspato.")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        st.write("- **Método:** Muitas vezes extraídas em meio aquático (em lagos ou leitos de rios) através de dragas de sucção.")
+        st.write("- **Processamento:** Foca-se predominantemente em operações de lavagem vigorosa e triagem por densidade.")
 
-        st.markdown("### 🌋 Granitos")
-
-        st.write("**Características principais:**")
-        st.write("- Rocha ígnea intrusiva")
-        st.write("- Ortoclase como mineral dominante")
-        st.write("- Textura fanerítica")
-        st.write("- Amplamente distribuído")
-
-    elif "residuais" in deposito.lower():
-
-        st.markdown("### 🌱 Depósitos Residuais")
-
-        st.write("**Características principais:**")
-        st.write("- Resultantes da alteração química")
-        st.write("- Formação in situ")
-        st.write("- Enriquecimento relativo em feldspatos")
-        st.write("- Associado a solos e regolitos")
+    # 5. Veios Hidrotermais
+    elif "Hidrotermais" in deposito or "Veios" in deposito:
+        st.markdown("## 5. Veios Hidrotermais")
+        
+        st.success(
+            "Ocorrências que frequentemente albergam a variedade cristalina translúcida conhecida como 'adulária'."
+        )
+        st.divider()
+        
+        st.markdown("## Génese e Formação")
+        st.warning(
+            "A variedade adulária forma-se por precipitação de fluidos hidrotermais."
+        )
+        st.write("- Estes fluidos circulam em fendas e cavidades nas rochas a temperaturas relativamente baixas, onde o mineral precipita livremente.")
+        
+        st.divider()
+        st.markdown("## Exploração e Processamento")
+        st.write("- **Método:** Exploração geralmente mais localizada e de escala reduzida (frequentemente manual ou semi-mecanizada).")
+        st.write("- **Processamento:** É bastante simplificado, maioritariamente focado na limpeza de impurezas superficiais e moagem seletiva.")
 
     else:
-        st.info("Selecione um tipo de depósito válido.")
-
-
+        st.info("Selecione um tipo de depósito válido para visualizar a informação.")
 # ===============================
 # 2. CONFUSÕES COMUNS
 # ===============================
