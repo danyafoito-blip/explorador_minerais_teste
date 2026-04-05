@@ -160,6 +160,8 @@ def mostrar_confusoes_sms(deposito):
 
     # 1. Sulfuretos Maciços (SMS)
     if "Sulfuretos" in deposito_str or "SMS" in deposito_str or "Arcos" in deposito_str or "Dorsais" in deposito_str:
+        st.markdown("### 🌋 1. Sulfuretos Maciços do Fundo do Mar (SMS)")
+        
         st.markdown("**1. Mito da Abundância Visível**")
         st.write("- Existe a ideia de que o recurso se limita ao montículo visível no fundo do mar.")
         st.write("- **A Realidade:** Os depósitos estendem-se até 200 metros abaixo do leito marinho, contendo até cinco vezes mais minério do que o previsto apenas pela topografia de superfície.")
@@ -182,6 +184,8 @@ def mostrar_confusoes_sms(deposito):
 
     # 2. Crostas de Ferro-Manganês
     elif "Crostas" in deposito_str or "Ferro-Manganês" in deposito_str or "Cobalto" in deposito_str:
+        st.markdown("### ⛰️ 2. Crostas de Ferro-Manganês (Ricas em Cobalto)")
+        
         st.markdown("**1. Confusão Genética**")
         st.write("- É comum confundir crostas puramente hidrogenéticas com hidrotermais.")
         st.write("- **A Realidade:** Apenas as hidrogenéticas (precipitadas da água do mar) contêm metais raros suficientes para interesse económico; as hidrotermais são ricas em ferro, mas pobres em metais críticos.")
@@ -204,6 +208,8 @@ def mostrar_confusoes_sms(deposito):
 
     # 3. Nódulos Polimetálicos
     elif "Nódulos" in deposito_str:
+        st.markdown("### 🌑 3. Nódulos Polimetálicos")
+        
         st.markdown("**1. Mito da Fonte Única**")
         st.write("- Pensa-se frequentemente que os metais dos nódulos vêm apenas da precipitação direta da água do mar.")
         st.write("- **A Realidade:** Têm uma génese mista, recebendo um aporte significativo de metais a partir da água dos poros dos sedimentos (diagénese).")
@@ -226,6 +232,8 @@ def mostrar_confusoes_sms(deposito):
 
     # 4. Fosforitos
     elif "Fosforitos" in deposito_str:
+        st.markdown("### 🦴 4. Fosforitos")
+        
         st.markdown("**1. Confusão Rocha vs. Minério**")
         st.write("- São muitas vezes vistos apenas como a 'rocha de base' das crostas de cobalto.")
         st.write("- **A Realidade:** Na verdade, são um recurso potencial riquíssimo em terras raras (REY) e fósforo, com um tremendo valor económico próprio.")
@@ -248,6 +256,8 @@ def mostrar_confusoes_sms(deposito):
 
     # 5. Lamas REY (Sedimentos Metalíferos)
     elif "Lamas" in deposito_str or "Sedimentos" in deposito_str:
+        st.markdown("### 🌫️ 5. Lamas REY")
+        
         st.markdown("**1. Mito do Material de Desperdício**")
         st.write("- São frequentemente ignorados como mera 'lama' sem valor localizada em redor dos campos hidrotermais SMS.")
         st.write("- **A Realidade:** Estes sedimentos podem estender-se por quilómetros quadrados e representar um recurso volumétrico massivo de metais como cobre e zinco.")
