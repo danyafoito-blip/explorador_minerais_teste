@@ -177,8 +177,8 @@ depositos = {
         "Depósitos aluviais"
     ],
     "Monazite": [
-        "Depósitos de Placer",
-        "Depósitos ígneos",
+        "Depósitos sedimentares",
+        "Depósitos magmáticos",
         "Depósitos metamórficos"
     ],
     "Ortoclase": [
