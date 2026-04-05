@@ -180,9 +180,11 @@ depositos = {
         "Depósitos metamórficos"
     ],
     "Ortoclase": [
-        "Pegmatitos graníticos",
-        "Granitos",
-        "Depósitos residuais"
+        "Pegmatitos Graníticos",
+        "Granitoides Félsicos",
+        "Depósitos Metamórficos",
+        "Acumulações Sedimentares",
+        "Veios Hidrotermais"
     ]
 }
 
