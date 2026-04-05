@@ -434,20 +434,31 @@ def quiz_sms(*args):
         else:
             st.info("Podes sempre rever a informação nas secções acima e tentar novamente. 💪")
 
+# ===============================
+# 6. REFERÊNCIAS
+# ===============================
+
 def referencias_sms():
-    """Função que guarda e formata as referências bibliográficas dos SMS"""
-    st.markdown("### Fontes e Bibliografia - SMS")
-    
+    st.markdown("### 📚 Referências e Bibliografia")
+    st.info("Fontes consultadas na elaboração dos conteúdos (Norma APA):")
+
     st.markdown("""
-    Abaixo encontram-se as principais referências científicas e académicas consultadas para a elaboração do perfil dos Sulfuretos Maciços do Fundo Oceânico:
+    * Boschen, R. E., Rowden, A. A., Clark, M. R., & Gardner, J. P. A. (2013). Mining of deep-sea seafloor massive sulfides: A review of the deposits, their benthic communities, impacts from mining, regulatory frameworks and management strategies. *Ocean & Coastal Management, 84*, 54–67.
     
-    * **Hannington, M. D., de Ronde, C. E. J., & Petersen, S. (2005).** *Sea-floor tectonics and submarine hydrothermal systems.* Economic Geology 100th Anniversary Volume, 111-141.
-    * **Pirajno, F. (2009).** *Hydrothermal Processes and Mineral Systems.* Springer.
-    * **Robb, L. (2005).** *Introduction to Ore-Forming Processes.* Blackwell Publishing.
+    * Fallon, E. K., Frische, M., Petersen, S., Brooker, R. A., & Scott, T. B. (2019). Geological, Mineralogical and Textural Impacts on the Distribution of Environmentally Toxic Trace Elements in Seafloor Massive Sulfide Occurrences. *Minerals, 9*(3), 162.
+    
+    * Hwang, G., Ko, Y., Yang, S., & Kim, W. (2024). Resource abundance of cobalt-rich ferromanganese crusts in the KC-8 seamount, West Pacific. *Frontiers in Earth Science, 12*, 1495673.
+    
+    * Maciąg, Ł., Zawadzki, D., Kozub-Budzyń, G. A., Piestrzyński, A., Kotliński, R. A., & Wróbel, R. J. (2019). Mineralogy of Cobalt-Rich Ferromanganese Crusts from the Perth Abyssal Plain (E Indian Ocean). *Minerals, 9*(2), 84.
+    
+    * Marino, E., González, F. J., Kuhn, T., Madureira, P., Wegorzewski, A. V., Mirao, J., Medialdea, T., Oeser, M., Miguel, C., Reyes, J., Somoza, L., & Lunar, R. (2019). Hydrogenetic, Diagenetic and Hydrothermal Processes Forming Ferromanganese Crusts in the Canary Island Seamounts and Their Influence in the Metal Recovery Rate with Hydrometallurgical Methods. *Minerals, 9*(7), 439.
+    
+    * Murton, B. J., Lehrmann, B., Dutrieux, A. M., Martins, S., Gil de la Iglesia, A., Stobbs, I. J., Barriga, F. J. A. S., Bialas, J., Dannowski, A., Vardy, M. E., North, L. J., Yeo, I. A. L. M., Lusty, P. A. J., & Petersen, S. (2019). Geological fate of seafloor massive sulphides at the TAG hydrothermal field (Mid-Atlantic Ridge). *Ore Geology Reviews, 107*, 903–925.
+    
+    * Secretariat of the Pacific Community. (2013). *Deep Sea Minerals: Cobalt-rich Ferromanganese Crusts, a physical, biological, environmental, and technical review* (Vol. 1C). E. Baker & Y. Beaudoin (Eds.).
+    
+    * Toffolo, L., Nimis, P., Tret'yakov, G. A., Melekestseva, I. Y., & Beltenev, V. E. (2020). Seafloor massive sulfides from mid-ocean ridges: Exploring the causes of their geochemical variability with multivariate analysis. *Earth-Science Reviews, 201*, 102958.
     """)
-    
-    st.divider()
-    st.caption("Organizado por: Grupo Quartzo (SB, GM, CP, DA)")
 
 
 # ===============================
