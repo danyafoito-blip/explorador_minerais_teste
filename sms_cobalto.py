@@ -254,7 +254,7 @@ def mostrar_confusoes_sms(deposito):
 
         st.markdown("**2. Confusão de Origem**")
         st.write("- São repetidamente confundidos com os sedimentos pelágicos normais do fundo do mar.")
-        st.write("- **A Realidade:** Derivam fundamentalmente da deposição de "cinzas" ricas em metais provenientes das plumas hidrotermais e da erosão dos montículos de sulfuretos.")
+        st.write("- **A Realidade:** Derivam fundamentalmente da deposição de 'cinzas' ricas em metais provenientes das plumas hidrotermais e da erosão dos montículos de sulfuretos.")
 
         st.markdown("**3. Mito da Toxicidade Uniforme**")
         st.write("- Pensa-se que, por serem sedimentos finos ricos em metais, são sempre letalmente tóxicos para toda a vida.")
@@ -270,6 +270,8 @@ def mostrar_confusoes_sms(deposito):
 
     else:
         st.info("Selecione um tipo de depósito válido para visualizar as informações.")
+
+
 
 def quiz_sms():
     """Função que guarda e corre o quiz dos Sulfuretos (SMS)"""
