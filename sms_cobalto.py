@@ -143,27 +143,133 @@ def mostrar_caracteristicas_sms(deposito):
 
 def mostrar_confusoes_sms(deposito):
 
-    st.markdown("### ⚠️ Confusões Comuns")
+    st.markdown("### ⚠️ Confusões Comuns e Mitos")
 
-    st.warning("Os depósitos SMS e crostas de cobalto são frequentemente confundidos.")
+    # Verificação de segurança
+    if not deposito:
+        st.warning("Por favor, seleciona um tipo de depósito para visualizar as confusões e mitos.")
+        return
 
-    with st.expander("🔍 Ver detalhes"):
+    # Converter lista de seleções para string para facilitar verificação
+    if isinstance(deposito, list):
+        deposito_str = " ".join(deposito)
+    else:
+        deposito_str = deposito
 
-        st.markdown("**1. SMS vs Nódulos Polimetálicos**")
-        st.write("- SMS: associados a hidrotermalismo")
-        st.write("- Nódulos: crescimento lento em planícies abissais")
+    st.markdown("#### 🔍 Os 5 Mitos e Confusões")
 
-        st.markdown("**2. SMS vs Crostas de Cobalto**")
-        st.write("- SMS: sulfuretos maciços")
-        st.write("- Crostas: enriquecimento em superfícies rochosas")
+    # 1. Sulfuretos Maciços (SMS)
+    if "Sulfuretos" in deposito_str or "SMS" in deposito_str or "Arcos" in deposito_str or "Dorsais" in deposito_str:
+        st.markdown("**1. Mito da Abundância Visível**")
+        st.write("- Existe a ideia de que o recurso se limita ao montículo visível no fundo do mar.")
+        st.write("- **A Realidade:** Os depósitos estendem-se até 200 metros abaixo do leito marinho, contendo até cinco vezes mais minério do que o previsto apenas pela topografia de superfície.")
 
-        st.markdown("**3. Ativo vs Inativo**")
-        st.write("- Ativo: associado a fluidos quentes")
-        st.write("- Inativo: sistemas fossilizados")
+        st.markdown("**2. Confusão sobre a Rocha Hospedeira**")
+        st.write("- Frequentemente acredita-se que a composição do substrato (máfico vs. ultramáfico) dita a geoquímica do depósito.")
+        st.write("- **A Realidade:** Análises sugerem que a temperatura de deposição e a taxa de espalhamento da crista são fatores muito mais determinantes para a variabilidade metálica.")
 
-        st.markdown("**4. Mineração Simples?**")
-        st.write("- Ambientes profundos implicam desafios técnicos e ambientais")
+        st.markdown("**3. Confusão Ativos vs. Extintos**")
+        st.write("- Pensa-se que apenas fontes ativas têm interesse económico.")
+        st.write("- **A Realidade:** Os depósitos extintos (eSMS) são muito mais abundantes e acessíveis, embora muitas vezes estejam escondidos sob sedimentos pelágicos.")
 
+        st.markdown("**4. Mito do Rácio Co/Ni**")
+        st.write("- Este rácio é usado para distinguir sistemas máficos de ultramáficos, mas os dados mostram que tem pouco poder discriminatório.")
+        st.write("- **A Realidade:** Elementos como o estanho (Sn) são indicadores muito mais fiáveis de influência ultramáfica.")
+
+        st.markdown("**5. Mito da Presença de Anidrite**")
+        st.write("- Embora a anidrite domine o interior dos depósitos ativos, ela está ausente em depósitos extintos.")
+        st.write("- **A Realidade:** A anidrite dissolve-se quando as temperaturas caem abaixo de 140°C, o que pode inclusive causar o colapso estrutural do depósito.")
+
+    # 2. Crostas de Ferro-Manganês
+    elif "Crostas" in deposito_str or "Ferro-Manganês" in deposito_str or "Cobalto" in deposito_str:
+        st.markdown("**1. Confusão Genética**")
+        st.write("- É comum confundir crostas puramente hidrogenéticas com hidrotermais.")
+        st.write("- **A Realidade:** Apenas as hidrogenéticas (precipitadas da água do mar) contêm metais raros suficientes para interesse económico; as hidrotermais são ricas em ferro, mas pobres em metais críticos.")
+
+        st.markdown("**2. Mito da Taxa de Formação**")
+        st.write("- Devido à sua espessura (até 26 cm), pode-se pensar que se formam rapidamente.")
+        st.write("- **A Realidade:** O seu crescimento é de apenas 1 a 5 milímetros por milhão de anos, sendo um dos processos geológicos mais lentos da Terra.")
+
+        st.markdown("**3. Confusão sobre a Camada Diagenética**")
+        st.write("- Lâminas brilhantes dentro das crostas são por vezes vistas como meras variações estéticas.")
+        st.write("- **A Realidade:** Indicam diagénese subóxica, sendo camadas enriquecidas em níquel e cobre, mas pobres em cobalto.")
+
+        st.markdown("**4. Mito da Facilidade de Extração**")
+        st.write("- Existe o mito de que são tão fáceis de colher como os nódulos.")
+        st.write("- **A Realidade:** A sua forte adesão ao substrato rochoso e a variabilidade de espessura tornam a sua exploração tecnicamente muito mais desafiante.")
+
+        st.markdown("**5. Confusão sobre o Valor do Substrato**")
+        st.write("- O substrato rochoso das crostas é muitas vezes considerado estéril ou sem valor.")
+        st.write("- **A Realidade:** Quando o substrato é composto por fosforitos, o valor económico global do recurso aumenta drasticamente devido ao conteúdo extra de fósforo e ítrio.")
+
+    # 3. Nódulos Polimetálicos
+    elif "Nódulos" in deposito_str:
+        st.markdown("**1. Mito da Fonte Única**")
+        st.write("- Pensa-se frequentemente que os metais dos nódulos vêm apenas da precipitação direta da água do mar.")
+        st.write("- **A Realidade:** Têm uma génese mista, recebendo um aporte significativo de metais a partir da água dos poros dos sedimentos (diagénese).")
+
+        st.markdown("**2. Confusão com as Crostas**")
+        st.write("- São frequentemente confundidos com as crostas de cobalto.")
+        st.write("- **A Realidade:** Os nódulos são sistematicamente mais ricos em níquel e cobre e ocorrem soltos em planícies abissais, não encrustados em montes submarinos.")
+
+        st.markdown("**3. Mito da Renovabilidade**")
+        st.write("- Devido ao seu crescimento contínuo contatando com a água, há quem os veja como renováveis.")
+        st.write("- **A Realidade:** À escala humana, são recursos absolutamente não-renováveis, dado que levam milhões de anos a atingir tamanhos exploráveis.")
+
+        st.markdown("**4. Confusão no Processamento**")
+        st.write("- Acredita-se que métodos de lixiviação simples funcionam igualmente para todos os nódulos.")
+        st.write("- **A Realidade:** Minerais específicos presentes nos nódulos, como a todorokite, podem ser bastante resistentes a certos processos hidrometalúrgicos padronizados.")
+
+        st.markdown("**5. Mito da Distribuição Aleatória**")
+        st.write("- Pensa-se que os nódulos estão espalhados por todo o lado nas planícies abissais.")
+        st.write("- **A Realidade:** A sua presença depende criticamente de correntes de fundo ativas que mantenham os núcleos de nucleação livres de sedimentação excessiva que os enterraria.")
+
+    # 4. Fosforitos
+    elif "Fosforitos" in deposito_str:
+        st.markdown("**1. Confusão Rocha vs. Minério**")
+        st.write("- São muitas vezes vistos apenas como a 'rocha de base' das crostas de cobalto.")
+        st.write("- **A Realidade:** Na verdade, são um recurso potencial riquíssimo em terras raras (REY) e fósforo, com um tremendo valor económico próprio.")
+
+        st.markdown("**2. Mito da Composição Simples**")
+        st.write("- Pensa-se que os fosforitos marinhos são apenas fosfatos de cálcio básicos.")
+        st.write("- **A Realidade:** A sua estrutura mineral complexa (CFA - fluorapatite carbonatada) permite a incorporação de uma vasta gama de metais críticos.")
+
+        st.markdown("**3. Confusão Visual**")
+        st.write("- Em campo ou em amostras de museu, são facilmente confundidos com um calcário comum.")
+        st.write("- **A Realidade:** A sua assinatura química revela teores de P₂O₅ e terras raras (REY) ordens de grandeza superiores ao calcário.")
+
+        st.markdown("**4. Mito da Formação Aleatória**")
+        st.write("- Existe a ideia de que podem aparecer em qualquer monte submarino.")
+        st.write("- **A Realidade:** A sua génese está estritamente ligada a eventos oceanográficos muito específicos, como períodos de elevada produtividade biológica e correntes de afloramento (*upwelling*).")
+
+        st.markdown("**5. Confusão na Lixiviação**")
+        st.write("- Existe a ideia de que os metais valiosos estão nos óxidos secundários associados ao fosforito.")
+        st.write("- **A Realidade:** As terras raras estão intrinsecamente concentradas e substituídas dentro dos próprios minerais de fosfato.")
+
+    # 5. Lamas REY (Sedimentos Metalíferos)
+    elif "Lamas" in deposito_str or "Sedimentos" in deposito_str:
+        st.markdown("**1. Mito do Material de Desperdício**")
+        st.write("- São frequentemente ignorados como mera 'lama' sem valor localizada em redor dos campos hidrotermais SMS.")
+        st.write("- **A Realidade:** Estes sedimentos podem estender-se por quilómetros quadrados e representar um recurso volumétrico massivo de metais como cobre e zinco.")
+
+        st.markdown("**2. Confusão de Origem**")
+        st.write("- São repetidamente confundidos com os sedimentos pelágicos normais do fundo do mar.")
+        st.write("- **A Realidade:** Derivam fundamentalmente da deposição de "cinzas" ricas em metais provenientes das plumas hidrotermais e da erosão dos montículos de sulfuretos.")
+
+        st.markdown("**3. Mito da Toxicidade Uniforme**")
+        st.write("- Pensa-se que, por serem sedimentos finos ricos em metais, são sempre letalmente tóxicos para toda a vida.")
+        st.write("- **A Realidade:** A toxicidade varia; as comunidades adaptadas de fontes ativas conseguem tolerá-los, mas a fauna pelágica e de fundo comum é que é altamente vulnerável.")
+
+        st.markdown("**4. Confusão sobre a Preservação**")
+        st.write("- Acredita-se que os metais particulados nestas lamas se oxidam e dissolvem rapidamente na água fria do fundo.")
+        st.write("- **A Realidade:** O soterramento rápido e a baixa permeabilidade da lama podem preservar grãos de sulfuretos perfeitamente intactos durante muito tempo.")
+
+        st.markdown("**5. Mito da Concentração de Terras Raras**")
+        st.write("- Assume-se que os elementos de terras raras (REY) estão distribuídos uniformemente por toda a lama.")
+        st.write("- **A Realidade:** As terras raras leves (LREE) concentram-se preferencialmente e de forma muito específica nas fases minerais de ferro e manganês destes sedimentos.")
+
+    else:
+        st.info("Selecione um tipo de depósito válido para visualizar as informações.")
 
 def quiz_sms():
     """Função que guarda e corre o quiz dos Sulfuretos (SMS)"""
