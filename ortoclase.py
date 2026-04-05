@@ -147,32 +147,40 @@ def mostrar_caracteristicas_ortoclase(deposito):
 
     else:
         st.info("Selecione um tipo de depósito válido para visualizar a informação.")
+
+
 # ===============================
 # 2. CONFUSÕES COMUNS
 # ===============================
 
 def mostrar_confusoes_ortoclase():
 
-    st.markdown("### ⚠️ Confusões Comuns")
+    st.markdown("### ⚠️ Confusões Comuns e Mitos")
 
-    st.warning("A ortoclase é frequentemente confundida com outros feldspatos.")
+    st.warning("Existem várias ideias erradas e ambiguidades comuns na identificação e estudo da ortoclase.")
 
-    with st.expander("🔍 Ver detalhes"):
+    with st.expander("🔍 Explorar os 5 Mitos e Confusões"):
 
-        st.markdown("**1. Ortoclase vs Plagioclase**")
-        st.write("- Ortoclase: feldspato potássico")
-        st.write("- Plagioclase: feldspato sódio-cálcico")
+        st.markdown("**1. Confusão entre Ortoclase e Quartzo**")
+        st.write("- Em rochas vulcânicas ou pegmatitos, a ortoclase pode ser facilmente confundida com o quartzo por se apresentar límpida e ter uma clivagem pouco visível a olho nu.")
+        st.write("- **Distinção:** A identificação segura exige a observação da natureza biaxial ou a presença de microporos sob o microscópio petrográfico.")
 
-        st.markdown("**2. Ortoclase vs Quartzo**")
-        st.write("- Ortoclase: clivagem presente")
-        st.write("- Quartzo: fratura concoidal")
+        st.markdown("**2. O Mito do Arrefecimento como Único Controlo**")
+        st.write("- É falso assumir que a taxa de arrefecimento magmático é o único fator a ditar a transição da ortoclase para microclina.")
+        st.write("- **A Realidade:** A presença de fluidos e a deformação mecânica são fundamentais no processo; sem a influência destes, a ortoclase pode persistir intacta mesmo em rochas antigas do Arcaico.")
 
-        st.markdown("**3. Feldspatos ≠ Minerais Raros**")
-        st.write("- São os minerais mais abundantes da crosta")
+        st.markdown("**3. A Ambiguidade do Nome \"Ortoclase\"**")
+        st.write("- Na literatura geológica, o termo é frequentemente utilizado de forma ambígua.")
+        st.write("- Pode referir-se ao **componente químico teórico** (KAlSi₃O₈) presente em soluções sólidas.")
+        st.write("- Em alternativa, pode designar o **mineral monoclínico específico** que exibe uma microtextura interna complexa em xadrez (tipo \"tweed\").")
 
-        st.markdown("**4. Alteração para Argilas**")
-        st.write("- Feldspatos alteram-se facilmente (caulinização)")
+        st.markdown("**4. O Mito da Estabilidade a Baixa Temperatura**")
+        st.write("- A ortoclase é, na verdade, **metaestável** a temperaturas abaixo dos 480°C – 500°C.")
+        st.write("- Nestas condições, a fase mineralógica perfeitamente estável deveria ser a microclina. No entanto, a ortoclase consegue \"sobreviver\" porque a sua própria estrutura cristalina bloqueia a reorganização atómica que seria necessária para a transição.")
 
+        st.markdown("**5. Interpretação Errada da Extinção Ondulante**")
+        st.write("- Na observação microscópica, a extinção ondulante na ortoclase é quase sempre interpretada de imediato (e erradamente) como prova exclusiva de que a rocha sofreu forte deformação mecânica.")
+        st.write("- Contudo, este fenómeno ótico pode ser simplesmente o resultado de **misturas sub-óticas (à nanoescala)** de domínios estruturais de ortoclase e microclina a coexistirem dentro do mesmo cristal.")
 
 # ===============================
 # 3. QUIZ INTERATIVO
