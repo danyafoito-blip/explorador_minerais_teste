@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Global Lithium Occurrences Map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f4f7f6;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .dataset-summary {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        #map {
+            flex: 3;
+            height: 100%;
+            background-color: #e5e3df;
+        }
+
+        #side-panel {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            min-width: 300px;
+            border-left: 1px solid #ddd;
+        }
+
+        .panel-placeholder {
+            color: #7f8c8d;
+            font-style: italic;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .info-group {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #34495e;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            color: #2c3e50;
+            font-size: 1em;
+            line-height: 1.45;
+        }
+
+        .info-value ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .legend {
+            background: white;
+            padding: 10px;
+            line-height: 1.5em;
+            color: #333;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            font-size: 0.85em;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .legend i {
+            width: 12px;
+            height: 12px;
+            float: left;
+            margin-right: 8px;
+            margin-top: 3px;
+            border-radius: 50%;
+        }
+
+        .source-link {
+            display: inline-block;
+            margin-bottom: 6px;
+            word-break: break-word;
+        }
+
+        .note-box {
+            background: #f8fbfd;
+            border-left: 4px solid #cfd8dc;
+            padding: 10px 12px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            #map {
+                min-height: 50vh;
+            }
+
+            #side-panel {
+                min-width: 0;
+                border-left: none;
+                border-top: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Global Lithium Occurrences</h2>
+        <div class="header-controls">
+            <div>
+                <label for="csvFileInput" style="margin-right: 10px;">Load CSV Database:</label>
+                <input type="file" id="csvFileInput" accept=".csv" />
+            </div>
+            <div id="datasetSummary" class="dataset-summary">No dataset loaded</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div id="map"></div>
+        <div id="side-panel">
+            <div class="panel-placeholder">
+                <h3>Welcome!</h3>
+                <p>1. Load your lithium CSV file using the button above.</p>
+                <p>2. Hover over or click any point on the map to inspect the occurrence.</p>
+                <p>3. This version is aligned with the simplified v13 CSV structure.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <script>
+        const map = L.map('map', { worldCopyJump: true }).setView([20, 0], 2);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+            subdomains: 'abcd',
+            maxZoom: 12
+        }).addTo(map);
+
+        const classColors = {
+            'hard-rock': '#2980b9',
+            'salar / continental brine': '#16a085',
+            'geothermal brine': '#f39c12',
+            'sedimentary clay': '#8e44ad',
+            'oilfield / basinal brine': '#c0392b',
+            'borate-associated sedimentary': '#27ae60',
+            'non-economic geochemical fluid/saline system': '#7f8c8d',
+            'default': '#95a5a6'
+        };
+
+        const preferredLegendOrder = [
+            'hard-rock',
+            'salar / continental brine',
+            'geothermal brine',
+            'sedimentary clay',
+            'oilfield / basinal brine',
+            'borate-associated sedimentary',
+            'non-economic geochemical fluid/saline system'
+        ];
+
+        const legend = L.control({ position: 'bottomleft' });
+        legend.onAdd = function () {
+            this._div = L.DomUtil.create('div', 'info legend');
+            this.update([]);
+            return this._div;
+        };
+        legend.update = function(classesPresent) {
+            const div = this._div;
+            if (!div) return;
+
+            const ordered = preferredLegendOrder.filter(c => classesPresent.includes(c));
+            const extras = classesPresent.filter(c => !ordered.includes(c)).sort();
+            const labels = ordered.concat(extras);
+
+            if (!labels.length) {
+                div.innerHTML = '<strong>Occurrence Class</strong><br><span style="color:#7f8c8d;">Load a CSV to populate the legend.</span>';
+                return;
+            }
+
+            div.innerHTML = '<strong>Occurrence Class</strong><br>';
+            labels.forEach(label => {
+                div.innerHTML += `<i style="background:${classColors[label] || classColors.default}"></i> ${escapeHtml(label)}<br>`;
+            });
+        };
+        legend.addTo(map);
+
+        let markersLayer = L.layerGroup().addTo(map);
+
+        document.getElementById('csvFileInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            Papa.parse(file, {
+                header: true,
+                dynamicTyping: false,
+                skipEmptyLines: true,
+                complete: function (results) {
+                    plotData(results.data || [], file.name);
+                }
+            });
+        });
+
+        function getValue(row, keys) {
+            for (const key of keys) {
+                if (Object.prototype.hasOwnProperty.call(row, key)) {
+                    const value = row[key];
+                    if (value !== undefined && value !== null && String(value).trim() !== '') {
+                        return value;
+                    }
+                }
+            }
+            return null;
+        }
+
+        function isMissing(val) {
+            return val === null || val === undefined || String(val).trim() === '' || (typeof val === 'number' && Number.isNaN(val));
+        }
+
+        function safeStr(val) {
+            return isMissing(val) ? 'N/A' : escapeHtml(String(val));
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function normalizeYesNo(val) {
+            if (isMissing(val)) return 'N/A';
+            const str = String(val).trim().toLowerCase();
+            if (['yes', 'true', 'y', '1'].includes(str)) return 'Yes';
+            if (['no', 'false', 'n', '0'].includes(str)) return 'No';
+            return escapeHtml(String(val));
+        }
+
+        function splitSources(raw) {
+            if (isMissing(raw)) return [];
+            return String(raw)
+                .split(/\s*[|\n;]+\s*/)
+                .map(s => s.trim())
+                .filter(Boolean);
+        }
+
+        function formatSources(raw) {
+            const items = splitSources(raw);
+            if (!items.length) return 'N/A';
+
+            return items.map(item => {
+                if (/^https?:\/\//i.test(item)) {
+                    const safeUrl = escapeHtml(item);
+                    return `<a class="source-link" href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeUrl}</a>`;
+                }
+                return `<div class="source-link">${escapeHtml(item)}</div>`;
+            }).join('');
+        }
+
+        function getClassLabel(row) {
+            const raw = getValue(row, ['deposit_type_main_class']);
+            return isMissing(raw) ? 'unclassified' : String(raw).trim().toLowerCase();
+        }
+
+        function getPointColor(row) {
+            const mainClass = getClassLabel(row);
+            return classColors[mainClass] || classColors.default;
+        }
+
+        function updateSummary(totalRows, plottedRows, fileName) {
+            const el = document.getElementById('datasetSummary');
+            el.textContent = `${fileName} | ${plottedRows} mapped points | ${totalRows} rows`;
+        }
+
+        function plotData(data, fileName) {
+            markersLayer.clearLayers();
+
+            const classesPresent = new Set();
+            let plotted = 0;
+
+            data.forEach(row => {
+                const lat = parseFloat(getValue(row, ['latitude']));
+                const lng = parseFloat(getValue(row, ['longitude']));
+
+                if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+                const pointColor = getPointColor(row);
+                const classLabel = getClassLabel(row);
+                classesPresent.add(classLabel);
+
+                const marker = L.circleMarker([lat, lng], {
+                    radius: 6,
+                    fillColor: pointColor,
+                    color: '#fff',
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.82
+                });
+
+                const occurrenceName = getValue(row, ['occurrence_name']) || 'Unnamed occurrence';
+                marker.bindTooltip(escapeHtml(String(occurrenceName)), { sticky: true, direction: 'top' });
+                marker.on('mouseover', function () {
+                    updateSidePanel(row, pointColor);
+                });
+                marker.on('click', function () {
+                    updateSidePanel(row, pointColor);
+                });
+
+                markersLayer.addLayer(marker);
+                plotted += 1;
+            });
+
+            legend.update(Array.from(classesPresent));
+            updateSummary(data.length, plotted, fileName);
+
+            if (plotted > 0) {
+                const group = new L.featureGroup(markersLayer.getLayers());
+                map.fitBounds(group.getBounds().pad(0.08));
+            }
+        }
+
+        function updateSidePanel(row, color) {
+            const panel = document.getElementById('side-panel');
+
+            const occurrenceName = getValue(row, ['occurrence_name']) || 'Unnamed occurrence';
+            const classLabel = getValue(row, ['deposit_type_main_class']) || 'Unclassified';
+            const region = getValue(row, ['region_or_basin']);
+            const subtype = getValue(row, ['occurrence_subtype_host']);
+            const recordScale = getValue(row, ['record_scale']);
+            const status = getValue(row, ['status']);
+            const stage = getValue(row, ['development_stage_normalized']);
+            const evidence = getValue(row, ['lithium_evidence_level']);
+            const interpretation = getValue(row, ['record_interpretation']);
+            const coordQuality = getValue(row, ['coordinate_quality']);
+            const notes = getValue(row, ['notes']);
+            const sources = getValue(row, ['Sources']);
+            const country = getValue(row, ['country']);
+            const publishedValues = getValue(row, ['Published Value(s)']);
+            const publishedScope = getValue(row, ['Published Value(s) Scope']);
+            const lat = getValue(row, ['latitude']);
+            const lng = getValue(row, ['longitude']);
+
+            const html = `
+                <h2 style="margin-top:0; color:#2c3e50;">${safeStr(occurrenceName)}</h2>
+                <div class="tag" style="background-color: ${color};">${safeStr(classLabel)}</div>
+                <hr style="border:0; border-top:1px solid #ddd; margin: 15px 0;">
+
+                <div class="info-group">
+                    <div class="info-label">Location</div>
+                    <div class="info-value">
+                        <div><b>Country:</b> ${safeStr(country)}</div>
+                        <div><b>Region / Basin:</b> ${safeStr(region)}</div>
+                        <div><b>Latitude:</b> ${safeStr(lat)}</div>
+                        <div><b>Longitude:</b> ${safeStr(lng)}</div>
+                        <div><b>Coordinate Quality:</b> ${safeStr(coordQuality)}</div>
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">Occurrence Classification</div>
+                    <div class="info-value">
+                        <ul>
+                            <li><b>Main Class:</b> ${safeStr(classLabel)}</li>
+                            <li><b>Subtype / Host:</b> ${safeStr(subtype)}</li>
+                            <li><b>Record Scale:</b> ${safeStr(recordScale)}</li>
+                            <li><b>Interpretation:</b> ${safeStr(interpretation)}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">Status & Development</div>
+                    <div class="info-value">
+                        <div><b>Status:</b> ${safeStr(status)}</div>
+                        <div><b>Development Stage:</b> ${safeStr(stage)}</div>
+                        <div><b>Economic Occurrence:</b> ${normalizeYesNo(getValue(row, ['economic_occurrence_flag']))}</div>
+                        <div><b>Geochemical Indication:</b> ${normalizeYesNo(getValue(row, ['geochemical_indication_flag']))}</div>
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">Lithium Evidence & Values</div>
+                    <div class="info-value">
+                        <div><b>Evidence Level:</b> ${safeStr(evidence)}</div>
+                        <div><b>Published Value(s):</b> ${safeStr(publishedValues)}</div>
+                        <div><b>Value Scope:</b> ${safeStr(publishedScope)}</div>
+                    </div>
+                </div>
+
+                <div class="info-group">
+                    <div class="info-label">Notes</div>
+                    <div class="info-value note-box">${safeStr(notes)}</div>
+                </div>
+
+                <div class="info-group" style="border-bottom:none; padding-bottom:0;">
+                    <div class="info-label">Sources</div>
+                    <div class="info-value" style="font-size: 0.85em; word-wrap: break-word;">${formatSources(sources)}</div>
+                </div>
+            `;
+
+            panel.innerHTML = html;
+        }
+
+        window.addEventListener('resize', function () {
+            map.invalidateSize();
+        });
+    </script>
+</body>
+</html>
