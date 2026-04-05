@@ -164,7 +164,7 @@ depositos = {
         "Granitos Evoluídos e Pegmatitos",
         "Perfis de Alteração Residual (Weathering Crusts)"
     ],
-    "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto": [
+    "Depósitos de Fundo Oceãnico": [
         "Dorsais médio-oceânicas",
         "Arcos vulcânicos submarinos",
         "Bacias de retro-arco"
