@@ -451,24 +451,80 @@ def referencias_sms():
 
 
 # ===============================
-# 4. CHECKLIST DE CAMPO
+# 4. CHECKLIST DE EXPLORAÇÃO
 # ===============================
 
-def checklist_sms():
+def checklist_sms(deposito):
+    st.markdown("### 📋 Checklist de Exploração e Identificação")
 
-    st.markdown("### ✅ Checklist de Campo (Exploração Submarina)")
+    # Verificação de segurança
+    if not deposito:
+        st.warning("Por favor, seleciona um tipo de depósito para visualizar a checklist correspondente.")
+        return
 
-    st.write("Utilizado na exploração de depósitos SMS:")
+    # Converter lista de seleções para string para facilitar verificação
+    if isinstance(deposito, list):
+        deposito_str = " ".join(deposito)
+    else:
+        deposito_str = deposito
 
-    st.checkbox("Identificar atividade hidrotermal")
-    st.checkbox("Mapear estruturas tectónicas")
-    st.checkbox("Analisar plumas hidrotermais")
-    st.checkbox("Amostragem de sulfuretos")
-    st.checkbox("Caracterização geoquímica")
-    st.checkbox("Avaliação ambiental")
-    st.checkbox("Utilização de ROVs/AUVs")
+    # 1. Sulfuretos Maciços (SMS)
+    if "Sulfuretos" in deposito_str or "SMS" in deposito_str or "Arcos" in deposito_str or "Dorsais" in deposito_str:
+        st.markdown("#### 🌋 Sulfuretos Maciços do Fundo do Mar (SMS)")
+        st.info("Estes depósitos são os mais 'clássicos' em coleções de mineração devido ao seu aspeto metálico e estruturas verticais.")
+        
+        st.checkbox("**Morfologia de Chaminé:** Procure por formas tubulares ou cilíndricas com condutos centrais vazios ou preenchidos (os 'black smokers').", key="chk_sms_1")
+        st.checkbox("**Mineralogia Primária:** Identifique pirite e marcasite (bronze pálido), calcopirite (amarelo-latão) no centro dos condutos e esfalerite (brilho resinoso, de mel a preto) na periferia.", key="chk_sms_2")
+        st.checkbox("**Capa de Jasper:** Em amostras extintas (eSMS), procure uma crosta externa de sílica rica em ferro (Jasper), de cor laranja a vermelho-sangue, que protege o minério da oxidação.", key="chk_sms_3")
+        st.checkbox("**Alteração Superficial:** Verifique a presença de FeOOH (red-brown) ou manchas verdes de atacamite (cloreto de cobre), indicando exposição à água do mar.", key="chk_sms_4")
+        st.checkbox("**Texturas de Maturação:** Amostras coloformes (anéis concêntricos) indicam cristalização rápida e imatura; amostras maciças indicam recristalização térmica.", key="chk_sms_5")
 
+    # 2. Crostas de Ferro-Manganês
+    elif "Crostas" in deposito_str or "Ferro-Manganês" in deposito_str or "Cobalto" in deposito_str:
+        st.markdown("#### 🧲 Crostas de Ferro-Manganês (Cobalto-Ricas - CFC)")
+        st.info("Identificáveis pela sua cor escura e deposição sobre rocha pré-existente.")
+        
+        st.checkbox("**Superfície Botrioidal:** Procure por uma textura externa em forma de 'cacho de uvas' ou mamelonada, de cor preta ou castanho-escuro.", key="chk_cfc_1")
+        st.checkbox("**Lâminas Genéticas:** Observe o corte transversal; vernadite (hidrogenética) é baça e porosa, enquanto as lâminas de asbolane/todorokite (diagenéticas) são muito brilhantes, densas e fibrosas.", key="chk_cfc_2")
+        st.checkbox("**Espessura e Estrutificação:** As crostas variam de 1 mm a 26 cm, apresentando geralmente 3 a 4 camadas principais distinguíveis pela cor e porosidade.", key="chk_cfc_3")
+        st.checkbox("**Relação com o Substrato:** Verifique se a crosta está firmemente aderida a rochas como basalto alterado ou fosforitos.", key="chk_cfc_4")
+        st.checkbox("**Brilho Metálico:** Se a amostra tiver brilho submetálico intenso, pode haver influência de processos hidrotermais ou diagenéticos enriquecidos em Ni e Cu.", key="chk_cfc_5")
 
+    # 3. Nódulos Polimetálicos
+    elif "Nódulos" in deposito_str:
+        st.markdown("#### 🌑 Nódulos Polimetálicos")
+        st.info("Diferenciam-se das crostas por não estarem agarrados a uma base rochosa sólida.")
+        
+        st.checkbox("**Núcleo Central:** Ao cortar o nódulo, procure por um núcleo de nucleação (fragmento de basalto, osso de baleia ou dente de tubarão).", key="chk_nod_1")
+        st.checkbox("**Acreção Concêntrica:** Identifique anéis de crescimento internos que alternam entre camadas ricas em ferro (baças) e ricas em manganês (brilhantes).", key="chk_nod_2")
+        st.checkbox("**Forma Livre:** Os nódulos são geralmente esféricos, discoidais ou irregulares, mas sempre como corpos isolados (não pavimentos).", key="chk_nod_3")
+        st.checkbox("**Mineralogia de Manganês:** Presença de todorokite (associada a crescimento diagenético) e vernadite.", key="chk_nod_4")
+        st.checkbox("**Textura Rugosa vs. Lisa:** A rugosidade indica crescimento diagenético a partir dos sedimentos, enquanto superfícies lisas indicam crescimento hidrogenético a partir da água do mar.", key="chk_nod_5")
+
+    # 4. Fosforitos
+    elif "Fosforitos" in deposito_str:
+        st.markdown("#### 🦴 Fosforitos")
+        st.info("Muitas vezes confundidos com calcário, ocorrem frequentemente como a 'base' de outros recursos.")
+        
+        st.checkbox("**Cor e Aspeto:** Rocha de cor clara, variando entre o branco-rosado, bege e castanho-claro.", key="chk_fos_1")
+        st.checkbox("**Mineralogia CFA:** Composto predominantemente por fluorapatite carbonatada (CFA), por vezes com restos de bioclastos (foraminíferos).", key="chk_fos_2")
+        st.checkbox("**Localização na Amostra:** Procure por fosforitos servindo como o substrato geológico diretamente abaixo de crostas de ferro-manganês.", key="chk_fos_3")
+        st.checkbox("**Pervasividade:** Verifique se há 'fantasmas' de minerais anteriores (como feldspatos corroídos) preenchidos por fosfato e goethite.", key="chk_fos_4")
+        st.checkbox("**Inclusões Orgânicas:** Comum a presença de dentes de peixe ou escamas incorporados na matriz fosfática.", key="chk_fos_5")
+
+    # 5. Lamas REY (Sedimentos Metalíferos)
+    elif "Lamas" in deposito_str or "Sedimentos" in deposito_str:
+        st.markdown("#### 🌫️ Lamas REY (Sedimentos Metalíferos)")
+        st.info("Identificadas pelo seu caráter granular e associação com plumas hidrotermais.")
+        
+        st.checkbox("**Granulometria:** Areias de grão fino a médio, muitas vezes apresentando uma sequência de soterramento rápido ('fining upwards').", key="chk_lam_1")
+        st.checkbox("**Cor Metalífera:** Podem ser castanho-avermelhadas (ricas em óxidos de ferro como goethite) ou cinza-escuras (se ricas em partículas de sulfuretos lixiviados).", key="chk_lam_2")
+        st.checkbox("**Localização Espacial:** Em exposições geológicas, situam-se geralmente na base ou nos flancos dos montículos de sulfuretos (SMS).", key="chk_lam_3")
+        st.checkbox("**Componente Detrítico:** Presença de sedimentos pelágicos (calcite/foraminíferos) intercalados com as camadas metálicas.", key="chk_lam_4")
+        st.checkbox("**Mistura Mineral:** Consistem numa mistura de grãos de sulfuretos primários, argilas ricas em ferro e óxidos de manganês dispersos.", key="chk_lam_5")
+
+    else:
+        st.info("Selecione um tipo de depósito válido para visualizar a checklist de identificação.")
 # ===============================
 # 5. MAPA GLOBAL
 # ===============================
