@@ -11,7 +11,7 @@ from streamlit_folium import st_folium
 
 def mostrar_caracteristicas_ortoclase(deposito):
 
-    st.markdown("### 🪨 Características da Ortoclase")
+    st.markdown("### ⛰️ Características da Ortoclase")
 
     col1, col2 = st.columns(2)
 
