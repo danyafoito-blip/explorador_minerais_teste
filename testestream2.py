@@ -383,7 +383,7 @@ with tab_check:
         checklist_torio(deposito_selecionado)
         
     elif recurso_selecionado == "Depósitos de Fundo Oceânico":
-        checklist_sms()
+        checklist_sms(deposito_selecionado)
         
     elif recurso_selecionado == "Quartzo":
         checklist_quartzo()
