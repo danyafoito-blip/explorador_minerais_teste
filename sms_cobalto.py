@@ -48,7 +48,7 @@ def mostrar_caracteristicas_sms(deposito):
 
     # 2. Crostas de Ferro-Manganês
     elif "Crostas" in deposito_str or "Ferro-Manganês" in deposito_str or "Cobalto" in deposito_str:
-        st.markdown("## 2. Crostas de Ferro-Manganês Cobalto-Ricas (CFC)")
+        st.markdown("## 2. Crostas de Ferro-Manganês (Ricas em Cobalto)")
         
         col1, col2 = st.columns(2)
         
@@ -114,7 +114,7 @@ def mostrar_caracteristicas_sms(deposito):
 
     # 5. Lamas REY
     elif "Lamas" in deposito_str or "Sedimentos" in deposito_str:
-        st.markdown("## 5. Lamas REY (Sedimentos Metalíferos)")
+        st.markdown("## 5. Lamas REY")
         
         col1, col2 = st.columns(2)
         
