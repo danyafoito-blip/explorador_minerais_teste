@@ -136,9 +136,8 @@ depositos = {
     ],
     "Petróleo e Gás (Sistemas convencionais)": [
         "Reservatório de óleo",
-        "Reservatórios de gás",
-        "Reservatórios de misto (óleo + gás)",
-
+        "Reservatório de gás",
+        "Reservatório misto (óleo + gás)"
     ],
     "Metano (Hidratos e recursos não convencionais)": [
         "Biogénico",
