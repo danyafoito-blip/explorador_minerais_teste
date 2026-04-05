@@ -11,64 +11,131 @@ from streamlit_folium import st_folium
 
 def mostrar_caracteristicas_sms(deposito):
 
-    st.markdown("### 🌊⚙️ Sulfuretos Maciços Submarinos (SMS) e Crostas de Cobalto")
+    st.markdown("### 🌊⚙️ Características dos Depósitos Oceânicos")
 
-    col1, col2 = st.columns(2)
+    # Verificação de segurança
+    if not deposito:
+        st.warning("Por favor, seleciona um tipo de depósito para visualizar as características.")
+        return
 
-    with col1:
+    # Converter lista de seleções para string para facilitar verificação
+    if isinstance(deposito, list):
+        deposito_str = " ".join(deposito)
+    else:
+        deposito_str = deposito
 
-        st.success("**Propriedades Geológicas e Geoquímicas**")
+    # 1. Sulfuretos Maciços (SMS)
+    if "Sulfuretos" in deposito_str or "SMS" in deposito_str or "Arcos" in deposito_str or "Dorsais" in deposito_str:
+        st.markdown("## 1. Sulfuretos Maciços do Fundo do Mar (SMS) / Arcos e Retro-arcos")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.success("**5 Propriedades Físicas e Geoquímicas**")
+            st.write("- **Composição de Metais Base:** Apresentam altos teores de ferro, zinco, cobre e chumbo.")
+            st.write("- **Riqueza em Metais Preciosos:** Contêm concentrações comercialmente exploráveis de ouro e prata.")
+            st.write("- **Zonamento Térmico:** A mineralogia é influenciada pela temperatura; fluidos >300°C enriquecem em cobre, temperaturas mais baixas favorecem zinco.")
+            st.write("- **Estrutura Tridimensional:** Compostos por chaminés ('black smokers'), montículos de talude e zona de stockwork.")
+            st.write("- **Assinatura de Voláteis (Arcos):** Enriquecimento em elementos magmatófilos tóxicos como arsénio, mercúrio e antimónio.")
 
-        st.write("- Depósitos hidrotermais submarinos")
-        st.write("- Ricos em Cu, Zn, Pb, Au, Ag")
-        st.write("- Associados a fluidos quentes")
-        st.write("- Precipitação rápida de sulfuretos")
-        st.write("- Elevada heterogeneidade")
+        with col2:
+            st.info("**5 Pontos da Importância Energética**")
+            st.write("- **Cobre para Eletrificação:** Fornecem cobre essencial para a construção de infraestruturas de redes elétricas.")
+            st.write("- **Zinco para Armazenamento:** Fundamental para a produção de baterias e proteção de estruturas de energia renovável.")
+            st.write("- **Transição de Baixo Carbono:** Fornecem matérias-primas críticas necessárias para uma economia de baixo carbono.")
+            st.write("- **Alternativa a Minas Terrestres:** Teores frequentemente superiores aos de depósitos terrestres em declínio de qualidade.")
+            st.write("- **Segurança de Abastecimento:** Reduzem a dependência externa de metais estratégicos para os setores tecnológico e energético.")
 
-    with col2:
+    # 2. Crostas de Ferro-Manganês
+    elif "Crostas" in deposito_str or "Ferro-Manganês" in deposito_str or "Cobalto" in deposito_str:
+        st.markdown("## 2. Crostas de Ferro-Manganês Cobalto-Ricas (CFC)")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.success("**5 Propriedades Físicas e Geoquímicas**")
+            st.write("- **Mineralogia Principal:** Compostas por oxihidróxidos de ferro e óxidos de manganês (vernadite e birnessite).")
+            st.write("- **Enriquecimento em Cobalto:** Principal fonte oceânica de cobalto, com teores que podem atingir os 2%.")
+            st.write("- **Crescimento Lento:** Taxa de crescimento extremamente lenta (1 a 5 milímetros por milhão de anos).")
+            st.write("- **Alta Área Superficial:** Superfície específica média enorme (325 m²/cm³), potenciando a adsorção de metais.")
+            st.write("- **Conteúdo de Metais Raros:** Concentram telúrio, platina, molibdénio e elementos de terras raras (REY).")
 
-        st.info("**Importância Económica**")
+        with col2:
+            st.info("**5 Pontos da Importância Energética**")
+            st.write("- **Cobalto para Mobilidade Elétrica:** Essencial para o fabrico de baterias de iões de lítio para veículos elétricos.")
+            st.write("- **Telúrio para Energia Solar:** Constituem a maior reserva global de telúrio, usado em células solares de película fina.")
+            st.write("- **Terras Raras (REY) para Aerogeradores:** Contêm neodímio e térbio, cruciais para ímanes em turbinas eólicas.")
+            st.write("- **Platina para Células de Combustível:** Fonte de platina, catalisador em tecnologias de hidrogénio.")
+            st.write("- **Autonomia Estratégica:** Fornecem Minerais Críticos (CRM) fundamentais para a independência energética.")
 
-        st.write("- Fonte de metais críticos")
-        st.write("- Cobalto essencial para baterias")
-        st.write("- Potencial elevado no fundo oceânico")
-        st.write("- Interesse crescente em mineração profunda")
+    # 3. Nódulos Polimetálicos
+    elif "Nódulos" in deposito_str:
+        st.markdown("## 3. Nódulos Polimetálicos")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.success("**5 Propriedades Físicas e Geoquímicas**")
+            st.write("- **Acreção Concêntrica:** Deposição concêntrica de óxidos em torno de um núcleo (ex: dente de tubarão ou rocha).")
+            st.write("- **Génese Mista:** Crescimento hidrogenético (água do mar) e diagenético (água dos poros dos sedimentos).")
+            st.write("- **Mineralogia de Manganês:** Compostos essencialmente por vernadite, todorokite e birnessite.")
+            st.write("- **Riqueza em Níquel e Cobre:** Apresentam teores de níquel e cobre superiores aos das crostas.")
+            st.write("- **Localização Abissal:** Ocorrem de forma vasta nas planícies abissais oceânicas.")
 
-    st.divider()
+        with col2:
+            st.info("**5 Pontos da Importância Energética**")
+            st.write("- **Níquel para Baterias:** O elevado teor de níquel é vital para baterias de alta densidade energética.")
+            st.write("- **Manganês para Armazenamento:** Utilizado em ligas metálicas e em novas tecnologias de armazenamento.")
+            st.write("- **Suplemento de Recursos Terrestres:** Alternativa massiva para suprir a procura global de metais base.")
+            st.write("- **Diversificação de Fontes:** Aumentam a resiliência do mercado contra interrupções no fornecimento terrestre.")
+            st.write("- **Economia de Escala:** Potencial de exploração em larga escala pode reduzir custos nas energias renováveis.")
 
-    if "Dorsais" in deposito:
+    # 4. Fosforitos
+    elif "Fosforitos" in deposito_str:
+        st.markdown("## 4. Fosforitos")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.success("**5 Propriedades Físicas e Geoquímicas**")
+            st.write("- **Mineralogia de Fosfato:** Compostos predominantemente por fluorapatite carbonatada (CFA).")
+            st.write("- **Composição Química:** Ricos em fósforo (P₂O₅) e cálcio (CaO).")
+            st.write("- **Associação com Crostas:** Servem frequentemente de substrato rochoso para as crostas de cobalto.")
+            st.write("- **Hospedeiros de REY:** Atuam como depósitos secundários importantes para elementos de terras raras e ítrio.")
+            st.write("- **Origem Oceanográfica:** Ligada a correntes de fundo intensas e períodos de elevada produtividade biológica.")
 
-        st.markdown("### 🌋 Dorsais Médio-Oceânicas")
+        with col2:
+            st.info("**5 Pontos da Importância Energética**")
+            st.write("- **Ítrio para Eficiência Energética:** Fonte de ítrio, usado em tecnologias de iluminação eficiente e LEDs.")
+            st.write("- **Terras Raras para Tecnologia:** O seu conteúdo em REY apoia a produção de componentes eletrónicos avançados.")
+            st.write("- **Valorização de Recursos:** A presença aumenta significativamente o valor económico total dos montes submarinos.")
+            st.write("- **Independência Tecnológica:** Contribuem para a segurança de abastecimento de metais críticos.")
+            st.write("- **Fósforo Industrial:** Potencial para aplicações químicas e industriais ligadas a infraestruturas energéticas.")
 
-        st.write("**Características principais:**")
-        st.write("- Associadas a expansão do fundo oceânico")
-        st.write("- Sistemas hidrotermais ativos (black smokers)")
-        st.write("- Formação rápida de sulfuretos")
-        st.write("- Alta temperatura")
+    # 5. Lamas REY
+    elif "Lamas" in deposito_str or "Sedimentos" in deposito_str:
+        st.markdown("## 5. Lamas REY (Sedimentos Metalíferos)")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.success("**5 Propriedades Físicas e Geoquímicas**")
+            st.write("- **Origem Hidrotermal:** Deposição de partículas ricas em metais de plumas hidrotermais.")
+            st.write("- **Preservação Metálica:** Retêm Cu, Zn e sulfuretos por soterramento rápido e ausência de fluxo residual.")
+            st.write("- **Estratigrafia Fina:** Apresentam frequentemente sequências de grão fino de depósitos turbidíticos.")
+            st.write("- **Concentração de Terras Raras:** Enriquecidas em terras raras leves (LREE) e ítrio.")
+            st.write("- **Extensão Territorial:** Dispersam-se por áreas de vários quilómetros quadrados em torno dos depósitos centrais.")
 
-    elif "Arcos" in deposito:
-
-        st.markdown("### 🌊 Arcos Vulcânicos Submarinos")
-
-        st.write("**Características principais:**")
-        st.write("- Associados a zonas de subducção")
-        st.write("- Magmatismo intenso")
-        st.write("- Maior diversidade metálica")
-        st.write("- Ambientes complexos")
-
-    elif "retro-arco" in deposito.lower():
-
-        st.markdown("### 🌊 Bacias de Retro-Arco")
-
-        st.write("**Características principais:**")
-        st.write("- Extensão tectónica atrás de arcos vulcânicos")
-        st.write("- Sistemas hidrotermais ativos")
-        st.write("- Depósitos economicamente relevantes")
-        st.write("- Variabilidade geológica")
+        with col2:
+            st.info("**5 Pontos da Importância Energética**")
+            st.write("- **Fonte de LREE:** Fornecem terras raras leves essenciais para ímanes de alta tecnologia e motores elétricos.")
+            st.write("- **Metais Base Dispersos:** Contêm misturas de cobre e zinco que representam um recurso volumétrico.")
+            st.write("- **Volume de Recurso:** A vasta dispersão sugere um potencial de extração massivo por quilómetro quadrado.")
+            st.write("- **Diversificação Estratégica:** Via alternativa para obter metais críticos fora dos depósitos maciços tradicionais.")
+            st.write("- **Autonomia em CRM:** Apoiam diretamente as metas de autonomia estratégica em matérias-primas críticas.")
 
     else:
-        st.info("Selecione um tipo de depósito válido.")
-
+        st.info("Selecione um tipo de depósito válido para visualizar a informação detalhada.")
 
 # ===============================
 # 2. CONFUSÕES COMUNS
