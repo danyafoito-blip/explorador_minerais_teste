@@ -123,7 +123,7 @@ materias_primas = [
     "Lítio (Rocha dura versus salmouras)",
     "Urânio (Combustíveis nucleares)",
     "Tório (Combustíveis nucleares)",
-    "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto",
+    "Depósitos de Fundo Oceãnico",
     "Quartzo",
     "Monazite",
     "Ortoclase"
