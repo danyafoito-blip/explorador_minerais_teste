@@ -5,7 +5,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-
 # ===============================
 # 1. CARACTERÍSTICAS
 # ===============================
@@ -338,7 +337,7 @@ def mostrar_caracteristicas_petroleo(deposito):
         st.markdown("#### Tipo de querogénio")
     
         st.success(
-            "Tipo II (exinito): derivado de plâncton marinho e bactérias, associado à geração de petróleo e gás."
+            "Tipo II (exinito): derivado de plâncton marinho e bactérias, associado à geração de óleo e gás."
         )
     
         st.divider()
@@ -654,7 +653,7 @@ def quiz_petroleo(deposito):
             st.session_state.corrigido_gas = False
 
         corretas = ["Gasoso", "Tipo III", "150–300 ºC",
-                    "Carvões e folhelhos carbonosos",
+                    "Carvões e argilitos carbonosos",
                     "Catagénese tardia e metagénese"]
 
         q1 = st.radio("1️⃣ Estado predominante dos hidrocarbonetos:",
@@ -685,7 +684,7 @@ def quiz_petroleo(deposito):
                 st.error(f"Errado ❌ → Resposta correta: **{corretas[2]}**")
 
         q4 = st.radio("4️⃣ Tipo de rocha-mãe mais associado ao gás:",
-                      ["Argilitos lacustres", "Carvões e folhelhos carbonosos", "Calcários marinhos"], key="gas_q4", index=None)
+                      ["Argilitos lacustres", "Carvões e argilitos carbonosos", "Calcários marinhos"], key="gas_q4", index=None)
 
         if st.session_state.corrigido_gas:
             if q4 == corretas[3]:
