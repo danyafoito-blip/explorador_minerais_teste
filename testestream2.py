@@ -172,8 +172,9 @@ depositos = {
     ],
     "Quartzo": [
         "Veios hidrotermais",
-        "Pegmatitos",
-        "Depósitos aluviais"
+        "Depósitos sedimentares",
+        "Depósitos magmáticos",
+        "Depósitos metamórficos"
     ],
     "Monazite": [
         "Depósitos sedimentares",
