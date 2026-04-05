@@ -283,100 +283,156 @@ def mostrar_confusoes_sms(deposito):
 
 
 
-def quiz_sms():
-    """Função que guarda e corre o quiz dos Sulfuretos (SMS)"""
-    
-    st.write("Responda às seguintes questões sobre a formação e exploração de depósitos SMS:")
-    
-    q1 = st.radio(
-        "**1. Qual é o principal mecanismo que faz com que os metais precipitem e formem as chaminés de SMS no fundo do mar?**",
-        [
-            "A) O arrefecimento lento do magma em profundidade.",
-            "B) O choque térmico e químico entre o fluido hidrotermal a ~350°C e a água do mar a ~2°C.",
-            "C) A compactação dos sedimentos marinhos devido ao peso da coluna de água.",
-            "D) A oxidação das rochas basálticas pela luz solar."
-        ],
-        index=None
-    )
+# ===============================
+# 3. QUIZ INTERATIVO
+# ===============================
 
-    q2 = st.radio(
-        "**2. Se fores avaliar a viabilidade de uma exploração mineira de um depósito análogo em terra (VMS), que diferença física fundamental esperas encontrar em relação a um SMS fresco do fundo do mar?**",
-        [
-            "A) O depósito em terra será muito mais poroso e leve.",
-            "B) O depósito em terra não terá sulfuretos, apenas óxidos.",
-            "C) O depósito em terra será muito mais denso, compacto e menos friável devido à compressão tectónica.",
-            "D) Não haverá diferença, a rocha mantém-se intacta para sempre."
-        ],
-        index=None
-    )
+def quiz_sms(*args):
+    st.header("🧠 Quiz: Depósitos de Fundo Oceânico")
+    st.markdown("Testa os teus conhecimentos gerais sobre todos os recursos minerais abordados nesta secção.")
 
-    q3 = st.radio(
-        "**3. Quais são os dois metais base mais rentáveis e abundantes extraídos deste tipo de sulfuretos (tanto SMS como VMS)?**",
-        [
-            "A) Alumínio e Níquel.",
-            "B) Ferro e Manganês.",
-            "C) Cobre e Zinco.",
-            "D) Lítio e Cobalto."
-        ],
-        index=None
-    )
+    # Dicionário com todas as 10 perguntas gerais
+    quiz_data = [
+        {
+            "pergunta": "1. Sulfuretos Maciços (SMS): Qual é o processo geológico fundamental que leva à formação dos depósitos de SMS?",
+            "opcoes": [
+                "A) Erosão de montanhas continentais.",
+                "B) Circulação hidrotermal de água do mar aquecida por magma.",
+                "C) Acumulação de esqueletos de baleias no abismo.",
+                "D) Precipitação de sal devido à evaporação solar."
+            ],
+            "correta": "B) Circulação hidrotermal de água do mar aquecida por magma."
+        },
+        {
+            "pergunta": "2. Sulfuretos Maciços (SMS): Quais são os metais preciosos frequentemente encontrados com teores económicos nestes depósitos?",
+            "opcoes": [
+                "A) Platina e Irídio.",
+                "B) Ouro e Prata.",
+                "C) Alumínio e Magnésio.",
+                "D) Urânio e Tório."
+            ],
+            "correta": "B) Ouro e Prata."
+        },
+        {
+            "pergunta": "3. Nódulos Polimetálicos: Em que ambiente marinho se localizam predominantemente os nódulos polimetálicos?",
+            "opcoes": [
+                "A) No topo de vulcões ativos.",
+                "B) Nas praias de ilhas oceânicas.",
+                "C) Nas planícies abissais oceânicas.",
+                "D) Nos recifes de coral pouco profundos."
+            ],
+            "correta": "C) Nas planícies abissais oceânicas."
+        },
+        {
+            "pergunta": "4. Nódulos Polimetálicos: Qual é a estrutura interna característica de um nódulo polimetálico?",
+            "opcoes": [
+                "A) Estrutura oca como um balão.",
+                "B) Acreção concêntrica de óxidos em torno de um núcleo.",
+                "C) Uma única massa de cristal de quartzo.",
+                "D) Camadas de carvão fóssil."
+            ],
+            "correta": "B) Acreção concêntrica de óxidos em torno de um núcleo."
+        },
+        {
+            "pergunta": "5. Crostas de Ferro-Manganês: Qual é a taxa de crescimento típica das crostas hidrogenéticas que se formam nos montes submarinos?",
+            "opcoes": [
+                "A) 1 metro por cada mil anos.",
+                "B) 1 a 5 milímetros por cada milhão de anos.",
+                "C) 10 centímetros por década.",
+                "D) Elas crescem instantaneamente após tempestades."
+            ],
+            "correta": "B) 1 a 5 milímetros por cada milhão de anos."
+        },
+        {
+            "pergunta": "6. Crostas de Ferro-Manganês: Qual é o metal estratégico que dá o nome comum a estas crostas devido à sua elevada concentração?",
+            "opcoes": [
+                "A) Níquel.",
+                "B) Cobre.",
+                "C) Cobalto.",
+                "D) Ferro."
+            ],
+            "correta": "C) Cobalto."
+        },
+        {
+            "pergunta": "7. Fosforitos: Qual é o mineral principal que constitui a base dos fosforitos marinhos?",
+            "opcoes": [
+                "A) Pirite.",
+                "B) Fluorapatite carbonatada (CFA).",
+                "C) Calcite pura.",
+                "D) Feldspato."
+            ],
+            "correta": "B) Fluorapatite carbonatada (CFA)."
+        },
+        {
+            "pergunta": "8. Fosforitos: Qual é a relação comum entre os fosforitos e as crostas de cobalto?",
+            "opcoes": [
+                "A) Estão sempre em oceanos diferentes.",
+                "B) Os fosforitos servem frequentemente de substrato geológico para as crostas.",
+                "C) As crostas transformam-se em fosforitos quando aquecem.",
+                "D) Os fosforitos impedem o crescimento de qualquer outro mineral."
+            ],
+            "correta": "B) Os fosforitos servem frequentemente de substrato geológico para as crostas."
+        },
+        {
+            "pergunta": "9. Lamas REY (Sedimentos Metalíferos): Qual é a origem das partículas ricas em metais que compõem estas lamas?",
+            "opcoes": [
+                "A) Areias sopradas pelo vento do deserto.",
+                "B) Deposição de partículas das plumas de fontes hidrotermais.",
+                "C) Restos de plâncton que brilha no escuro.",
+                "D) Cinzas de fogos florestais costeiros."
+            ],
+            "correta": "B) Deposição de partículas das plumas de fontes hidrotermais."
+        },
+        {
+            "pergunta": "10. Lamas REY (Sedimentos Metalíferos): Estas lamas são consideradas um recurso estratégico principalmente devido ao seu teor em:",
+            "opcoes": [
+                "A) Sal de cozinha.",
+                "B) Diamantes industriais.",
+                "C) Elementos de Terras Raras (REY).",
+                "D) Ferro e Alumínio apenas."
+            ],
+            "correta": "C) Elementos de Terras Raras (REY)."
+        }
+    ]
 
-    q4 = st.radio(
-        "**4. O que acontece à rocha por baixo do depósito maciço (a chamada zona de stockwork ou condutas) devido à passagem contínua dos fluidos quentes?**",
-        [
-            "A) Fica mais dura e resistente que o basalto original.",
-            "B) Sofre alteração hidrotermal, tornando-se uma zona fraturada e frequentemente argilizada, com implicações na estabilidade mecânica.",
-            "C) Transforma-se em calcário puro.",
-            "D) Derrete completamente, formando um lago de lava subterrâneo."
-        ],
-        index=None
-    )
-
-    st.write("") # Espaço em branco
-    
-    if st.button("Submeter Respostas"):
-        # Variável para contar a pontuação
-        pontuacao = 0
+    # Criação do formulário para o Quiz
+    with st.form("quiz_sms_form"):
+        respostas_utilizador = []
         
-        # Verificação da Q1
-        if q1 and q1.startswith("B)"):
-            st.success("1. Correto!")
-            pontuacao += 1
-        elif q1:
-            st.error("1. Incorreto. A resposta certa era a B.")
+        for i, q in enumerate(quiz_data):
+            # Usar 'qsms_' como chave única para os radio buttons
+            resp = st.radio(f"**{q['pergunta']}**", q["opcoes"], key=f"qsms_{i}", index=None)
+            respostas_utilizador.append(resp)
+            st.write("---")
             
-        # Verificação da Q2
-        if q2 and q2.startswith("C)"):
-            st.success("2. Correto!")
-            pontuacao += 1
-        elif q2:
-            st.error("2. Incorreto. A resposta certa era a C.")
-            
-        # Verificação da Q3
-        if q3 and q3.startswith("C)"):
-            st.success("3. Correto!")
-            pontuacao += 1
-        elif q3:
-            st.error("3. Incorreto. A resposta certa era a C.")
-            
-        # Verificação da Q4
-        if q4 and q4.startswith("B)"):
-            st.success("4. Correto!")
-            pontuacao += 1
-        elif q4:
-            st.error("4. Incorreto. A resposta certa era a B.")
-            
-        # Resultado Final
+        # Botão de submissão do formulário
+        submetido = st.form_submit_button("Verificar Respostas")
+
+    # Lógica de validação das respostas ao submeter
+    if submetido:
+        pontuacao = 0
+        total_perguntas = len(quiz_data)
+        
         st.divider()
-        if pontuacao == 4:
+        st.subheader("Resultados:")
+        
+        for i, q in enumerate(quiz_data):
+            if respostas_utilizador[i] == q["correta"]:
+                pontuacao += 1
+            elif respostas_utilizador[i] is None:
+                st.warning(f"⚠️ Pergunta {i+1} não respondida.")
+            else:
+                st.error(f"❌ Pergunta {i+1}: Incorreta. A resposta certa era: **{q['correta']}**")
+            
+        st.success(f"Pontuação Final: {pontuacao} / {total_perguntas}")
+        
+        if pontuacao == total_perguntas:
             st.balloons()
-            st.success(f"🎉 Brilhante! Acertou {pontuacao} em 4 questões!")
-        elif q1 and q2 and q3 and q4:
-            st.info(f"Acertou {pontuacao} em 4. Reveja as opções incorretas e tente novamente!")
+            st.success("Perfeito! Acertaste em todas as perguntas do Fundo Oceânico! 🎉🌊")
+        elif pontuacao >= 7:
+            st.info("Muito bom resultado! Dominas bem os conceitos dos depósitos oceânicos. 👍")
         else:
-            st.warning("⚠️ Responda a todas as perguntas para ver o seu resultado final.")
-
-
+            st.info("Podes sempre rever a informação nas secções acima e tentar novamente. 💪")
 
 def referencias_sms():
     """Função que guarda e formata as referências bibliográficas dos SMS"""
