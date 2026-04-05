@@ -263,7 +263,7 @@ with tab_caract:
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
         mostrar_caracteristicas_torio(deposito_selecionado)
     
-    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+    elif recurso_selecionado == "Depósitos de Fundo Oceãnico":
         mostrar_caracteristicas_sms(deposito_selecionado)
     
     elif recurso_selecionado == "Quartzo":
@@ -302,7 +302,7 @@ with tab_conf:
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
         mostrar_confusoes_torio()
         
-    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+    elif recurso_selecionado == "Depósitos de Fundo Oceãnico":
         mostrar_confusoes_sms(deposito_selecionado) # Adicionado aqui
         
     elif recurso_selecionado == "Quartzo":
@@ -341,7 +341,7 @@ with tab_quiz:
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
         quiz_torio(deposito_selecionado)
         
-    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+    elif recurso_selecionado == "Depósitos de Fundo Oceãnico":
         quiz_sms() # Removido daqui
         
     elif recurso_selecionado == "Quartzo":
@@ -380,7 +380,7 @@ with tab_check:
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
         checklist_torio(deposito_selecionado)
         
-    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+    elif recurso_selecionado == "Depósitos de Fundo Oceãnico":
         checklist_sms()
         
     elif recurso_selecionado == "Quartzo":
@@ -421,7 +421,7 @@ with tab_mapa:
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
         mapa_torio()
         
-    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+    elif recurso_selecionado == "Depósitos de Fundo Oceãnico":
         mapa_sms()
         
     elif recurso_selecionado == "Quartzo":
@@ -478,7 +478,7 @@ with tab_ref:
     elif recurso_selecionado == "Tório (Combustíveis nucleares)":
         referencias_torio()
         
-    elif recurso_selecionado == "Sulfuretos maciços do fundo oceânico (SMS) e crostas de cobalto":
+    elif recurso_selecionado == "Depósitos de Fundo Oceãnico":
         referencias_sms()
         
     elif recurso_selecionado == "Quartzo":
