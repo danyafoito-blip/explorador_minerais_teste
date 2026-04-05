@@ -166,10 +166,10 @@ depositos = {
     ],
     "Depósitos de Fundo Oceânico": [
         "Sulfuretos Maciços do Fundo do Mar (SMS)",
-        "Crostas de Ferro-Manganês Cobalto-Ricas",
+        "Crostas de Ferro-Manganês (Ricas em Cobalto)",
         "Nódulos Polimetálicos",
         "Fosforitos",
-        "Lamas REY (Sedimentos Metalíferos)"
+        "Lamas REY"
     ],
     "Quartzo": [
         "Veios hidrotermais",
